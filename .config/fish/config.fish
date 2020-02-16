@@ -6,7 +6,6 @@ end
 
 set -U EDITOR nvim
 set -g theme_display_date no
-set -g theme_powerline_fonts no
 
 function fish_right_prompt; end
 function fish_greeting; end
