@@ -17,5 +17,3 @@ if status --is-interactive
 end
 
 fish_ssh_agent
-
-fish_vi_key_bindings
