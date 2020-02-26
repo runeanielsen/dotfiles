@@ -15,3 +15,5 @@ set -U fish_key_bindings fish_default_key_bindings
 if status --is-interactive
     set PATH $PATH ~/.local/bin;
 end
+
+fish_ssh_agent
