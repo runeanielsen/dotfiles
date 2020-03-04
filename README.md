@@ -1,5 +1,5 @@
 # DOTFILES
-Repository containing my person dotfiles
+Repository containing my personal dotfiles.
 
 ## Cloning the repository
 
