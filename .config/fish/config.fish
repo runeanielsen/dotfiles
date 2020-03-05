@@ -6,6 +6,7 @@ end
 
 set -U EDITOR nvim
 set -g theme_display_date no
+set -g DOTNET_CLI_TELEMETRY_OPTOUT 1
 
 function fish_right_prompt; end
 function fish_greeting; end
