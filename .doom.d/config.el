@@ -23,7 +23,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. These are the defaults.
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-city-lights)
 
 ;; If you intend to use org, it is recommended you change this!
 ;; (setq org-directory "~/org/")
@@ -130,8 +130,7 @@
 (add-hook! 'org-capture-mode-hook (company-mode -1))
 
 (setq
- doom-font (font-spec :family "Monospace" :size 20)
- doom-variable-pitch-font (font-spec :family "Monospace" :size 20)
+ doom-font (font-spec :family "Monospace" :size 16)
  dart-format-on-save t
  web-mode-markup-indent-offset 2
  web-mode-code-indent-offset 2
