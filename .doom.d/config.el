@@ -80,7 +80,8 @@
 (add-hook! 'org-capture-mode-hook (company-mode -1))
 
 (setq
- doom-font (font-spec :family "Monospace" :size 16)
+ doom-font (font-spec :family "monospace" :size 16 :weight 'bold)
+ doom-variable-pitch-font (font-spec :family "monospace" :size 16)
  dart-format-on-save t
  web-mode-markup-indent-offset 2
  web-mode-code-indent-offset 2
@@ -207,6 +208,11 @@
   'company
   '(add-to-list 'company-backends #'company-omnisharp))
 
+
+(eval-after-load
+  'company
+  '(add-to-list 'company-backends #'company-omnisharp))
+
 (defun my-csharp-mode-setup ()
   (omnisharp-mode)
   (company-mode)
@@ -221,8 +227,8 @@
   (setq evil-shift-width 4)
 
   ;csharp-mode README.md recommends this too
-  (electric-pair-mode 1)       ;; Emacs 24
-  (electric-pair-local-mode 1) ;; Emacs 25
+  ;(electric-pair-mode 1)       ;; Emacs 24
+  ;(electric-pair-local-mode 1) ;; Emacs 25
 
   (local-set-key (kbd "C-c r r") 'omnisharp-run-code-action-refactoring)
   (local-set-key (kbd "C-c C-c") 'recompile))
