@@ -81,7 +81,7 @@
 
 (setq
  doom-font (font-spec :family "monospace" :size 16 :weight 'bold)
- doom-variable-pitch-font (font-spec :family "monospace" :size 16)
+ doom-variable-pitch-font (font-spec :family "monospace" :size 12)
  dart-format-on-save t
  web-mode-markup-indent-offset 2
  web-mode-code-indent-offset 2
