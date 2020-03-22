@@ -59,3 +59,4 @@
 (package! prettier-js)
 (package! eslint-fix)
 (package! jedi)
+(package! lsp-java)
