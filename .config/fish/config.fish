@@ -4,6 +4,9 @@ function ll
     ls -lh $argv
 end
 
+set -e MSBuildSDKsPath 
+set -e DOTNET_ROOT 
+
 set -U EDITOR nvim
 set -U theme_display_date no
 set -Ux DOTNET_CLI_TELEMETRY_OPTOUT 1
