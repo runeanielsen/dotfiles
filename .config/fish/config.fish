@@ -5,8 +5,10 @@ function ll
 end
 
 set -U EDITOR nvim
-set -g theme_display_date no
-set -g DOTNET_CLI_TELEMETRY_OPTOUT 1
+set -U theme_display_date no
+set -Ux DOTNET_CLI_TELEMETRY_OPTOUT 1
+set -Ux DOTNET_ROOT /usr/share/dotnet
+set -Ux MSBuildSDKsPath /usr/share/dotnet/sdk/3.1.103/Sdks
 
 function fish_right_prompt; end
 function fish_greeting; end
@@ -18,3 +20,4 @@ if status --is-interactive
 end
 
 fish_ssh_agent
+
