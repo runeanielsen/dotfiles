@@ -16,7 +16,7 @@ set -Ux MSBuildSDKsPath /usr/share/dotnet/sdk/3.1.103/Sdks
 function fish_right_prompt; end
 function fish_greeting; end
 
-set -U fish_key_bindings fish_default_key_bindings
+set -U fish_key_bindings fish_vi_key_bindings
 
 if status --is-interactive
     set PATH $PATH ~/.local/bin;
