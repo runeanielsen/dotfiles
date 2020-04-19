@@ -80,8 +80,8 @@
 (add-hook! 'org-capture-mode-hook (company-mode -1))
 
 (setq
- doom-font (font-spec :family "monospace" :size 16 :weight 'bold)
- doom-variable-pitch-font (font-spec :family "monospace" :size 12)
+ doom-font (font-spec :family "monospace" :size 22 :weight 'bold)
+ doom-variable-pitch-font (font-spec :family "monospace" :size 16)
  dart-format-on-save t
  web-mode-markup-indent-offset 2
  web-mode-code-indent-offset 2
@@ -235,4 +235,3 @@
   (local-set-key (kbd "C-c f f"), 'omnisharp-go-to-definition))
 
 (add-hook 'csharp-mode-hook 'my-csharp-mode-setup t)
-
