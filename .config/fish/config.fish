@@ -12,6 +12,9 @@ set -U theme_display_date no
 set -Ux DOTNET_CLI_TELEMETRY_OPTOUT 1
 set -Ux DOTNET_ROOT /usr/share/dotnet
 set -Ux MSBuildSDKsPath /usr/share/dotnet/sdk/3.1.103/Sdks
+set -Ux PATH $HOME/.node_modules/bin $PATH
+
+export npm_config_prefix=~/.node_modules
 
 function fish_right_prompt; end
 function fish_greeting; end
