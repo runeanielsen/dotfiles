@@ -51,12 +51,4 @@
 ;; our package manager can't deal with; see raxod502/straight.el#279)
 ;(package! builtin-package :recipe (:branch "develop"))
 
-(package! js2-mode)
-(package! js-import)
-(package! web-mode)
-(package! react-snippets)
-(package! rjsx-mode)
-(package! prettier-js)
-(package! eslint-fix)
-(package! jedi)
-(package! lsp-java)
+(package! tide)
