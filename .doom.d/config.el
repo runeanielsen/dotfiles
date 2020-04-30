@@ -9,13 +9,9 @@
 ;; Pandoc Mode --------------------------------------------------------
 (add-hook 'markdown-mode-hook 'pandoc-mode)
 
-(setq
- doom-font (font-spec :family "monospace" :size 14 :weight 'bold)
- doom-variable-pitch-font (font-spec :family "monospace" :size 14))
-
-
 ;; Tide ---------------------------------------------------------------
 (defun setup-tide-mode ()
+  "Setup function for tide."
   (interactive)
   (tide-setup)
   (flycheck-mode +1)
@@ -29,17 +25,11 @@
 (add-hook 'js-mode-hook #'setup-tide-mode)
 
 
-;; Prettier -----------------------------------------------------------
-(add-hook 'js-mode-hook 'prettier-js-mode)
+;; Font ---------------------------------------------------------------
+(setq
+ doom-font (font-spec :family "monospace" :size 14 :weight 'bold)
+ doom-variable-pitch-font (font-spec :family "monospace" :size 14))
 
-(setq prettier-js-args '(
-  "--trailing-comma" "none"
-  "--bracket-spacing" "true"
-  "--single-quote" "true"
-  "--no-semi" "true"
-  "--jsx-single-quote" "true"
-  "--jsx-bracket-same-line" "true"
-  "--print-width" "100"))
 
 ;; C# -----------------------------------------------------------------
 (eval-after-load
