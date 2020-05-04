@@ -50,4 +50,4 @@ colors:
     cyan:    '0xc0e9f8'
     white:   '0xffffff'
 
-background_opacity: 1.0 
+background_opacity: 0.7

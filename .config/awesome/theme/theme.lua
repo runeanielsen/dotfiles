@@ -14,7 +14,7 @@ local theme = {}
 theme.font          = "sans 10"
 
 theme.bg_normal     = "#111111"
-theme.bg_focus      = "#111111"
+theme.bg_focus      = "#707070"
 theme.bg_urgent     = "#111111"
 theme.bg_minimize   = "#404040"
 theme.bg_systray    = theme.bg_normal
@@ -25,7 +25,7 @@ theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
 theme.useless_gap   = dpi(0)
-theme.border_width  = dpi(1)
+theme.border_width  = dpi(0)
 theme.border_normal = "#000000"
 theme.border_focus  = "#e5e5e5"
 theme.border_marked = "#91231c"

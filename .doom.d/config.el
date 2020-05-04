@@ -4,10 +4,13 @@
 (setq user-full-name "Rune Nielsen"
       user-mail-address "runenielsen@runbox.com")
 
+
 (setq doom-theme 'doom-city-lights)
+
 
 ;; Pandoc Mode --------------------------------------------------------
 (add-hook 'markdown-mode-hook 'pandoc-mode)
+
 
 ;; Tide ---------------------------------------------------------------
 (defun setup-tide-mode ()
@@ -25,10 +28,14 @@
 (add-hook 'js-mode-hook #'setup-tide-mode)
 
 
+;; Prettier -----------------------------------------------------------
+(add-hook 'js-mode-hook 'prettier-js-mode)
+
+
 ;; Font ---------------------------------------------------------------
 (setq
- doom-font (font-spec :family "monospace" :size 14 :weight 'bold)
- doom-variable-pitch-font (font-spec :family "monospace" :size 14))
+ doom-font (font-spec :family "monospace" :size 20 :weight 'bold)
+ doom-variable-pitch-font (font-spec :family "monospace" :size 20))
 
 
 ;; C# -----------------------------------------------------------------
