@@ -560,3 +560,15 @@ show_categories = false
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+-- Autorun programs
+autorun = true
+autorunApps =
+{
+   "/home/notation/bin/fehbg",
+}
+if autorun then
+   for app = 1, #autorunApps do
+       awful.util.spawn(autorunApps[app])
+   end
+end
