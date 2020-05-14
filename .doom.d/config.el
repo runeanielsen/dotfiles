@@ -6,7 +6,7 @@
 
 
 (setq doom-theme 'doom-city-lights)
-
+(setq browse-url-browser-function 'browse-url-firefox)
 
 ;; Pandoc Mode --------------------------------------------------------
 (add-hook 'markdown-mode-hook 'pandoc-mode)
