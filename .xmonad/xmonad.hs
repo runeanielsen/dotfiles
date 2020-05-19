@@ -1,4 +1,4 @@
-- IMPORTS
+-- IMPORTS
 
 import XMonad
 import Data.Monoid
