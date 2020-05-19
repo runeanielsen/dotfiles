@@ -249,7 +249,9 @@ myStartupHook = do
 --
 main = do 
 	xmproc <- spawnPipe "xmobar -x 0 /home/notation/.config/xmobar/xmobar.config"
-	xmonad $ docks defaults
+	-- Set this to show dock always 
+	-- xmonad $ docks defaults
+	xmonad defaults
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
