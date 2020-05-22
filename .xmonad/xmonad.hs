@@ -25,7 +25,7 @@ myClickJustFocuses = False
 
 -- Width of the window border in pixels.
 --
-myBorderWidth   = 1
+myBorderWidth   = 0 
 
 -- modMask lets you specify which modkey you want to use. The default
 -- is mod1Mask ("left alt").  You may also consider using mod3Mask
@@ -250,8 +250,8 @@ myStartupHook = do
 main = do 
 	xmproc <- spawnPipe "xmobar -x 0 /home/notation/.config/xmobar/xmobar.config"
 	-- Set this to show dock always 
-	xmonad $ docks defaults
-	-- xmonad defaults
+	-- xmonad $ docks defaults
+	xmonad defaults
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
