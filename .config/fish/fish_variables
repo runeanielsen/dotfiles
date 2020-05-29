@@ -4,6 +4,7 @@ SETUVAR --export DOTNET_CLI_TELEMETRY_OPTOUT:1
 SETUVAR --export DOTNET_ROOT:/usr/share/dotnet
 SETUVAR EDITOR:nvim
 SETUVAR --export MSBuildSDKsPath:/usr/share/dotnet/sdk/3\x2e1\x2e103/Sdks
+SETUVAR --export --path PATH:/home/notation/\x2enode_modules/bin\x1e/usr/local/sbin\x1e/usr/local/bin\x1e/usr/bin\x1e/opt/android\x2dsdk/platform\x2dtools\x1e/opt/android\x2dsdk/tools\x1e/opt/android\x2dsdk/tools/bin\x1e/home/notation/\x2edotnet/tools\x1e/usr/lib/jvm/default/bin\x1e/usr/bin/site_perl\x1e/usr/bin/vendor_perl\x1e/usr/bin/core_perl\x1e/sbin/\x1e/home/notation/\x2enode_modules/bin/
 SETUVAR THEME_EDEN_PROMPT_CHAR:\u00bb
 SETUVAR __fish_init_2_39_8:\x1d
 SETUVAR __fish_init_2_3_0:\x1d

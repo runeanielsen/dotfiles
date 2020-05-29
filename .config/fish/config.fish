@@ -1,4 +1,5 @@
 set -x PATH $PATH /sbin/
+set -x PATH $PATH $HOME/.node_modules/bin/
 
 function ll
     ls -lh $argv
