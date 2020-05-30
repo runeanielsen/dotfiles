@@ -3,8 +3,8 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run(spawnPipe)
-import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Layout.NoBorders (noBorders, smartBorders)
+import XMonad.Layout.Fullscreen (fullscreenFull, fullscreenSupport)
 import System.IO
 
 -- Settings
@@ -33,11 +33,14 @@ myLayout = avoidStruts (smartBorders $ tiled ||| Mirror tiled ||| noBorders Full
 -- Main
 main = do   
     xmproc <- spawnPipe "xmobar -x 0 /home/notation/.config/xmobar/xmobar.config"
-    xmonad $ docks defaultConfig
+    xmonad $ fullscreenSupport $ docks defaultConfig
         { layoutHook = myLayout
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
-                        , ppTitle = xmobarColor "green" "" . shorten 50
+                        , ppTitle = xmobarColor "white" "" . shorten 50
+			, ppCurrent = xmobarColor "#3CB371" ""
+			, ppSep =  "<fc=#666666> | </fc>"
+			, ppHiddenNoWindows = xmobarColor "#F07178" ""
                         }
         , modMask = myModMask
 	, borderWidth = myBorderWidth 
@@ -45,8 +48,4 @@ main = do
         , terminal = myTerminal
 	, normalBorderColor = myNormalBorderColor
 	, focusedBorderColor = myFocusedBorderColor
-        } `additionalKeys`
-        [ ((mod4Mask .|. shiftMask, xK_z), spawn "slock")
-        , ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s")
-        , ((0, xK_Print), spawn "scrot")
-        ]
+        }
