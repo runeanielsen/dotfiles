@@ -31,21 +31,21 @@ myLayout = avoidStruts (smartBorders $ tiled ||| Mirror tiled ||| noBorders Full
      delta   = 3/100
 
 -- Main
-main = do   
-    xmproc <- spawnPipe "xmobar -x 0 /home/notation/.config/xmobar/xmobar.config"
-    xmonad $ fullscreenSupport $ docks defaultConfig
-        { layoutHook =          myLayout
-        , logHook =             dynamicLogWithPP xmobarPP
+main = do 
+        xmproc <- spawnPipe "xmobar -x 0 /home/notation/.config/xmobar/xmobar.config"
+        xmonad $ fullscreenSupport $ docks defaultConfig
+                { layoutHook =          myLayout
+                , logHook =             dynamicLogWithPP xmobarPP
                                         { ppOutput = hPutStrLn xmproc
                                         , ppTitle = xmobarColor "white" "" . shorten 50
 		                        , ppCurrent = xmobarColor "#3CB371" ""
 		                        , ppSep =  "<fc=#666666> | </fc>"
 		                        , ppHiddenNoWindows = xmobarColor "#F07178" ""
                                 }
-        , modMask =             myModMask
-        , borderWidth =         myBorderWidth 
-        , startupHook =         myStartupHook
-        , terminal =            myTerminal
-        , normalBorderColor =   myNormalBorderColor
-        , focusedBorderColor =  myFocusedBorderColor
-        }
+                , modMask =             myModMask
+                , borderWidth =         myBorderWidth 
+                , startupHook =         myStartupHook
+                , terminal =            myTerminal
+                , normalBorderColor =   myNormalBorderColor
+                , focusedBorderColor =  myFocusedBorderColor
+                }
