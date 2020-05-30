@@ -16,7 +16,7 @@ myFocusedBorderColor =  "#ffffff"
 
 -- Startup Hook
 myStartupHook = do
-	spawnOnce "nitrogen --restore &"
+	spawnOnce "wal -i ~/wallpapers/wallpaper-primary.jpg -s"
 
 -- Layout
 myLayout = avoidStruts (smartBorders $ fullscreenFull $ tiled ||| Mirror tiled ||| noBorders Full)
