@@ -19,7 +19,7 @@ myStartupHook = do
 	spawnOnce "nitrogen --restore &"
 
 -- Layout
-myLayout = avoidStruts (smartBorders $ tiled ||| Mirror tiled ||| noBorders Full)
+myLayout = avoidStruts (smartBorders $ fullscreenFull $ tiled ||| Mirror tiled ||| noBorders Full)
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -32,20 +32,20 @@ myLayout = avoidStruts (smartBorders $ tiled ||| Mirror tiled ||| noBorders Full
 
 -- Main
 main = do 
-        xmproc <- spawnPipe "xmobar -x 0 /home/notation/.config/xmobar/xmobar.config"
-        xmonad $ fullscreenSupport $ docks defaultConfig
-                { layoutHook =          myLayout
-                , logHook =             dynamicLogWithPP xmobarPP
-                                        { ppOutput = hPutStrLn xmproc
-                                        , ppTitle = xmobarColor "white" "" . shorten 50
-		                        , ppCurrent = xmobarColor "#3CB371" ""
-		                        , ppSep =  "<fc=#666666> | </fc>"
-		                        , ppHiddenNoWindows = xmobarColor "#F07178" ""
+    xmproc <- spawnPipe "xmobar -x 0 /home/notation/.config/xmobar/xmobar.config"
+    xmonad $ fullscreenSupport $ docks defaultConfig
+        { layoutHook =          myLayout
+        , logHook =             dynamicLogWithPP xmobarPP
+                                { ppOutput = hPutStrLn xmproc
+                                , ppTitle = xmobarColor "white" "" . shorten 50
+		                , ppCurrent = xmobarColor "#3CB371" ""
+		                , ppSep =  "<fc=#666666> | </fc>"
+		                , ppHiddenNoWindows = xmobarColor "#F07178" ""
                                 }
-                , modMask =             myModMask
-                , borderWidth =         myBorderWidth 
-                , startupHook =         myStartupHook
-                , terminal =            myTerminal
-                , normalBorderColor =   myNormalBorderColor
-                , focusedBorderColor =  myFocusedBorderColor
-                }
+        , modMask =             myModMask
+        , borderWidth =         myBorderWidth 
+        , startupHook =         myStartupHook
+        , terminal =            myTerminal
+        , normalBorderColor =   myNormalBorderColor
+        , focusedBorderColor =  myFocusedBorderColor
+        }
