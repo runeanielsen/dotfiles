@@ -8,11 +8,11 @@ import XMonad.Layout.Fullscreen (fullscreenFull, fullscreenSupport)
 import System.IO
 
 -- Settings
-myModMask = mod4Mask
-myBorderWidth = 1 
-myTerminal = "alacritty"
-myNormalBorderColor = "#222222"
-myFocusedBorderColor = "#ffffff"
+myModMask =             mod4Mask
+myBorderWidth =         1 
+myTerminal =            "alacritty"
+myNormalBorderColor =   "#222222"
+myFocusedBorderColor =  "#ffffff"
 
 -- Startup Hook
 myStartupHook = do
@@ -34,18 +34,18 @@ myLayout = avoidStruts (smartBorders $ tiled ||| Mirror tiled ||| noBorders Full
 main = do   
     xmproc <- spawnPipe "xmobar -x 0 /home/notation/.config/xmobar/xmobar.config"
     xmonad $ fullscreenSupport $ docks defaultConfig
-        { layoutHook = myLayout
-        , logHook = dynamicLogWithPP xmobarPP
-                        { ppOutput = hPutStrLn xmproc
-                        , ppTitle = xmobarColor "white" "" . shorten 50
-			, ppCurrent = xmobarColor "#3CB371" ""
-			, ppSep =  "<fc=#666666> | </fc>"
-			, ppHiddenNoWindows = xmobarColor "#F07178" ""
-                        }
-        , modMask = myModMask
-	, borderWidth = myBorderWidth 
- 	, startupHook = myStartupHook
-        , terminal = myTerminal
-	, normalBorderColor = myNormalBorderColor
-	, focusedBorderColor = myFocusedBorderColor
+        { layoutHook =          myLayout
+        , logHook =             dynamicLogWithPP xmobarPP
+                                        { ppOutput = hPutStrLn xmproc
+                                        , ppTitle = xmobarColor "white" "" . shorten 50
+		                        , ppCurrent = xmobarColor "#3CB371" ""
+		                        , ppSep =  "<fc=#666666> | </fc>"
+		                        , ppHiddenNoWindows = xmobarColor "#F07178" ""
+                                }
+        , modMask =             myModMask
+        , borderWidth =         myBorderWidth 
+        , startupHook =         myStartupHook
+        , terminal =            myTerminal
+        , normalBorderColor =   myNormalBorderColor
+        , focusedBorderColor =  myFocusedBorderColor
         }
