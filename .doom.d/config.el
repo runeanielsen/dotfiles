@@ -5,11 +5,16 @@
       user-mail-address "runenielsen@runbox.com")
 
 
-(setq doom-theme 'doom-city-lights)
+(setq doom-theme 'doom-spacegrey)
 (setq browse-url-browser-function 'browse-url-firefox)
 
 ;; Pandoc Mode --------------------------------------------------------
 (add-hook 'markdown-mode-hook 'pandoc-mode)
+
+
+;; Theme Magic Pywal --------------------------------------------------------------
+(require 'theme-magic)
+(theme-magic-export-theme-mode)
 
 
 ;; Tide ---------------------------------------------------------------

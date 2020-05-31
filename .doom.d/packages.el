@@ -52,3 +52,4 @@
 ;(package! builtin-package :recipe (:branch "develop"))
 (package! tide)
 (package! prettier-js)
+(package! theme-magic)
