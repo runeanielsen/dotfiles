@@ -5,6 +5,8 @@ function ll
     ls -lh $argv
 end
 
+cat ~/.cache/wal/sequences &
+
 set -e MSBuildSDKsPath 
 set -e DOTNET_ROOT 
 
