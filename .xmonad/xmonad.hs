@@ -37,7 +37,7 @@ main = do
         , logHook =             dynamicLogWithPP xmobarPP
                                 { ppOutput = hPutStrLn xmproc
                                 , ppTitle = xmobarColor "white" "" . shorten 50
-                                , ppCurrent = xmobarColor "#3CB371" ""
+                                , ppCurrent = xmobarColor "#FFA500" ""
                                 , ppSep =  "<fc=#666666> | </fc>"
                                 , ppHiddenNoWindows = xmobarColor "grey" ""
                                 }
