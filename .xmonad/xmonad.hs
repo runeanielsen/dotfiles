@@ -2,7 +2,6 @@ import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
-import XMonad.Util.SpawnOnce
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Layout.NoBorders (noBorders, smartBorders)
 import XMonad.Layout.Fullscreen (fullscreenFull, fullscreenSupport)
@@ -38,9 +37,9 @@ main = do
         , logHook =             dynamicLogWithPP xmobarPP
                                 { ppOutput = hPutStrLn xmproc
                                 , ppTitle = xmobarColor "white" "" . shorten 50
-		                , ppCurrent = xmobarColor "#3CB371" ""
-		                , ppSep =  "<fc=#666666> | </fc>"
-		                , ppHiddenNoWindows = xmobarColor "#F07178" ""
+                                , ppCurrent = xmobarColor "#3CB371" ""
+                                , ppSep =  "<fc=#666666> | </fc>"
+                                , ppHiddenNoWindows = xmobarColor "grey" ""
                                 }
         , modMask =             myModMask
         , borderWidth =         myBorderWidth 
