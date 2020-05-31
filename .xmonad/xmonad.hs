@@ -1,6 +1,7 @@
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Layout.NoBorders (noBorders, smartBorders)
@@ -15,8 +16,7 @@ myNormalBorderColor =   "#222222"
 myFocusedBorderColor =  "#ffffff"
 
 -- Startup Hook
-myStartupHook = do
-	spawnOnce "wal -i ~/wallpapers/wallpaper-primary.jpg -s"
+myStartupHook = return ()
 
 -- Layout
 myLayout = avoidStruts (smartBorders $ fullscreenFull $ tiled ||| Mirror tiled ||| noBorders Full)
@@ -48,4 +48,5 @@ main = do
         , terminal =            myTerminal
         , normalBorderColor =   myNormalBorderColor
         , focusedBorderColor =  myFocusedBorderColor
+        , manageHook = manageDocks <+> (isFullscreen --> doFullFloat) <+> manageHook defaultConfig
         }
