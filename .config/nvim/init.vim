@@ -76,8 +76,6 @@ let g:fzf_action = {
 
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
-call plug#end()
-
 " use alt+hjkl to move between split/vsplit panels
 tnoremap <A-h> <C-\><C-n><C-w>h
 tnoremap <A-j> <C-\><C-n><C-w>j
@@ -87,3 +85,8 @@ nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
+
+" Prettier
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+call plug#end()
