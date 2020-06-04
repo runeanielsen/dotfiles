@@ -33,7 +33,6 @@ myLayout = avoidStruts (smartBorders $ fullscreenFull $ tiled ||| Mirror tiled |
 myManageHook = composeAll [
    manageDocks,
    isFullscreen --> doFullFloat,
-   className =? "mpv" --> doFloat,
    manageHook defaultConfig
  ] 
 
