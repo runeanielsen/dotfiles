@@ -1,23 +1,40 @@
+-- System
+import System.IO
+
+import GHC.Word (Word32)
+
+-- Data
+import Data.Monoid
+
+-- XMonad
 import XMonad
 import XMonad.Hooks.DynamicLog
-import qualified XMonad.StackSet as W
-import XMonad.Util.EZConfig (additionalKeysP)
-import Data.Maybe (isJust)
-import XMonad.Actions.CycleWS (moveTo, shiftTo, WSType(..), nextScreen, prevScreen)
-import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.ManageHelpers
-import Data.Monoid
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Layout.NoBorders (noBorders, smartBorders)
 import XMonad.Layout.Fullscreen (fullscreenFull, fullscreenSupport)
-import System.IO
+import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
+import XMonad.Util.EZConfig (additionalKeysP)
+
+import qualified XMonad.StackSet as W
+import qualified Data.Map        as M
+
 
 -- Settings
-myModMask =             mod4Mask
-myBorderWidth =         1 
-myTerminal =            "alacritty"
-myNormalBorderColor =   "#222222"
-myFocusedBorderColor =  "#ffffff"
+myModMask :: KeyMask
+myModMask = mod4Mask
+
+myBorderWidth :: Word32
+myBorderWidth = 1
+
+myTerminal :: String
+myTerminal = "alacritty"
+
+myNormalBorderColor :: String
+myNormalBorderColor = "#222222"
+
+myFocusedBorderColor :: String
+myFocusedBorderColor = "#ffffff"
 
 -- Startup Hook
 myStartupHook :: X ()
@@ -45,19 +62,21 @@ myManageHook = composeAll [
 
 -- Keys
 myKeys :: [([Char], X ())]
-myKeys =
+myKeys = 
+  -- Xmonad hotkeys
+  [ ("M-d", kill)
+  
     -- Open my preferred terminal. 
-        [ ("M-<Return>", spawn (myTerminal ++ " -e fish"))
+  , ("M-<Return>", spawn (myTerminal ++ " -e fish"))
 
     -- My applications
-        , ("M-f", spawn "firefox")
-        , ("M-s", spawn "~/.dmenu/dmenu-scrot.sh")
+  , ("M-f", spawn "firefox")
+  , ("M-s", spawn "~/.dmenu/dmenu-scrot.sh")
 
     -- Multimedia keys
-        , ("M-,", spawn "cmus-remote -r")
-        , ("M-.", spawn "cmus-remote -n")
-        ] where nonNSP          = WSIs (return (\ws -> W.tag ws /= "nsp"))
-                nonEmptyNonNSP  = WSIs (return (\ws -> isJust (W.stack ws) && W.tag ws /= "nsp"))
+  , ("M-,", spawn "cmus-remote -r")
+  , ("M-.", spawn "cmus-remote -n")
+  ] 
 
 -- Main
 main = do 
