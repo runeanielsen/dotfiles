@@ -8,7 +8,7 @@ prog="
 3.section
 "
 
-cmd=$(dmenu -l 20 -nf '#000000' -nb '#FFFFFF' -sf '#FFFFFF' -sb '#000000' -p 'Choose Screenshot Type' <<< "$prog")
+cmd=$(dmenu -l 20 -nf '#ffffff' -nb '#222222' -sf '#222222' -sb '#ffffff' -p 'Choose Screenshot Type' <<< "$prog")
 
 cd $IMG_PATH
 case ${cmd%% *} in
