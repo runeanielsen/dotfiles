@@ -5,6 +5,7 @@ import GHC.Word (Word32)
 
 -- Data
 import Data.Monoid
+import qualified Data.Map as M
 
 -- XMonad
 import XMonad
@@ -15,7 +16,7 @@ import XMonad.Layout.Fullscreen (fullscreenFull, fullscreenSupport)
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
-
+import qualified XMonad.StackSet as W
 
 -- Settings
 myModMask :: KeyMask
@@ -70,10 +71,14 @@ myKeys =
   , ("M-f", spawn "firefox")
   , ("M-s", spawn "~/.dmenu/dmenu-scrot.sh")
 
+    -- Kill xmobar 
+  , ("M-u", spawn "killall xmobar")
+
     -- Multimedia keys
   , ("M-,", spawn "cmus-remote -r")
   , ("M-.", spawn "cmus-remote -n")
-  ] 
+  ]
+
 
 -- Main
 main :: IO ()
