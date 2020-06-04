@@ -5,7 +5,6 @@ import GHC.Word (Word32)
 
 -- Data
 import Data.Monoid
-import qualified Data.Map as M
 
 -- XMonad
 import XMonad
@@ -16,7 +15,6 @@ import XMonad.Layout.Fullscreen (fullscreenFull, fullscreenSupport)
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
-import qualified XMonad.StackSet as W
 
 -- Settings
 myModMask :: KeyMask
