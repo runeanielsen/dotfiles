@@ -8,16 +8,13 @@ import Data.Monoid
 
 -- XMonad
 import XMonad
-import XMonad.Hooks.DynamicLog
 import XMonad.Util.Run(spawnPipe)
+import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Layout.NoBorders (noBorders, smartBorders)
 import XMonad.Layout.Fullscreen (fullscreenFull, fullscreenSupport)
+import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
-import XMonad.Util.EZConfig (additionalKeysP)
-
-import qualified XMonad.StackSet as W
-import qualified Data.Map        as M
 
 
 -- Settings
@@ -79,6 +76,7 @@ myKeys =
   ] 
 
 -- Main
+main :: IO ()
 main = do 
     xmproc <- spawnPipe "xmobar -x 0 /home/notation/.config/xmobar/xmobar.config"
     xmonad $ fullscreenSupport $ docks defaultConfig
