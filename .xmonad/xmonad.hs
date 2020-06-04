@@ -29,6 +29,14 @@ myLayout = avoidStruts (smartBorders $ fullscreenFull $ tiled ||| Mirror tiled |
      -- Percent of screen to increment by when resizing panes
      delta   = 3/100
 
+-- Manage Hook
+myManageHook = composeAll [
+   manageDocks,
+   isFullscreen --> doFullFloat,
+   className =? "mpv" --> doFloat,
+   manageHook defaultConfig
+ ] 
+
 -- Main
 main = do 
     xmproc <- spawnPipe "xmobar -x 0 /home/notation/.config/xmobar/xmobar.config"
@@ -47,5 +55,5 @@ main = do
         , terminal =            myTerminal
         , normalBorderColor =   myNormalBorderColor
         , focusedBorderColor =  myFocusedBorderColor
-        , manageHook = manageDocks <+> (isFullscreen --> doFullFloat) <+> manageHook defaultConfig
+        , manageHook = myManageHook
         }
