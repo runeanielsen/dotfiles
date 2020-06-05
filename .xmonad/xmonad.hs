@@ -76,6 +76,7 @@ myKeys =
     -- Multimedia keys
   , ("M-,", spawn "cmus-remote -r")
   , ("M-.", spawn "cmus-remote -n")
+  , ("M-/", spawn "~/.config/scripts/cmus-play-pause.sh")
   ]
 
 
