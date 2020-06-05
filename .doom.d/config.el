@@ -42,6 +42,9 @@
  doom-font (font-spec :family "monospace" :size 20 :weight 'bold)
  doom-variable-pitch-font (font-spec :family "monospace" :size 20))
 
+;; Yaml ---------------------------------------------------------------
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 
 ;; C# -----------------------------------------------------------------
 (eval-after-load
