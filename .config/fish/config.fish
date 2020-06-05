@@ -1,21 +1,22 @@
 set -x PATH $PATH /sbin/
-set -x PATH $PATH $HOME/.node_modules/bin/
+set -e MSBuildSDKsPath
+set -e DOTNET_ROOT
+
+set -Ux EDITOR nvim
+set -Ux theme_display_date no
+set -Ux DOTNET_CLI_TELEMETRY_OPTOUT 1
+set -Ux DOTNET_ROOT /usr/share/dotnet
+set -Ux MSBuildSDKsPath /usr/share/dotnet/sdk/3.1.103/Sdks
+set -x PATH $PATH $HOME/.node_modules/bin
+set -Ux GOPATH $HOME/go
+set -Ux GOBIN $GOPATH/bin
+set -x PATH $PATH $GOBIN
 
 function ll
     ls -lh $argv
 end
 
 cat ~/.cache/wal/sequences &
-
-set -e MSBuildSDKsPath 
-set -e DOTNET_ROOT 
-
-set -U EDITOR nvim
-set -U theme_display_date no
-set -Ux DOTNET_CLI_TELEMETRY_OPTOUT 1
-set -Ux DOTNET_ROOT /usr/share/dotnet
-set -Ux MSBuildSDKsPath /usr/share/dotnet/sdk/3.1.103/Sdks
-set -Ux PATH $HOME/.node_modules/bin $PATH
 
 export npm_config_prefix=~/.node_modules
 
@@ -29,4 +30,3 @@ if status --is-interactive
 end
 
 fish_ssh_agent
-
