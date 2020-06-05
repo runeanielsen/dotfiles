@@ -2,13 +2,11 @@
 
 IMG_PATH=/home/notation/screenshots/
 
-prog="
-1.quick_fullscreen
+prog="1.quick_fullscreen
 2.delayed_fullscreen
-3.section
-"
+3.section"
 
-cmd=$(dmenu -l 20 -nf '#ffffff' -nb '#222222' -sf '#222222' -sb '#ffffff' -p 'Choose Screenshot Type' <<< "$prog")
+cmd=$(dmenu -l 20 -nf '#ffffff' -nb '#222222' -sf '#222222' -sb '#ffffff' <<< "$prog")
 
 cd $IMG_PATH
 case ${cmd%% *} in
