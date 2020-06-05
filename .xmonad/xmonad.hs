@@ -10,6 +10,7 @@ import Data.Monoid
 import XMonad
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig (additionalKeysP)
+import XMonad.Util.SpawnOnce
 import XMonad.Layout.NoBorders (noBorders, smartBorders)
 import XMonad.Layout.Fullscreen (fullscreenFull, fullscreenSupport)
 import XMonad.Hooks.DynamicLog
@@ -34,7 +35,8 @@ myFocusedBorderColor = "#ffffff"
 
 -- Startup Hook
 myStartupHook :: X ()
-myStartupHook = return ()
+myStartupHook = do
+  spawnOnce "nitrogen --restore &"
 
 -- Layout
 myLayout = avoidStruts (smartBorders $ fullscreenFull $ tiled ||| Mirror tiled ||| noBorders Full)
