@@ -68,6 +68,7 @@ myKeys =
     -- My applications
   , ("M-f", spawn "firefox")
   , ("M-s", spawn "~/.dmenu/dmenu-scrot.sh")
+  , ("M-i", spawn "~/.dmenu/dmenu-cmus.sh")
 
     -- Kill xmobar 
   , ("M-u", spawn "killall xmobar")
