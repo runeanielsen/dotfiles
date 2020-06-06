@@ -1,6 +1,7 @@
 -- System
 import System.IO
 
+-- GHC
 import GHC.Word (Word32)
 
 -- Data
