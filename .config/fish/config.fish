@@ -8,9 +8,6 @@ set -Ux DOTNET_CLI_TELEMETRY_OPTOUT 1
 set -Ux DOTNET_ROOT /usr/share/dotnet
 set -Ux MSBuildSDKsPath /usr/share/dotnet/sdk/3.1.103/Sdks
 set -x PATH $PATH $HOME/.node_modules/bin
-set -Ux GOPATH $HOME/go
-set -Ux GOBIN $GOPATH/bin
-set -x PATH $PATH $GOBIN
 
 function ll
     ls -lh $argv
