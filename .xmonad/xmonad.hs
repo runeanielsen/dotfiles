@@ -72,8 +72,7 @@ myKeys =
   , ("M-f", spawn "firefox")
   , ("M-e", spawn "emacs")
   , ("M-s", spawn "~/.dmenu/dmenu-scrot.sh")
-  , ("M-i", spawn "~/.dmenu/dmenu-cmus.sh")
-  , ("M-o", spawn "~/.dmenu/dmenu-passmenu.sh")
+  , ("M-i", spawn "~/.dmenu/dmenu-passmenu.sh")
 
     -- Kill xmobar 
   , ("M-u", spawn "killall xmobar")
