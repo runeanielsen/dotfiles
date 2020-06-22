@@ -4,9 +4,16 @@
 (setq user-full-name "Rune Nielsen"
       user-mail-address "runenielsen@runbox.com")
 
+
+;; Theme --------------------------------------------------------------
 (setq doom-theme 'doom-spacegrey)
+
+
+;; Default Browser ----------------------------------------------------
 (setq browse-url-browser-function 'browse-url-firefox)
 
+
+;; Path ---------------------------------------------------------------
 (setenv "PATH"
   (concat
    "/usr/bin/go/" ":"
@@ -17,6 +24,7 @@
 
 (setenv "GOPATH" "/usr/bin/go")
 
+
 ;; Font ---------------------------------------------------------------
 (setq
  doom-font (font-spec :family "monospace" :size 20 :weight 'bold)
@@ -25,6 +33,12 @@
 
 ;; Pandoc Mode --------------------------------------------------------
 (add-hook 'markdown-mode-hook 'pandoc-mode)
+
+
+;; Don't cache if file not exist---------------------------------------
+(defadvice! dont-cache-if-file-doesnt-exist-a (&rest _)
+  :before-until #'projectile-cache-files-find-file-hook
+  (and buffer-file-name (file-exists-p buffer-file-name)))
 
 
 ;; Theme Magic Pywal --------------------------------------------------
