@@ -53,4 +53,3 @@
 (package! tide)
 (package! prettier-js)
 (package! theme-magic)
-(package! yaml-mode)

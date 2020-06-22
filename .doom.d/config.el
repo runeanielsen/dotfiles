@@ -63,15 +63,7 @@
 
 
 ;; Prettier -----------------------------------------------------------
-(add-hook 'js-mode-hook 'prettier-js-mode)
-
-
-;; Yaml ---------------------------------------------------------------
-(require 'yaml-mode)
-(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-
-(after! flycheck
-  (setq flycheck-check-syntax-automatically '(save idle-change new-line mode-enabled)))
+ (add-hook 'js-mode-hook 'prettier-js-mode)
 
 
 ;; C# -----------------------------------------------------------------
