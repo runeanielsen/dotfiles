@@ -17,6 +17,8 @@ import XMonad.Layout.Fullscreen (fullscreenFull, fullscreenSupport)
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.SetWMName
+import qualified XMonad.StackSet as W 
 
 -- Settings
 myModMask :: KeyMask
@@ -37,7 +39,8 @@ myFocusedBorderColor = "#ffffff"
 -- Startup Hook
 myStartupHook :: X ()
 myStartupHook = do
-  spawnOnce "nitrogen --restore &"
+  spawnOnce "nitrogen --restore &" 
+  setWMName "LG3D"
 
 -- Layout
 myLayout = avoidStruts (smartBorders $ fullscreenFull $ tiled ||| Mirror tiled ||| noBorders Full)
@@ -55,8 +58,7 @@ myLayout = avoidStruts (smartBorders $ fullscreenFull $ tiled ||| Mirror tiled |
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll [
    manageDocks,
-   isFullscreen --> doFullFloat,
-   manageHook defaultConfig
+   isFullscreen --> doFullFloat
  ]
 
 -- Keys
