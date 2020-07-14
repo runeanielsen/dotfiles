@@ -18,7 +18,6 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName
-import qualified XMonad.StackSet as W 
 
 -- Settings
 myModMask :: KeyMask
