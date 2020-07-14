@@ -27,8 +27,8 @@
 
 ;; Font ---------------------------------------------------------------
 (setq
- doom-font (font-spec :family "monospace" :size 20 :weight 'bold)
- doom-variable-pitch-font (font-spec :family "monospace" :size 20))
+ doom-font (font-spec :family "monospace" :size 16 :weight 'bold)
+ doom-variable-pitch-font (font-spec :family "monospace" :size 16))
 
 
 ;; Pandoc Mode --------------------------------------------------------
