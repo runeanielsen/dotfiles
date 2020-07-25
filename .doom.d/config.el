@@ -25,10 +25,14 @@
 (setenv "GOPATH" "/usr/bin/go")
 
 
+;; Relative line numbers ----------------------------------------------
+(setq display-line-numbers-type 'relative)
+
+
 ;; Font ---------------------------------------------------------------
 (setq
- doom-font (font-spec :family "monospace" :size 16 :weight 'bold)
- doom-variable-pitch-font (font-spec :family "monospace" :size 16))
+ doom-font (font-spec :family "monospace" :size 20 :weight 'bold)
+ doom-variable-pitch-font (font-spec :family "monospace" :size 20))
 
 
 ;; Pandoc Mode --------------------------------------------------------
