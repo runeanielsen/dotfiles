@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMG_PATH=/home/notation/screenshots/
+IMG_PATH=~/screenshots/
 
 prog="1.quick_fullscreen
 2.delayed_fullscreen
