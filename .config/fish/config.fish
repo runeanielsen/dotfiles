@@ -6,7 +6,7 @@ set -Ux EDITOR nvim
 set -Ux theme_display_date no
 set -Ux DOTNET_CLI_TELEMETRY_OPTOUT 1
 set -Ux DOTNET_ROOT /usr/share/dotnet
-set -Ux MSBuildSDKsPath /usr/share/dotnet/sdk/3.1.103/Sdks
+set -Ux MSBuildSDKsPath /usr/share/dotnet/sdk/3.1.106/Sdks
 set -x PATH $PATH $HOME/.node_modules/bin
 
 function ll
