@@ -8,6 +8,7 @@ set -Ux DOTNET_CLI_TELEMETRY_OPTOUT 1
 set -Ux DOTNET_ROOT /usr/share/dotnet
 set -Ux MSBuildSDKsPath /usr/share/dotnet/sdk/3.1.106/Sdks
 set -x PATH $PATH $HOME/.node_modules/bin
+set -Ux PYTHONPATH /usr/share/qgis/python/qsci_apis
 
 function ll
     ls -lh $argv
