@@ -93,3 +93,9 @@
   (local-set-key (kbd "C-c f f"), 'omnisharp-go-to-definition))
 
 (add-hook 'csharp-mode-hook 'my-csharp-mode-setup t)
+
+
+;; Python MS ----------------------------------------------------------
+(require 'lsp-python-ms)
+(setq lsp-python-ms-auto-install-server t)
+(add-hook 'python-mode-hook #'lsp) ; or lsp-deferred
