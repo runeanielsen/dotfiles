@@ -66,14 +66,6 @@
 (add-hook 'js-mode-hook #'setup-tide-mode)
 
 
-;; JSX ----------------------------------------------------------------
-(defun web-mode-init-prettier-hook ()
-  (add-node-modules-path)
-  (prettier-js-mode))
-
-(add-hook 'web-mode-hook  'web-mode-init-prettier-hook)
-(add-hook 'web-mode-hook  'emmet-mode)
-
 ;; C# -----------------------------------------------------------------
 (eval-after-load
   'company
