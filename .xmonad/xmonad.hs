@@ -39,7 +39,6 @@ myFocusedBorderColor = "#ffffff"
 myStartupHook :: X ()
 myStartupHook = do
   spawnOnce "nitrogen --restore &" 
-  spawnOnce "stalonetray -c /home/notation/.config/.stalonetrayrc &" 
   setWMName "LG3D"
 
 -- Layout
