@@ -98,6 +98,7 @@
 
 
 ;; Treemacs
+(add-hook 'projectile-after-switch-project-hook #'treemacs-display-current-project-exclusively)
 
 (use-package treemacs
   :ensure t
