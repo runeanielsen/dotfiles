@@ -39,6 +39,7 @@ myFocusedBorderColor = "#ffffff"
 myStartupHook :: X ()
 myStartupHook = do
   spawnOnce "nitrogen --restore &" 
+  spawn "trayer --edge top --align right --widthtype request --SetDockType true --SetPartialStrut true --expand true --iconspacing 6 --tint 0x00000 --transparent true --alpha 0 &"
   setWMName "LG3D"
 
 -- Layout
@@ -76,7 +77,7 @@ myKeys =
   , ("M-i", spawn "~/.dmenu/dmenu-passmenu.sh")
 
     -- Kill xmobar 
-  , ("M-u", spawn "killall xmobar")
+  , ("M-u", spawn "killall xmobar trayer")
 
     -- Multimedia keys
   , ("M-,", spawn "cmus-remote -r")
