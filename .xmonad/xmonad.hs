@@ -73,7 +73,9 @@ myKeys =
     -- My applications
   , ("M-f", spawn "firefox")
   , ("M-e", spawn "emacs")
+  , ("M-v", spawn "freetube-vue-git")
   , ("M-s", spawn "~/.dmenu/dmenu-scrot.sh")
+  , ("M-i", spawn "~/.dmenu/dmenu-passmenu.sh")
   , ("M-i", spawn "~/.dmenu/dmenu-passmenu.sh")
 
     -- Kill xmobar 
