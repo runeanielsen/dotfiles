@@ -72,6 +72,7 @@ myKeys =
 
     -- My applications
   , ("M-f", spawn "firefox")
+  , ("M-m", spawn "firefox -new-window music.youtube.com")
   , ("M-e", spawn "emacs")
   , ("M-v", spawn "freetube-bin")
   , ("M-s", spawn "~/.dmenu/dmenu-scrot.sh")
