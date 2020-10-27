@@ -1,0 +1,1 @@
+PROMPT=$'%F{white}%~ %B%F{blue}>%f%b '
