@@ -1,11 +1,16 @@
 source ~/.config/zsh/aliases
 
-# Load colors
-autoload -U colors && colors	
+# load colors
+autoload -U colors && colors 
+PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b"
 
-autoload -Uz compinit; compinit
+# history
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.cache/zsh/history
 
 # autocomplete
+autoload -Uz compinit; compinit
 _comp_options+=(globdots) # With hidden files
 source ~/.config/zsh/completion.zsh
 
@@ -19,5 +24,8 @@ bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 
+# prompt
 fpath=(~/.config/zsh $fpath)
 autoload -Uz prompt; prompt
+source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+source ~/.config/zsh/plugins/zsh-completions/zsh-completions.plugin.zsh
