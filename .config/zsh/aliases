@@ -21,8 +21,8 @@ alias glol='git log --graph --oneline --decorate'
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 alias ma='mount -a'
-
 alias r='ranger'
+alias bt='bluetoothctl'
 
 alias k='kubectl'
 alias kaf='kubectl apply -f'
