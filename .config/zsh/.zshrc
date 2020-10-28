@@ -27,5 +27,6 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 # prompt
 fpath=(~/.config/zsh $fpath)
 autoload -Uz prompt; prompt
-source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 source ~/.config/zsh/plugins/zsh-completions/zsh-completions.plugin.zsh
+source ~/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
