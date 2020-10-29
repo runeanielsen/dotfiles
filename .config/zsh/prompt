@@ -1,4 +1,4 @@
-PROMPT=$'%F{white}%~ %B%F{blue}>%f%b '
+PROMPT=$'%F{white}%1~ %B%F{yellow}>%f%b '
 
 vim_cursor_mode() {
     cursor_block='\e[2 q'
