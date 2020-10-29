@@ -14,15 +14,10 @@ SAVEHIST=10000
 HISTFILE=~/.cache/zsh/history
 
 # autocomplete
-autoload -Uz compinit;
+autoload -Uz compinit; compinit
 
-# Only dump completion cache once a day
-# https://gist.github.com/ctechols/ca1035271ad134841284
-if [[ -n "${ZSH_CACHE}"/zcompdump(#qN.mh+24) ]]; then
-	compinit -d "${ZSH_CACHE}/zcompdump"
-else
-	compinit -d "${ZSH_CACHE}/zcompdump" -C
-fi
+_comp_options+=(globdots)
+source ~/.config/zsh/completion.zsh
 
 # vi mode
 bindkey -v
@@ -33,9 +28,6 @@ bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
-
-_comp_options+=(globdots)
-source ~/.config/zsh/completion.zsh
 
 source ~/.config/zsh/plugins/zsh-completions/zsh-completions.plugin.zsh
 source ~/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
