@@ -11,7 +11,7 @@ autoload -Uz prompt; prompt
 # history
 HISTSIZE=10000
 SAVEHIST=10000
-HISTFILE=~/.cache/zsh/history
+HISTFILE=~/.zsh_history
 
 # autocomplete
 autoload -Uz compinit; compinit
