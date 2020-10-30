@@ -1,3 +1,6 @@
+# wal colors
+(cat ~/.cache/wal/sequences)
+
 source ~/.config/zsh/aliases
 
 # load colors
@@ -28,9 +31,6 @@ bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
-
-# wal colors
-cat ~/.cache/wal/sequences
 
 source ~/.config/zsh/plugins/zsh-completions/zsh-completions.plugin.zsh
 source ~/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
