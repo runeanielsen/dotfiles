@@ -23,6 +23,7 @@ alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias ma='mount -a'
 alias r='ranger'
 alias bt='bluetoothctl'
+alias of='cd ~/Projects/openftth/'
 
 alias k='kubectl'
 alias kaf='kubectl apply -f'
