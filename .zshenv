@@ -15,3 +15,7 @@ export DOTNET_ROOT="/usr/share/dotnet"
 export MSBuildSDKsPath=$(echo /usr/share/dotnet/sdk/3.*/Sdks);
 
 export PYTHONPATH="/usr/share/qgis/python:/usr/share/qgis/python/plugins"
+
+export TODO_FILENAME="/home/notation/.todo.json"
+
+export GOBIN="/usr/bin"
