@@ -13,18 +13,6 @@
 (setq browse-url-browser-function 'browse-url-firefox)
 
 
-;; Path ---------------------------------------------------------------
-(setenv "PATH"
-        (concat
-         "/usr/bin/go/" ":"
-         "/home/notation/go/bin/" ":"
-         (getenv "PATH")
-         )
-        )
-
-(setenv "GOPATH" "/usr/bin/go")
-
-
 ;; Relative line numbers ----------------------------------------------
 (setq display-line-numbers-type 'relative)
 
@@ -70,6 +58,33 @@
 (require 'lsp-python-ms)
 (setq lsp-python-ms-auto-install-server t)
 (add-hook 'python-mode-hook #'lsp) ; or lsp-deferred
+
+
+;; Go
+ (use-package lsp-mode
+  :ensure t
+  :commands (lsp lsp-deferred)
+  :hook (go-mode . lsp-deferred))
+
+;; Set up before-save hooks to format buffer and add/delete imports.
+;; Make sure you don't have other gofmt/goimports hooks enabled.
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+
+;; Optional - provides fancier overlays.
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode)
+
+;; Company mode is a standard completion package that works well with lsp-mode.
+(use-package company
+  :ensure t
+  :config
+  ;; Optionally enable completion-as-you-type behavior.
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 1))
 
 
 ;; Treemacs
