@@ -76,6 +76,7 @@ myKeys =
   , ("M-v", spawn "freetube-bin")
   , ("M-s", spawn "~/.dmenu/dmenu-scrot.sh")
   , ("M-i", spawn "~/.dmenu/dmenu-passmenu.sh")
+  , ("M-b", spawn "~/.dmenu/dmenu-books.sh")
 
     -- Kill xmobar 
   , ("M-u", spawn "killall xmobar trayer")
