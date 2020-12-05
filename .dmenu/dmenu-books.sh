@@ -13,5 +13,5 @@ then
     exit 1
 fi
 
-BOOK=$BOOKS_PATH$cmd
+BOOK=$(find $BOOKS_PATH -name "$cmd")
 $(zathura "$BOOK")
