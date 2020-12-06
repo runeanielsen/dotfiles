@@ -7,10 +7,6 @@ source ~/.config/zsh/aliases
 autoload -U colors && colors 
 PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b"
 
-# prompt
-fpath=(~/.config/zsh $fpath)
-autoload -Uz prompt; prompt
-
 # history
 HISTSIZE=10000
 SAVEHIST=10000
@@ -35,3 +31,5 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 source ~/.config/zsh/plugins/zsh-completions/zsh-completions.plugin.zsh
 source ~/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+
+eval "$(starship init zsh)"
