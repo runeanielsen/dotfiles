@@ -3,7 +3,7 @@
 BOOKS_PATH=$HOME/Nas/books/
 
 prog="
-"$(exa $BOOKS_PATH -R | grep '\.pdf\|\.epub')
+"$(exa $BOOKS_PATH -R | rg '\.pdf|\.epub')
 
 cmd=$(dmenu -l 20 -i -nf '#ffffff' -nb '#222222' -sf '#222222' -sb '#ffffff' <<< "$prog")
 
