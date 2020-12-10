@@ -10,7 +10,6 @@
 ;;(package-refresh-contents)
 
 ;; --- install packages ---
-
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 
@@ -38,6 +37,9 @@
 (unless (package-installed-p 'go-mode)
   (package-install 'go-mode))
 
+(unless (package-installed-p 'csharp-mode)
+  (package-install 'csharp-mode))
+
 (unless (package-installed-p 'doom-modeline)
   (package-install 'doom-modeline))
 
@@ -52,6 +54,9 @@
 
 (unless (package-installed-p 'projectile)
   (package-install 'projectile))
+
+(unless (package-installed-p 'treemacs-projectile)
+  (package-install 'treemacs-projectile))
 
 (unless (package-installed-p 'evil-leader)
   (package-install 'evil-leader))
@@ -191,6 +196,7 @@
   (global-evil-leader-mode)
   (evil-leader/set-leader "<SPC>"))
 
+;; --- Keybindings ---
 (evil-leader/set-key
   ;; files
   "ff" 'find-file
@@ -205,7 +211,12 @@
   ;; window
   "ww" 'other-window
   "wn" 'split-window-right
-  "wd" 'delete-window)
+  "wd" 'delete-window
+  ;; open
+  "ot" 'treemacs
+  ;; project
+  "pa" 'projectile-add-known-project
+  "pp" 'projectile-switch-project)
 
 ;; --- Evil snipe ---
 (use-package evil-snipe
@@ -219,9 +230,9 @@
 (setq lsp-keymap-prefix "s-l")
 
 (use-package lsp-mode
-    :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+    :hook (
+            (csharp-mode . lsp)
             (go-mode . lsp)
-            ;; if you want which-key integration
             (lsp-mode . lsp-enable-which-key-integration))
     :commands lsp)
 
@@ -257,8 +268,6 @@
 (setq projectile-completion-system 'ivy)
 
 ;; --- Treemacs ---
-(add-hook 'projectile-after-switch-project-hook #'treemacs-display-current-project-exclusively)
-
 (use-package treemacs
   :ensure t
   :defer t
@@ -305,8 +314,14 @@
           treemacs-tag-follow-delay              1.5
           treemacs-user-mode-line-format         nil
           treemacs-user-header-line-format       nil
-          treemacs-width                         50
+          treemacs-width                         40
           treemacs-workspace-switch-cleanup      'all))
     (treemacs-follow-mode t)
     (treemacs-filewatch-mode t)
     (treemacs-fringe-indicator-mode t))
+
+(use-package treemacs-projectile
+  :after treemacs projectile
+  :ensure t)
+
+(add-hook 'projectile-after-switch-project-hook #'treemacs-display-current-project-exclusively)
