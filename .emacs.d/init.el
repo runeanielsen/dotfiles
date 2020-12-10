@@ -40,6 +40,18 @@
 (unless (package-installed-p 'csharp-mode)
   (package-install 'csharp-mode))
 
+(unless (package-installed-p 'web-mode)
+  (package-install 'web-mode))
+
+(unless (package-installed-p 'js2-mode)
+  (package-install 'js2-mode))
+
+(unless (package-installed-p 'json-mode)
+  (package-install 'json-mode))
+
+(unless (package-installed-p 'exec-path-from-shell)
+  (package-install 'exec-path-from-shell))
+
 (unless (package-installed-p 'doom-modeline)
   (package-install 'doom-modeline))
 
@@ -63,6 +75,15 @@
 
 (unless (package-installed-p 'evil-snipe)
   (package-install 'evil-snipe))
+
+(unless (package-installed-p 'evil-snipe)
+  (package-install 'tide))
+
+(unless (package-installed-p 'lsp-python-ms)
+  (package-install 'lsp-python-ms))
+
+(unless (package-installed-p 'tide)
+  (package-install 'tide))
 
 ;; --- load use-packages ---
 
@@ -236,6 +257,15 @@
             (lsp-mode . lsp-enable-which-key-integration))
     :commands lsp)
 
+(use-package lsp-python-ms
+  :ensure t
+  :init (setq lsp-python-ms-auto-install-server t)
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-python-ms)
+                          (lsp))))
+
+
+
 ;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
 (defun lsp-go-install-save-hooks ()
@@ -314,7 +344,7 @@
           treemacs-tag-follow-delay              1.5
           treemacs-user-mode-line-format         nil
           treemacs-user-header-line-format       nil
-          treemacs-width                         40
+          treemacs-width                         45
           treemacs-workspace-switch-cleanup      'all))
     (treemacs-follow-mode t)
     (treemacs-filewatch-mode t)
@@ -325,3 +355,80 @@
   :ensure t)
 
 (add-hook 'projectile-after-switch-project-hook #'treemacs-display-current-project-exclusively)
+
+
+;; --- Tide ---
+(defun setup-tide-mode ()
+  (interactive)
+  ;;  (setq tide-tsserver-process-environment '("TSS_LOG=-level verbose -file /tmp/tss.log"))
+  (tide-setup)
+  (if (file-exists-p (concat tide-project-root "node_modules/typescript/bin/tsserver"))
+    (setq tide-tsserver-executable "node_modules/typescript/bin/tsserver"))
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  (setq tide-format-options '(:indentSize 2 :tabSize 2 :insertSpaceAfterFunctionKeywordForAnonymousFunctions t :placeOpenBraceOnNewLineForFunctions nil))
+  (local-set-key (kbd "C-c d") 'tide-documentation-at-point)
+  (company-mode +1)
+  (setq company-minimum-prefix-length 1))
+
+(require 'use-package)
+(use-package tide
+  :ensure t
+  :config
+  (progn
+    (company-mode +1)
+    ;; aligns annotation to the right hand side
+    (setq company-tooltip-align-annotations t)
+    (add-hook 'typescript-mode-hook #'setup-tide-mode)
+    (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+  ))
+
+;; use web-mode + tide-mode for javascript instead
+(use-package js2-mode
+  :ensure t
+  :config
+  (progn
+    (add-hook 'js2-mode-hook #'setup-tide-mode)
+    ;; configure javascript-tide checker to run after your default javascript checker
+    (setq js2-basic-offset 2)
+    (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
+    (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
+    (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))))
+
+;; (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
+
+(use-package json-mode
+  :ensure t
+  :config
+  (progn
+    (flycheck-add-mode 'json-jsonlint 'json-mode)
+    (add-hook 'json-mode-hook 'flycheck-mode)
+    (setq js-indent-level 2)
+    (add-to-list 'auto-mode-alist '("\\.json" . json-mode))))
+
+(use-package web-mode
+  :ensure t
+  :config
+  (progn
+    (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.js"     . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.html"   . web-mode))
+    ;; this magic incantation fixes highlighting of jsx syntax in .js files
+    (setq web-mode-content-types-alist
+          '(("jsx" . "\\.js[x]?\\'")))
+    (add-hook 'web-mode-hook
+              (lambda ()
+                (setq web-mode-code-indent-offset 2)
+                (when (string-equal "tsx" (file-name-extension buffer-file-name))
+                  (setup-tide-mode))
+                (when (string-equal "jsx" (file-name-extension buffer-file-name))
+                  (setup-tide-mode))
+                (when (string-equal "js" (file-name-extension buffer-file-name))
+                  (progn
+                    (setup-tide-mode)
+                    (with-eval-after-load 'flycheck
+                      (flycheck-add-mode 'typescript-tslint 'web-mode)
+                      (flycheck-add-mode 'javascript-tide 'web-mode))))))
+    ))
