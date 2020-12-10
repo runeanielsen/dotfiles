@@ -56,6 +56,9 @@
 (unless (package-installed-p 'evil-leader)
   (package-install 'evil-leader))
 
+(unless (package-installed-p 'evil-snipe)
+  (package-install 'evil-snipe))
+
 ;; --- load use-packages ---
 
 (eval-when-compile
@@ -131,7 +134,7 @@
 ;; relative line numbers
 (setq-default display-line-numbers 'relative
               display-line-numbers-current-absolute t
-              display-line-numbers-width 2 
+              display-line-numbers-width 2
               display-line-numbers-widen t)
 
 ;; --- Disable unnecessary UI elements ---
@@ -166,7 +169,7 @@
 
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
-  
+
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
@@ -180,6 +183,7 @@
   :config
   (evil-mode 1))
 
+;; --- Evil leader ---
 (use-package evil-leader
   :ensure t
   :defer t
@@ -196,7 +200,17 @@
   "bb" 'switch-to-buffer
   "bd" 'kill-current-buffer
   "bS" 'evil-write-all
-  "")
+  ;; lsp
+  "cr" 'lsp-rename
+  ;; window
+  "ww" 'other-window
+  "wn" 'split-window-right
+  "wd" 'delete-window)
+
+;; --- Evil snipe ---
+(use-package evil-snipe
+  :config
+  (evil-snipe-override-mode +1))
 
 ;; --- Electrical pair ---
 (electric-pair-mode 1)
