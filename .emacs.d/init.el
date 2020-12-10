@@ -85,6 +85,10 @@
 (unless (package-installed-p 'tide)
   (package-install 'tide))
 
+(unless (package-installed-p 'eslint-fix)
+  (package-install 'eslint-fix))
+
+
 ;; --- load use-packages ---
 
 (eval-when-compile
@@ -356,79 +360,54 @@
 
 (add-hook 'projectile-after-switch-project-hook #'treemacs-display-current-project-exclusively)
 
+;; --- Flycheck ---
+(use-package flycheck
+  :ensure t
+  :config
+(global-flycheck-mode))
 
 ;; --- Tide ---
+(use-package tide
+  :ensure t
+  :config
+    (defvar company-tooltip-align-annotations)
+    (setq company-tooltip-align-annotations t)
+    (add-hook 'js-mode-hook #'setup-tide-mode))
+
 (defun setup-tide-mode ()
   (interactive)
-  ;;  (setq tide-tsserver-process-environment '("TSS_LOG=-level verbose -file /tmp/tss.log"))
   (tide-setup)
-  (if (file-exists-p (concat tide-project-root "node_modules/typescript/bin/tsserver"))
-    (setq tide-tsserver-executable "node_modules/typescript/bin/tsserver"))
   (flycheck-mode +1)
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
-  (setq tide-format-options '(:indentSize 2 :tabSize 2 :insertSpaceAfterFunctionKeywordForAnonymousFunctions t :placeOpenBraceOnNewLineForFunctions nil))
-  (local-set-key (kbd "C-c d") 'tide-documentation-at-point)
-  (company-mode +1)
-  (setq company-minimum-prefix-length 1))
+  (company-mode +1))
 
-(require 'use-package)
-(use-package tide
-  :ensure t
-  :config
-  (progn
-    (company-mode +1)
-    ;; aligns annotation to the right hand side
-    (setq company-tooltip-align-annotations t)
-    (add-hook 'typescript-mode-hook #'setup-tide-mode)
-    (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
-  ))
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
 
-;; use web-mode + tide-mode for javascript instead
-(use-package js2-mode
-  :ensure t
-  :config
-  (progn
-    (add-hook 'js2-mode-hook #'setup-tide-mode)
-    ;; configure javascript-tide checker to run after your default javascript checker
-    (setq js2-basic-offset 2)
-    (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
-    (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
-    (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))))
+;; formats the buffer before saving
+;;(add-hook 'before-save-hook 'tide-format-before-save)
 
-;; (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
+(use-package js2-mode)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
-(use-package json-mode
-  :ensure t
-  :config
-  (progn
-    (flycheck-add-mode 'json-jsonlint 'json-mode)
-    (add-hook 'json-mode-hook 'flycheck-mode)
-    (setq js-indent-level 2)
-    (add-to-list 'auto-mode-alist '("\\.json" . json-mode))))
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
+(add-hook 'js2-mode-hook #'setup-tide-mode)
+(flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
 
-(use-package web-mode
-  :ensure t
-  :config
-  (progn
-    (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.js"     . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.html"   . web-mode))
-    ;; this magic incantation fixes highlighting of jsx syntax in .js files
-    (setq web-mode-content-types-alist
-          '(("jsx" . "\\.js[x]?\\'")))
-    (add-hook 'web-mode-hook
-              (lambda ()
-                (setq web-mode-code-indent-offset 2)
-                (when (string-equal "tsx" (file-name-extension buffer-file-name))
-                  (setup-tide-mode))
-                (when (string-equal "jsx" (file-name-extension buffer-file-name))
-                  (setup-tide-mode))
-                (when (string-equal "js" (file-name-extension buffer-file-name))
-                  (progn
-                    (setup-tide-mode)
-                    (with-eval-after-load 'flycheck
-                      (flycheck-add-mode 'typescript-tslint 'web-mode)
-                      (flycheck-add-mode 'javascript-tide 'web-mode))))))
-    ))
+(eval-after-load 'js2-mode
+	   '(add-hook 'js2-mode-hook (lambda () (add-hook 'after-save-hook 'eslint-fix nil t))))
+
+(use-package web-mode)
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
+(add-hook 'web-mode-hook
+          (lambda ()
+            (when (string-equal "jsx" (file-name-extension buffer-file-name))
+              (setup-tide-mode))))
+;; configure jsx-tide checker to run after your default jsx checker
+(flycheck-add-mode 'javascript-eslint 'web-mode)
+(flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
+
+(eval-after-load 'web-mode
+	   '(add-hook 'web-mode-hook (lambda () (add-hook 'after-save-hook 'eslint-fix nil t))))
