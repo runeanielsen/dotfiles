@@ -150,25 +150,14 @@
 ;; set default tab char's display width to 4 spaces
 (setq-default tab-width 4)
 
-;; set current buffer's tab char's display width to 4 spaces
-(setq tab-width 4)
-
 ;; make indent commands use space only (never tab character)
 (progn
-  (setq-default indent-tabs-mode nil)
-  )
+  (setq-default indent-tabs-mode nil))
 
 ;; display line numbers
 (global-display-line-numbers-mode)
 
-;; relative line numbers
-(setq-default display-line-numbers 'relative
-              display-line-numbers-current-absolute t
-              display-line-numbers-width 2
-              display-line-numbers-widen t)
-
 ;; --- Disable unnecessary UI elements ---
-
 (progn
   ;; Do not show menu bar.
   (menu-bar-mode -1)
@@ -386,9 +375,6 @@
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
 
-;; formats the buffer before saving
-;;(add-hook 'before-save-hook 'tide-format-before-save)
-
 (use-package js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
@@ -398,6 +384,8 @@
 
 (eval-after-load 'js2-mode
 	   '(add-hook 'js2-mode-hook (lambda () (add-hook 'after-save-hook 'eslint-fix nil t))))
+(eval-after-load 'js2-mode
+	   '(add-hook 'js2-mode-hook (lambda () (add-hook 'after-save-hook 'flycheck-buffer))))
 
 (use-package web-mode)
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
@@ -405,9 +393,16 @@
           (lambda ()
             (when (string-equal "jsx" (file-name-extension buffer-file-name))
               (setup-tide-mode))))
-;; configure jsx-tide checker to run after your default jsx checker
+
 (flycheck-add-mode 'javascript-eslint 'web-mode)
 (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
 
 (eval-after-load 'web-mode
 	   '(add-hook 'web-mode-hook (lambda () (add-hook 'after-save-hook 'eslint-fix nil t))))
+(eval-after-load 'web-mode
+	   '(add-hook 'web-mode-hook (lambda () (add-hook 'after-save-hook 'flycheck-buffer))))
+
+(setq-default js2-basic-offset 2)
+(setq-default web-mode-code-indent-offset 2)
+(setq-default web-mode-css-indent-offset 2)
+(setq-default web-mode-markup-indent-offset 2)
