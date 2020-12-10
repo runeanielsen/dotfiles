@@ -50,6 +50,12 @@
 (unless (package-installed-p 'treemacs)
   (package-install 'treemacs))
 
+(unless (package-installed-p 'projectile)
+  (package-install 'projectile))
+
+(unless (package-installed-p 'evil-leader)
+  (package-install 'evil-leader))
+
 ;; --- load use-packages ---
 
 (eval-when-compile
@@ -174,6 +180,24 @@
   :config
   (evil-mode 1))
 
+(use-package evil-leader
+  :ensure t
+  :defer t
+  :config
+  (global-evil-leader-mode)
+  (evil-leader/set-leader "<SPC>"))
+
+(evil-leader/set-key
+  ;; files
+  "ff" 'find-file
+  "fd" 'dired'
+  "SPC" 'projectile-find-file
+  ;; buffer
+  "bb" 'switch-to-buffer
+  "bd" 'kill-current-buffer
+  "bS" 'evil-write-all
+  "")
+
 ;; --- Electrical pair ---
 (electric-pair-mode 1)
 
@@ -205,7 +229,7 @@
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 1))
 
-;; if you are ivy user
+;; Ivy
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 
@@ -213,6 +237,10 @@
 (use-package which-key
     :config
     (which-key-mode))
+
+;; --- Projectile ---
+(projectile-mode +1)
+(setq projectile-completion-system 'ivy)
 
 ;; --- Treemacs ---
 (add-hook 'projectile-after-switch-project-hook #'treemacs-display-current-project-exclusively)
