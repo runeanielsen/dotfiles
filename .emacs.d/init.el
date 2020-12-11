@@ -41,12 +41,6 @@ auto-fill-function 'do-auto-fill
 ;; set default tab char's display width to 4 spaces
 tab-width 4
 
-;; set default indent offset on modes
-js-indent-level 2
-web-mode-code-indent-offset 2
-web-mode-css-indent-offset 2
-web-mode-markup-indent-offset 2
-
  ;; Allow commands to be run on minibuffers.
  enable-recursive-minibuffers t)
 
@@ -329,4 +323,13 @@ web-mode-markup-indent-offset 2
        (add-hook 'scss-mode-hook #'add-node-modules-path)
        (add-hook 'js2-mode-hook #'add-node-modules-path)
        (add-hook 'web-mode-hook #'prettier-js-mode)))
+
+(setq-default
+;; set default indent offset on modes
+  js-indent-level 2
+  css-indent-offset 2
+  web-mode-code-indent-offset 2
+  web-mode-css-indent-offset 2
+  web-mode-markup-indent-offset 2)
+
 ;;; init.el ends here
