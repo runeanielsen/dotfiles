@@ -1,5 +1,7 @@
+;;; Commentary:
 ;;; --- Set up 'package' ---
 
+;;; Code:
 (load "~/.emacs.d/init-packages")
 
 (add-to-list 'default-frame-alist
@@ -30,8 +32,20 @@
  ;; http://www.gnu.org/software/emacs/manual/html_node/elisp/Backup-Files.html
  backup-directory-alist `(("." . ,(concat user-emacs-directory "backups")))
 
+;; Automatically auto-fill mode on in all major modes
+auto-fill-function 'do-auto-fill
+
  ;; Do not autosave.
  auto-save-default nil
+
+;; set default tab char's display width to 4 spaces
+tab-width 4
+
+;; set default indent offset on modes
+js-indent-level 2
+web-mode-code-indent-offset 2
+web-mode-css-indent-offset 2
+web-mode-markup-indent-offset 2
 
  ;; Allow commands to be run on minibuffers.
  enable-recursive-minibuffers t)
@@ -51,12 +65,6 @@
 
 ;; Automatically update buffers if file content on the disk has changed.
 (global-auto-revert-mode t)
-
-;; Automatically auto-fill mode on in all major modes
-(setq-default auto-fill-function 'do-auto-fill)
-
-;; set default tab char's display width to 4 spaces
-(setq-default tab-width 4)
 
 ;; make indent commands use space only (never tab character)
 (progn
@@ -310,7 +318,4 @@
 (eval-after-load 'web-mode
 	   '(add-hook 'web-mode-hook (lambda () (add-hook 'after-save-hook 'flycheck-buffer))))
 
-(setq-default js2-basic-offset 2)
-(setq-default web-mode-code-indent-offset 2)
-(setq-default web-mode-css-indent-offset 2)
-(setq-default web-mode-markup-indent-offset 2)
+;;; init.el ends here
