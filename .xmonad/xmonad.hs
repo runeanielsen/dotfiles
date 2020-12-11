@@ -30,7 +30,7 @@ myTerminal :: String
 myTerminal = "alacritty"
 
 myNormalBorderColor :: String
-myNormalBorderColor = "#222222"
+myNormalBorderColor = "#2b303b"
 
 myFocusedBorderColor :: String
 myFocusedBorderColor = "#ffffff"
@@ -39,7 +39,7 @@ myFocusedBorderColor = "#ffffff"
 myStartupHook :: X ()
 myStartupHook = do
   spawnOnce "nitrogen --restore &" 
-  spawn "trayer --edge top --align right --widthtype request --SetDockType true --SetPartialStrut true --expand true --iconspacing 4 --tint 0x00000 --transparent true --alpha 0 &"
+  spawn "trayer --edge top --align right --widthtype request --SetDockType true --SetPartialStrut true --expand true --iconspacing 4 --tint 0x2b303b --transparent true --alpha 0 &"
   setWMName "LG3D"
 
 -- Layout
