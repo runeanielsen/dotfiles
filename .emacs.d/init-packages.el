@@ -29,7 +29,9 @@
         evil-leader
         evil-snipe
         tide
-        eslint-fix))
+        eslint-fix
+        prettier-js
+        add-node-modules-path))
 
 ; activate all the packages
 (package-initialize)

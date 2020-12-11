@@ -136,6 +136,7 @@ web-mode-markup-indent-offset 2
   "bb" 'switch-to-buffer
   "bd" 'kill-current-buffer
   "bS" 'evil-write-all
+  "bl" 'evil-switch-to-windows-last-buffer
   ;; lsp
   "cr" 'lsp-rename
   ;; window
@@ -298,11 +299,6 @@ web-mode-markup-indent-offset 2
 (add-hook 'js2-mode-hook #'setup-tide-mode)
 (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
 
-(eval-after-load 'js2-mode
-	   '(add-hook 'js2-mode-hook (lambda () (add-hook 'after-save-hook 'eslint-fix nil t))))
-(eval-after-load 'js2-mode
-	   '(add-hook 'js2-mode-hook (lambda () (add-hook 'after-save-hook 'flycheck-buffer))))
-
 (use-package web-mode)
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
 (add-hook 'web-mode-hook
@@ -313,9 +309,24 @@ web-mode-markup-indent-offset 2
 (flycheck-add-mode 'javascript-eslint 'web-mode)
 (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
 
-(eval-after-load 'web-mode
-	   '(add-hook 'web-mode-hook (lambda () (add-hook 'after-save-hook 'eslint-fix nil t))))
-(eval-after-load 'web-mode
-	   '(add-hook 'web-mode-hook (lambda () (add-hook 'after-save-hook 'flycheck-buffer))))
+(add-hook 'js2-mode-hook 'prettier-js-mode)
+(add-hook 'web-mode-hook 'prettier-js-mode)
+(add-hook 'scss-mode-hook 'prettier-js-mode)
 
+(defun enable-minor-mode (my-pair)
+  "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
+  (if (buffer-file-name)
+      (if (string-match (car my-pair) buffer-file-name)
+      (funcall (cdr my-pair)))))
+
+(add-hook 'web-mode-hook #'(lambda ()
+                            (enable-minor-mode
+                             '("\\.jsx?\\'" . prettier-js-mode))))
+
+(eval-after-load 'web-mode
+    '(progn
+       (add-hook 'web-mode-hook #'add-node-modules-path)
+       (add-hook 'scss-mode-hook #'add-node-modules-path)
+       (add-hook 'js2-mode-hook #'add-node-modules-path)
+       (add-hook 'web-mode-hook #'prettier-js-mode)))
 ;;; init.el ends here
