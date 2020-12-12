@@ -140,6 +140,8 @@ enable-recursive-minibuffers t)
   "cR" 'lsp-workspace-restart
   "lsp" 'comment-or-uncomment-region
   "ce" 'flycheck-list-errors
+  "ca" 'lsp-execute-code-action
+  "co" 'lsp-organize-imports
   ;; window
   "ww" 'other-window
   "wn" 'split-window-right
@@ -167,6 +169,13 @@ enable-recursive-minibuffers t)
 (use-package go-mode
     :ensure t)
 
+;; Set up before-save hooks to format buffer and add/delete imports.
+;; Make sure you don't have other gofmt/goimports hooks enabled.
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+
 ;; --- json mode ---
 (use-package json-mode
     :ensure t)
@@ -193,15 +202,6 @@ enable-recursive-minibuffers t)
             (go-mode . lsp)
             (lsp-mode . lsp-enable-which-key-integration))
     :commands lsp)
-
-
-
-;; Set up before-save hooks to format buffer and add/delete imports.
-;; Make sure you don't have other gofmt/goimports hooks enabled.
-(defun lsp-go-install-save-hooks ()
-  (add-hook 'before-save-hook #'lsp-format-buffer t t)
-  (add-hook 'before-save-hook #'lsp-organize-imports t t))
-(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
 ;; optionally
 (use-package lsp-ui :commands lsp-ui-mode :ensure t)
