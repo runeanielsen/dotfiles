@@ -2,8 +2,9 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$XDG_CONFIG_HOME/local/share"
 export XDG_CACHE_HOME="$XDG_CONFIG_HOME/cache"
 
+export ALTERNATE_EDITOR=""
 export EDITOR="nvim"
-export VISUAL="nvim"
+export VISUAL="emacsclient -c -a emacs"
 export PAGER="less"
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
@@ -19,3 +20,5 @@ export PYTHONPATH="/usr/share/qgis/python:/usr/share/qgis/python/plugins"
 export TODO_FILENAME="/home/notation/.todo.json"
 
 export GOBIN="/usr/bin"
+
+

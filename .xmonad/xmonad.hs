@@ -72,7 +72,7 @@ myKeys =
 
     -- My applications
   , ("M-f", spawn "firefox")
-  , ("M-e", spawn "emacs")
+  , ("M-e", spawn "emacsclient --create-frame --alternate-editor=\"\"")
   , ("M-v", spawn "freetube-bin")
   , ("M-s", spawn "~/.dmenu/dmenu-scrot.sh")
   , ("M-i", spawn "~/.dmenu/dmenu-passmenu.sh")
