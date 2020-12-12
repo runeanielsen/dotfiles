@@ -8,7 +8,6 @@
       '(
         use-package))
 
-; activate all the packages
 (package-initialize)
 
 ; fetch the list of packages available

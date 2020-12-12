@@ -35,8 +35,8 @@
 ;; Automatically auto-fill mode on in all major modes
 auto-fill-function 'do-auto-fill
 
- ;; Do not autosave.
- auto-save-default nil
+;; Do not autosave.
+auto-save-default nil
 
 ;; set default tab char's display width to 4 spaces
 tab-width 4
@@ -80,8 +80,17 @@ enable-recursive-minibuffers t)
   (when (fboundp 'scroll-bar-mode)
     (scroll-bar-mode -1))
 
-  ;; Highlight line on point.
-  (global-hl-line-mode t))
+;; Highlight line on point.
+(global-hl-line-mode t))
+
+;; --- dashboard ---
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook))
+
+(setq dashboard-items '((projects . 10)
+                        (agenda . 5)))
 
 ;; --- Modeline ---
 (use-package doom-modeline
