@@ -227,7 +227,7 @@ enable-recursive-minibuffers t)
 ;; --- Projectile ---
 (use-package projectile
     :ensure t
-    :config 
+    :config
     (projectile-mode +1)
     (setq projectile-completion-system 'ivy))
 
@@ -292,9 +292,9 @@ enable-recursive-minibuffers t)
 
 (use-package treemacs-projectile
   :after treemacs projectile
-  :init
-  (add-hook 'projectile-after-switch-project-hook #'treemacs-display-current-project-exclusively)
   :ensure t)
+
+(add-hook 'projectile-after-switch-project-hook #'treemacs-display-current-project-exclusively)
 
 ;; --- Flycheck ---
 (use-package flycheck
@@ -343,7 +343,6 @@ enable-recursive-minibuffers t)
 
 (flycheck-add-mode 'javascript-eslint 'web-mode)
 (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
-
 
 (defun enable-minor-mode (my-pair)
   "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
