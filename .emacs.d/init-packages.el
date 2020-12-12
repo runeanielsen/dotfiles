@@ -6,32 +6,7 @@
 ; list the packages you want
 (setq package-list
       '(
-        use-package
-        evil
-        lsp-mode
-        lsp-ui
-        company
-        lsp-ivy
-        which-key
-        flycheck
-        go-mode
-        lsp-python-ms
-        csharp-mode
-        web-mode
-        js2-mode
-        json-mode
-        doom-modeline
-        doom-themes
-        theme-magic
-        treemacs
-        projectile
-        treemacs-projectile
-        evil-leader
-        evil-snipe
-        tide
-        eslint-fix
-        prettier-js
-        add-node-modules-path))
+        use-package))
 
 ; activate all the packages
 (package-initialize)

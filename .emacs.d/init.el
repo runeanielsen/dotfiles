@@ -41,8 +41,8 @@ auto-fill-function 'do-auto-fill
 ;; set default tab char's display width to 4 spaces
 tab-width 4
 
- ;; Allow commands to be run on minibuffers.
- enable-recursive-minibuffers t)
+;; Allow commands to be run on minibuffers.
+enable-recursive-minibuffers t)
 
 ;; Change all yes/no questions to y/n type
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -90,6 +90,7 @@ tab-width 4
 
 ;; --- doom-themes ---
 (use-package doom-themes
+  :ensure t
   :config
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
@@ -103,11 +104,14 @@ tab-width 4
   (doom-themes-org-config))
 
 ;; --- Theme Magic Pywal ---
-(require 'theme-magic)
-(theme-magic-export-theme-mode)
+(use-package theme-magic
+  :ensure t
+  :config
+  (theme-magic-export-theme-mode))
 
 ;; --- Evil mode ---
 (use-package evil
+  :ensure t
   :init
   :config
   (evil-mode 1))
@@ -131,42 +135,64 @@ tab-width 4
   "bd" 'kill-current-buffer
   "bS" 'evil-write-all
   "bl" 'evil-switch-to-windows-last-buffer
-  ;; lsp
+  ;; code
   "cr" 'lsp-rename
+  "cR" 'lsp-workspace-restart
+  "lsp" 'comment-or-uncomment-region
+  "ce" 'flycheck-list-errors
   ;; window
   "ww" 'other-window
   "wn" 'split-window-right
   "wd" 'delete-window
   ;; open
-  "ot" 'treemacs
+  "op" 'treemacs
   ;; project
   "pa" 'projectile-add-known-project
-  "pp" 'projectile-switch-project)
+  "pd" 'projectile-remove-known-project
+  "pp" 'projectile-switch-project
+  "pi" 'projectile-invalidate-cache
+  "pb" 'projectile-switch-to-buffer
+  "pk" 'projectile-kill-buffers)
 
 ;; --- Evil snipe ---
 (use-package evil-snipe
+  :ensure t
   :config
   (evil-snipe-override-mode +1))
 
 ;; --- Electrical pair ---
 (electric-pair-mode 1)
 
-;; --- lsp mode ---
-(setq lsp-keymap-prefix "s-l")
+;; --- go mode ---
+(use-package go-mode
+    :ensure t)
 
-(use-package lsp-mode
-    :hook (
-            (csharp-mode . lsp)
-            (go-mode . lsp)
-            (lsp-mode . lsp-enable-which-key-integration))
-    :commands lsp)
+;; --- json mode ---
+(use-package json-mode
+    :ensure t)
 
+;; --- csharp mode ---
+(use-package csharp-mode
+    :ensure t)
+
+;; --- python-ms ---
 (use-package lsp-python-ms
   :ensure t
   :init (setq lsp-python-ms-auto-install-server t)
   :hook (python-mode . (lambda ()
                           (require 'lsp-python-ms)
                           (lsp))))
+
+;; --- lsp mode ---
+(setq lsp-keymap-prefix "s-l")
+
+(use-package lsp-mode
+    :ensure t
+    :hook (
+            (csharp-mode . lsp)
+            (go-mode . lsp)
+            (lsp-mode . lsp-enable-which-key-integration))
+    :commands lsp)
 
 
 
@@ -189,17 +215,21 @@ tab-width 4
   (setq company-minimum-prefix-length 1))
 
 ;; Ivy
-(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
-(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+(use-package lsp-ivy :ensure t :commands lsp-ivy-workspace-symbol)
+(use-package lsp-treemacs :ensure t :commands lsp-treemacs-errors-list)
 
 ;; optional if you want which-key integration
 (use-package which-key
+    :ensure t
     :config
     (which-key-mode))
 
 ;; --- Projectile ---
-(projectile-mode +1)
-(setq projectile-completion-system 'ivy)
+(use-package projectile
+    :ensure t
+    :config 
+    (projectile-mode +1)
+    (setq projectile-completion-system 'ivy))
 
 ;; --- Treemacs ---
 (use-package treemacs
@@ -250,30 +280,29 @@ tab-width 4
           treemacs-user-header-line-format       nil
           treemacs-width                         45
           treemacs-workspace-switch-cleanup      'all))
+    (treemacs-resize-icons 20)
     (treemacs-follow-mode t)
     (treemacs-filewatch-mode t)
     (treemacs-fringe-indicator-mode t))
 
-(use-package treemacs-projectile
-  :after treemacs projectile
+
+(use-package treemacs-evil
+  :after treemacs evil
   :ensure t)
 
-(add-hook 'projectile-after-switch-project-hook #'treemacs-display-current-project-exclusively)
+(use-package treemacs-projectile
+  :after treemacs projectile
+  :init
+  (add-hook 'projectile-after-switch-project-hook #'treemacs-display-current-project-exclusively)
+  :ensure t)
 
 ;; --- Flycheck ---
 (use-package flycheck
   :ensure t
   :config
-(global-flycheck-mode))
+  (global-flycheck-mode))
 
 ;; --- Tide ---
-(use-package tide
-  :ensure t
-  :config
-    (defvar company-tooltip-align-annotations)
-    (setq company-tooltip-align-annotations t)
-    (add-hook 'js-mode-hook #'setup-tide-mode))
-
 (defun setup-tide-mode ()
   (interactive)
   (tide-setup)
@@ -286,14 +315,26 @@ tab-width 4
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
 
-(use-package js2-mode)
+(use-package tide
+  :ensure t
+  :config
+    (defvar company-tooltip-align-annotations)
+    (setq company-tooltip-align-annotations t)
+    (add-hook 'js-mode-hook #'setup-tide-mode))
+
+(use-package js2-mode
+  :ensure t)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 (add-hook 'js2-mode-hook #'setup-tide-mode)
 (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
 
-(use-package web-mode)
+(use-package add-node-modules-path
+    :ensure t)
+(use-package web-mode
+    :ensure t)
+
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
 (add-hook 'web-mode-hook
           (lambda ()
@@ -303,9 +344,6 @@ tab-width 4
 (flycheck-add-mode 'javascript-eslint 'web-mode)
 (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
 
-(add-hook 'js2-mode-hook 'prettier-js-mode)
-(add-hook 'web-mode-hook 'prettier-js-mode)
-(add-hook 'scss-mode-hook 'prettier-js-mode)
 
 (defun enable-minor-mode (my-pair)
   "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
@@ -331,5 +369,12 @@ tab-width 4
   web-mode-code-indent-offset 2
   web-mode-css-indent-offset 2
   web-mode-markup-indent-offset 2)
+
+(use-package prettier-js
+    :ensure t
+    :init
+    (add-hook 'js2-mode-hook 'prettier-js-mode)
+    (add-hook 'web-mode-hook 'prettier-js-mode)
+    (add-hook 'scss-mode-hook 'prettier-js-mode))
 
 ;;; init.el ends here
