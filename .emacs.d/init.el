@@ -92,6 +92,11 @@ enable-recursive-minibuffers t)
 (setq dashboard-items '((projects . 10)
                         (agenda . 5)))
 
+;; Set the title
+(setq dashboard-banner-logo-title "Welcome to Emacs Dashboard")
+;; Set the banner
+(setq dashboard-startup-banner "~/.emacs.d/banner-text.txt")
+
 ;; --- Modeline ---
 (use-package doom-modeline
   :ensure t
