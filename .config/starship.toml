@@ -1,5 +1,8 @@
 add_newline = true
 
+[line_break]
+disabled = false
+
 [aws]
 symbol = " "
 
