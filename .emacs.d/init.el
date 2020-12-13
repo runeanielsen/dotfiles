@@ -151,6 +151,8 @@ enable-recursive-minibuffers t)
   "bd" 'kill-current-buffer
   "bS" 'evil-write-all
   "bl" 'evil-switch-to-windows-last-buffer
+  ;; git
+  "gg" 'magit-status
   ;; code
   "cr" 'lsp-rename
   "cR" 'lsp-workspace-restart
@@ -164,6 +166,8 @@ enable-recursive-minibuffers t)
   "wd" 'delete-window
   ;; open
   "op" 'treemacs
+  ;; h
+  "ht" 'counsel-load-theme
   ;; project
   "pa" 'projectile-add-known-project
   "pd" 'projectile-remove-known-project
@@ -172,11 +176,11 @@ enable-recursive-minibuffers t)
   "pb" 'projectile-switch-to-buffer
   "pk" 'projectile-kill-buffers)
 
-;; Counsel
+;; --- Counsel ---
 (use-package counsel
   :ensure t)
 
-;; Ivy
+;; --- Ivy ---
 (use-package ivy
   :ensure t)
 
@@ -186,6 +190,13 @@ enable-recursive-minibuffers t)
 
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+
+;; --- Magit ---
+(use-package magit
+  :ensure t)
+
+(use-package evil-magit
+  :ensure t)
 
 ;; --- Evil snipe ---
 (use-package evil-snipe
