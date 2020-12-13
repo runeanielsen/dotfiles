@@ -20,3 +20,5 @@ export PYTHONPATH="/usr/share/qgis/python:/usr/share/qgis/python/plugins"
 export TODO_FILENAME="/home/notation/.todo.json"
 
 export GOBIN="/usr/bin"
+
+export TERM=xterm vim
