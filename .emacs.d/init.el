@@ -143,7 +143,7 @@ enable-recursive-minibuffers t)
 ;; --- Keybindings ---
 (evil-leader/set-key
   ;; files
-  "ff" 'find-file
+  "ff" 'counsel-find-file
   "fd" 'dired'
   "SPC" 'projectile-find-file
   ;; buffer
@@ -171,6 +171,21 @@ enable-recursive-minibuffers t)
   "pi" 'projectile-invalidate-cache
   "pb" 'projectile-switch-to-buffer
   "pk" 'projectile-kill-buffers)
+
+;; Counsel
+(use-package counsel
+  :ensure t)
+
+;; Ivy
+(use-package ivy
+  :ensure t)
+
+(ivy-mode 1)
+(setq ivy-use-virtual-buffers t)
+(setq enable-recursive-minibuffers t)
+
+(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
 
 ;; --- Evil snipe ---
 (use-package evil-snipe
