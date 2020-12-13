@@ -111,7 +111,7 @@ enable-recursive-minibuffers t)
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-spacegrey t)
+  ;;(load-theme 'doom-spacegrey t)
 
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
@@ -196,13 +196,9 @@ enable-recursive-minibuffers t)
   :ensure t)
 
 (use-package evil-magit
-  :ensure t)
-
-;; --- Evil snipe ---
-(use-package evil-snipe
   :ensure t
   :config
-  (evil-snipe-override-mode +1))
+    (evil-define-key* evil-magit-state magit-mode-map [escape] nil))
 
 ;; --- Electrical pair ---
 (electric-pair-mode 1)
