@@ -210,6 +210,7 @@ enable-recursive-minibuffers t)
 ;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
 (defun lsp-go-install-save-hooks ()
+  "LSP Go install save hooks."
   (add-hook 'before-save-hook #'lsp-format-buffer t t)
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
 (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
@@ -273,9 +274,6 @@ enable-recursive-minibuffers t)
 (use-package treemacs
   :ensure t
   :defer t
-  :init
-  (with-eval-after-load 'winum
-    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
   :config
   (progn
     (setq treemacs-collapse-dirs                 (if treemacs-python-executable 3 0)
@@ -342,6 +340,7 @@ enable-recursive-minibuffers t)
 
 ;; --- Tide ---
 (defun setup-tide-mode ()
+  "Setup Tide Mode."
   (interactive)
   (tide-setup)
   (flycheck-mode +1)
@@ -413,5 +412,4 @@ enable-recursive-minibuffers t)
     (add-hook 'js2-mode-hook 'prettier-js-mode)
     (add-hook 'web-mode-hook 'prettier-js-mode)
     (add-hook 'scss-mode-hook 'prettier-js-mode))
-
 ;;; init.el ends here
