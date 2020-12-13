@@ -125,6 +125,13 @@ enable-recursive-minibuffers t)
   :config
   (theme-magic-export-theme-mode))
 
+;; --- Linum relative ---
+(use-package linum-relative
+  :ensure t
+  :config
+  (setq linum-relative-backend 'display-line-numbers-mode)
+  (linum-relative-on))
+
 ;; --- Evil mode ---
 (use-package evil
   :ensure t
@@ -240,10 +247,14 @@ enable-recursive-minibuffers t)
             (csharp-mode . lsp)
             (go-mode . lsp)
             (lsp-mode . lsp-enable-which-key-integration))
-    :commands lsp)
+    :commands lsp
+    :config
+      (setq lsp-enable-links nil))
 
 ;; optionally
-(use-package lsp-ui :commands lsp-ui-mode :ensure t)
+(use-package lsp-ui
+  :commands lsp-ui-mode
+  :ensure t)
 
 ;; Company mode is a standard completion package that works well with lsp-mode.
 (use-package company
@@ -254,8 +265,12 @@ enable-recursive-minibuffers t)
   (setq company-minimum-prefix-length 1))
 
 ;; Ivy
-(use-package lsp-ivy :ensure t :commands lsp-ivy-workspace-symbol)
-(use-package lsp-treemacs :ensure t :commands lsp-treemacs-errors-list)
+(use-package lsp-ivy
+  :ensure t
+  :commands lsp-ivy-workspace-symbol)
+(use-package lsp-treemacs
+  :ensure t
+  :commands lsp-treemacs-errors-list)
 
 ;; optional if you want which-key integration
 (use-package which-key
@@ -320,7 +335,6 @@ enable-recursive-minibuffers t)
     (treemacs-follow-mode t)
     (treemacs-filewatch-mode t)
     (treemacs-fringe-indicator-mode t))
-
 
 (use-package treemacs-evil
   :after treemacs evil
@@ -398,8 +412,8 @@ enable-recursive-minibuffers t)
        (add-hook 'js2-mode-hook #'add-node-modules-path)
        (add-hook 'web-mode-hook #'prettier-js-mode)))
 
-(setq-default
 ;; set default indent offset on modes
+(setq-default
   js-indent-level 2
   css-indent-offset 2
   web-mode-code-indent-offset 2
