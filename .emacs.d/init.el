@@ -238,6 +238,12 @@ enable-recursive-minibuffers t)
                           (require 'lsp-python-ms)
                           (lsp))))
 
+;; --- commmon lisp ---
+(defvar inferior-lisp-program "sbcl")
+
+(use-package sly
+  :ensure t)
+
 ;; --- lsp mode ---
 (setq lsp-keymap-prefix "s-l")
 
