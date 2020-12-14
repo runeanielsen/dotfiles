@@ -258,6 +258,8 @@ enable-recursive-minibuffers t)
 
 ;; Company mode is a standard completion package that works well with lsp-mode.
 (use-package company
+  :init
+  (add-hook 'after-init-hook 'global-company-mode)
   :ensure t
   :config
   ;; Optionally enable completion-as-you-type behavior.
