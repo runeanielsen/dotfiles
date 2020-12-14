@@ -181,7 +181,7 @@ enable-recursive-minibuffers t)
   "pp" 'projectile-switch-project
   "pi" 'projectile-invalidate-cache
   "pb" 'projectile-switch-to-buffer
-  "pk" 'projectile-kill-buffers)
+  "pk" '+kill-projectile-buffers-kill-treemacs)
 
 ;; --- Counsel ---
 (use-package counsel
@@ -286,6 +286,13 @@ enable-recursive-minibuffers t)
     :config
     (projectile-mode +1)
     (setq projectile-completion-system 'ivy))
+
+(defun +kill-projectile-buffers-kill-treemacs ()
+  "Kill projectile buffers and treemacs buffers."
+  (interactive)
+  (projectile-kill-buffers)
+  (treemacs-select-window)
+  (treemacs-kill-buffer))
 
 ;; --- Treemacs ---
 (use-package treemacs
