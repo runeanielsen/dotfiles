@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 BOOKS_PATH=$HOME/Nas/books/
 
