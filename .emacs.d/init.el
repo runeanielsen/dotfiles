@@ -87,17 +87,13 @@ enable-recursive-minibuffers t)
 (use-package dashboard
   :ensure t
   :config
-  (dashboard-setup-startup-hook))
-
-(setq dashboard-items '((projects . 10)
-                        (agenda . 5)))
-
-(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
-
-;; Set the banner
-(setq dashboard-startup-banner "~/.emacs.d/banner-text.txt")
-(setq dashboard-show-shortcuts nil)
-(setq dashboard-set-footer nil)
+  (dashboard-setup-startup-hook)
+  (setq dashboard-items '((agenda . 5)))
+  (setq dashboard-center-content t)
+  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+  (setq dashboard-startup-banner "~/.emacs.d/banner-text.txt")
+  (setq dashboard-show-shortcuts nil)
+  (setq dashboard-set-footer nil))
 
 ;; --- Modeline ---
 (use-package doom-modeline
