@@ -194,6 +194,13 @@ enable-recursive-minibuffers t)
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
 
+(use-package ivy-rich
+  :ensure t
+  :config
+  (ivy-rich-mode 1))
+
+(setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
+
 ;; --- Magit ---
 (use-package magit
   :ensure t)
