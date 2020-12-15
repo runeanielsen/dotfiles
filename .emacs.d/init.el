@@ -24,7 +24,7 @@
  ;; Do not create lockfiles.
  create-lockfiles nil
 
-;; Don't use hard tabs
+ ;; Don't use hard tabs
  indent-tabs-mode nil
 
  ;; Emacs can automatically create backup files. This tells Emacs to put all backups in
@@ -130,6 +130,22 @@
   :config
   (setq linum-relative-backend 'display-line-numbers-mode)
   (linum-relative-on))
+
+;; --- Eyebrowse ---
+(use-package eyebrowse
+  :ensure t
+  :init
+  (eyebrowse-mode t))
+
+(global-set-key (kbd "M-1") 'eyebrowse-switch-to-window-config-0)
+(global-set-key (kbd "M-2") 'eyebrowse-switch-to-window-config-1)
+(global-set-key (kbd "M-3") 'eyebrowse-switch-to-window-config-2)
+(global-set-key (kbd "M-4") 'eyebrowse-switch-to-window-config-3)
+(global-set-key (kbd "M-5") 'eyebrowse-switch-to-window-config-4)
+(global-set-key (kbd "M-6") 'eyebrowse-switch-to-window-config-5)
+(global-set-key (kbd "M-7") 'eyebrowse-switch-to-window-config-6)
+(global-set-key (kbd "M-8") 'eyebrowse-switch-to-window-config-7)
+(global-set-key (kbd "M-9") 'eyebrowse-switch-to-window-config-8)
 
 ;; --- Evil mode ---
 (use-package evil
