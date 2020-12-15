@@ -1,3 +1,10 @@
+if [[ "$TERM" == "dumb" ]]; then
+    unset zle_bracketed_paste
+    unset zle
+    PS1='$ '
+    return
+fi
+
 # wal colors
 (cat ~/.cache/wal/sequences)
 
