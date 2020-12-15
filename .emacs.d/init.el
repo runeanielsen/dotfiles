@@ -359,6 +359,15 @@ enable-recursive-minibuffers t)
   :after treemacs projectile
   :ensure t)
 
+(defun treemacs-expand-when-first-used (&optional visibility)
+  "Expand treemacs when first used (as VISIBILITY)."
+  (when (or (null visibility) (eq visibility 'none))
+    (treemacs-do-for-button-state
+     :on-root-node-closed (treemacs-toggle-node)
+     :no-error t)))
+
+(add-hook 'treemacs-select-functions #'treemacs-expand-when-first-used)
+(add-hook 'treemacs-switch-workspace-hook #'treemacs-expand-when-first-used)
 (add-hook 'projectile-after-switch-project-hook #'treemacs-display-current-project-exclusively)
 
 ;; --- Flycheck ---
