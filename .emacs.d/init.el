@@ -24,7 +24,7 @@
  ;; Do not create lockfiles.
  create-lockfiles nil
 
- ;; Don't use hard tabs
+;; Don't use hard tabs
  indent-tabs-mode nil
 
  ;; Emacs can automatically create backup files. This tells Emacs to put all backups in
@@ -32,17 +32,20 @@
  ;; http://www.gnu.org/software/emacs/manual/html_node/elisp/Backup-Files.html
  backup-directory-alist `(("." . ,(concat user-emacs-directory "backups")))
 
-;; Automatically auto-fill mode on in all major modes
-auto-fill-function 'do-auto-fill
+ ;; Automatically auto-fill mode on in all major modes
+ auto-fill-function 'do-auto-fill
 
-;; Do not autosave.
-auto-save-default nil
+ ;; Do not autosave.
+ auto-save-default nil
 
-;; set default tab char's display width to 4 spaces
-tab-width 4
+ ;; set default tab char's display width to 4 spaces
+ tab-width 4
 
-;; Allow commands to be run on minibuffers.
-enable-recursive-minibuffers t)
+ ;; Allow commands to be run on minibuffers.
+ enable-recursive-minibuffers t)
+
+;; Electrical pair
+(electric-pair-mode 1)
 
 ;; Change all yes/no questions to y/n type
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -80,8 +83,8 @@ enable-recursive-minibuffers t)
   (when (fboundp 'scroll-bar-mode)
     (scroll-bar-mode -1))
 
-;; Highlight line on point.
-(global-hl-line-mode t))
+  ;; Highlight line on point.
+  (global-hl-line-mode t))
 
 ;; --- dashboard ---
 (use-package dashboard
@@ -181,25 +184,24 @@ enable-recursive-minibuffers t)
 
 ;; --- Counsel ---
 (use-package counsel
-  :ensure t)
+  :ensure t
+  :config
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file))
 
 ;; --- Ivy ---
 (use-package ivy
-  :ensure t)
-
-(ivy-mode 1)
-(setq ivy-use-virtual-buffers t)
-(setq enable-recursive-minibuffers t)
-
-(global-set-key (kbd "M-x") 'counsel-M-x)
-(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+  :ensure t
+  :config
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t))
 
 (use-package ivy-rich
   :ensure t
   :config
-  (ivy-rich-mode 1))
-
-(setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
+  (ivy-rich-mode 1)
+  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
 ;; --- Magit ---
 (use-package magit
@@ -210,8 +212,6 @@ enable-recursive-minibuffers t)
   :config
     (evil-define-key* evil-magit-state magit-mode-map [escape] nil))
 
-;; --- Electrical pair ---
-(electric-pair-mode 1)
 
 ;; --- go mode ---
 (use-package go-mode
@@ -402,6 +402,7 @@ enable-recursive-minibuffers t)
 
 (use-package js2-mode
   :ensure t)
+
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
