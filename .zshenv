@@ -15,7 +15,7 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export DOTNET_ROOT="/usr/share/dotnet"
 export MSBuildSDKsPath=$(echo /usr/share/dotnet/sdk/5.*/Sdks);
 
-export PYTHONPATH="/usr/share/qgis/python:/usr/share/qgis/python/plugins"
+export PYTHONPATH="/usr/share/qgis/python:/usr/share/qgis/python/plugins:/usr/lib/python3.9"
 
 export TODO_FILENAME="/home/notation/.todo.json"
 
