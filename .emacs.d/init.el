@@ -1,11 +1,22 @@
 ;;; Commentary:
 ;;; --- Set up 'package' ---
+(require 'package)
 
 ;;; Code:
-(load "~/.emacs.d/init-packages")
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
 
-(add-to-list 'default-frame-alist
-             '(font . "Monospace-13"))
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+
+(require 'use-package)
+
+;; Font
+(set-face-attribute 'default nil :font "Fira Code" :height 130)
 
 ;; --- Use better defaults ---
 (setq-default
