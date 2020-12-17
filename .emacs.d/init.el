@@ -189,6 +189,7 @@
   ;; buffer
   "bb" 'switch-to-buffer
   "bd" 'kill-current-buffer
+  "bs" 'evil-all
   "bS" 'evil-write-all
   "bl" 'evil-switch-to-windows-last-buffer
   ;; git
