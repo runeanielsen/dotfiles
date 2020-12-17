@@ -199,10 +199,12 @@
   ;; code
   "cr" 'lsp-rename
   "cR" 'lsp-workspace-restart
-  "lsp" 'comment-or-uncomment-region
+  "cc" 'comment-or-uncomment-region
   "ce" 'flycheck-list-errors
   "ca" 'lsp-execute-code-action
   "co" 'lsp-organize-imports
+  "ci" 'lsp-goto-implementation
+  "ct" 'lsp-goto-type-definition
   ;; window
   "ww" 'other-window
   "wn" 'split-window-right
