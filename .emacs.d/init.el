@@ -18,6 +18,9 @@
 ;; Font
 (set-face-attribute 'default nil :font "Fira Code" :height 130)
 
+;; Make ESC quit prompts
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
 ;; --- Use better defaults ---
 (setq-default
  ;; Don't use the compiled code if its the older package.
