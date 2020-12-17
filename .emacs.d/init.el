@@ -64,9 +64,6 @@
 ;; Change all yes/no questions to y/n type
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; Delete whitespace just when a file is saved.
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
 ;; Enable narrowing commands.
 (put 'narrow-to-region 'disabled nil)
 (put 'narrow-to-page 'disabled nil)
@@ -115,7 +112,8 @@
 ;; --- Modeline ---
 (use-package doom-modeline
   :ensure t
-  :init (doom-modeline-mode 1))
+  :init
+  (doom-modeline-mode 1))
 
 ;; --- doom-themes ---
 (use-package doom-themes
@@ -144,6 +142,12 @@
   :config
   (setq linum-relative-backend 'display-line-numbers-mode)
   (linum-relative-on))
+
+;; --- automatically clean whitespace ---
+(use-package ws-butler
+  :ensure t
+  :hook ((text-mode . ws-butler-mode)
+         (prog-mode . ws-butler-mode)))
 
 ;; --- Eyebrowse ---
 (use-package eyebrowse
@@ -189,6 +193,8 @@
   "bl" 'evil-switch-to-windows-last-buffer
   ;; git
   "gg" 'magit-status
+  ;; search
+  "ss" 'swiper
   ;; code
   "cr" 'lsp-rename
   "cR" 'lsp-workspace-restart
@@ -241,7 +247,6 @@
   :ensure t
   :config
     (evil-define-key* evil-magit-state magit-mode-map [escape] nil))
-
 
 ;; --- go mode ---
 (use-package go-mode
