@@ -4,7 +4,7 @@ export XDG_CACHE_HOME="$XDG_CONFIG_HOME/cache"
 
 export ALTERNATE_EDITOR=""
 export EDITOR="nvim"
-export VISUAL="emacsclient -c -a emacs"
+export VISUAL="nvim"
 export PAGER="less"
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
