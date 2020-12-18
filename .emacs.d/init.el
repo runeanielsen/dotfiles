@@ -97,6 +97,15 @@
   ;; Highlight line on point.
   (global-hl-line-mode t))
 
+;; --- Persp-mode ---
+(use-package persp-mode
+  :ensure t)
+
+(with-eval-after-load "persp-mode-autoloads"
+  (setq wg-morph-on nil) ;; switch off animation
+  (setq persp-autokill-buffer-on-remove 'kill-weak)
+  (add-hook 'window-setup-hook #'(lambda () (persp-mode 1))))
+
 ;; --- dashboard ---
 (use-package dashboard
   :ensure t
@@ -182,6 +191,9 @@
 
 ;; --- Keybindings ---
 (evil-leader/set-key
+  ;; persp
+  "TAB TAB" 'persp-switch
+  "TAB n" 'persp-add-new
   ;; files
   "ff" 'counsel-find-file
   "fd" 'dired'
@@ -407,6 +419,11 @@
     (treemacs-do-for-button-state
      :on-root-node-closed (treemacs-toggle-node)
      :no-error t)))
+
+(use-package treemacs-persp ;;treemacs-persective if you use perspective.el vs. persp-mode
+  :after treemacs persp-mode ;;or perspective vs. persp-mode
+  :ensure t
+  :config (treemacs-set-scope-type 'Perspectives))
 
 (add-hook 'treemacs-select-functions #'treemacs-expand-when-first-used)
 (add-hook 'treemacs-switch-workspace-hook #'treemacs-expand-when-first-used)
