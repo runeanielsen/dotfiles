@@ -135,6 +135,21 @@
   (setq dashboard-show-shortcuts nil)
   (setq dashboard-set-footer nil))
 
+;; --- Helpful ---
+(use-package helpful
+  :ensure t
+  :custom
+  (counsel-describe-function-function #'helpful-callable)
+  (counsel-describe-variable-function #'helpful-variable)
+  :bind
+  ([remap describe-function] . counsel-describe-function)
+  ([remap describe-command] . helpful-command)
+  ([remap describe-variable] . counsel-describe-variable)
+  ([remap describe-key] . helpful-key))
+
+;; --- All-the-icons ---
+(use-package all-the-icons)
+
 ;; --- Modeline ---
 (use-package doom-modeline
   :ensure t
@@ -149,10 +164,8 @@
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
   (load-theme 'doom-spacegrey t)
-
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
-
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
@@ -333,6 +346,7 @@
 (use-package lsp-ivy
   :ensure t
   :commands lsp-ivy-workspace-symbol)
+
 (use-package lsp-treemacs
   :ensure t
   :commands lsp-treemacs-errors-list)
