@@ -161,6 +161,12 @@
 ;; --- All-the-icons ---
 (use-package all-the-icons)
 
+;; --- vterm ---
+(use-package vterm
+  :ensure t
+  :config
+  (setq vterm-shell "zsh"))
+
 ;; --- Modeline ---
 
 (use-package doom-modeline
@@ -200,6 +206,7 @@
 
 (dolist (mode '(org-mode-hook
                 term-mode-hook
+                vterm-mode-hook
                 shell-mode-hook
                 treemacs-mode-hook
                 eshell-mode-hook))
@@ -262,6 +269,7 @@
   "wd" 'delete-window
   ;; open
   "op" 'treemacs
+  "ot" 'vterm
   ;; h
   "ht" 'counsel-load-theme
   ;; project
@@ -568,4 +576,5 @@
   (defun dw/markdown-mode-hook ()
     (dw/set-markdown-header-font-sizes))
   (add-hook 'markdown-mode-hook 'dw/markdown-mode-hook))
+
 ;;; init.el ends here

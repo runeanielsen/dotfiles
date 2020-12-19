@@ -5,6 +5,10 @@ if [[ "$TERM" == "dumb" ]]; then
     return
 fi
 
+if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
+    alias clear='vterm_printf "51;Evterm-clear-scrollback";tput clear'
+fi
+
 # wal colors
 (cat ~/.cache/wal/sequences)
 
