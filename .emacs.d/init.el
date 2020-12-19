@@ -15,8 +15,21 @@
 
 (require 'use-package)
 
+(defvar efs/default-font-size 130)
+(defvar efs/default-variable-font-size 130)
+
+;; Make frame transparency overridable
+(defvar efs/frame-transparency '(95 . 95))
+
+(set-frame-parameter nil 'internal-border-width 15)
+
+(set-frame-parameter (selected-frame) 'alpha efs/frame-transparency)
+(add-to-list 'default-frame-alist `(alpha . ,efs/frame-transparency))
+(set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
 ;; Font
-(set-face-attribute 'default nil :font "Monospace" :height 130)
+(set-face-attribute 'default nil :font "monospace" :height 130)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -151,10 +164,15 @@
 (use-package all-the-icons)
 
 ;; --- Modeline ---
+
 (use-package doom-modeline
   :ensure t
-  :init
-  (doom-modeline-mode 1))
+  :hook (after-init . doom-modeline-mode)
+  :config
+  (setq doom-modeline-persp-name nil)
+  (setq doom-modeline-height 30)
+  (set-face-attribute 'mode-line nil :family "Monospace" :height 110)
+  (set-face-attribute 'mode-line-inactive nil :family "Monospace" :height 110))
 
 ;; --- doom-themes ---
 (use-package doom-themes
@@ -181,6 +199,13 @@
   :config
   (setq linum-relative-backend 'display-line-numbers-mode)
   (linum-relative-on))
+
+(dolist (mode '(org-mode-hook
+                term-mode-hook
+                shell-mode-hook
+                treemacs-mode-hook
+                eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; --- automatically clean whitespace ---
 (use-package ws-butler
@@ -325,7 +350,8 @@
             (lsp-mode . lsp-enable-which-key-integration))
     :commands lsp
     :config
-      (setq lsp-enable-links nil))
+    (setq lsp-enable-links nil)
+    (setq lsp-headerline-breadcrumb-enable nil))
 
 ;; optionally
 (use-package lsp-ui
