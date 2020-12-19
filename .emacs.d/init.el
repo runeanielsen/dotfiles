@@ -16,7 +16,7 @@
 (require 'use-package)
 
 ;; Font
-(set-face-attribute 'default nil :font "Fira Code" :height 130)
+(set-face-attribute 'default nil :font "Monospace" :height 130)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -106,6 +106,23 @@
   (setq persp-autokill-buffer-on-remove 'kill-weak)
   (add-hook 'window-setup-hook #'(lambda () (persp-mode 1))))
 
+(use-package persp-mode-projectile-bridge
+  :ensure t)
+
+(add-hook 'persp-mode-hook #'(lambda ()
+                               (persp-mode-projectile-bridge-mode 1)))
+
+(with-eval-after-load "persp-mode-projectile-bridge-autoloads"
+  (add-hook 'persp-mode-projectile-bridge-mode-hook
+            #'(lambda ()
+                (if persp-mode-projectile-bridge-mode
+                    (persp-mode-projectile-bridge-find-perspectives-for-all-buffers)
+                  (persp-mode-projectile-bridge-kill-perspectives))))
+  (add-hook 'after-init-hook
+            #'(lambda ()
+                (persp-mode-projectile-bridge-mode 1))
+            t))
+
 ;; --- dashboard ---
 (use-package dashboard
   :ensure t
@@ -194,6 +211,8 @@
   ;; persp
   "TAB TAB" 'persp-switch
   "TAB n" 'persp-add-new
+  "TAB h" 'persp-prev
+  "TAB l" 'persp-next
   ;; files
   "ff" 'counsel-find-file
   "fd" 'dired'
