@@ -18,14 +18,6 @@
 (defvar efs/default-font-size 130)
 (defvar efs/default-variable-font-size 130)
 
-;; Make frame transparency overridable
-(defvar efs/frame-transparency '(95 . 95))
-
-(set-frame-parameter (selected-frame) 'alpha efs/frame-transparency)
-(add-to-list 'default-frame-alist `(alpha . ,efs/frame-transparency))
-(set-frame-parameter (selected-frame) 'fullscreen 'maximized)
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-
 ;; Font
 (set-face-attribute 'default nil :font "monospace" :height 130)
 
