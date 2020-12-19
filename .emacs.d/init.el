@@ -215,7 +215,7 @@
   "fd" 'dired'
   "SPC" 'projectile-find-file
   ;; buffer
-  "bb" 'switch-to-buffer
+  "bb" 'counsel-switch-buffer
   "bd" 'kill-current-buffer
   "bs" 'evil-all
   "bS" 'evil-write-all
