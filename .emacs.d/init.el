@@ -15,8 +15,13 @@
 
 (require 'use-package)
 
-(defvar efs/default-font-size 130)
-(defvar efs/default-variable-font-size 130)
+;; Make frame transparency overridable
+(defvar efs/frame-transparency '(97 . 97))
+
+(set-frame-parameter (selected-frame) 'alpha efs/frame-transparency)
+(add-to-list 'default-frame-alist `(alpha . ,efs/frame-transparency))
+(set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; Font
 (set-face-attribute 'default nil :font "monospace" :height 130)
@@ -301,7 +306,7 @@
 
 ;; --- go mode ---
 (use-package go-mode
-    :ensure t)
+  :ensure t)
 
 ;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
@@ -317,7 +322,13 @@
 
 ;; --- csharp mode ---
 (use-package csharp-mode
-    :ensure t)
+  :ensure t)
+
+(defun lsp-csharp-install-save-hooks ()
+  "LSP CSharp install save hooks."
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'csharp-mode-hook #'lsp-csharp-install-save-hooks)
 
 ;; --- python-ms ---
 (use-package lsp-python-ms
