@@ -49,9 +49,6 @@
  ;; http://www.gnu.org/software/emacs/manual/html_node/elisp/Backup-Files.html
  backup-directory-alist `(("." . ,(concat user-emacs-directory "backups")))
 
- ;; Automatically auto-fill mode on in all major modes
- auto-fill-function 'do-auto-fill
-
  ;; Do not autosave.
  auto-save-default nil
 
