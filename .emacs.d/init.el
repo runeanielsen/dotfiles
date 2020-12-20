@@ -239,7 +239,7 @@
   "fd" 'dired'
   "SPC" 'projectile-find-file
   ;; buffer
-  "bb" 'counsel-switch-buffer
+  "bb" 'persp-switch-to-buffer
   "bd" 'kill-current-buffer
   "bs" 'evil-all
   "bS" 'evil-write-all
