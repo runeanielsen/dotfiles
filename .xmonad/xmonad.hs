@@ -72,7 +72,7 @@ myKeys =
 
     -- My applications
   , ("M-f", spawn "firefox")
-  , ("M-e", spawn "emacsclient --create-frame --alternate-editor=\"\"")
+  , ("M-e", spawn "emacs")
   , ("M-v", spawn "freetube-bin")
   , ("M-s", spawn "~/.dmenu/dmenu-scrot.sh")
   , ("M-i", spawn "~/.dmenu/dmenu-passmenu.sh")
@@ -86,7 +86,6 @@ myKeys =
   , ("M-.", spawn "cmus-remote -n")
   , ("M-/", spawn "~/.config/scripts/cmus-play-pause.sh")
   ]
-
 
 -- Main
 main :: IO ()
