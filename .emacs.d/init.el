@@ -15,16 +15,8 @@
 
 (require 'use-package)
 
-;; Make frame transparency overridable
-(defvar efs/frame-transparency '(97 . 97))
-
-(set-frame-parameter (selected-frame) 'alpha efs/frame-transparency)
-(add-to-list 'default-frame-alist `(alpha . ,efs/frame-transparency))
-(set-frame-parameter (selected-frame) 'fullscreen 'maximized)
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-
 ;; Font
-(set-face-attribute 'default nil :font "monospace" :height 130)
+(set-face-attribute 'default nil :font "Fira Code" :height 130)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -78,6 +70,9 @@
 
 ;; Automatically update buffers if file content on the disk has changed.
 (global-auto-revert-mode t)
+
+;; No blinking cursor
+(blink-cursor-mode 0)
 
 ;; make indent commands use space only (never tab character)
 (progn
@@ -212,67 +207,90 @@
   :hook ((text-mode . ws-butler-mode)
          (prog-mode . ws-butler-mode)))
 
+;; --- General ---
+(use-package general
+  :ensure t
+  :config
+  (general-create-definer fp/leader-keys
+    :keymaps '(normal visual)
+    :prefix "SPC")
+
+  (fp/leader-keys
+   "TAB" '(:ignore t :which-key "persp")
+   "TAB TAB" '(persp-switch :which-key "persp-switch")
+   "TAB n" '(persp-add-new :which-key "persp-add-new")
+   "TAB h" '(persp-prev :which-key "persp-prev")
+   "TAB l" '(persp-next :which-key "persp-next"))
+
+  (fp/leader-keys
+   "SPC" '(projectile-find-file :which-key "find-file"))
+
+  (fp/leader-keys
+   "b" '(:ignore t :which-key "buffer")
+   "bb" '(persp-switch-to-buffer :which-key "switch-to-buffer")
+   "bd" '(kill-current-buffer :which-key "kill-current-buffer")
+   "bs" '(evil-write :which-key "write-buffer")
+   "bS" '(evil-write-all :which-key "write-buffer-all")
+   "bl" '(evil-switch-to-windows-last-buffer :which-key "switch-last-buffer"))
+
+  (fp/leader-keys
+   "g" '(:ignore t :which-key "git")
+   "gg" '(magit-status :which-key "magit-status"))
+
+  (fp/leader-keys
+   "s" '(:ignore t :which-key "search")
+   "ss" '(swiper :which-key "swiper"))
+
+  (fp/leader-keys
+   "c" '(:ignore t :which-key "code")
+   "cr" '(lsp-rename :which-key "rename")
+   "cR" '(lsp-workspace-restart :which-key "workspace-restart")
+   "cc" '(comment-or-uncomment-region :which-key "comment-or-uncomment-region")
+   "ca" '(lsp-execute-code-action :which-key "code-action")
+   "ci" '(lsp-goto-implementation :which-key "goto-implementation")
+   "ct" '(lsp-goto-type-definition :which-key "goto-type-definition")
+   "co" '(lsp-organize-imports :which-key "organize-imports"))
+
+  (fp/leader-keys
+   "w" '(:ignore t :which-key "window")
+   "ww" '(other-window :which-key "other-window")
+   "wn" '(split-window-right :which-key "split-window-right")
+   "wd" '(delete-window :which-key "delete-window"))
+
+  (fp/leader-keys
+   "o" '(:ignore t :which-key "open")
+   "op" '(treemacs :which-key "treemacs")
+   "ot" '(vterm :which-key "vterm"))
+
+  (fp/leader-keys
+   "p" '(:ignore t :which-key "projectile")
+   "pa" '(projectile-add-known-project :which-key "add-project")
+   "pd" '(projectile-remove-known-project :which-key "remove-project")
+   "pp" '(projectile-switch-project :which-key "switch-project")
+   "pi" '(projectile-invalidate-cache :which-key "invalidate-cache")
+   "pb" '(projectile-switch-to-buffer :which-key "switch-buffer")
+   "pk" '(+kill-projectile-buffers-kill-treemacs :which-key "kill-project"))
+
+  (fp/leader-keys
+   "f"  '(:ignore t :which-key "files")
+   "ff" '(counsel-find-file :which-key "find-file")))
+
 ;; --- Evil mode ---
 (use-package evil
   :ensure t
   :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
   :config
-  (evil-mode 1))
+  (evil-mode 1)
+  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+  (evil-global-set-key 'motion "k" 'evil-previous-visual-line))
 
-;; --- Evil leader ---
-(use-package evil-leader
+(use-package evil-collection
   :ensure t
-  :defer t
+  :after evil
   :config
-  (global-evil-leader-mode)
-  (evil-leader/set-leader "<SPC>"))
-
-;; --- Keybindings ---
-(evil-leader/set-key
-  ;; persp
-  "TAB TAB" 'persp-switch
-  "TAB n" 'persp-add-new
-  "TAB h" 'persp-prev
-  "TAB l" 'persp-next
-  ;; files
-  "ff" 'counsel-find-file
-  "fd" 'dired'
-  "SPC" 'projectile-find-file
-  ;; buffer
-  "bb" 'persp-switch-to-buffer
-  "bd" 'kill-current-buffer
-  "bs" 'evil-all
-  "bS" 'evil-write-all
-  "bl" 'evil-switch-to-windows-last-buffer
-  ;; git
-  "gg" 'magit-status
-  ;; search
-  "ss" 'swiper
-  ;; code
-  "cr" 'lsp-rename
-  "cR" 'lsp-workspace-restart
-  "cc" 'comment-or-uncomment-region
-  "ce" 'flycheck-list-errors
-  "ca" 'lsp-execute-code-action
-  "co" 'lsp-organize-imports
-  "ci" 'lsp-goto-implementation
-  "ct" 'lsp-goto-type-definition
-  ;; window
-  "ww" 'other-window
-  "wn" 'split-window-right
-  "wd" 'delete-window
-  ;; open
-  "op" 'treemacs
-  "ot" 'vterm
-  ;; h
-  "ht" 'counsel-load-theme
-  ;; project
-  "pa" 'projectile-add-known-project
-  "pd" 'projectile-remove-known-project
-  "pp" 'projectile-switch-project
-  "pi" 'projectile-invalidate-cache
-  "pb" 'projectile-switch-to-buffer
-  "pk" '+kill-projectile-buffers-kill-treemacs)
+  (evil-collection-init))
 
 ;; --- Counsel ---
 (use-package counsel
@@ -298,11 +316,6 @@
 ;; --- Magit ---
 (use-package magit
   :ensure t)
-
-(use-package evil-magit
-  :ensure t
-  :config
-    (evil-define-key* evil-magit-state magit-mode-map [escape] nil))
 
 ;; --- go mode ---
 (use-package go-mode
@@ -453,10 +466,6 @@
     (treemacs-follow-mode t)
     (treemacs-filewatch-mode t)
     (treemacs-fringe-indicator-mode t))
-
-(use-package treemacs-evil
-  :after treemacs evil
-  :ensure t)
 
 (use-package treemacs-projectile
   :after treemacs projectile
