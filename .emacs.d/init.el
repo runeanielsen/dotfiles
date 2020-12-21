@@ -1,4 +1,7 @@
 ;;; Commentary:
+;;; --- Garbage collection speedup ---
+(setq gc-cons-threshold (* 50 1000 1000))
+
 ;;; --- Set up 'package' ---
 (require 'package)
 
@@ -157,7 +160,6 @@
   (setq vterm-shell "zsh"))
 
 ;; --- Modeline ---
-
 (use-package doom-modeline
   :ensure t
   :hook (after-init . doom-modeline-mode)
@@ -239,7 +241,8 @@
 
   (fp/leader-keys
    "s" '(:ignore t :which-key "search")
-   "ss" '(swiper :which-key "swiper"))
+   "ss" '(swiper :which-key "swiper")
+   "sp" '(counsel-projectile-rg :which-key "ripgrep-projectile"))
 
   (fp/leader-keys
    "c" '(:ignore t :which-key "code")
@@ -289,6 +292,8 @@
 (use-package evil-collection
   :ensure t
   :after evil
+  :custom
+  (evil-collection-outline-bind-tab-p nil)
   :config
   (evil-collection-init))
 
@@ -298,6 +303,11 @@
   :config
   (global-set-key (kbd "M-x") 'counsel-M-x)
   (global-set-key (kbd "C-x C-f") 'counsel-find-file))
+
+(use-package counsel-projectile
+  :ensure t
+  :config
+  (counsel-projectile-mode))
 
 ;; --- Ivy ---
 (use-package ivy
@@ -315,7 +325,18 @@
 
 ;; --- Magit ---
 (use-package magit
+  :ensure t
+  :custom
+  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+
+(use-package forge
   :ensure t)
+
+(ghub-request "GET" "/user" nil
+              :forge 'github
+              :host "api.github.com"
+              :username "runeanielsen"
+              :auth 'forge)
 
 ;; --- go mode ---
 (use-package go-mode
@@ -405,9 +426,12 @@
 ;; --- Projectile ---
 (use-package projectile
     :ensure t
+    :custom
+    ((setq projectile-completion-system 'ivy))
     :config
     (projectile-mode +1)
-    (setq projectile-completion-system 'ivy))
+    :init
+    (setq projectile-switch-project-action #'projectile-dired))
 
 (defun +kill-projectile-buffers-kill-treemacs ()
   "Kill projectile buffers and treemacs buffers."
@@ -471,20 +495,11 @@
   :after treemacs projectile
   :ensure t)
 
-(defun treemacs-expand-when-first-used (&optional visibility)
-  "Expand treemacs when first used (as VISIBILITY)."
-  (when (or (null visibility) (eq visibility 'none))
-    (treemacs-do-for-button-state
-     :on-root-node-closed (treemacs-toggle-node)
-     :no-error t)))
-
 (use-package treemacs-persp ;;treemacs-persective if you use perspective.el vs. persp-mode
   :after treemacs persp-mode ;;or perspective vs. persp-mode
   :ensure t
   :config (treemacs-set-scope-type 'Perspectives))
 
-(add-hook 'treemacs-select-functions #'treemacs-expand-when-first-used)
-(add-hook 'treemacs-switch-workspace-hook #'treemacs-expand-when-first-used)
 (add-hook 'projectile-after-switch-project-hook #'treemacs-display-current-project-exclusively)
 
 ;; --- Flycheck ---
