@@ -230,7 +230,7 @@
   (fp/leader-keys
    "b" '(:ignore t :which-key "buffer")
    "bb" '(persp-switch-to-buffer :which-key "switch-to-buffer")
-   "bB" '(counsel-switch-buffer :which-key "switch-to-buffer-all")
+   "bB" '(counsel-projectile-switch-to-buffer :which-key "switch-to-buffer-all")
    "bd" '(kill-current-buffer :which-key "kill-current-buffer")
    "bs" '(evil-write :which-key "write-buffer")
    "bS" '(evil-write-all :which-key "write-buffer-all")
