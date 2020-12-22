@@ -334,6 +334,19 @@
   :config
   (counsel-projectile-mode))
 
+(defun fp/counsel-projectile-switch-project-action-dired (project)
+  "Open ‘dired’ at the root of the project (as PROJECT)."
+  (let ((projectile-switch-project-action
+	 (lambda ()
+	   (projectile-dired))))
+    (counsel-projectile-switch-project-by-name project)))
+
+(counsel-projectile-modify-action
+ 'counsel-projectile-switch-project-action
+ '((add ("." fp/counsel-projectile-switch-project-action-dired
+	 "open ‘dired’ at the root of the project")
+	1)))
+
 ;; --- Ivy ---
 (use-package ivy
   :ensure t
@@ -452,9 +465,7 @@
     :custom
     ((setq projectile-completion-system 'ivy))
     :config
-    (projectile-mode +1)
-    :init
-    (setq projectile-switch-project-action #'projectile-dired))
+    (projectile-mode +1))
 
 ;; --- Flycheck ---
 (use-package flycheck
