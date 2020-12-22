@@ -199,7 +199,6 @@
                 term-mode-hook
                 vterm-mode-hook
                 shell-mode-hook
-                treemacs-mode-hook
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
@@ -268,7 +267,6 @@
 
   (fp/leader-keys
    "o" '(:ignore t :which-key "open")
-   "op" '(treemacs :which-key "treemacs")
    "ot" '(vterm :which-key "vterm"))
 
   (fp/leader-keys
@@ -278,7 +276,7 @@
    "pp" '(projectile-switch-project :which-key "switch-project")
    "pi" '(projectile-invalidate-cache :which-key "invalidate-cache")
    "pb" '(projectile-switch-to-buffer :which-key "switch-buffer")
-   "pk" '(+kill-projectile-buffers-kill-treemacs :which-key "kill-project"))
+   "pk" '(persp-kill :which-key "kill-project"))
 
   (fp/leader-keys
    "f"  '(:ignore t :which-key "files")
@@ -430,10 +428,6 @@
   :ensure t
   :commands lsp-ivy-workspace-symbol)
 
-(use-package lsp-treemacs
-  :ensure t
-  :commands lsp-treemacs-errors-list)
-
 ;; optional if you want which-key integration
 (use-package which-key
     :ensure t
@@ -449,75 +443,6 @@
     (projectile-mode +1)
     :init
     (setq projectile-switch-project-action #'projectile-dired))
-
-(defun +kill-projectile-buffers-kill-treemacs ()
-  "Kill projectile buffers and treemacs buffers."
-  (interactive)
-  (projectile-kill-buffers)
-  (treemacs-select-window)
-  (treemacs-kill-buffer))
-
-;; --- Treemacs ---
-(use-package treemacs
-  :ensure t
-  :defer t
-  :config
-  (progn
-    (setq treemacs-collapse-dirs                 (if treemacs-python-executable 3 0)
-          treemacs-deferred-git-apply-delay      0.5
-          treemacs-directory-name-transformer    #'identity
-          treemacs-display-in-side-window        t
-          treemacs-eldoc-display                 t
-          treemacs-file-event-delay              5000
-          treemacs-file-extension-regex          treemacs-last-period-regex-value
-          treemacs-file-follow-delay             0.2
-          treemacs-file-name-transformer         #'identity
-          treemacs-follow-after-init             t
-          treemacs-git-command-pipe              ""
-          treemacs-goto-tag-strategy             'refetch-index
-          treemacs-indentation                   2
-          treemacs-indentation-string            " "
-          treemacs-is-never-other-window         nil
-          treemacs-max-git-entries               5000
-          treemacs-missing-project-action        'ask
-          treemacs-move-forward-on-expand        nil
-          treemacs-no-png-images                 nil
-          treemacs-no-delete-other-windows       t
-          treemacs-project-follow-cleanup        nil
-          treemacs-persist-file                  (expand-file-name ".cache/treemacs-persist" user-emacs-directory)
-          treemacs-position                      'left
-          treemacs-recenter-distance             0.1
-          treemacs-recenter-after-file-follow    nil
-          treemacs-recenter-after-tag-follow     nil
-          treemacs-recenter-after-project-jump   'always
-          treemacs-recenter-after-project-expand 'on-distance
-          treemacs-show-cursor                   nil
-          treemacs-show-hidden-files             t
-          treemacs-silent-filewatch              nil
-          treemacs-silent-refresh                nil
-          treemacs-sorting                       'alphabetic-asc
-          treemacs-space-between-root-nodes      t
-          treemacs-tag-follow-cleanup            t
-          treemacs-tag-follow-delay              1.5
-          treemacs-user-mode-line-format         nil
-          treemacs-user-header-line-format       nil
-          treemacs-width                         45
-          treemacs-workspace-switch-cleanup      'all))
-    (treemacs-resize-icons 20)
-    (treemacs-follow-mode t)
-    (treemacs-filewatch-mode t)
-    (treemacs-fringe-indicator-mode t))
-
-(use-package treemacs-projectile
-  :after treemacs projectile
-  :ensure t)
-
-(use-package treemacs-persp ;;treemacs-persective if you use perspective.el vs. persp-mode
-  :after treemacs persp-mode ;;or perspective vs. persp-mode
-  :ensure t
-  :config (treemacs-set-scope-type 'Perspectives))
-
-(add-hook 'projectile-after-switch-project-hook #'treemacs-display-current-project-exclusively)
 
 ;; --- Flycheck ---
 (use-package flycheck
