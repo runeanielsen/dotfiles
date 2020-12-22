@@ -310,8 +310,17 @@
   :custom ((dired-listing-switches "-agho --group-directories-first"))
   :config
   (evil-collection-define-key 'normal 'dired-mode-map
-    "h" 'dired-up-directory
-    "l" 'dired-find-file))
+    "h" 'dired-single-up-directory
+    "l" 'dired-single-buffer
+    "f" 'dired-create-empty-file
+    "F" 'dired-create-directory))
+
+(use-package dired-single
+  :ensure t)
+
+(use-package all-the-icons-dired
+  :ensure t
+  :hook (dired-mode . all-the-icons-dired-mode))
 
 ;; --- Counsel ---
 (use-package counsel
