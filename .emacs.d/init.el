@@ -242,7 +242,7 @@
   (fp/leader-keys
    "s" '(:ignore t :which-key "search")
    "ss" '(swiper :which-key "swiper")
-   "sp" '(counsel-projectile-rg :which-key "ripgrep-projectile"))
+   "sg" '(counsel-projectile-rg :which-key "ripgrep-projectile"))
 
   (fp/leader-keys
    "c" '(:ignore t :which-key "code")
