@@ -228,6 +228,11 @@
    "SPC" '(projectile-find-file :which-key "find-file"))
 
   (fp/leader-keys
+   "d" '(:ignore t :which-key "dired")
+   "dd" '(dired-jump :which-key "dired-jump")
+   "dp" '(projectile-dired :which-key "dired-projectile"))
+
+  (fp/leader-keys
    "b" '(:ignore t :which-key "buffer")
    "bb" '(persp-switch-to-buffer :which-key "switch-to-buffer")
    "bB" '(counsel-projectile-switch-to-buffer :which-key "switch-to-buffer-all")
@@ -297,6 +302,15 @@
   (evil-collection-outline-bind-tab-p nil)
   :config
   (evil-collection-init))
+
+;; --- Dired ---
+(use-package dired
+  :ensure nil
+  :custom ((dired-listing-switches "-agho --group-directories-first"))
+  :config
+  (evil-collection-define-key 'normal 'dired-mode-map
+    "h" 'dired-up-directory
+    "l" 'dired-find-file))
 
 ;; --- Counsel ---
 (use-package counsel
