@@ -397,7 +397,9 @@
 ;; optionally
 (use-package lsp-ui
   :commands lsp-ui-mode
-  :ensure t)
+  :ensure t
+  :config
+  (setq lsp-ui-sideline-show-code-actions nil))
 
 ;; Company mode is a standard completion package that works well with lsp-mode.
 (use-package company
