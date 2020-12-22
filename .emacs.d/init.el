@@ -109,6 +109,9 @@
   (setq persp-autokill-buffer-on-remove 'kill-weak)
   (add-hook 'window-setup-hook #'(lambda () (persp-mode 1))))
 
+(with-eval-after-load "persp-mode"
+  (set-persp-parameter 'dont-save-to-file t nil))
+
 (use-package persp-mode-projectile-bridge
   :ensure t)
 
