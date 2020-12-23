@@ -236,9 +236,9 @@
 
   (fp/leader-keys
    "b" '(:ignore t :which-key "buffer")
-   "bb" '(persp-switch-to-buffer :which-key "switch-to-buffer")
-   "bB" '(counsel-projectile-switch-to-buffer :which-key "switch-to-buffer-all")
-   "bd" '(kill-current-buffer :which-key "kill-current-buffer")
+   "bb" '(counsel-projectile-switch-to-buffer :which-key "switch-to-buffer-all")
+   "bd" '(bury-buffer :which-key "bury-current-buffer")
+   "bk '(kill-current-buffer :which-key "kill-current-buffer")
    "bs" '(evil-write :which-key "write-buffer")
    "bS" '(evil-write-all :which-key "write-buffer-all")
    "bl" '(evil-switch-to-windows-last-buffer :which-key "switch-last-buffer"))
@@ -333,19 +333,6 @@
   :ensure t
   :config
   (counsel-projectile-mode))
-
-(defun fp/counsel-projectile-switch-project-action-dired (project)
-  "Open ‘dired’ at the root of the project (as PROJECT)."
-  (let ((projectile-switch-project-action
-	 (lambda ()
-	   (projectile-dired))))
-    (counsel-projectile-switch-project-by-name project)))
-
-(counsel-projectile-modify-action
- 'counsel-projectile-switch-project-action
- '((add ("." fp/counsel-projectile-switch-project-action-dired
-	 "open ‘dired’ at the root of the project")
-	1)))
 
 ;; --- Ivy ---
 (use-package ivy
