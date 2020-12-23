@@ -238,7 +238,7 @@
    "b" '(:ignore t :which-key "buffer")
    "bb" '(counsel-projectile-switch-to-buffer :which-key "switch-to-buffer-all")
    "bd" '(bury-buffer :which-key "bury-current-buffer")
-   "bk '(kill-current-buffer :which-key "kill-current-buffer")
+   "bk" '(kill-current-buffer :which-key "kill-current-buffer")
    "bs" '(evil-write :which-key "write-buffer")
    "bS" '(evil-write-all :which-key "write-buffer-all")
    "bl" '(evil-switch-to-windows-last-buffer :which-key "switch-last-buffer"))
