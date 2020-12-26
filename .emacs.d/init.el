@@ -100,17 +100,32 @@
   ;; Highlight line on point.
   (global-hl-line-mode t))
 
+;; --- Projectile ---
+(use-package projectile
+    :ensure t
+    :custom
+    (projectile-completion-system 'ivy)
+    (projectile-enable-caching nil)
+    (projectile-indexing-method 'alien)
+    (projectile-track-known-projects-automatically nil)
+    :config
+    (projectile-mode +1))
+
 ;; --- Persp-mode ---
 (use-package persp-mode
   :ensure t)
 
 (with-eval-after-load "persp-mode-autoloads"
-  (setq wg-morph-on nil) ;; switch off animation
-  (setq persp-autokill-buffer-on-remove 'kill-weak)
+  (setq persp-autokill-buffer-on-remove 'kill-weak
+        persp-nil-hidden t
+        persp-auto-save-fname "autosave"
+        persp-set-last-persp-for-new-frames nil
+        persp-switch-to-added-buffer nil
+        persp-kill-foreign-buffer-behaviour 'kill
+        persp-remove-buffers-from-nil-persp-behaviour nil
+        persp-auto-resume-time -1 ; Don't auto-load on startup
+        persp-auto-save-opt (if noninteractive 0 1)) ; auto-save on kill
   (add-hook 'window-setup-hook #'(lambda () (persp-mode 1))))
-
-(with-eval-after-load "persp-mode"
-  (set-persp-parameter 'dont-save-to-file t nil))
 
 (use-package persp-mode-projectile-bridge
   :ensure t)
@@ -167,7 +182,6 @@
   :ensure t
   :hook (after-init . doom-modeline-mode)
   :config
-  (setq doom-modeline-persp-name nil)
   (setq doom-modeline-height 30)
   (set-face-attribute 'mode-line nil :family "Monospace" :height 110)
   (set-face-attribute 'mode-line-inactive nil :family "Monospace" :height 110))
@@ -227,7 +241,7 @@
    "TAB l" '(persp-next :which-key "persp-next"))
 
   (fp/leader-keys
-   "SPC" '(projectile-find-file :which-key "find-file"))
+   "SPC" '(counsel-projectile-find-file :which-key "find-file"))
 
   (fp/leader-keys
    "d" '(:ignore t :which-key "dired")
@@ -236,9 +250,9 @@
 
   (fp/leader-keys
    "b" '(:ignore t :which-key "buffer")
-   "bb" '(counsel-projectile-switch-to-buffer :which-key "switch-to-buffer-all")
+   "bb" '(persp-switch-to-buffer :which-key "switch-to-buffer-all")
    "bd" '(bury-buffer :which-key "bury-current-buffer")
-   "bk" '(kill-current-buffer :which-key "kill-current-buffer")
+   "bk" '(persp-kill-buffer :which-key "kill-current-buffer")
    "bs" '(evil-write :which-key "write-buffer")
    "bS" '(evil-write-all :which-key "write-buffer-all")
    "bl" '(evil-switch-to-windows-last-buffer :which-key "switch-last-buffer"))
@@ -276,9 +290,9 @@
    "p" '(:ignore t :which-key "projectile")
    "pa" '(projectile-add-known-project :which-key "add-project")
    "pd" '(projectile-remove-known-project :which-key "remove-project")
-   "pp" '(projectile-switch-project :which-key "switch-project")
+   "pp" '(counsel-projectile-switch-project :which-key "switch-project")
    "pi" '(projectile-invalidate-cache :which-key "invalidate-cache")
-   "pb" '(projectile-switch-to-buffer :which-key "switch-buffer")
+   "pb" '(counsel-projectile-switch-to-buffer :which-key "switch-buffer")
    "pk" '(persp-kill :which-key "kill-project"))
 
   (fp/leader-keys
@@ -445,14 +459,6 @@
     :ensure t
     :config
     (which-key-mode))
-
-;; --- Projectile ---
-(use-package projectile
-    :ensure t
-    :custom
-    ((setq projectile-completion-system 'ivy))
-    :config
-    (projectile-mode +1))
 
 ;; --- Flycheck ---
 (use-package flycheck
