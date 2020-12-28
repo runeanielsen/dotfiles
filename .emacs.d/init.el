@@ -527,9 +527,6 @@
     (dw/set-markdown-header-font-sizes))
   (add-hook 'markdown-mode-hook 'dw/markdown-mode-hook))
 
-;; Make gc pauses faster by decreasing the threshold.
-(setq gc-cons-threshold (* 2 1000 1000))
-
 ;; --- Rainbow delimiters
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
@@ -575,3 +572,6 @@
 (use-package visual-fill-column
   :hook
   (org-mode . fp/org-mode-visual-fill))
+
+;; Make gc pauses faster by decreasing the threshold.
+(setq gc-cons-threshold (* 2 1000 1000))
