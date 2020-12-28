@@ -217,6 +217,7 @@
                 term-mode-hook
                 vterm-mode-hook
                 shell-mode-hook
+                sly-mrepl-mode-hook
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
