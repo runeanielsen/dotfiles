@@ -6,17 +6,20 @@
 (require 'package)
 
 ;;; Code:
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("org" . "https://orgmode.org/elpa/")
+                         ("elpa" . "https://elpa.gnu.org/packages/")))
 
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
 
+  ;; Initialize use-package on non-Linux platforms
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 
 (require 'use-package)
+(setq use-package-always-ensure t)
 
 ;; Font
 (set-face-attribute 'default nil :font "Fira Code" :height 120)
@@ -102,7 +105,6 @@
 
 ;; --- Projectile ---
 (use-package projectile
-    :ensure t
     :custom
     (projectile-completion-system 'ivy)
     (projectile-enable-caching nil)
@@ -112,8 +114,7 @@
     (projectile-mode +1))
 
 ;; --- Persp-mode ---
-(use-package persp-mode
-  :ensure t)
+(use-package persp-mode)
 
 (with-eval-after-load "persp-mode-autoloads"
   (setq persp-autokill-buffer-on-remove 'kill-weak
@@ -128,8 +129,7 @@
         persp-auto-save-opt (if noninteractive 0 1)) ; auto-save on kill
   (add-hook 'window-setup-hook #'(lambda () (persp-mode 1))))
 
-(use-package persp-mode-projectile-bridge
-  :ensure t)
+(use-package persp-mode-projectile-bridge)
 
 (add-hook 'persp-mode-hook #'(lambda ()
                                (persp-mode-projectile-bridge-mode 1)))
@@ -147,7 +147,6 @@
 
 ;; --- dashboard ---
 (use-package dashboard
-  :ensure t
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-items '((agenda . 5)))
@@ -159,7 +158,6 @@
 
 ;; --- Helpful ---
 (use-package helpful
-  :ensure t
   :custom
   (counsel-describe-function-function #'helpful-callable)
   (counsel-describe-variable-function #'helpful-variable)
@@ -174,13 +172,11 @@
 
 ;; --- vterm ---
 (use-package vterm
-  :ensure t
   :config
   (setq vterm-shell "zsh"))
 
 ;; --- Modeline ---
 (use-package doom-modeline
-  :ensure t
   :hook (after-init . doom-modeline-mode)
   :config
   (setq doom-modeline-height 34)
@@ -189,7 +185,6 @@
 
 ;; --- doom-themes ---
 (use-package doom-themes
-  :ensure t
   :config
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
@@ -202,13 +197,11 @@
 
 ;; --- Theme Magic Pywal ---
 (use-package theme-magic
-  :ensure t
   :config
   (theme-magic-export-theme-mode))
 
 ;; --- Linum relative ---
 (use-package linum-relative
-  :ensure t
   :config
   (setq linum-relative-backend 'display-line-numbers-mode)
   (linum-relative-on))
@@ -223,13 +216,11 @@
 
 ;; --- automatically clean whitespace ---
 (use-package ws-butler
-  :ensure t
   :hook ((text-mode . ws-butler-mode)
          (prog-mode . ws-butler-mode)))
 
 ;; --- General ---
 (use-package general
-  :ensure t
   :config
   (general-create-definer fp/leader-keys
     :keymaps '(normal visual)
@@ -303,7 +294,6 @@
 
 ;; --- Evil mode ---
 (use-package evil
-  :ensure t
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
@@ -313,7 +303,6 @@
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line))
 
 (use-package evil-collection
-  :ensure t
   :after evil
   :custom
   (evil-collection-outline-bind-tab-p nil)
@@ -331,51 +320,42 @@
     "f" 'dired-create-empty-file
     "F" 'dired-create-directory))
 
-(use-package dired-single
-  :ensure t)
+(use-package dired-single)
 
 (use-package all-the-icons-dired
-  :ensure t
   :hook (dired-mode . all-the-icons-dired-mode))
 
 ;; --- Counsel ---
 (use-package counsel
-  :ensure t
   :config
   (global-set-key (kbd "M-x") 'counsel-M-x)
   (global-set-key (kbd "C-x C-f") 'counsel-find-file))
 
 (use-package counsel-projectile
-  :ensure t
   :config
   (counsel-projectile-mode))
 
 ;; --- Ivy ---
 (use-package ivy
-  :ensure t
   :config
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t))
 
 (use-package all-the-icons-ivy-rich
-  :ensure t
   :init (all-the-icons-ivy-rich-mode 1))
 
 (use-package ivy-rich
-  :ensure t
   :config
   (ivy-rich-mode 1)
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
 ;; --- Magit ---
 (use-package magit
-  :ensure t
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
-(use-package forge
-  :ensure t)
+(use-package forge)
 
 (ghub-request "GET" "/user" nil
               :forge 'github
@@ -384,8 +364,7 @@
               :auth 'forge)
 
 ;; --- go mode ---
-(use-package go-mode
-  :ensure t)
+(use-package go-mode)
 
 ;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
@@ -396,12 +375,10 @@
 (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
 ;; --- json mode ---
-(use-package json-mode
-    :ensure t)
+(use-package json-mode)
 
 ;; --- csharp mode ---
-(use-package csharp-mode
-  :ensure t)
+(use-package csharp-mode)
 
 (defun lsp-csharp-install-save-hooks ()
   "LSP CSharp install save hooks."
@@ -411,7 +388,6 @@
 
 ;; --- python-ms ---
 (use-package lsp-python-ms
-  :ensure t
   :init
   (setq lsp-python-ms-auto-install-server t)
   :hook (python-mode . (lambda ()
@@ -421,14 +397,12 @@
 ;; --- commmon lisp ---
 (defvar inferior-lisp-program "sbcl")
 
-(use-package sly
-  :ensure t)
+(use-package sly)
 
 ;; --- lsp mode ---
 (setq lsp-keymap-prefix "s-l")
 
 (use-package lsp-mode
-    :ensure t
     :hook (
             (csharp-mode . lsp)
             (go-mode . lsp)
@@ -441,7 +415,6 @@
 ;; optionally
 (use-package lsp-ui
   :commands lsp-ui-mode
-  :ensure t
   :config
   (setq lsp-ui-sideline-show-code-actions nil))
 
@@ -449,7 +422,6 @@
 (use-package company
   :init
   (add-hook 'after-init-hook 'global-company-mode)
-  :ensure t
   :config
   ;; Optionally enable completion-as-you-type behavior.
   (setq company-idle-delay 0)
@@ -457,18 +429,16 @@
 
 ;; Ivy
 (use-package lsp-ivy
-  :ensure t
   :commands lsp-ivy-workspace-symbol)
 
 ;; optional if you want which-key integration
 (use-package which-key
-    :ensure t
+
     :config
     (which-key-mode))
 
 ;; --- Flycheck ---
 (use-package flycheck
-  :ensure t
   :config
   (global-flycheck-mode))
 
@@ -487,14 +457,12 @@
 (setq company-tooltip-align-annotations t)
 
 (use-package tide
-  :ensure t
   :config
     (defvar company-tooltip-align-annotations)
     (setq company-tooltip-align-annotations t)
     (add-hook 'js-mode-hook #'setup-tide-mode))
 
-(use-package js2-mode
-  :ensure t)
+(use-package js2-mode)
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
@@ -502,10 +470,8 @@
 (add-hook 'js2-mode-hook #'setup-tide-mode)
 (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
 
-(use-package add-node-modules-path
-    :ensure t)
-(use-package web-mode
-    :ensure t)
+(use-package add-node-modules-path)
+(use-package web-mode)
 
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
 (add-hook 'web-mode-hook
@@ -542,7 +508,6 @@
   web-mode-markup-indent-offset 2)
 
 (use-package prettier-js
-    :ensure t
     :init
     (add-hook 'js2-mode-hook 'prettier-js-mode)
     (add-hook 'web-mode-hook 'prettier-js-mode)
@@ -550,7 +515,6 @@
 
 ;; --- markdown ---
 (use-package markdown-mode
-  :ensure t
   :mode "\\.md\\'"
   :config
   (setq markdown-command "marked")
@@ -570,11 +534,10 @@
 
 ;; --- Rainbow delimiters
 (use-package rainbow-delimiters
-  :ensure t
   :hook (prog-mode . rainbow-delimiters-mode))
 
+;; --- Rainbow mode
 (use-package rainbow-mode
-  :ensure t
   :defer t
   :hook (org-mode
          emacs-lisp-mode
@@ -582,5 +545,3 @@
          lisp-mode
          typescript-mode
          js2-mode))
-
-;;; init.el ends here
