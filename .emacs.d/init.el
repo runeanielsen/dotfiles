@@ -121,6 +121,7 @@
         persp-auto-save-fname "autosave"
         persp-set-last-persp-for-new-frames nil
         persp-switch-to-added-buffer nil
+        persp-add-buffer-on-find-file nil
         persp-kill-foreign-buffer-behaviour 'kill
         persp-remove-buffers-from-nil-persp-behaviour nil
         persp-auto-resume-time -1 ; Don't auto-load on startup
@@ -356,6 +357,10 @@
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t))
 
+(use-package all-the-icons-ivy-rich
+  :ensure t
+  :init (all-the-icons-ivy-rich-mode 1))
+
 (use-package ivy-rich
   :ensure t
   :config
@@ -561,4 +566,20 @@
 
 ;; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
+
+;; --- Rainbow delimiters
+(use-package rainbow-delimiters
+  :ensure t
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+(use-package rainbow-mode
+  :ensure t
+  :defer t
+  :hook (org-mode
+         emacs-lisp-mode
+         web-mode
+         lisp-mode
+         typescript-mode
+         js2-mode))
+
 ;;; init.el ends here
