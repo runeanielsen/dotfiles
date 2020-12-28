@@ -183,7 +183,7 @@
   :ensure t
   :hook (after-init . doom-modeline-mode)
   :config
-  (setq doom-modeline-height 30)
+  (setq doom-modeline-height 34)
   (set-face-attribute 'mode-line nil :family "Monospace" :height 110)
   (set-face-attribute 'mode-line-inactive nil :family "Monospace" :height 110))
 
