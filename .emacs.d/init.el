@@ -120,7 +120,6 @@
         persp-auto-save-fname "autosave"
         persp-set-last-persp-for-new-frames nil
         persp-switch-to-added-buffer nil
-        persp-add-buffer-on-find-file nil
         persp-kill-foreign-buffer-behaviour 'kill
         persp-remove-buffers-from-nil-persp-behaviour nil
         persp-auto-resume-time -1 ; Don't auto-load on startup
@@ -177,6 +176,7 @@
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode)
   :config
+  (setq doom-modeline-persp-name nil)
   (setq doom-modeline-height 34)
   (set-face-attribute 'mode-line nil :family "Monospace" :height 110)
   (set-face-attribute 'mode-line-inactive nil :family "Monospace" :height 110))
