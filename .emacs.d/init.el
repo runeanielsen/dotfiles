@@ -545,3 +545,6 @@
          lisp-mode
          typescript-mode
          js2-mode))
+
+(provide 'init)
+;;; init.el ends here
