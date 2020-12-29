@@ -309,6 +309,25 @@
   :config
   (evil-collection-init))
 
+;; --- Hydra ---
+(use-package hydra)
+
+(defhydra hydra-text-scale (:timeout 4)
+  "scale text"
+  ("j" text-scale-decrease "out")
+  ("k" text-scale-increase "in")
+  ("f" nil "finished" :exit t))
+
+(defhydra hydra-window-resize (:timeout 4)
+  "window-width"
+  ("j" evil-window-decrease-width "decrease")
+  ("k" evil-window-increase-width "increase")
+  ("f" nil "finished" :exit t))
+
+(fp/leader-keys
+  "ts" '(hydra-text-scale/body :which-key "scale text")
+  "ws" '(hydra-window-resize/body :which-key "resize window"))
+
 ;; --- Dired ---
 (use-package dired
   :ensure nil
