@@ -290,7 +290,8 @@
 
   (fp/leader-keys
    "f"  '(:ignore t :which-key "files")
-   "ff" '(counsel-find-file :which-key "find-file")))
+   "ff" '(counsel-find-file :which-key "find-file")
+   "ft" '(counsel-load-theme :which-key "load-theme")))
 
 ;; --- Evil mode ---
 (use-package evil
@@ -319,9 +320,11 @@
   ("f" nil "finished" :exit t))
 
 (defhydra hydra-window-resize (:timeout 4)
-  "window-width"
-  ("j" evil-window-decrease-width "decrease")
-  ("k" evil-window-increase-width "increase")
+  "window-resize"
+  ("h" evil-window-decrease-width "decrease-width")
+  ("j" evil-window-decrease-height "decrease-height")
+  ("k" evil-window-increase-height "increase-height")
+  ("l" evil-window-increase-width "increase-width")
   ("f" nil "finished" :exit t))
 
 (fp/leader-keys
