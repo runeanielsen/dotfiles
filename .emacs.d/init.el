@@ -241,7 +241,9 @@
 
   (fp/leader-keys
    "b" '(:ignore t :which-key "buffer")
-   "bb" '(persp-switch-to-buffer :which-key "switch-to-buffer-all")
+   "bb" '(persp-switch-to-buffer :which-key "switch-to-buffer-persp")
+   "bB" '(counsel-projectile-switch-to-buffer :which-key "switch-to-buffer-all")
+   "ba" '(persp-add-buffer :which-key "persp-add-buffer")
    "bd" '(bury-buffer :which-key "bury-current-buffer")
    "bk" '(persp-kill-buffer :which-key "kill-current-buffer")
    "bs" '(evil-write :which-key "write-buffer")
