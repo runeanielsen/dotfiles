@@ -377,36 +377,40 @@
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
-(use-package forge)
+(use-package magit-todos)
 
-(ghub-request "GET" "/user" nil
-              :forge 'github
-              :host "api.github.com"
-              :username "runeanielsen"
-              :auth 'forge)
+(use-package forge
+  :config
+  (ghub-request "GET" "/user" nil
+                :forge 'github
+                :host "api.github.com"
+                :username "runeanielsen"
+                :auth 'forge))
 
 ;; --- go mode ---
-(use-package go-mode)
-
 ;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
 (defun lsp-go-install-save-hooks ()
   "LSP Go install save hooks."
   (add-hook 'before-save-hook #'lsp-format-buffer t t)
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
-(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+
+(use-package go-mode
+  :config
+  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks))
 
 ;; --- json mode ---
 (use-package json-mode)
 
 ;; --- csharp mode ---
-(use-package csharp-mode)
-
 (defun lsp-csharp-install-save-hooks ()
   "LSP CSharp install save hooks."
   (add-hook 'before-save-hook #'lsp-format-buffer t t)
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
-(add-hook 'csharp-mode-hook #'lsp-csharp-install-save-hooks)
+
+(use-package csharp-mode
+  :config
+  (add-hook 'csharp-mode-hook #'lsp-csharp-install-save-hooks))
 
 ;; --- python-ms ---
 (use-package lsp-python-ms
@@ -482,15 +486,14 @@
   :config
     (defvar company-tooltip-align-annotations)
     (setq company-tooltip-align-annotations t)
-    (add-hook 'js-mode-hook #'setup-tide-mode))
+    (add-hook 'js-mode-hook #'setup-tide-mode)
+    (add-hook 'typescript-mode-hook #'setup-tide-mode)
+    (add-hook 'js2-mode-hook #'setup-tide-mode)
+    (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append))
 
-(use-package js2-mode)
-
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-
-(add-hook 'typescript-mode-hook #'setup-tide-mode)
-(add-hook 'js2-mode-hook #'setup-tide-mode)
-(flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
+(use-package js2-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
 
 (use-package add-node-modules-path)
 (use-package web-mode)
@@ -551,11 +554,11 @@
     (dw/set-markdown-header-font-sizes))
   (add-hook 'markdown-mode-hook 'dw/markdown-mode-hook))
 
-;; --- Rainbow delimiters
+;; --- Rainbow delimiters ---
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
-;; --- Rainbow mode
+;; --- Rainbow mode ---
 (use-package rainbow-mode
   :defer t
   :hook (org-mode
@@ -565,7 +568,7 @@
          typescript-mode
          js2-mode))
 
-;; --- Org mode
+;; --- Org mode ---
 (defun fp/org-mode-setup ()
   (org-indent-mode)
   (variable-pitch-mode 1))
