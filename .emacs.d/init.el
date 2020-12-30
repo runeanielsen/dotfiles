@@ -580,9 +580,26 @@
                              (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•")))))))
 
 (use-package org
-  ;;:hook (org-mode . fp/org-mode-setup)
+  :hook (org-mode . fp/org-mode-setup)
   :config
   (setq org-ellipsis " ▾")
+  (setq org-agenda-start-with-log-mode t)
+  (setq org-log-done t)
+  (setq org-log-into-drawer t)
+
+  (setq org-tag-alist
+    '((:startgroup)
+       ; Put mutually exclusive tags here
+       (:endgroup)
+       ("errand" . ?E)
+       ("task" . ?T)
+       ("work" . ?W)))
+
+  ;; Configure custom agenda views
+  (setq org-agenda-custom-commands
+        '(("d" "Dashboard" ((agenda "" ((org-deadline-warning-days 7)))))
+          ("W" "Work Tasks" tags-todo "+work")))
+
   (fp/org-font-setup))
 
 (use-package org-bullets
