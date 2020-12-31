@@ -558,6 +558,13 @@
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
+(use-package paredit
+  :hook
+  (emacs-lisp-mode . enable-paredit-mode)
+  (lisp-mode . enable-paredit-mode)
+  (sly-mode . enable-paredit-mode)
+  (lisp-interaction-mode . enable-paredit-mode))
+
 ;; --- Rainbow mode ---
 (use-package rainbow-mode
   :defer t
