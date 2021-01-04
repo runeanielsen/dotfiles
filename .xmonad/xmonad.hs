@@ -38,7 +38,6 @@ myFocusedBorderColor = "#ffffff"
 -- Startup Hook
 myStartupHook :: X ()
 myStartupHook = do
-  spawnOnce "nitrogen --restore &" 
   spawn "trayer --edge top --align right --widthtype request --SetDockType true --SetPartialStrut true --expand true --iconspacing 4 --tint 0x000000 --transparent true --alpha 0 &"
   setWMName "LG3D"
 
