@@ -20,7 +20,7 @@
 (setq use-package-always-ensure t)
 
 ;; Font
-(set-face-attribute 'default nil :font "Fira Code" :height 120)
+(set-face-attribute 'default nil :font "Fira Code" :height 130)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -78,6 +78,9 @@
 ;; No blinking cursor
 (blink-cursor-mode 0)
 
+;; Show parens pairs
+(show-paren-mode 1)
+
 ;; make indent commands use space only (never tab character)
 (progn
   (setq-default indent-tabs-mode nil))
@@ -117,8 +120,7 @@
 (with-eval-after-load "persp-mode-autoloads"
   (setq persp-autokill-buffer-on-remove 'kill-weak
         persp-nil-hidden t
-        persp-auto-resume-time -1 ; Don't auto-load on startup
-        persp-auto-save-opt (if noninteractive 0 1)) ; auto-save on kill
+        persp-auto-resume-time -1) ; Don't auto-load on startup
   (add-hook 'window-setup-hook #'(lambda () (persp-mode 1))))
 
 (use-package persp-mode-projectile-bridge)
@@ -399,9 +401,8 @@
 
 ;; --- elm mode ---
 (defun lsp-elm-install-save-hooks ()
-  "LSP CSharp install save hooks."
-  (add-hook 'before-save-hook #'lsp-format-buffer t t)
-  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+  "LSP Elm install save hooks."
+  (add-hook 'before-save-hook #'elm-format-on-save-mode))
 
 (use-package elm-mode
   :config
@@ -429,6 +430,22 @@
 (defvar inferior-lisp-program "sbcl")
 
 (use-package sly)
+
+;; --- Rainbow delimiters ---
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+(use-package paredit)
+
+;; --- Rainbow mode ---
+(use-package rainbow-mode
+  :defer t
+  :hook (org-mode
+         emacs-lisp-mode
+         web-mode
+         lisp-mode
+         typescript-mode
+         js2-mode))
 
 ;; --- tree-sitter ---
 (use-package tree-sitter
@@ -478,7 +495,6 @@
 
 ;; optional if you want which-key integration
 (use-package which-key
-
     :config
     (which-key-mode))
 
@@ -573,32 +589,37 @@
     (dw/set-markdown-header-font-sizes))
   (add-hook 'markdown-mode-hook 'dw/markdown-mode-hook))
 
-;; --- Rainbow delimiters ---
-(use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode))
-
-(use-package paredit)
-
-;; --- Rainbow mode ---
-(use-package rainbow-mode
-  :defer t
-  :hook (org-mode
-         emacs-lisp-mode
-         web-mode
-         lisp-mode
-         typescript-mode
-         js2-mode))
-
 ;; --- Org mode ---
 (defun fp/org-mode-setup ()
   (org-indent-mode)
-  (variable-pitch-mode 1))
+  (variable-pitch-mode 1)
+  (visual-line-mode 1))
 
 (defun fp/org-font-setup ()
   ;; Replace list hyphen with dot
   (font-lock-add-keywords 'org-mode
                           '(("^ *\\([-]\\) "
-                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•")))))))
+                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+
+  ;; Set faces for heading levels
+  (dolist (face '((org-level-1 . 1.2)
+                  (org-level-2 . 1.1)
+                  (org-level-3 . 1.05)
+                  (org-level-4 . 1.0)
+                  (org-level-5 . 1.1)
+                  (org-level-6 . 1.1)
+                  (org-level-7 . 1.1)
+                  (org-level-8 . 1.1)))
+    (set-face-attribute (car face) nil :font "Fira Code" :weight 'regular :height 180))
+
+  ;; Ensure that anything that should be fixed-pitch in Org files appears that way
+  (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-table nil   :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
 
 (use-package org
   :hook (org-mode . fp/org-mode-setup)
