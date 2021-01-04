@@ -117,11 +117,6 @@
 (with-eval-after-load "persp-mode-autoloads"
   (setq persp-autokill-buffer-on-remove 'kill-weak
         persp-nil-hidden t
-        persp-auto-save-fname "autosave"
-        persp-set-last-persp-for-new-frames nil
-        persp-switch-to-added-buffer nil
-        persp-kill-foreign-buffer-behaviour 'kill
-        persp-remove-buffers-from-nil-persp-behaviour nil
         persp-auto-resume-time -1 ; Don't auto-load on startup
         persp-auto-save-opt (if noninteractive 0 1)) ; auto-save on kill
   (add-hook 'window-setup-hook #'(lambda () (persp-mode 1))))
@@ -187,7 +182,7 @@
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-spacegrey t)
+  (load-theme 'doom-monokai-pro t)
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
   ;; Corrects (and improves) org-mode's native fontification.
@@ -402,6 +397,16 @@
 ;; --- json mode ---
 (use-package json-mode)
 
+;; --- elm mode ---
+(defun lsp-elm-install-save-hooks ()
+  "LSP CSharp install save hooks."
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+
+(use-package elm-mode
+  :config
+  (add-hook 'elm-mode-hook #'lsp-elm-install-save-hooks))
+
 ;; --- csharp mode ---
 (defun lsp-csharp-install-save-hooks ()
   "LSP CSharp install save hooks."
@@ -425,14 +430,28 @@
 
 (use-package sly)
 
+;; --- tree-sitter ---
+(use-package tree-sitter
+  :config
+  (global-tree-sitter-mode)
+  :hook ((go-mode . tree-sitter-hl-mode)
+         (csharp-mode . tree-sitter-hl-mode)
+         (js2-mode . tree-sitter-hl-mode)
+         (web-mode . tree-sitter-hl-mode)
+         (python-mode . tree-sitter-hl-mode)
+         (css-mode . tree-sitter-hl-mode)
+         (elm-mode . tree-sitter-hl-mode)))
+
+(use-package tree-sitter-langs)
+
 ;; --- lsp mode ---
 (setq lsp-keymap-prefix "s-l")
 
 (use-package lsp-mode
-    :hook (
-            (csharp-mode . lsp)
-            (go-mode . lsp)
-            (lsp-mode . lsp-enable-which-key-integration))
+    :hook ((csharp-mode . lsp)
+           (go-mode . lsp)
+           (elm-mode . lsp)
+           (lsp-mode . lsp-enable-which-key-integration))
     :commands lsp
     :config
     (setq lsp-enable-links nil)
