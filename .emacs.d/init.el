@@ -104,6 +104,15 @@
   ;; Highlight line on point.
   (global-hl-line-mode t))
 
+(use-package disable-mouse
+  :config
+  (global-disable-mouse-mode)
+  (mapc #'disable-mouse-in-keymap
+        (list evil-motion-state-map
+              evil-normal-state-map
+              evil-visual-state-map
+              evil-insert-state-map)))
+
 ;; --- Projectile ---
 (use-package projectile
     :custom
