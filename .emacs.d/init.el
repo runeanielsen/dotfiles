@@ -106,12 +106,7 @@
 
 (use-package disable-mouse
   :config
-  (global-disable-mouse-mode)
-  (mapc #'disable-mouse-in-keymap
-        (list evil-motion-state-map
-              evil-normal-state-map
-              evil-visual-state-map
-              evil-insert-state-map)))
+  (global-disable-mouse-mode))
 
 ;; --- Projectile ---
 (use-package projectile
@@ -307,7 +302,12 @@
   :config
   (evil-mode 1)
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-  (evil-global-set-key 'motion "k" 'evil-previous-visual-line))
+  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+  (mapc #'disable-mouse-in-keymap
+      (list evil-motion-state-map
+            evil-normal-state-map
+            evil-visual-state-map
+            evil-insert-state-map)))
 
 (use-package evil-collection
   :after evil
