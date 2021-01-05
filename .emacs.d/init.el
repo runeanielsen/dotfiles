@@ -399,15 +399,6 @@
 ;; --- json mode ---
 (use-package json-mode)
 
-;; --- elm mode ---
-(defun lsp-elm-install-save-hooks ()
-  "LSP Elm install save hooks."
-  (add-hook 'before-save-hook #'elm-format-on-save-mode))
-
-(use-package elm-mode
-  :config
-  (add-hook 'elm-mode-hook #'lsp-elm-install-save-hooks))
-
 ;; --- csharp mode ---
 (defun lsp-csharp-install-save-hooks ()
   "LSP CSharp install save hooks."
@@ -456,8 +447,7 @@
          (js2-mode . tree-sitter-hl-mode)
          (web-mode . tree-sitter-hl-mode)
          (python-mode . tree-sitter-hl-mode)
-         (css-mode . tree-sitter-hl-mode)
-         (elm-mode . tree-sitter-hl-mode)))
+         (css-mode . tree-sitter-hl-mode)))
 
 (use-package tree-sitter-langs)
 
@@ -467,7 +457,6 @@
 (use-package lsp-mode
     :hook ((csharp-mode . lsp)
            (go-mode . lsp)
-           (elm-mode . lsp)
            (lsp-mode . lsp-enable-which-key-integration))
     :commands lsp
     :config
