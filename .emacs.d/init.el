@@ -20,7 +20,7 @@
 (setq use-package-always-ensure t)
 
 ;; Font
-(set-face-attribute 'default nil :font "Fira Code" :height 120)
+(set-face-attribute 'default nil :font "Fira Code" :height 130)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -648,14 +648,5 @@
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
-(defun fp/org-mode-visual-fill ()
-  (setq visual-fill-column-width 100
-        visual-fill-column-center-text t)
-  (visual-fill-column-mode 1))
-
-(use-package visual-fill-column
-  :hook
-  (org-mode . fp/org-mode-visual-fill))
-
-;; Make gc pauses faster by decreasing the threshold.
+;; Make gc pause faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
