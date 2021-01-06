@@ -194,7 +194,7 @@
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-monokai-pro t)
+  (load-theme 'doom-horizon t)
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
   ;; Corrects (and improves) org-mode's native fontification.
@@ -255,7 +255,7 @@
    "bk" '(persp-kill-buffer :which-key "kill-current-buffer")
    "bs" '(evil-write :which-key "write-buffer")
    "bS" '(evil-write-all :which-key "write-buffer-all")
-   "bl" '(projectile-previous-project-buffer :which-key "switch-last-buffer"))
+   "bl" '(evil-switch-to-windows-last-buffer :which-key "switch-last-buffer"))
 
   (fp/leader-keys
    "g" '(:ignore t :which-key "git")
@@ -284,7 +284,8 @@
 
   (fp/leader-keys
    "o" '(:ignore t :which-key "open")
-   "ot" '(vterm :which-key "vterm"))
+   "ot" '(projectile-run-vterm :which-key "vterm")
+   "oT" '(vterm :which-key "vterm"))
 
   (fp/leader-keys
    "p" '(:ignore t :which-key "projectile")
@@ -426,8 +427,7 @@
   (global-tree-sitter-mode)
   :hook ((go-mode . tree-sitter-hl-mode)
          (csharp-mode . tree-sitter-hl-mode)
-         (js2-mode . tree-sitter-hl-mode)
-         (web-mode . tree-sitter-hl-mode)
+         (js-mode . tree-sitter-hl-mode)
          (python-mode . tree-sitter-hl-mode)
          (css-mode . tree-sitter-hl-mode)))
 
@@ -435,12 +435,18 @@
 
 ;; Company mode is a standard completion package that works well with lsp-mode.
 (use-package company
-  :init
-  (add-hook 'after-init-hook 'global-company-mode)
+  :init (add-hook 'after-init-hook 'global-company-mode)
+  :bind
+  (:map company-active-map
+        ("<tab>" . company-complete-selection))
+  (:map lsp-mode-map
+        ("<tab>" . company-indent-or-complete-common))
   :config
-  ;; Optionally enable completion-as-you-type behavior.
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 1))
+
+(use-package company-box
+  :hook (company-mode . company-box-mode))
 
 ;; optional if you want which-key integration
 (use-package which-key
@@ -450,7 +456,10 @@
 ;; --- Flycheck ---
 (use-package flycheck
   :defer t
-  :hook (lsp-mode . flycheck-mode))
+  :hook (lsp-mode . flycheck-mode)
+  :config
+  ; Hack because csharp lsp mode often bugs out
+  (setq flycheck-checker-error-threshold 10000))
 
 ;; --- lsp mode ---
 (use-package lsp-mode
@@ -517,12 +526,8 @@
   (tide-hl-identifier-mode +1)
   (company-mode +1))
 
-;; aligns annotation to the right hand side
-(setq company-tooltip-align-annotations t)
-
 (use-package tide
   :config
-    (defvar company-tooltip-align-annotations)
     (setq company-tooltip-align-annotations t)
     (add-hook 'js-mode-hook #'setup-tide-mode)
     (add-hook 'typescript-mode-hook #'setup-tide-mode)
@@ -533,8 +538,7 @@
   :mode "\\.ts\\'"
   :hook (typescript-mode . lsp-deferred)
   :config
-  (setq typescript-indent-level 2)
-  (setq js-indent-level 2))
+  (setq typescript-indent-level 2))
 
 (add-hook 'js-mode-hook #'lsp-deferred)
 (add-hook 'css-mode-hook #'lsp-deferred)
