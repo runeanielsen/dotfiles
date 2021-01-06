@@ -554,6 +554,13 @@
   :hook ((js-mode . prettier-js-mode)
          (css-mode . prettier-js-mode)))
 
+(use-package emmet-mode
+  :hook ((sgml-mode . emmet-mode)
+         (js-mode . emmet-mode)
+         (css-mode . emmet-mode))
+  :config
+  (setq emmet-expand-jsx-className? t))
+
 ;; --- markdown ---
 (defun fp/set-markdown-header-font-sizes ()
   (dolist (face '((markdown-header-face-1 . 1.2)
