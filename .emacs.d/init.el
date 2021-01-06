@@ -509,7 +509,6 @@
 
 ;; --- python-ms ---
 (use-package python-mode
-  :hook (python-mode . lsp-deferred)
   :custom
   (python-shell-interpreter "python3"))
 
