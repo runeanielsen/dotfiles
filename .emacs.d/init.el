@@ -399,39 +399,6 @@
                 :username "runeanielsen"
                 :auth 'forge))
 
-;; --- go mode ---
-;; Set up before-save hooks to format buffer and add/delete imports.
-;; Make sure you don't have other gofmt/goimports hooks enabled.
-(defun lsp-go-install-save-hooks ()
-  "LSP Go install save hooks."
-  (add-hook 'before-save-hook #'lsp-format-buffer t t)
-  (add-hook 'before-save-hook #'lsp-organize-imports t t))
-
-(use-package go-mode
-  :config
-  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks))
-
-;; --- json mode ---
-(use-package json-mode)
-
-;; --- csharp mode ---
-(defun lsp-csharp-install-save-hooks ()
-  "LSP CSharp install save hooks."
-  (add-hook 'before-save-hook #'lsp-format-buffer t t)
-  (add-hook 'before-save-hook #'lsp-organize-imports t t))
-
-(use-package csharp-mode
-  :config
-  (add-hook 'csharp-mode-hook #'lsp-csharp-install-save-hooks))
-
-;; --- python-ms ---
-(use-package lsp-python-ms
-  :init
-  (setq lsp-python-ms-auto-install-server t)
-  :hook (python-mode . (lambda ()
-                          (require 'lsp-python-ms)
-                          (lsp))))
-
 ;; --- commmon lisp ---
 (defvar inferior-lisp-program "sbcl")
 
@@ -466,24 +433,6 @@
 
 (use-package tree-sitter-langs)
 
-;; --- lsp mode ---
-(setq lsp-keymap-prefix "s-l")
-
-(use-package lsp-mode
-    :hook ((csharp-mode . lsp)
-           (go-mode . lsp)
-           (lsp-mode . lsp-enable-which-key-integration))
-    :commands lsp
-    :config
-    (setq lsp-enable-links nil)
-    (setq lsp-headerline-breadcrumb-enable nil))
-
-;; optionally
-(use-package lsp-ui
-  :commands lsp-ui-mode
-  :config
-  (setq lsp-ui-sideline-show-code-actions nil))
-
 ;; Company mode is a standard completion package that works well with lsp-mode.
 (use-package company
   :init
@@ -492,10 +441,6 @@
   ;; Optionally enable completion-as-you-type behavior.
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 1))
-
-;; Ivy
-(use-package lsp-ivy
-  :commands lsp-ivy-workspace-symbol)
 
 ;; optional if you want which-key integration
 (use-package which-key
@@ -506,6 +451,60 @@
 (use-package flycheck
   :defer t
   :hook (lsp-mode . flycheck-mode))
+
+;; --- lsp mode ---
+(use-package lsp-mode
+  :hook (lsp-mode . lsp-enable-which-key-integration)
+  :commands (lsp lsp-deferred)
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :config
+  (setq lsp-enable-links nil)
+  (setq lsp-headerline-breadcrumb-enable nil))
+
+(use-package lsp-ui
+  :commands lsp-ui-mode
+  :config
+  (setq lsp-ui-sideline-show-code-actions nil))
+
+;; lsp-ivy
+(use-package lsp-ivy
+  :commands lsp-ivy-workspace-symbol)
+
+;; --- go mode ---
+;; Set up before-save hooks to format buffer and add/delete imports.
+;; Make sure you don't have other gofmt/goimports hooks enabled.
+(defun lsp-go-install-save-hooks ()
+  "LSP Go install save hooks."
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+
+(use-package go-mode
+  :hook (go-mode . lsp-deferred)
+  :config
+  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks))
+
+;; --- json mode ---
+(use-package json-mode)
+
+;; --- csharp mode ---
+(defun lsp-csharp-install-save-hooks ()
+  "LSP CSharp install save hooks."
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+
+(use-package csharp-mode
+  :hook (csharp-mode . lsp-deferred)
+  :config
+  (add-hook 'csharp-mode-hook #'lsp-csharp-install-save-hooks))
+
+;; --- python-ms ---
+(use-package lsp-python-ms
+  :init
+  (setq lsp-python-ms-auto-install-server t)
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-python-ms)
+                          (lsp))))
 
 ;; --- Tide ---
 (defun setup-tide-mode ()
@@ -527,55 +526,33 @@
     (setq company-tooltip-align-annotations t)
     (add-hook 'js-mode-hook #'setup-tide-mode)
     (add-hook 'typescript-mode-hook #'setup-tide-mode)
-    (add-hook 'js2-mode-hook #'setup-tide-mode)
     (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append))
 
-(use-package js2-mode
+;; --- Typescript mode ---
+(use-package typescript-mode
+  :mode "\\.ts\\'"
+  :hook (typescript-mode . lsp-deferred)
   :config
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
+  (setq typescript-indent-level 2)
+  (setq js-indent-level 2))
 
-(use-package add-node-modules-path)
-(use-package web-mode)
-
-(add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
-(add-hook 'web-mode-hook
-          (lambda ()
-            (when (string-equal "jsx" (file-name-extension buffer-file-name))
-              (setup-tide-mode))))
-
-(flycheck-add-mode 'javascript-eslint 'web-mode)
-(flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
-
-(defun enable-minor-mode (my-pair)
-  "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
-  (if (buffer-file-name)
-      (if (string-match (car my-pair) buffer-file-name)
-      (funcall (cdr my-pair)))))
-
-(add-hook 'web-mode-hook #'(lambda ()
-                            (enable-minor-mode
-                             '("\\.jsx?\\'" . prettier-js-mode))))
-
-(eval-after-load 'web-mode
-    '(progn
-       (add-hook 'web-mode-hook #'add-node-modules-path)
-       (add-hook 'scss-mode-hook #'add-node-modules-path)
-       (add-hook 'js2-mode-hook #'add-node-modules-path)
-       (add-hook 'web-mode-hook #'prettier-js-mode)))
+(add-hook 'js-mode-hook #'lsp-deferred)
+(add-hook 'css-mode-hook #'lsp-deferred)
 
 ;; set default indent offset on modes
 (setq-default
-  js-indent-level 2
-  css-indent-offset 2
-  web-mode-code-indent-offset 2
-  web-mode-css-indent-offset 2
-  web-mode-markup-indent-offset 2)
+ css-indent-offset 2
+ js-indent-level 2)
 
+;; --- Node modules path ---
+(use-package add-node-modules-path
+  :hook ((js-mode . add-node-modules-path)
+         (css-mode . add-node-modules-path)))
+
+;; --- Prettier ---
 (use-package prettier-js
-    :init
-    (add-hook 'js2-mode-hook 'prettier-js-mode)
-    (add-hook 'web-mode-hook 'prettier-js-mode)
-    (add-hook 'scss-mode-hook 'prettier-js-mode))
+  :hook ((js-mode . prettier-js-mode)
+         (css-mode . prettier-js-mode)))
 
 ;; --- markdown ---
 (use-package markdown-mode
