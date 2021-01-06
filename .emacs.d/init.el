@@ -186,8 +186,9 @@
   (setq doom-modeline-persp-name nil)
   (setq doom-modeline-height 34)
   (setq doom-modeline-buffer-file-name-style 'file-name)
-  (set-face-attribute 'mode-line nil :family "Monospace" :height 110)
-  (set-face-attribute 'mode-line-inactive nil :family "Monospace" :height 110))
+  (setq doom-modeline-buffer-encoding nil)
+  (set-face-attribute 'mode-line nil :family "Fira Code" :height 110)
+  (set-face-attribute 'mode-line-inactive nil :family "Fira Code" :height 110))
 
 ;; --- doom-themes ---
 (use-package doom-themes
