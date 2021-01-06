@@ -124,6 +124,12 @@
 (with-eval-after-load "persp-mode-autoloads"
   (setq persp-autokill-buffer-on-remove 'kill-weak
         persp-nil-hidden t
+        persp-add-buffer-on-find-file nil
+        persp-switch-to-added-buffer nil
+        persp-set-last-persp-for-new-frames nil
+        persp-kill-foreign-buffer-behaviour 'kill
+        persp-remove-buffers-from-nil-persp-behaviour nil
+        persp-nil-name "dashboard"
         persp-auto-resume-time -1) ; Don't auto-load on startup
   (add-hook 'window-setup-hook #'(lambda () (persp-mode 1))))
 
