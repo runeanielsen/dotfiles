@@ -508,6 +508,11 @@
   (add-hook 'csharp-mode-hook #'lsp-csharp-install-save-hooks))
 
 ;; --- python-ms ---
+(use-package python-mode
+  :hook (python-mode . lsp-deferred)
+  :custom
+  (python-shell-interpreter "python3"))
+
 (use-package lsp-python-ms
   :init
   (setq lsp-python-ms-auto-install-server t)
@@ -540,18 +545,23 @@
   :config
   (setq typescript-indent-level 2))
 
-(add-hook 'js-mode-hook #'lsp-deferred)
-(add-hook 'css-mode-hook #'lsp-deferred)
+(use-package js-mode
+  :ensure nil
+  :hook (js-mode . lsp-deferred)
+  :config
+  (setq js-indent-level 2))
 
-;; set default indent offset on modes
-(setq-default
- css-indent-offset 2
- js-indent-level 2)
+(use-package css-mode
+  :ensure nil
+  :hook (css-mode . lsp-deferred)
+  :config
+  (setq css-indent-offset 2))
 
 ;; --- Node modules path ---
 (use-package add-node-modules-path
   :hook ((js-mode . add-node-modules-path)
-         (css-mode . add-node-modules-path)))
+         (css-mode . add-node-modules-path)
+         (typescript-mode . add-node-modules-path)))
 
 ;; --- Prettier ---
 (use-package prettier-js
