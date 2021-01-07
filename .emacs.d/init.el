@@ -282,6 +282,7 @@
    "w" '(:ignore t :which-key "window")
    "ww" '(other-window :which-key "other-window")
    "wn" '(split-window-right :which-key "split-window-right")
+   "ws" '(window-swap-states :which-key "window-swap-states")
    "wd" '(delete-window :which-key "delete-window"))
 
   (fp/leader-keys
@@ -344,7 +345,7 @@
 
 (fp/leader-keys
   "ts" '(hydra-text-scale/body :which-key "scale text")
-  "ws" '(hydra-window-resize/body :which-key "resize window"))
+  "wr" '(hydra-window-resize/body :which-key "resize window"))
 
 ;; --- Dired ---
 (use-package dired
