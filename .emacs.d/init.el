@@ -533,10 +533,14 @@
 
 (use-package tide
   :config
-    (setq company-tooltip-align-annotations t)
-    (add-hook 'js-mode-hook #'setup-tide-mode)
-    (add-hook 'typescript-mode-hook #'setup-tide-mode)
-    (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append))
+  (setq company-tooltip-align-annotations t)
+  (setq js-indent-level 2)
+  (add-hook 'js-mode-hook #'setup-tide-mode)
+  (add-hook 'typescript-mode-hook #'setup-tide-mode)
+  (flycheck-add-mode 'javascript-eslint 'js-mode)
+  (setq flycheck-enabled-checkers (append flycheck-enabled-checkers '(javascript-eslint)))
+  (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
+  (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append))
 
 ;; --- Typescript mode ---
 (use-package typescript-mode
@@ -544,12 +548,6 @@
   :hook (typescript-mode . lsp-deferred)
   :config
   (setq typescript-indent-level 2))
-
-(use-package js-mode
-  :ensure nil
-  :hook (js-mode . lsp-deferred)
-  :config
-  (setq js-indent-level 2))
 
 (use-package css-mode
   :ensure nil
