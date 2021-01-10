@@ -45,10 +45,6 @@
  ;; Don't use hard tabs
  indent-tabs-mode nil
 
- ;; Emacs can automatically create backup files. This tells Emacs to put all backups in
- ;; ~/.emacs.d/tmp/backups.
- backup-directory-alist `(("." . ,(concat user-emacs-directory "tmp/backups")))
-
  ;; Do not autosave.
  auto-save-default nil
 
@@ -103,6 +99,13 @@
   ;; Highlight line on point.
   (global-hl-line-mode t))
 
+;; --- No littering ---
+(use-package no-littering
+  :config
+  (setq auto-save-file-name-transforms
+        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
+
+;; --- Disable mouse ---
 (use-package disable-mouse
   :config
   (global-disable-mouse-mode))
