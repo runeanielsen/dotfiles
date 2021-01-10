@@ -46,9 +46,8 @@
  indent-tabs-mode nil
 
  ;; Emacs can automatically create backup files. This tells Emacs to put all backups in
- ;; ~/.emacs.d/backups. More info:
- ;; http://www.gnu.org/software/emacs/manual/html_node/elisp/Backup-Files.html
- backup-directory-alist `(("." . ,(concat user-emacs-directory "backups")))
+ ;; ~/.emacs.d/tmp/backups.
+ backup-directory-alist `(("." . ,(concat user-emacs-directory "tmp/backups")))
 
  ;; Do not autosave.
  auto-save-default nil
@@ -571,8 +570,8 @@
 
 ;; --- markdown ---
 (defun fp/set-markdown-header-font-sizes ()
-  (dolist (face '((markdown-header-face-1 . 1.2)
-                  (markdown-header-face-2 . 1.1)
+  (dolist (face '((markdown-header-face-1 . 1.1)
+                  (markdown-header-face-2 . 1.05)
                   (markdown-header-face-3 . 1.0)
                   (markdown-header-face-4 . 1.0)
                   (markdown-header-face-5 . 1.0)))
