@@ -34,7 +34,7 @@
  inhibit-startup-message t
 
  ;; Do not put 'customize' config in init.el; give it another file.
- custom-file "~/.emacs.d/custom-file.el"
+ custom-file "~/.emacs.d/tmp/custom-file.el"
 
  ;; Use your name in the frame title. :)
  frame-title-format (format "%s's Emacs" (capitalize user-login-name))
@@ -189,6 +189,7 @@
   (setq doom-modeline-height 34)
   (setq doom-modeline-buffer-file-name-style 'file-name)
   (setq doom-modeline-buffer-encoding nil)
+  (setq doom-modeline-major-mode-icon nil)
   (set-face-attribute 'mode-line nil :family "Fira Code" :height 110)
   (set-face-attribute 'mode-line-inactive nil :family "Fira Code" :height 110))
 
@@ -488,7 +489,7 @@
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
 
 (use-package go-mode
-  :hook (go-mode . lsp-deferred)
+  :hook (go-mode . lsp)
   :config
   (add-hook 'go-mode-hook #'lsp-go-install-save-hooks))
 
