@@ -229,6 +229,11 @@
   :hook ((text-mode . ws-butler-mode)
          (prog-mode . ws-butler-mode)))
 
+(defun fp/split-window-balanced ()
+  (interactive)
+  (split-window-right)
+  (balance-windows))
+
 ;; --- General ---
 (use-package general
   :config
@@ -284,7 +289,7 @@
   (fp/leader-keys
    "w" '(:ignore t :which-key "window")
    "ww" '(other-window :which-key "other-window")
-   "wn" '(split-window-right :which-key "split-window-right")
+   "wn" '(fp/split-window-balanced :which-key "split-window-balanced")
    "ws" '(window-swap-states :which-key "window-swap-states")
    "wd" '(delete-window :which-key "delete-window"))
 
