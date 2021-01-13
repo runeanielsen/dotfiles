@@ -310,6 +310,8 @@
   (fp/leader-keys
    "f"  '(:ignore t :which-key "files")
    "ff" '(counsel-find-file :which-key "find-file")
+   "fc" '(dired-create-empty-file :which-key "create-file")
+   "fd" '(dired-create-directory :which-key "create-directory")
    "ft" '(counsel-load-theme :which-key "load-theme")))
 
 ;; --- Evil mode ---
