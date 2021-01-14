@@ -358,10 +358,16 @@
   "wr" '(hydra-window-resize/body :which-key "resize window"))
 
 ;; --- Dired ---
+(defun quiet-auto-revert ()
+  "A hook to run for buffers you want to revert automatically and silently"
+  (auto-revert-mode 1)
+  (setq-local auto-revert-verbose nil))
+
 (use-package dired
   :ensure nil
   :custom ((dired-listing-switches "-agho --group-directories-first"))
   :config
+  (add-hook 'dired-mode-hook #'quiet-auto-revert t nil)
   (evil-collection-define-key 'normal 'dired-mode-map
     "h" 'dired-single-up-directory
     "l" 'dired-single-buffer
@@ -388,6 +394,7 @@
   :config
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
+  (setq ivy-use-selectable-prompt t)
   (setq enable-recursive-minibuffers t))
 
 (use-package all-the-icons-ivy-rich
