@@ -9,6 +9,10 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export PAGER="less"
 
+export GOPATH=$HOME/go
+export GOBIN=$HOME/go/bin
+export PATH=$PATH:$(go env GOPATH)/bin
+
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 export BROWSER="/usr/bin/firefox"
@@ -20,7 +24,5 @@ export MSBuildSDKsPath=$(echo /usr/share/dotnet/sdk/5.*/Sdks);
 export PYTHONPATH="/usr/share/qgis/python:/usr/share/qgis/python/plugins:/usr/lib/python3.9"
 
 export TODO_FILENAME="/home/notation/.todo.json"
-
-export GOBIN="/usr/bin"
 
 export TERM=xterm vim
