@@ -506,8 +506,7 @@
 ;; --- csharp mode ---
 (defun lsp-csharp-install-save-hooks ()
   "LSP CSharp install save hooks."
-  (add-hook 'before-save-hook #'lsp-format-buffer t t)
-  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+  (add-hook 'before-save-hook #'lsp-format-buffer t t))
 
 (use-package csharp-mode
   :hook (csharp-mode . lsp-deferred)
