@@ -20,7 +20,7 @@
 (setq use-package-always-ensure t)
 
 ;; Font
-(set-face-attribute 'default nil :font "Fira Code" :height 130)
+(set-face-attribute 'default nil :font "Fira Code" :height 116)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -186,12 +186,12 @@
   :hook (after-init . doom-modeline-mode)
   :config
   (setq doom-modeline-persp-name nil)
-  (setq doom-modeline-height 34)
+  (setq doom-modeline-height 24)
   (setq doom-modeline-buffer-file-name-style 'file-name)
   (setq doom-modeline-buffer-encoding nil)
   (setq doom-modeline-major-mode-icon nil)
-  (set-face-attribute 'mode-line nil :family "Fira Code" :height 110)
-  (set-face-attribute 'mode-line-inactive nil :family "Fira Code" :height 110))
+  (set-face-attribute 'mode-line nil :family "Fira Code" :height 85)
+  (set-face-attribute 'mode-line-inactive nil :family "Fira Code" :height 85))
 
 ;; --- doom-themes ---
 (use-package doom-themes
@@ -199,11 +199,14 @@
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-nord t)
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
+
+(use-package hc-zenburn-theme
+  :config
+  (load-theme 'hc-zenburn t))
 
 ;; --- Theme Magic Pywal ---
 (use-package theme-magic
