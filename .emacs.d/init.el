@@ -110,6 +110,12 @@
   :config
   (global-disable-mouse-mode))
 
+;; --- shut up ---
+(use-package shut-up)
+
+(when noninteractive
+  (shut-up-silence-emacs))
+
 ;; --- Projectile ---
 (use-package projectile
     :custom
@@ -397,8 +403,7 @@
   :config
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
-  (setq ivy-use-selectable-prompt t)
-  (setq enable-recursive-minibuffers t))
+  (setq ivy-use-selectable-prompt t))
 
 (use-package all-the-icons-ivy-rich
   :init (all-the-icons-ivy-rich-mode 1))
