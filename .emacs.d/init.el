@@ -471,6 +471,10 @@
 ;; --- Company mode ---
 (use-package company
   :init (add-hook 'after-init-hook 'global-company-mode)
+  :bind (:map company-active-map
+         ("<tab>" . company-complete-selection))
+        (:map lsp-mode-map
+         ("<tab>" . company-indent-or-complete-common))
   :config
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 1))

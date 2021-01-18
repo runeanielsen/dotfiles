@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: namespace-class
+# key: nsi
+# --
+namespace $1
+{
+    public interface $2
+    {
+        $0
+    }
+}
