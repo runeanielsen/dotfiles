@@ -116,6 +116,11 @@
  (when noninteractive
   (shut-up-silence-emacs)))
 
+;; --- yasnippet ---
+(use-package yasnippet
+  :config
+  (yas-global-mode 1))
+
 ;; --- Projectile ---
 (use-package projectile
     :custom
