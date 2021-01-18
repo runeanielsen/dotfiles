@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: namespace-class
+# key: nsc
+# --
+namespace $1
+{
+    public class $2
+    {
+        $0
+    }
+}

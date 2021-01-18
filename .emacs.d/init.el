@@ -119,6 +119,9 @@
 ;; --- yasnippet ---
 (use-package yasnippet
   :config
+  (global-set-key (kbd "<C-tab>") 'yas-expand)
+  (setq yas-snippet-dirs
+        '("~/.emacs.d/snippets"))
   (yas-global-mode 1))
 
 ;; --- Projectile ---
@@ -465,7 +468,7 @@
 
 (use-package tree-sitter-langs)
 
-;; Company mode is a standard completion package that works well with lsp-mode.
+;; --- Company mode ---
 (use-package company
   :init (add-hook 'after-init-hook 'global-company-mode)
   :config
