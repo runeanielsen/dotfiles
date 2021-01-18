@@ -111,10 +111,10 @@
   (global-disable-mouse-mode))
 
 ;; --- shut up ---
-(use-package shut-up)
-
-(when noninteractive
-  (shut-up-silence-emacs))
+(use-package shut-up
+  :config
+ (when noninteractive
+  (shut-up-silence-emacs)))
 
 ;; --- Projectile ---
 (use-package projectile
