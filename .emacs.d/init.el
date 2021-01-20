@@ -213,8 +213,6 @@
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  ;; Enable flashing mode-line on errors
-  (doom-themes-visual-bell-config)
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
@@ -471,10 +469,6 @@
 ;; --- Company mode ---
 (use-package company
   :init (add-hook 'after-init-hook 'global-company-mode)
-  :bind (:map company-active-map
-         ("<tab>" . company-complete-selection))
-        (:map lsp-mode-map
-         ("<tab>" . company-indent-or-complete-common))
   :config
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 1))
