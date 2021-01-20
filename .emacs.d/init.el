@@ -20,7 +20,7 @@
 (setq use-package-always-ensure t)
 
 ;; Font
-(set-face-attribute 'default nil :font "Fira Code" :height 116)
+(set-face-attribute 'default nil :font "Fira Code" :height 120)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
