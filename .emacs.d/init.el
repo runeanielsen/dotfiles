@@ -521,6 +521,9 @@
   :config
   (add-hook 'go-mode-hook #'lsp-go-install-save-hooks))
 
+;; --- protobuf ---
+(use-package protobuf-mode)
+
 ;; --- json mode ---
 (use-package json-mode)
 
