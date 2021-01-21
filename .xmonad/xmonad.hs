@@ -80,6 +80,10 @@ myKeys =
     -- Kill xmobar 
   , ("M-u", spawn "killall xmobar trayer")
 
+
+    -- Pomodoro
+  , ("M-n", spawn "pomodoro start")
+
     -- Multimedia keys
   , ("M-,", spawn "cmus-remote -r")
   , ("M-.", spawn "cmus-remote -n")
