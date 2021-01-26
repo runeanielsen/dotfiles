@@ -35,4 +35,4 @@ alias scf='~/.config/scripts/snake-case-files.sh'
 alias task='~/.config/scripts/task'
 
 alias xhome='xrandr --output DP1 --mode 2560x1440 --rate 144 --output eDP1 --off'
-alias xwork='xrandr --output DP1 --mode 3440x1440 --output eDP1 --off'
+alias xwork='xrandr --output HDMI1 --mode 3440x1440 --output eDP1 --off'
