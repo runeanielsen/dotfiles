@@ -646,7 +646,19 @@
   (add-hook 'markdown-mode-hook 'fp/markdown-mode-hook))
 
 ;; --- Org mode ---
-(use-package org)
+(defun fp/org-mode-setup ()
+  (org-indent-mode)
+  (variable-pitch-mode 1)
+  (visual-line-mode 1))
+
+(use-package org
+  :hook (org-mode . fp/org-mode-setup))
+
+(use-package org-bullets
+  :after org
+  :hook (org-mode . org-bullets-mode)
+  :custom
+  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
 ;; Make gc pause faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
