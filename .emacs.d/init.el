@@ -527,6 +527,11 @@
 ;; --- json mode ---
 (use-package json-mode)
 
+(add-hook 'json-mode-hook
+          (lambda ()
+            (make-local-variable 'js-indent-level)
+            (setq js-indent-level 2)))
+
 ;; --- csharp mode ---
 (defun lsp-csharp-install-save-hooks ()
   "LSP CSharp install save hooks."
