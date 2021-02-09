@@ -304,6 +304,8 @@
   (fp/leader-keys
    "w" '(:ignore t :which-key "window")
    "ww" '(other-window :which-key "other-window")
+   "wk" '(evil-window-right :which-key "right-window")
+   "wj" '(evil-window-left :which-key "left-window")
    "wn" '(fp/split-window-balanced :which-key "split-window-balanced")
    "ws" '(window-swap-states :which-key "window-swap-states")
    "wd" '(delete-window :which-key "delete-window"))
