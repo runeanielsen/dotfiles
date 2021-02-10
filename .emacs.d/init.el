@@ -103,10 +103,7 @@
 
   ;; Do not show scroll bar.
   (when (fboundp 'scroll-bar-mode)
-    (scroll-bar-mode -1))
-
-  ;; Highlight line on point.
-  (global-hl-line-mode t))
+    (scroll-bar-mode -1)))
 
 ;; --- No littering ---
 (use-package no-littering
@@ -675,6 +672,14 @@
   :hook (org-mode . org-bullets-mode)
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+
+(defun efs/org-mode-visual-fill ()
+  (setq visual-fill-column-width 100
+        visual-fill-column-center-text t)
+  (visual-fill-column-mode 1))
+
+(use-package visual-fill-column
+  :hook (org-mode . efs/org-mode-visual-fill))
 
 ;; Make gc pause faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
