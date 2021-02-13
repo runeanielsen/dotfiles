@@ -224,6 +224,11 @@
 
 (use-package hc-zenburn-theme)
 
+;; --- Theme Magic Pywal ---
+(use-package theme-magic
+  :config
+  (theme-magic-export-theme-mode))
+
 ;; --- Set theme based on time ---
 (defun set-theme-based-on-time (hour-to-go-dark-mode light-theme dark-theme)
   (if (<= (nth 3 (decode-time (seconds-to-time (current-time)))) hour-to-go-dark-mode)
@@ -232,11 +237,6 @@
 
 ;; Light doing the day, dark doing the afternoon/night
 (set-theme-based-on-time 17 'doom-flatwhite 'hc-zenburn)
-
-;; --- Theme Magic Pywal ---
-(use-package theme-magic
-  :config
-  (theme-magic-export-theme-mode))
 
 ;; --- Linum relative ---
 (use-package linum-relative
