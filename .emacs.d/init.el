@@ -222,9 +222,16 @@
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
-(use-package hc-zenburn-theme
-  :config
-  (load-theme 'hc-zenburn t))
+(use-package hc-zenburn-theme)
+
+;; --- Set theme based on time ---
+(defun set-theme-based-on-time (hour-to-go-dark-mode light-theme dark-theme)
+  (if (<= (nth 3 (decode-time (seconds-to-time (current-time)))) hour-to-go-dark-mode)
+      (load-theme light-theme t)
+    (load-theme dark-theme t)))
+
+;; Light doing the day, dark doing the afternoon/night
+(set-theme-based-on-time 17 'doom-flatwhite 'hc-zenburn)
 
 ;; --- Theme Magic Pywal ---
 (use-package theme-magic
