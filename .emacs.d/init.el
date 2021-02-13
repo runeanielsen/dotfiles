@@ -231,12 +231,12 @@
 
 ;; --- Set theme based on time ---
 (defun set-theme-based-on-time (hour-to-go-dark-mode light-theme dark-theme)
-  (if (<= (nth 3 (decode-time (seconds-to-time (current-time)))) hour-to-go-dark-mode)
+  (if (<= (nth 2 (decode-time (seconds-to-time (current-time)))) hour-to-go-dark-mode)
       (load-theme light-theme t)
     (load-theme dark-theme t)))
 
 ;; Light doing the day, dark doing the afternoon/night
-(set-theme-based-on-time 17 'doom-flatwhite 'hc-zenburn)
+(set-theme-based-on-time 16 'doom-flatwhite 'hc-zenburn)
 
 ;; --- Linum relative ---
 (use-package linum-relative
