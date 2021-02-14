@@ -29,7 +29,7 @@
   (auto-package-update-at-time "09:00"))
 
 ;; Font
-(set-face-attribute 'default nil :font "Fira Code" :height 120)
+(set-face-attribute 'default nil :font "Fira Code" :height 115)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -213,21 +213,13 @@
   (set-face-attribute 'mode-line nil :family "Fira Code" :height 85)
   (set-face-attribute 'mode-line-inactive nil :family "Fira Code" :height 85))
 
-;; --- doom-themes ---
-(use-package doom-themes
-  :config
-  ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config))
-
-(use-package hc-zenburn-theme)
-
 ;; --- Theme Magic Pywal ---
 (use-package theme-magic
   :config
   (theme-magic-export-theme-mode))
+
+;; --- HC zenburn theme ---
+(use-package hc-zenburn-theme)
 
 ;; --- Set theme based on time ---
 (defun set-theme-based-on-time (hour-to-go-dark-mode light-theme dark-theme)
@@ -260,6 +252,11 @@
 (defun fp/split-window-balanced ()
   (interactive)
   (split-window-right)
+  (balance-windows))
+
+(defun fp/delete-window-balanced ()
+  (interactive)
+  (delete-window)
   (balance-windows))
 
 ;; --- General ---
@@ -321,7 +318,7 @@
    "wj" '(evil-window-left :which-key "left-window")
    "wn" '(fp/split-window-balanced :which-key "split-window-balanced")
    "ws" '(window-swap-states :which-key "window-swap-states")
-   "wd" '(delete-window :which-key "delete-window"))
+   "wd" '(fp/delete-window-balanced :which-key "delete-window"))
 
   (fp/leader-keys
    "o" '(:ignore t :which-key "open")
@@ -512,6 +509,7 @@
   (setq lsp-keymap-prefix "C-c l")
   :config
   (setq lsp-enable-links nil)
+  (setq lsp-log-io nil)
   (setq lsp-headerline-breadcrumb-enable nil))
 
 (use-package lsp-ui
