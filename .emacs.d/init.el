@@ -529,12 +529,10 @@
 (use-package protobuf-mode)
 
 ;; --- json mode ---
-(use-package json-mode)
-
-(add-hook 'json-mode-hook
-          (lambda ()
-            (make-local-variable 'js-indent-level)
-            (setq js-indent-level 2)))
+(use-package json-mode
+  :hook (json-mode . (lambda ()
+                       (make-local-variable 'js-indent-level)
+                       (setq js-indent-level 2))))
 
 ;; --- csharp mode ---
 (defun lsp-csharp-install-save-hooks ()
@@ -542,9 +540,8 @@
   (add-hook 'before-save-hook #'lsp-format-buffer t t))
 
 (use-package csharp-mode
-  :hook (csharp-mode . lsp-deferred)
-  :config
-  (add-hook 'csharp-mode-hook #'lsp-csharp-install-save-hooks))
+  :hook ((csharp-mode . lsp-deferred)
+         (csharp-mode . lsp-csharp-install-save-hooks)))
 
 ;; --- python-ms ---
 (use-package python-mode
