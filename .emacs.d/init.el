@@ -211,7 +211,7 @@
     (load-theme dark-theme t)))
 
 ;; Light doing the day, dark doing the afternoon/night
-;;(set-theme-based-on-time 16 'adwaita 'hc-zenburn)
+(set-theme-based-on-time 16 'adwaita 'hc-zenburn)
 
 ;; --- Linum relative ---
 (use-package linum-relative
