@@ -104,8 +104,7 @@
 
 ;; --- Disable mouse ---
 (use-package disable-mouse
-  :config
-  (global-disable-mouse-mode))
+  :init (global-disable-mouse-mode))
 
 ;; --- shut up ---
 (use-package shut-up
@@ -123,7 +122,7 @@
 
 ;; --- Projectile ---
 (use-package projectile
-  :defer
+  :defer t
   :custom
   (projectile-completion-system 'ivy)
   (projectile-enable-caching nil)
@@ -148,21 +147,11 @@
         persp-auto-resume-time -1) ; Don't auto-load on startup
   (add-hook 'window-setup-hook #'(lambda () (persp-mode 1))))
 
-(use-package persp-mode-projectile-bridge)
-
-(add-hook 'persp-mode-hook #'(lambda ()
-                               (persp-mode-projectile-bridge-mode 1)))
-
-(with-eval-after-load "persp-mode-projectile-bridge-autoloads"
-  (add-hook 'persp-mode-projectile-bridge-mode-hook
-            #'(lambda ()
-                (if persp-mode-projectile-bridge-mode
-                    (persp-mode-projectile-bridge-find-perspectives-for-all-buffers)
-                  (persp-mode-projectile-bridge-kill-perspectives))))
-  (add-hook 'after-init-hook
-            #'(lambda ()
-                (persp-mode-projectile-bridge-mode 1))
-            t))
+(use-package persp-mode-projectile-bridge
+  :after (persp-mode projectile)
+  :config
+  (add-hook 'persp-mode-hook #'(lambda ()
+                                 (persp-mode-projectile-bridge-mode 1))))
 
 ;; --- dashboard ---
 (use-package dashboard
@@ -177,6 +166,7 @@
 
 ;; --- Helpful ---
 (use-package helpful
+  :commands (helpful-callable helpful-variable helpful-command helpful-key)
   :custom
   (counsel-describe-function-function #'helpful-callable)
   (counsel-describe-variable-function #'helpful-variable)
@@ -221,13 +211,12 @@
     (load-theme dark-theme t)))
 
 ;; Light doing the day, dark doing the afternoon/night
-(set-theme-based-on-time 16 'adwaita 'hc-zenburn)
+;;(set-theme-based-on-time 16 'adwaita 'hc-zenburn)
 
 ;; --- Linum relative ---
 (use-package linum-relative
-  :config
-  (setq linum-relative-backend 'display-line-numbers-mode)
-  (linum-relative-on))
+  :custom (linum-relative-backend 'display-line-numbers-mode)
+  :config (linum-relative-on))
 
 (dolist (mode '(org-mode-hook
                 term-mode-hook
@@ -358,7 +347,7 @@
 
 ;; --- Hydra ---
 (use-package hydra
-  :defer)
+  :defer t)
 
 (defhydra hydra-text-scale (:timeout 4)
   "scale text"
@@ -413,27 +402,30 @@
 
 ;; --- Ivy ---
 (use-package ivy
+  :diminish
+  :custom ((ivy-use-virtual-buffers t)
+           (ivy-use-selectable-prompt t))
   :config
-  (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-use-selectable-prompt t))
+  (ivy-mode 1))
 
 (use-package all-the-icons-ivy-rich
-  :init (all-the-icons-ivy-rich-mode 1))
+  :after ivy
+  :config (all-the-icons-ivy-rich-mode 1))
 
 (use-package ivy-rich
+  :after ivy
   :config
   (ivy-rich-mode 1)
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
 ;; --- Magit ---
 (use-package magit
+  :defer t
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
-(use-package magit-todos)
-
 (use-package forge
+  :defer t
   :config
   (ghub-request "GET" "/user" nil
                 :forge 'github
@@ -444,7 +436,8 @@
 ;; --- commmon lisp ---
 (defvar inferior-lisp-program "sbcl")
 
-(use-package sly)
+(use-package sly
+  :commands (sly))
 
 ;; --- Rainbow delimiters ---
 (use-package rainbow-delimiters
@@ -463,8 +456,6 @@
 
 ;; --- tree-sitter ---
 (use-package tree-sitter
-  :config
-  (global-tree-sitter-mode)
   :hook ((go-mode . tree-sitter-hl-mode)
          (csharp-mode . tree-sitter-hl-mode)
          (js-mode . tree-sitter-hl-mode)
@@ -476,36 +467,34 @@
 ;; --- Company mode ---
 (use-package company
   :init (add-hook 'after-init-hook 'global-company-mode)
-  :config
-  (setq company-idle-delay 0)
-  (setq company-minimum-prefix-length 1))
+  :custom ((company-idle-delay 0)
+           (company-minimum-prefix-lenght 1)))
 
 (use-package company-box
   :hook (company-mode . company-box-mode))
 
 ;; optional if you want which-key integration
 (use-package which-key
-    :config
-    (which-key-mode))
+  :defer 0
+  :diminish which-key-mode
+  :custom (which-key-idle-delay 1)
+  :config (which-key-mode))
 
 ;; --- Flycheck ---
 (use-package flycheck
-  :defer t
   :hook (lsp-mode . flycheck-mode)
-  :config
   ; Hack because csharp lsp mode often bugs out
-  (setq flycheck-checker-error-threshold 10000))
+  :custom (flycheck-checker-error-threshold 10000))
 
 ;; --- lsp mode ---
 (use-package lsp-mode
   :hook (lsp-mode . lsp-enable-which-key-integration)
+  :custom ((lsp-enable-links nil)
+           (lsp-log-io nil)
+           (lsp-headerline-breadcrumb-enable nil))
   :commands (lsp lsp-deferred)
   :init
-  (setq lsp-keymap-prefix "C-c l")
-  :config
-  (setq lsp-enable-links nil)
-  (setq lsp-log-io nil)
-  (setq lsp-headerline-breadcrumb-enable nil))
+  (setq lsp-keymap-prefix "C-c l"))
 
 (use-package lsp-ui
   :commands lsp-ui-mode
@@ -527,7 +516,8 @@
          (go-mode . lsp-go-install-save-hooks)))
 
 ;; --- protobuf ---
-(use-package protobuf-mode)
+(use-package protobuf-mode
+  :mode "\\.proto\\'")
 
 ;; --- json mode ---
 (use-package json-mode
@@ -546,12 +536,10 @@
 
 ;; --- python-ms ---
 (use-package python-mode
-  :custom
-  (python-shell-interpreter "python3"))
+  :custom (python-shell-interpreter "python3"))
 
 (use-package lsp-python-ms
-  :init
-  (setq lsp-python-ms-auto-install-server t)
+  :init (setq lsp-python-ms-auto-install-server t)
   :hook (python-mode . (lambda ()
                           (require 'lsp-python-ms)
                           (lsp))))
@@ -607,7 +595,6 @@
 (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
 
 (use-package css-mode
-  :ensure nil
   :hook (css-mode . lsp-deferred)
   :config
   (setq css-indent-offset 2))
@@ -631,8 +618,8 @@
          (js-mode . emmet-mode)
          (web-mode . emmet-mode)
          (css-mode . emmet-mode))
-  :config
-  (setq emmet-expand-jsx-className? t))
+  :custom
+  (emmet-expand-jsx-className? t))
 
 ;; --- markdown ---
 (defun fp/set-markdown-header-font-sizes ()
