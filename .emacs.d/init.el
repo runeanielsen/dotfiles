@@ -181,6 +181,7 @@
 
 ;; --- vterm ---
 (use-package vterm
+  :commands (projectile-run-vterm vterm)
   :config
   (setq vterm-shell "zsh"))
 
@@ -420,12 +421,12 @@
 
 ;; --- Magit ---
 (use-package magit
-  :defer t
+  :commands magit-status
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
 (use-package forge
-  :defer t
+  :after magit
   :config
   (ghub-request "GET" "/user" nil
                 :forge 'github
@@ -497,9 +498,8 @@
   (setq lsp-keymap-prefix "C-c l"))
 
 (use-package lsp-ui
-  :commands lsp-ui-mode
-  :config
-  (setq lsp-ui-sideline-show-code-actions nil))
+  :hook (lsp-mode . lsp-ui-mode)
+  :custom (lsp-ui-sideline-show-code-actions nil))
 
 ;; lsp-ivy
 (use-package lsp-ivy
