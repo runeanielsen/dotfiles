@@ -110,8 +110,8 @@
 ;; --- shut up ---
 (use-package shut-up
   :config
- (when noninteractive
-  (shut-up-silence-emacs)))
+  (when noninteractive
+    (shut-up-silence-emacs)))
 
 ;; --- yasnippet ---
 (use-package yasnippet
@@ -123,16 +123,18 @@
 
 ;; --- Projectile ---
 (use-package projectile
-    :custom
-    (projectile-completion-system 'ivy)
-    (projectile-enable-caching nil)
-    (projectile-indexing-method 'alien)
-    (projectile-track-known-projects-automatically nil)
-    :config
-    (projectile-mode +1))
+  :defer
+  :custom
+  (projectile-completion-system 'ivy)
+  (projectile-enable-caching nil)
+  (projectile-indexing-method 'alien)
+  (projectile-track-known-projects-automatically nil)
+  :config
+  (projectile-mode +1))
 
 ;; --- Persp-mode ---
-(use-package persp-mode)
+(use-package persp-mode
+  :after projectile)
 
 (with-eval-after-load "persp-mode-autoloads"
   (setq persp-autokill-buffer-on-remove 'kill-weak
@@ -194,13 +196,13 @@
 
 ;; --- Modeline ---
 (use-package doom-modeline
-  :hook (after-init . doom-modeline-mode)
+  :init (doom-modeline-mode 1)
+  :custom ((doom-modeline-persp-name nil)
+           (doom-modeline-height 24)
+           (doom-modeline-buffer-file-name-style 'file-name)
+           (doom-modeline-buffer-encoding nil)
+           (doom-modeline-major-mode-icon nil))
   :config
-  (setq doom-modeline-persp-name nil)
-  (setq doom-modeline-height 24)
-  (setq doom-modeline-buffer-file-name-style 'file-name)
-  (setq doom-modeline-buffer-encoding nil)
-  (setq doom-modeline-major-mode-icon nil)
   (set-face-attribute 'mode-line nil :family "Fira Code" :height 85)
   (set-face-attribute 'mode-line-inactive nil :family "Fira Code" :height 85))
 
@@ -355,7 +357,8 @@
   (evil-collection-init))
 
 ;; --- Hydra ---
-(use-package hydra)
+(use-package hydra
+  :defer)
 
 (defhydra hydra-text-scale (:timeout 4)
   "scale text"
@@ -392,7 +395,8 @@
     "f" 'dired-create-empty-file
     "F" 'dired-create-directory))
 
-(use-package dired-single)
+(use-package dired-single
+  :after dired)
 
 (use-package all-the-icons-dired
   :hook (dired-mode . all-the-icons-dired-mode))
@@ -513,17 +517,14 @@
   :commands lsp-ivy-workspace-symbol)
 
 ;; --- go mode ---
-;; Set up before-save hooks to format buffer and add/delete imports.
-;; Make sure you don't have other gofmt/goimports hooks enabled.
 (defun lsp-go-install-save-hooks ()
   "LSP Go install save hooks."
   (add-hook 'before-save-hook #'lsp-format-buffer t t)
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
 
 (use-package go-mode
-  :hook (go-mode . lsp)
-  :config
-  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks))
+  :hook ((go-mode . lsp-deferred)
+         (go-mode . lsp-go-install-save-hooks)))
 
 ;; --- protobuf ---
 (use-package protobuf-mode)
