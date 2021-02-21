@@ -206,13 +206,14 @@
 (use-package hc-zenburn-theme)
 
 ;; --- Set theme based on time ---
-(defun set-theme-based-on-time (hour-to-go-dark-mode light-theme dark-theme)
-  (if (<= (nth 2 (decode-time (seconds-to-time (current-time)))) hour-to-go-dark-mode)
-      (load-theme light-theme t)
-    (load-theme dark-theme t)))
+(defun set-theme-based-on-time (hour-to-go-dark-mode hour-to-go-light-mode light-theme dark-theme)
+  (let ((hour (nth 2 (decode-time (seconds-to-time (current-time))))))
+        (if (and (<= hour hour-to-go-dark-mode) (>= hour hour-to-go-light-mode))
+            (load-theme light-theme t)
+          (load-theme dark-theme t))))
 
 ;; Light doing the day, dark doing the afternoon/night
-(set-theme-based-on-time 16 'adwaita 'hc-zenburn)
+(set-theme-based-on-time 16 8 'adwaita 'hc-zenburn)
 
 ;; --- Linum relative ---
 (use-package linum-relative
