@@ -518,7 +518,7 @@
 
 ;; --- elixir ---
 (use-package elixir-mode
-  :mode "\\.exs\\'")
+  :mode "\\.exs\\'" "\\.ex\\'")
 
 (use-package alchemist
   :hook (elixir-mode . alchemist-mode)
@@ -690,7 +690,8 @@
   (visual-line-mode 1))
 
 (use-package org
-  :hook (org-mode . fp/org-mode-setup)
+  :hook ((org-mode . fp/org-mode-setup)
+         (org-mode . flyspell-mode))
   :config
   (fp/org-font-setup))
 
