@@ -516,6 +516,22 @@
   :hook ((go-mode . lsp-deferred)
          (go-mode . lsp-go-install-save-hooks)))
 
+;; --- elixir ---
+(use-package elixir-mode
+  :mode "\\.exs\\'")
+
+(use-package alchemist
+  :hook (elixir-mode . alchemist-mode)
+  :config
+  (set-lookup-handlers! 'elixir-mode
+    :definition #'alchemist-goto-definition-at-point
+    :documentation #'alchemist-help-search-at-point)
+  (set-eval-handler! 'elixir-mode #'alchemist-eval-region)
+  (set-repl-handler! 'elixir-mode #'alchemist-iex-project-run)
+  (setq alchemist-mix-env "dev")
+  (setq alchemist-hooks-compile-on-save t)
+  (map! :map elixir-mode-map :nv "m" alchemist-mode-keymap))
+
 ;; --- protobuf ---
 (use-package protobuf-mode
   :mode "\\.proto\\'")
