@@ -484,7 +484,8 @@
 
 ;; --- Flycheck ---
 (use-package flycheck
-  :hook (lsp-mode . flycheck-mode)
+  :hook ((lsp-mode . flycheck-mode)
+         (elixir-mode . flycheck-mode))
   ; Hack because csharp lsp mode often bugs out
   :custom (flycheck-checker-error-threshold 10000))
 
@@ -517,20 +518,25 @@
          (go-mode . lsp-go-install-save-hooks)))
 
 ;; --- elixir ---
+(defun elixir-install-save-hooks ()
+  (add-hook 'before-save-hook #'elixir-format))
+
 (use-package elixir-mode
-  :mode "\\.exs\\'" "\\.ex\\'")
+  :mode "\\.exs\\'" "\\.ex\\'"
+  :hook (elixir-mode . elixir-install-save-hooks))
 
 (use-package alchemist
   :hook (elixir-mode . alchemist-mode)
   :config
-  (set-lookup-handlers! 'elixir-mode
-    :definition #'alchemist-goto-definition-at-point
-    :documentation #'alchemist-help-search-at-point)
-  (set-eval-handler! 'elixir-mode #'alchemist-eval-region)
-  (set-repl-handler! 'elixir-mode #'alchemist-iex-project-run)
   (setq alchemist-mix-env "dev")
-  (setq alchemist-hooks-compile-on-save t)
-  (map! :map elixir-mode-map :nv "m" alchemist-mode-keymap))
+  (setq alchemist-hooks-compile-on-save t))
+
+(use-package mix
+  :hook (elixir-mode . mix-minor-mode))
+
+(use-package flycheck-credo
+  :after flycheck-mode
+  :init (flycheck-credo-setup))
 
 ;; --- protobuf ---
 (use-package protobuf-mode
