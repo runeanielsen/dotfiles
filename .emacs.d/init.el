@@ -538,6 +538,9 @@
   :after flycheck-mode
   :init (flycheck-credo-setup))
 
+;; --- clojure ---
+(use-package cider)
+
 ;; --- protobuf ---
 (use-package protobuf-mode
   :mode "\\.proto\\'")
