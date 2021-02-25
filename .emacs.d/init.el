@@ -539,7 +539,11 @@
   :init (flycheck-credo-setup))
 
 ;; --- clojure ---
-(use-package cider)
+(defun clojure-install-save-hooks ()
+  (add-hook 'before-save-hook #'cider-format-buffer))
+
+(use-package cider
+  :hook(clojure-mode . clojure-install-save-hooks))
 
 ;; --- protobuf ---
 (use-package protobuf-mode
