@@ -525,12 +525,6 @@
   :mode "\\.exs\\'" "\\.ex\\'"
   :hook (elixir-mode . elixir-install-save-hooks))
 
-(use-package alchemist
-  :hook (elixir-mode . alchemist-mode)
-  :config
-  (setq alchemist-mix-env "dev")
-  (setq alchemist-hooks-compile-on-save t))
-
 (use-package mix
   :hook (elixir-mode . mix-minor-mode))
 
