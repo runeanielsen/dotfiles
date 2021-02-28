@@ -82,6 +82,15 @@
 
 ;; display line numbers
 (global-display-line-numbers-mode)
+(setq display-line-numbers-type 'relative)
+
+(dolist (mode '(org-mode-hook
+                term-mode-hook
+                vterm-mode-hook
+                shell-mode-hook
+                sly-mrepl-mode-hook
+                eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; --- Disable unnecessary UI elements ---
 (progn
@@ -216,20 +225,7 @@
           (load-theme dark-theme t))))
 
 ;; Light doing the day, dark doing the afternoon/night
-(set-theme-based-on-time 16 8 'spacemacs-light 'hc-zenburn)
-
-;; --- Linum relative ---
-(use-package linum-relative
-  :custom (linum-relative-backend 'display-line-numbers-mode)
-  :config (linum-relative-on))
-
-(dolist (mode '(org-mode-hook
-                term-mode-hook
-                vterm-mode-hook
-                shell-mode-hook
-                sly-mrepl-mode-hook
-                eshell-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+(set-theme-based-on-time 17 8 'spacemacs-light 'hc-zenburn)
 
 ;; --- automatically clean whitespace ---
 (use-package ws-butler
