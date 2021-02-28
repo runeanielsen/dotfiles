@@ -211,8 +211,14 @@
   :config
   (theme-magic-export-theme-mode))
 
-;; --- HC zenburn theme ---
-(use-package hc-zenburn-theme)
+;; --- themes ---
+(use-package hc-zenburn-theme
+  :defer t)
+(use-package spacemacs-theme
+  :defer t
+  :init
+  (setq spacemacs-theme-org-agenda-height nil)
+  (setq spacemacs-theme-org-height nil))
 
 ;; --- Set theme based on time ---
 (defun set-theme-based-on-time (hour-to-go-dark-mode hour-to-go-light-mode light-theme dark-theme)
@@ -222,7 +228,7 @@
           (load-theme dark-theme t))))
 
 ;; Light doing the day, dark doing the afternoon/night
-(set-theme-based-on-time 17 8 'leuven 'hc-zenburn)
+(set-theme-based-on-time 17 8 'spacemacs-light 'hc-zenburn)
 
 ;; --- automatically clean whitespace ---
 (use-package ws-butler
@@ -336,13 +342,6 @@
             evil-visual-state-map
             evil-insert-state-map)))
 
-(use-package evil-collection
-  :after evil
-  :custom
-  (evil-collection-outline-bind-tab-p nil)
-  :config
-  (evil-collection-init))
-
 ;; --- Hydra ---
 (use-package hydra
   :defer t)
@@ -376,7 +375,7 @@
   :custom ((dired-listing-switches "-agho --group-directories-first"))
   :config
   (add-hook 'dired-mode-hook #'quiet-auto-revert t nil)
-  (evil-collection-define-key 'normal 'dired-mode-map
+  (evil-define-key 'normal 'dired-mode-map
     "h" 'dired-single-up-directory
     "l" 'dired-single-buffer
     "f" 'dired-create-empty-file
