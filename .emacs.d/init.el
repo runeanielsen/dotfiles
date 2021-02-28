@@ -202,6 +202,9 @@
   :config
   (theme-magic-export-theme-mode))
 
+;; --- Tao theme ---
+(use-package spacemacs-theme)
+
 ;; --- HC zenburn theme ---
 (use-package hc-zenburn-theme)
 
@@ -213,7 +216,7 @@
           (load-theme dark-theme t))))
 
 ;; Light doing the day, dark doing the afternoon/night
-(set-theme-based-on-time 16 8 'adwaita 'hc-zenburn)
+(set-theme-based-on-time 16 8 'spacemacs-light 'hc-zenburn)
 
 ;; --- Linum relative ---
 (use-package linum-relative
@@ -718,3 +721,4 @@
 
 ;; Make gc pause faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
+(put 'upcase-region 'disabled nil)
