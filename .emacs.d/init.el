@@ -211,9 +211,6 @@
   :config
   (theme-magic-export-theme-mode))
 
-;; --- Spacemacs theme ---
-(use-package spacemacs-theme)
-
 ;; --- HC zenburn theme ---
 (use-package hc-zenburn-theme)
 
@@ -225,7 +222,7 @@
           (load-theme dark-theme t))))
 
 ;; Light doing the day, dark doing the afternoon/night
-(set-theme-based-on-time 17 8 'spacemacs-light 'hc-zenburn)
+(set-theme-based-on-time 17 8 'leuven 'hc-zenburn)
 
 ;; --- automatically clean whitespace ---
 (use-package ws-butler
