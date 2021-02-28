@@ -20,7 +20,7 @@
 (setq use-package-always-ensure t)
 
 ;; Font
-(set-face-attribute 'default nil :font "Fira Code" :height 120)
+(set-face-attribute 'default nil :font "Fira Code" :height 110)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -202,7 +202,7 @@
   :config
   (theme-magic-export-theme-mode))
 
-;; --- Tao theme ---
+;; --- Spacemacs theme ---
 (use-package spacemacs-theme)
 
 ;; --- HC zenburn theme ---
