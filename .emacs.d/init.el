@@ -274,8 +274,6 @@
    "ba" '(persp-add-buffer :which-key "persp-add-buffer")
    "bd" '(bury-buffer :which-key "bury-current-buffer")
    "bk" '(persp-kill-buffer :which-key "kill-current-buffer")
-   "bs" '(evil-write :which-key "write-buffer")
-   "bS" '(evil-write-all :which-key "write-buffer-all")
    "bl" '(evil-switch-to-windows-last-buffer :which-key "switch-last-buffer"))
 
   (fp/leader-keys
@@ -325,6 +323,8 @@
    "ff" '(counsel-find-file :which-key "find-file")
    "fc" '(dired-create-empty-file :which-key "create-file")
    "fd" '(dired-create-directory :which-key "create-directory")
+   "fs" '(evil-write :which-key "write")
+   "fS" '(evil-write-all :which-key "write-all")
    "ft" '(counsel-load-theme :which-key "load-theme")))
 
 ;; --- Evil mode ---
