@@ -342,6 +342,13 @@
             evil-visual-state-map
             evil-insert-state-map)))
 
+(use-package evil-collection
+  :after evil
+  :custom
+  (evil-collection-outline-bind-tab-p nil)
+  :config
+  (evil-collection-init))
+
 ;; --- Hydra ---
 (use-package hydra
   :defer t)
@@ -375,7 +382,7 @@
   :custom ((dired-listing-switches "-agho --group-directories-first"))
   :config
   (add-hook 'dired-mode-hook #'quiet-auto-revert t nil)
-  (evil-define-key 'normal 'dired-mode-map
+  (evil-collection-define-key 'normal 'dired-mode-map
     "h" 'dired-single-up-directory
     "l" 'dired-single-buffer
     "f" 'dired-create-empty-file
