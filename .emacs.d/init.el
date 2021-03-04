@@ -538,8 +538,11 @@
 (defun clojure-install-save-hooks ()
   (add-hook 'before-save-hook #'cider-format-buffer))
 
+(use-package clojure-mode
+  :hook (clojure-mode . clojure-install-save-hooks))
+
 (use-package cider
-  :hook(clojure-mode . clojure-install-save-hooks))
+  :hook (clojure-mode . cider-mode))
 
 ;; --- protobuf ---
 (use-package protobuf-mode
