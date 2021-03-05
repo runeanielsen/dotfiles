@@ -138,7 +138,7 @@
   :defer t
   :custom
   (projectile-completion-system 'ivy)
-  (projectile-enable-caching t)
+  (projectile-enable-caching nil)
   (projectile-indexing-method 'alien)
   (projectile-track-known-projects-automatically nil)
   :config
