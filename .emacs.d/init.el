@@ -23,7 +23,7 @@
 (setq comp-async-report-warnings-errors nil)
 
 ;; Font
-(set-face-attribute 'default nil :font "Fira Code" :height 110)
+(set-face-attribute 'default nil :font "Fira Code" :height 120)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -137,7 +137,7 @@
   :defer t
   :custom
   (projectile-completion-system 'ivy)
-  (projectile-enable-caching nil)
+  (projectile-enable-caching t)
   (projectile-indexing-method 'alien)
   (projectile-track-known-projects-automatically nil)
   :config
