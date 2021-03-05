@@ -19,6 +19,9 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+;; Do now show comp warnings
+(setq comp-async-report-warnings-errors nil)
+
 ;; Font
 (set-face-attribute 'default nil :font "Fira Code" :height 110)
 
