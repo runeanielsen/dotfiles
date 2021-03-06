@@ -476,7 +476,8 @@
 (use-package company
   :init (add-hook 'after-init-hook 'global-company-mode)
   :custom ((company-idle-delay 0)
-           (company-minimum-prefix-lenght 1)))
+           (company-minimum-prefix-lenght 1))
+  :bind (("<C-tab>" . company-complete)))
 
 (use-package company-box
   :hook (company-mode . company-box-mode))
