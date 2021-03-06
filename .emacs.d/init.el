@@ -257,41 +257,41 @@
     :prefix "SPC")
 
   (fp/leader-keys
-   "TAB" '(:ignore t :which-key "persp")
-   "TAB TAB" '(persp-switch :which-key "persp-switch")
-   "TAB n" '(persp-add-new :which-key "persp-add-new")
-   "TAB h" '(persp-prev :which-key "persp-prev")
-   "TAB l" '(persp-next :which-key "persp-next"))
+    "TAB" '(:ignore t :which-key "persp")
+    "TAB TAB" '(persp-switch :which-key "persp-switch")
+    "TAB n" '(persp-add-new :which-key "persp-add-new")
+    "TAB h" '(persp-prev :which-key "persp-prev")
+    "TAB l" '(persp-next :which-key "persp-next"))
 
   (fp/leader-keys
-   "SPC" '(counsel-projectile-find-file :which-key "find-file"))
+    "SPC" '(counsel-projectile-find-file :which-key "find-file"))
 
   (fp/leader-keys
-   "d" '(:ignore t :which-key "dired")
-   "dd" '(dired-jump :which-key "dired-jump")
-   "dp" '(projectile-dired :which-key "dired-projectile"))
+    "d" '(:ignore t :which-key "dired")
+    "dd" '(dired-jump :which-key "dired-jump")
+    "dp" '(projectile-dired :which-key "dired-projectile"))
 
   (fp/leader-keys
-   "b" '(:ignore t :which-key "buffer")
-   "bb" '(persp-switch-to-buffer :which-key "switch-to-buffer-persp")
-   "bB" '(counsel-projectile-switch-to-buffer :which-key "switch-to-buffer-all")
-   "ba" '(persp-add-buffer :which-key "persp-add-buffer")
-   "bd" '(bury-buffer :which-key "bury-current-buffer")
-   "bk" '(persp-kill-buffer :which-key "kill-current-buffer")
-   "bl" '(evil-switch-to-windows-last-buffer :which-key "switch-last-buffer"))
+    "b" '(:ignore t :which-key "buffer")
+    "bb" '(persp-switch-to-buffer :which-key "switch-to-buffer-persp")
+    "bB" '(counsel-projectile-switch-to-buffer :which-key "switch-to-buffer-all")
+    "ba" '(persp-add-buffer :which-key "persp-add-buffer")
+    "bd" '(bury-buffer :which-key "bury-current-buffer")
+    "bk" '(persp-kill-buffer :which-key "kill-current-buffer")
+    "bl" '(evil-switch-to-windows-last-buffer :which-key "switch-last-buffer"))
 
   (fp/leader-keys
-   "g" '(:ignore t :which-key "git")
-   "gg" '(magit-status :which-key "magit-status"))
+    "g" '(:ignore t :which-key "git")
+    "gg" '(magit-status :which-key "magit-status"))
 
   (fp/leader-keys
-   "s" '(:ignore t :which-key "search")
-   "ss" '(swiper :which-key "swiper")
-   "sg" '(counsel-projectile-rg :which-key "ripgrep-projectile"))
+    "s" '(:ignore t :which-key "search")
+    "ss" '(swiper :which-key "swiper")
+    "sg" '(counsel-projectile-rg :which-key "ripgrep-projectile"))
 
   (fp/leader-keys
-   "c" '(:ignore t :which-key "code")
-   "cc" '(comment-or-uncomment-region :which-key "comment-or-uncomment-region"))
+    "c" '(:ignore t :which-key "code")
+    "cc" '(comment-or-uncomment-region :which-key "comment-or-uncomment-region"))
 
   (fp/leader-keys
     :states '(normal visual)
@@ -309,36 +309,36 @@
     "cR" '(lsp-workspace-restart :which-key "workspace-restart"))
 
   (fp/leader-keys
-   "w" '(:ignore t :which-key "window")
-   "ww" '(other-window :which-key "other-window")
-   "wk" '(evil-window-right :which-key "right-window")
-   "wj" '(evil-window-left :which-key "left-window")
-   "wn" '(fp/split-window-balanced :which-key "split-window-balanced")
-   "ws" '(window-swap-states :which-key "window-swap-states")
-   "wd" '(fp/delete-window-balanced :which-key "delete-window"))
+    "w" '(:ignore t :which-key "window")
+    "ww" '(other-window :which-key "other-window")
+    "wk" '(evil-window-right :which-key "right-window")
+    "wj" '(evil-window-left :which-key "left-window")
+    "wn" '(fp/split-window-balanced :which-key "split-window-balanced")
+    "ws" '(window-swap-states :which-key "window-swap-states")
+    "wd" '(fp/delete-window-balanced :which-key "delete-window"))
 
   (fp/leader-keys
-   "o" '(:ignore t :which-key "open")
-   "ot" '(projectile-run-vterm :which-key "vterm")
-   "oT" '(vterm :which-key "vterm"))
+    "o" '(:ignore t :which-key "open")
+    "ot" '(projectile-run-vterm :which-key "vterm")
+    "oT" '(vterm :which-key "vterm"))
 
   (fp/leader-keys
-   "p" '(:ignore t :which-key "projectile")
-   "pa" '(projectile-add-known-project :which-key "add-project")
-   "pd" '(projectile-remove-known-project :which-key "remove-project")
-   "pp" '(counsel-projectile-switch-project :which-key "switch-project")
-   "pi" '(projectile-invalidate-cache :which-key "invalidate-cache")
-   "pb" '(counsel-projectile-switch-to-buffer :which-key "switch-buffer")
-   "pk" '(persp-kill :which-key "kill-project"))
+    "p" '(:ignore t :which-key "projectile")
+    "pa" '(projectile-add-known-project :which-key "add-project")
+    "pd" '(projectile-remove-known-project :which-key "remove-project")
+    "pp" '(counsel-projectile-switch-project :which-key "switch-project")
+    "pi" '(projectile-invalidate-cache :which-key "invalidate-cache")
+    "pb" '(counsel-projectile-switch-to-buffer :which-key "switch-buffer")
+    "pk" '(persp-kill :which-key "kill-project"))
 
   (fp/leader-keys
-   "f"  '(:ignore t :which-key "files")
-   "ff" '(counsel-find-file :which-key "find-file")
-   "fc" '(dired-create-empty-file :which-key "create-file")
-   "fd" '(dired-create-directory :which-key "create-directory")
-   "fs" '(evil-write :which-key "write")
-   "fS" '(evil-write-all :which-key "write-all")
-   "ft" '(counsel-load-theme :which-key "load-theme")))
+    "f"  '(:ignore t :which-key "files")
+    "ff" '(counsel-find-file :which-key "find-file")
+    "fc" '(dired-create-empty-file :which-key "create-file")
+    "fd" '(dired-create-directory :which-key "create-directory")
+    "fs" '(evil-write :which-key "write")
+    "fS" '(evil-write-all :which-key "write-all")
+    "ft" '(counsel-load-theme :which-key "load-theme")))
 
 ;; --- Evil mode ---
 (use-package evil
