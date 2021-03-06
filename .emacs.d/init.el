@@ -291,13 +291,22 @@
 
   (fp/leader-keys
    "c" '(:ignore t :which-key "code")
-   "cr" '(lsp-rename :which-key "rename")
-   "cR" '(lsp-workspace-restart :which-key "workspace-restart")
-   "cc" '(comment-or-uncomment-region :which-key "comment-or-uncomment-region")
-   "ca" '(lsp-execute-code-action :which-key "code-action")
-   "ci" '(lsp-goto-implementation :which-key "goto-implementation")
-   "ct" '(lsp-goto-type-definition :which-key "goto-type-definition")
-   "co" '(lsp-organize-imports :which-key "organize-imports"))
+   "cc" '(comment-or-uncomment-region :which-key "comment-or-uncomment-region"))
+
+  (fp/leader-keys
+    :states '(normal visual)
+    :keymaps 'tide-mode-map
+    "cr" '(tide-rename-symbol :which-key "rename"))
+
+  (fp/leader-keys
+    :states '(normal visual)
+    :keymaps 'lsp-mode-map
+    "co" '(lsp-organize-imports :which-key "organize-imports")
+    "ct" '(lsp-goto-type-definition :which-key "goto-type-definition")
+    "ci" '(lsp-goto-implementation :which-key "goto-implementation")
+    "ca" '(lsp-execute-code-action :which-key "code-action")
+    "cr" '(lsp-rename :which-key "rename")
+    "cR" '(lsp-workspace-restart :which-key "workspace-restart"))
 
   (fp/leader-keys
    "w" '(:ignore t :which-key "window")
