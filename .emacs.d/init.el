@@ -296,7 +296,9 @@
   (fp/leader-keys
     :states '(normal visual)
     :keymaps 'tide-mode-map
-    "cr" '(tide-rename-symbol :which-key "rename"))
+    "ci" '(tide-goto-reference :which-key "go-to-reference")
+    "cr" '(tide-rename-symbol :which-key "rename")
+    "cR" '(tide-restart-server :which-key "restart-tide"))
 
   (fp/leader-keys
     :states '(normal visual)
