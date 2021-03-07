@@ -1,5 +1,18 @@
-;;; --- Garbage collection speedup ---
-(setq gc-cons-threshold (* 50 1000 1000))
+;; Set garbage collection threshold to 1GB.
+(setq gc-cons-threshold #x40000000)
+
+(defmacro k-time (&rest body)
+  "Measure and return the time it takes evaluating BODY."
+  `(let ((time (current-time)))
+     ,@body
+     (float-time (time-since time))))
+
+;; When idle for 60 run the GC no matter what.
+(defvar k-gc-timer
+  (run-with-idle-timer 60 t
+                       (lambda ()
+                         (message "Garbage Collector has run for %.06fsec"
+                                  (k-time (garbage-collect))))))
 
 ;;; --- Set up 'package' ---
 (require 'package)
@@ -736,7 +749,3 @@
   :hook (org-mode . org-bullets-mode)
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
-
-;; Make gc pause faster by decreasing the threshold.
-(setq gc-cons-threshold (* 2 1000 1000))
-(put 'upcase-region 'disabled nil)
