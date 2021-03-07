@@ -1,18 +1,5 @@
-;; Set garbage collection threshold to 1GB.
+;; Set garbage collection threshold to 1GB to speed up startup.
 (setq gc-cons-threshold #x40000000)
-
-(defmacro k-time (&rest body)
-  "Measure and return the time it takes evaluating BODY."
-  `(let ((time (current-time)))
-     ,@body
-     (float-time (time-since time))))
-
-;; When idle for 60 run the GC no matter what.
-(defvar k-gc-timer
-  (run-with-idle-timer 60 t
-                       (lambda ()
-                         (message "Garbage Collector has run for %.06fsec"
-                                  (k-time (garbage-collect))))))
 
 ;;; --- Set up 'package' ---
 (require 'package)
@@ -35,6 +22,11 @@
 ;; Native compilation
 (setq comp-async-report-warnings-errors nil)
 (setq package-native-compile t)
+
+;; gcmh
+(use-package gcmh
+  :config
+  (gcmh-mode 1))
 
 ;; Font
 (set-face-attribute 'default nil :font "Fira Code" :height 120)
