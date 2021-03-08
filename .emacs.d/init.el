@@ -307,6 +307,13 @@
 
   (fp/leader-keys
     :states '(normal visual)
+    :keymaps 'clojure-mode-map
+    "cd" '(cider-doc :which-key "cider-doc")
+    "cs" '(cider-jack-in :which-key "cider-jack-in")
+    "ce" '(cider-eval-last-sexp :which-key "cider-eval-last-sexp"))
+
+  (fp/leader-keys
+    :states '(normal visual)
     :keymaps 'lsp-mode-map
     "co" '(lsp-organize-imports :which-key "organize-imports")
     "ct" '(lsp-goto-type-definition :which-key "goto-type-definition")
@@ -557,7 +564,8 @@
 
 ;; --- clojure ---
 (defun clojure-install-save-hooks ()
-  (add-hook 'before-save-hook #'cider-format-buffer))
+  (add-hook 'before-save-hook #'cider-format-buffer)
+  (add-hook 'after-save-hook #'cider-load-buffer))
 
 (use-package clojure-mode
   :hook (clojure-mode . clojure-install-save-hooks))
