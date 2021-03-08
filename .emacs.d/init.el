@@ -564,8 +564,7 @@
 
 ;; --- clojure ---
 (defun clojure-install-save-hooks ()
-  (add-hook 'before-save-hook #'cider-format-buffer)
-  (add-hook 'after-save-hook #'cider-load-buffer))
+  (add-hook 'before-save-hook #'cider-format-buffer))
 
 (use-package clojure-mode
   :hook (clojure-mode . clojure-install-save-hooks))
