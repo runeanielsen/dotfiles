@@ -2,22 +2,26 @@
 (setq gc-cons-threshold #x40000000)
 
 ;;; --- Set up 'package' ---
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
+
+;; so package-list-packages includes them
 (require 'package)
-
-(setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                         ("org" . "https://orgmode.org/elpa/")
-                         ("elpa" . "https://elpa.gnu.org/packages/")))
-
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
-
-;; Initialize use-package on non-Linux platforms
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
-
-(require 'use-package)
-(setq use-package-always-ensure t)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
 
 ;; Native compilation
 (setq comp-async-report-warnings-errors nil)
@@ -405,7 +409,7 @@
   (setq-local auto-revert-verbose nil))
 
 (use-package dired
-  :ensure nil
+  :straight nil
   :custom ((dired-listing-switches "-agho --group-directories-first"))
   :config
   (add-hook 'dired-mode-hook #'quiet-auto-revert t nil)
