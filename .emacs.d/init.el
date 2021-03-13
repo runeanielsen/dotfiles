@@ -144,7 +144,6 @@
 
 ;; --- Projectile ---
 (use-package projectile
-  :defer t
   :custom
   (projectile-completion-system 'ivy)
   (projectile-enable-caching nil)
@@ -155,7 +154,7 @@
 
 ;; --- Persp-mode ---
 (use-package persp-mode
-  :after projectile)
+  :hook (projectile-mode . persp-mode))
 
 (with-eval-after-load "persp-mode-autoloads"
   (setq persp-autokill-buffer-on-remove 'kill-weak
@@ -478,11 +477,8 @@
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
-(use-package paredit)
-
 ;; --- Rainbow mode ---
 (use-package rainbow-mode
-  :defer t
   :hook (org-mode
          emacs-lisp-mode
          lisp-mode
