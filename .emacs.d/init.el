@@ -23,6 +23,7 @@
 
 ;; Native compilation
 (setq comp-async-report-warnings-errors nil)
+(setq package-native-compile t)
 
 ;; gcmh
 (use-package gcmh
@@ -599,10 +600,6 @@
                           (lsp))))
 
 ;; --- Tide ---
-(defun tide-install-save-hooks ()
-  "LSP Go install save hooks."
-  (tide-organize-imports))
-
 (defun setup-tide-mode ()
   "Setup Tide Mode."
   (interactive)
@@ -618,7 +615,6 @@
   (setq company-tooltip-align-annotations t)
   (add-hook 'js-mode-hook #'setup-tide-mode)
   (add-hook 'typescript-mode-hook #'setup-tide-mode)
-  (add-hook 'before-save-hook #'tide-install-save-hook)
   (flycheck-add-mode 'javascript-eslint 'js-mode)
   (setq flycheck-enabled-checkers (append flycheck-enabled-checkers '(javascript-eslint)))
   (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
