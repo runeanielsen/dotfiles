@@ -152,7 +152,10 @@
 
 ;; --- Persp-mode ---
 (use-package persp-mode
-  :hook (projectile-mode . persp-mode))
+  :hook (projectile-mode . persp-mode)
+  :config
+  (setq persp-auto-save-opt 0)
+  (setq persp-auto-resume-time -1))
 
 (with-eval-after-load "persp-mode-autoloads"
   (setq persp-autokill-buffer-on-remove 'kill-weak
