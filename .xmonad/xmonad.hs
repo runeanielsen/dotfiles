@@ -42,7 +42,7 @@ myStartupHook = do
   setWMName "LG3D"
 
 -- Layout
-myLayout = avoidStruts (smartBorders $ fullscreenFull $ tiled ||| Mirror tiled ||| noBorders Full)
+myLayout = avoidStruts (smartBorders $ fullscreenFull $ tiled ||| noBorders Full)
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
