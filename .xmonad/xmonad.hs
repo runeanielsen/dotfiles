@@ -72,17 +72,12 @@ myKeys =
     -- My applications
   , ("M-f", spawn "firefox")
   , ("M-e", spawn "emacs")
-  , ("M-v", spawn "freetube-bin")
   , ("M-s", spawn "~/.dmenu/dmenu-scrot.sh")
   , ("M-i", spawn "~/.dmenu/dmenu-passmenu.sh")
   , ("M-b", spawn "~/.dmenu/dmenu-books.sh")
 
     -- Kill xmobar 
   , ("M-u", spawn "killall xmobar trayer")
-
-
-    -- Pomodoro
-  , ("M-n", spawn "pomodoro start")
 
     -- Multimedia keys
   , ("M-,", spawn "cmus-remote -r")
