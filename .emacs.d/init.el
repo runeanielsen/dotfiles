@@ -175,7 +175,7 @@
 (use-package dashboard
   :config
   (dashboard-setup-startup-hook)
-  (setq dashboard-items '((agenda . 5)))
+  (setq dashboard-items nil)
   (setq dashboard-center-content t)
   (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
   (setq dashboard-startup-banner "~/.emacs.d/banner-text.txt")
