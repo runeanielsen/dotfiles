@@ -154,20 +154,16 @@
 (use-package persp-mode
   :hook (projectile-mode . persp-mode)
   :config
-  (setq persp-auto-save-opt 0)
-  (setq persp-auto-resume-time -1))
-
-(with-eval-after-load "persp-mode-autoloads"
   (setq persp-autokill-buffer-on-remove 'kill-weak
         persp-nil-hidden t
+        persp-auto-save-opt 0
         persp-add-buffer-on-find-file nil
         persp-switch-to-added-buffer nil
         persp-set-last-persp-for-new-frames nil
         persp-kill-foreign-buffer-behaviour 'kill
         persp-remove-buffers-from-nil-persp-behaviour nil
         persp-nil-name "dashboard"
-        persp-auto-resume-time -1) ; Don't auto-load on startup
-  (add-hook 'window-setup-hook #'(lambda () (persp-mode 1))))
+        persp-auto-resume-time -1))
 
 (use-package persp-mode-projectile-bridge
   :after (persp-mode projectile)
@@ -491,6 +487,7 @@
   :hook ((go-mode . tree-sitter-hl-mode)
          (csharp-mode . tree-sitter-hl-mode)
          (js-mode . tree-sitter-hl-mode)
+         (typescript-mode . tree-sitter-hl-mode)
          (python-mode . tree-sitter-hl-mode)
          (css-mode . tree-sitter-hl-mode)))
 
