@@ -310,6 +310,8 @@
     :keymaps 'clojure-mode-map
     "cd" '(cider-doc :which-key "cider-doc")
     "cs" '(cider-jack-in :which-key "cider-jack-in")
+    "cf" '(cider-format-buffer :which-key "cider-format-buffer")
+    "cf" '(cider-eval-buffer :which-key "cider-eval-buffer")
     "ce" '(cider-eval-last-sexp :which-key "cider-eval-last-sexp"))
 
   (fp/leader-keys
@@ -561,11 +563,7 @@
   :init (flycheck-credo-setup))
 
 ;; --- clojure ---
-(defun clojure-install-save-hooks ()
-  (add-hook 'before-save-hook #'cider-format-buffer))
-
-(use-package clojure-mode
-  :hook (clojure-mode . clojure-install-save-hooks))
+(use-package clojure-mode)
 
 (use-package cider
   :hook (clojure-mode . cider-mode))
