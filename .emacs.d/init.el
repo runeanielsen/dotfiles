@@ -254,6 +254,10 @@
   (delete-window)
   (balance-windows))
 
+(defun fp/open-init-el ()
+  (interactive)
+  (find-file "~/.emacs.d/init.el"))
+
 ;; --- General ---
 (use-package general
   :config
@@ -336,7 +340,8 @@
   (fp/leader-keys
     "o" '(:ignore t :which-key "open")
     "ot" '(projectile-run-vterm :which-key "vterm")
-    "oT" '(vterm :which-key "vterm"))
+    "oT" '(vterm :which-key "vterm")
+    "oe" '(fp/open-init-el :which-key "open-init.el"))
 
   (fp/leader-keys
     "p" '(:ignore t :which-key "projectile")
