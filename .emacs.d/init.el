@@ -315,7 +315,7 @@
     "cd" '(cider-doc :which-key "cider-doc")
     "cs" '(cider-jack-in :which-key "cider-jack-in")
     "cf" '(cider-format-buffer :which-key "cider-format-buffer")
-    "cf" '(cider-eval-buffer :which-key "cider-eval-buffer")
+    "cb" '(cider-eval-buffer :which-key "cider-eval-buffer")
     "ce" '(cider-eval-last-sexp :which-key "cider-eval-last-sexp"))
 
   (fp/leader-keys
