@@ -520,6 +520,7 @@
 ;; --- Flycheck ---
 (use-package flycheck
   :hook ((lsp-mode . flycheck-mode)
+         (clojure-mode . flycheck-mode)
          (elixir-mode . flycheck-mode))
   ; Hack because csharp lsp mode often bugs out
   :custom (flycheck-checker-error-threshold 10000))
@@ -568,7 +569,11 @@
   :init (flycheck-credo-setup))
 
 ;; --- clojure ---
-(use-package clojure-mode)
+(use-package flycheck-clj-kondo)
+
+(use-package clojure-mode
+  :config
+  (require 'flycheck-clj-kondo))
 
 (use-package cider
   :hook (clojure-mode . cider-mode))
@@ -748,3 +753,4 @@
   :hook (org-mode . org-bullets-mode)
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+(put 'upcase-region 'disabled nil)
