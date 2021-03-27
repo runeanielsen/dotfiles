@@ -229,15 +229,16 @@
   (setq spacemacs-theme-org-agenda-height nil)
   (setq spacemacs-theme-org-height nil))
 
-;; --- Set theme based on time ---
-(defun set-theme-based-on-time (hour-to-go-dark-mode hour-to-go-light-mode light-theme dark-theme)
-  (let ((hour (nth 2 (decode-time (seconds-to-time (current-time))))))
-        (if (and (<= hour hour-to-go-dark-mode) (>= hour hour-to-go-light-mode))
-            (load-theme light-theme t)
-          (load-theme dark-theme t))))
 
-;; Light doing the day, dark doing the afternoon/night
-(set-theme-based-on-time 17 8 'spacemacs-light 'hc-zenburn)
+;; --- Set theme based on time ---
+(use-package circadian
+  :ensure t
+  :config
+  (setq calendar-latitude 56.034962)
+  (setq calendar-longitude 9.931420)
+  (setq circadian-themes '((:sunrise . spacemacs-light)
+                           (:sunset  . hc-zenburn)))
+  (circadian-setup))
 
 ;; --- automatically clean whitespace ---
 (use-package ws-butler
