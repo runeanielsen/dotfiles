@@ -237,7 +237,6 @@
   (setq spacemacs-theme-org-agenda-height nil)
   (setq spacemacs-theme-org-height nil))
 
-
 ;; --- Set theme based on time ---
 (use-package circadian
   :ensure t
