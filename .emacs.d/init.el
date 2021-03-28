@@ -132,14 +132,6 @@
   (when noninteractive
     (shut-up-silence-emacs)))
 
-(use-package evil-motion-trainer
- :straight '(evil-motion-trainer :host github
-                         :repo "martinbaillie/evil-motion-trainer"
-                         :branch "master")
- :config
- (global-evil-motion-trainer-mode 1))
-
-
 ;; --- yasnippet ---
 (use-package yasnippet
   :config
