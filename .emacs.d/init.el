@@ -507,9 +507,6 @@
            (company-minimum-prefix-lenght 1))
   :bind (("<C-tab>" . company-complete)))
 
-(use-package company-box
-  :hook (company-mode . company-box-mode))
-
 ;; optional if you want which-key integration
 (use-package which-key
   :defer 0
