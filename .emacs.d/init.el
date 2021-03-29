@@ -607,6 +607,16 @@
                           (require 'lsp-python-ms)
                           (lsp))))
 
+;; --- elm ---
+(defun lsp-elm-install-save-hooks ()
+  "LSP CSharp install save hooks."
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+
+(use-package elm-mode
+  :hook ((elm-mode . lsp-elm-install-save-hooks)
+         (elm-mode . lsp-deferred)))
+
 ;; --- Tide ---
 (defun setup-tide-mode ()
   "Setup Tide Mode."
