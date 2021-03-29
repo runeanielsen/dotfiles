@@ -517,6 +517,11 @@
   :custom (which-key-idle-delay 1)
   :config (which-key-mode))
 
+;; --- smartparens ---
+(use-package smartparens
+  :config
+  (smartparens-global-mode t))
+
 ;; --- Flycheck ---
 (use-package flycheck
   :hook ((lsp-mode . flycheck-mode)
