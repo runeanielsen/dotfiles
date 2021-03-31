@@ -233,10 +233,8 @@
 (use-package circadian
   :ensure t
   :config
-  (setq calendar-latitude 56.034962)
-  (setq calendar-longitude 9.931420)
-  (setq circadian-themes '((:sunrise . spacemacs-light)
-                           (:sunset  . hc-zenburn)))
+  (setq circadian-themes '(("8:00" . spacemacs-light)
+                           ("17.00" . hc-zenburn)))
   (circadian-setup))
 
 ;; --- automatically clean whitespace ---
