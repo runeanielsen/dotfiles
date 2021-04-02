@@ -529,6 +529,9 @@
 
 ;; --- lsp mode ---
 (use-package lsp-mode
+  :straight '(evil-motion-trainer :host github
+                                  :repo "runeanielsen/lsp-mode"
+                                  :branch "master")
   :hook (lsp-mode . lsp-enable-which-key-integration)
   :custom ((lsp-enable-links nil)
            (lsp-log-io nil)
