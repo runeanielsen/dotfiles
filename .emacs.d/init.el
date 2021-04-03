@@ -65,9 +65,6 @@
  ;; Allow commands to be run on minibuffers.
  enable-recursive-minibuffers t)
 
-;; Electric pair
-(electric-pair-mode 1)
-
 ;; Change all yes/no questions to y/n type
 (fset 'yes-or-no-p 'y-or-n-p)
 
