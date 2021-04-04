@@ -611,7 +611,7 @@
 
 ;; --- elm ---
 (defun lsp-elm-install-save-hooks ()
-  "LSP CSharp install save hooks."
+  "LSP Elm install save hooks."
   (add-hook 'before-save-hook #'lsp-format-buffer t t)
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
 
