@@ -44,9 +44,6 @@
  ;; Do not show the startup message.
  inhibit-startup-message t
 
- ;; Do not put 'customize' config in init.el; give it another file.
- custom-file "~/.emacs.d/var/custom-file.el"
-
  ;; Use your name in the frame title. :)
  frame-title-format (format "%s's Emacs" (capitalize user-login-name))
 
