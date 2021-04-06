@@ -94,7 +94,8 @@
                 vterm-mode-hook
                 shell-mode-hook
                 sly-mrepl-mode-hook
-                eshell-mode-hook))
+                eshell-mode-hook
+                cider-repl-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; --- Disable unnecessary UI elements ---
@@ -575,7 +576,9 @@
   (require 'flycheck-clj-kondo))
 
 (use-package cider
-  :hook (clojure-mode . cider-mode))
+  :hook (clojure-mode . cider-mode)
+  :custom ((cider-repl-pop-to-buffer-on-connect 'display-only)
+           (cider-repl-display-help-banner nil)))
 
 ;; --- protobuf ---
 (use-package protobuf-mode
