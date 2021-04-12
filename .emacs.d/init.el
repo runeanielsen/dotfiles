@@ -678,6 +678,7 @@
 (use-package add-node-modules-path
   :hook ((js-mode . add-node-modules-path)
          (css-mode . add-node-modules-path)
+         (web-mode . add-node-modules-path)
          (typescript-mode . add-node-modules-path)))
 
 ;; --- Prettier ---
