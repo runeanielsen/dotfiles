@@ -30,6 +30,9 @@
   :config
   (gcmh-mode 1))
 
+;; Increase the amount of data which Emacs reads from process to 3mb
+(setq read-process-output-max (* 3072 1024))
+
 ;; Font
 (set-face-attribute 'default nil :font "Fira Code" :height 120)
 
@@ -520,7 +523,7 @@
          (clojure-mode . flycheck-mode)
          (elixir-mode . flycheck-mode))
   ; Hack because csharp lsp mode often bugs out
-  :custom (flycheck-checker-error-threshold 10000))
+  :custom ((flycheck-checker-error-threshold 10000)))
 
 ;; --- lsp mode ---
 (use-package lsp-mode
