@@ -285,7 +285,7 @@
     "ba" '(persp-add-buffer :which-key "persp-add-buffer")
     "bd" '(bury-buffer :which-key "bury-current-buffer")
     "bk" '(persp-kill-buffer :which-key "kill-current-buffer")
-    "bl" '(evil-switch-to-windows-last-buffer :which-key "switch-last-buffer"))
+    "bl" '(projectile-project-buffers-other-buffer :which-key "switch-last-buffer"))
 
   (fp/leader-keys
     "g" '(:ignore t :which-key "git")
