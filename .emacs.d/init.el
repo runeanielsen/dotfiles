@@ -534,9 +534,7 @@
   :custom ((lsp-enable-links nil)
            (lsp-log-io nil)
            (lsp-headerline-breadcrumb-enable nil))
-  :commands (lsp lsp-deferred)
-  :init
-  (setq lsp-keymap-prefix "C-c l"))
+  :commands (lsp lsp-deferred))
 
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
