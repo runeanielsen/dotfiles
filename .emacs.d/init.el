@@ -314,7 +314,8 @@
     "cs" '(cider-jack-in :which-key "cider-jack-in")
     "cf" '(cider-format-buffer :which-key "cider-format-buffer")
     "cb" '(cider-eval-buffer :which-key "cider-eval-buffer")
-    "ce" '(cider-eval-last-sexp :which-key "cider-eval-last-sexp"))
+    "ce" '(cider-eval-last-sexp :which-key "cider-eval-last-sexp")
+    "cR" '(cider-restart :which-key "cider-restart"))
 
   (fp/leader-keys
     :states '(normal visual)
