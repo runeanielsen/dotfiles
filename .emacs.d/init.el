@@ -47,8 +47,8 @@
  ;; Do not show the startup message.
  inhibit-startup-message t
 
- ;; Use your name in the frame title. :)
- frame-title-format (format "%s's Emacs" (capitalize user-login-name))
+ ;; Change title
+ frame-title-format "Free Programmers Emacs"
 
  ;; Do not create lockfiles.
  create-lockfiles nil
