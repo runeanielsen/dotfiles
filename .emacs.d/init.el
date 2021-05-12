@@ -493,6 +493,8 @@
   :hook ((go-mode . tree-sitter-hl-mode)
          (csharp-mode . tree-sitter-hl-mode)
          (js-mode . tree-sitter-hl-mode)
+         (clojure-mode . tree-sitter-hl-mode)
+         (elixir-mode . tree-sitter-hl-mode)
          (typescript-mode . tree-sitter-hl-mode)
          (python-mode . tree-sitter-hl-mode)
          (css-mode . tree-sitter-hl-mode)))
