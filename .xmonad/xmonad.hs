@@ -79,6 +79,8 @@ myKeys =
     -- Kill xmobar 
   , ("M-u", spawn "killall xmobar trayer")
 
+  , ("M-n", spawn "pomodoro start -d 25 -w && pomodoro break 0 && pomodoro start -d 5 -w && pomodoro break 0")
+
     -- Multimedia keys
   , ("M-,", spawn "cmus-remote -r")
   , ("M-.", spawn "cmus-remote -n")
