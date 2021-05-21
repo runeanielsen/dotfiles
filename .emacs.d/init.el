@@ -497,6 +497,7 @@
          (elixir-mode . tree-sitter-hl-mode)
          (typescript-mode . tree-sitter-hl-mode)
          (python-mode . tree-sitter-hl-mode)
+         (yaml-mode . tree-sitter-hl-mode)
          (css-mode . tree-sitter-hl-mode)))
 
 (use-package tree-sitter-langs)
@@ -596,6 +597,9 @@
   :hook (json-mode . (lambda ()
                        (make-local-variable 'js-indent-level)
                        (setq js-indent-level 2))))
+
+;; --- json mode ---
+(use-package yaml-mode)
 
 ;; --- csharp mode ---
 (defun lsp-csharp-install-save-hooks ()
