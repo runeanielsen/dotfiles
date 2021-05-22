@@ -304,6 +304,7 @@
     :states '(normal visual)
     :keymaps 'tide-mode-map
     "ci" '(tide-goto-reference :which-key "go-to-reference")
+    "cf" '(tide-organize-imports :which-key "organize-iports")
     "cr" '(tide-rename-symbol :which-key "rename")
     "cR" '(tide-restart-server :which-key "restart-tide"))
 
