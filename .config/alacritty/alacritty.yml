@@ -11,7 +11,7 @@ window:
 
 font:
   normal:
-    family: Monospace
+    family: Fira Code
   size: 13.0
     
 background_opacity: 1.0 
