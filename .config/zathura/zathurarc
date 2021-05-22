@@ -5,6 +5,6 @@ set adjust-open "best-fit"
 set recolor true
 set recolor-keephue true
 set recolor-lightcolor "#121212"
-set recolor-darkcolor "#BFBFBF"
+set recolor-darkcolor "#cecac3"
 
 set default-bg "#121212"
