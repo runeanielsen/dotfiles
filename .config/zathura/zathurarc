@@ -1,6 +1,6 @@
 set selection-clipboard clipboard
 set window-title-basename true
-set adjust-open "best-fit"
+set font "Fira Code 10"
 
 set recolor true
 set recolor-keephue true
