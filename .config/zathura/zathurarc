@@ -4,7 +4,7 @@ set font "Fira Code 10"
 
 set recolor true
 set recolor-keephue true
-set recolor-lightcolor "#121212"
-set recolor-darkcolor "#aba499"
+set recolor-lightcolor "#e3e3e3"
+set recolor-darkcolor "black"
 
-set default-bg "#121212"
+set default-bg "#e3e3e3"
