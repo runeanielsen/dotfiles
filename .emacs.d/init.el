@@ -555,6 +555,8 @@
 ;; --- go mode ---
 (defun lsp-go-install-save-hooks ()
   "LSP Go install save hooks."
+  (setq indent-tabs-mode 1)
+  (setq tab-width 2)
   (add-hook 'before-save-hook #'lsp-format-buffer t t)
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
 
