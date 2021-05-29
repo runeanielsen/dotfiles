@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-ffplay -loop 3 -nodisp -autoexit ~/.pomodoro/hooks/break_sound.mp3 
