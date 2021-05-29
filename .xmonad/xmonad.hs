@@ -75,12 +75,9 @@ myKeys =
   , ("M-e", spawn "emacs")
   , ("M-s", spawn "~/.dmenu/dmenu-scrot.sh")
   , ("M-i", spawn "~/.dmenu/dmenu-passmenu.sh")
-  , ("M-b", spawn "~/.dmenu/dmenu-books.sh")
 
     -- Kill xmobar 
   , ("M-u", spawn "killall xmobar trayer")
-
-  , ("M-n", spawn "pomodoro start -d 25 -w && pomodoro break 0 && pomodoro start -d 5 -w && pomodoro break 0")
 
     -- Multimedia keys
   , ("M-,", spawn "cmus-remote -r")

@@ -20,6 +20,8 @@ alias glol='git log --graph --oneline --decorate'
 
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
+alias bk='epy $(find ~/Nas/books -name $(exa ~/Nas/books -R | rg '.epub' | fzf))'
+
 alias ma='mount -a'
 alias r='ranger'
 alias bt='bluetoothctl'
