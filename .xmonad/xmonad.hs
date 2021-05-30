@@ -73,9 +73,9 @@ myKeys =
     -- My applications
   , ("M-f", spawn "firefox")
   , ("M-e", spawn "emacs")
-  , ("M-s", spawn "~/.dmenu/dmenu-scrot.sh")
-  , ("M-i", spawn "~/.dmenu/dmenu-passmenu.sh")
-  , ("M-b", spawn "~/.dmenu/dmenu-books.sh")
+  , ("M-s", spawn "~/.config/scripts/dmenu-scrot.sh")
+  , ("M-i", spawn "~/.config/scripts/dmenu-passmenu.sh")
+  , ("M-b", spawn "~/.config/scripts/dmenu-books.sh")
 
     -- Kill xmobar 
   , ("M-u", spawn "killall xmobar trayer")
