@@ -138,6 +138,9 @@
         '("~/.emacs.d/snippets"))
   (yas-global-mode 1))
 
+;; --- license templates ---
+(use-package license-templates)
+
 ;; --- Projectile ---
 (use-package projectile
   :custom
