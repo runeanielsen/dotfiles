@@ -325,6 +325,7 @@
     "ct" '(lsp-goto-type-definition :which-key "goto-type-definition")
     "ci" '(lsp-goto-implementation :which-key "goto-implementation")
     "ca" '(lsp-execute-code-action :which-key "code-action")
+    "ce" '(lsp-ui-flycheck-list :which-key "flycheck-list")
     "cr" '(lsp-rename :which-key "rename")
     "cR" '(lsp-workspace-restart :which-key "workspace-restart"))
 
