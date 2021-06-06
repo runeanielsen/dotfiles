@@ -227,6 +227,7 @@
 ;; --- themes ---
 (use-package hc-zenburn-theme
   :defer t)
+
 (use-package spacemacs-theme
   :defer t
   :init
@@ -335,7 +336,9 @@
     :keymaps 'lsp-mode-map
     "co" '(lsp-organize-imports :which-key "organize-imports")
     "ct" '(lsp-goto-type-definition :which-key "goto-type-definition")
-    "ci" '(lsp-goto-implementation :which-key "goto-implementation")
+    "ci" '(lsp-find-implementation :which-key "find-implementation")
+    "cf" '(lsp-find-definition :which-key "find-defintion")
+    "cd" '(lsp-describe-thing-at-point :which-key "describe-thing-at-point")
     "ca" '(lsp-execute-code-action :which-key "code-action")
     "cr" '(lsp-rename :which-key "rename")
     "cR" '(lsp-workspace-restart :which-key "workspace-restart"))
