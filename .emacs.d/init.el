@@ -47,6 +47,9 @@
  ;; Do not show the startup message.
  inhibit-startup-message t
 
+ ;; Warning minimum level
+ warning-minimum-level :emergency
+
  ;; Change title
  frame-title-format "Free Programmers Emacs"
 
