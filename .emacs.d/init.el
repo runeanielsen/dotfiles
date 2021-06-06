@@ -155,7 +155,7 @@
 (use-package persp-mode
   :hook (projectile-mode . persp-mode)
   :config
-  (setq persp-autokill-buffer-on-remove 'kill
+  (setq persp-autokill-buffer-on-remove t
         persp-nil-hidden t
         persp-auto-save-opt 0
         persp-add-buffer-on-find-file nil
@@ -259,6 +259,11 @@
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
+(defun fp/flycheck-list-errors ()
+  (interactive)
+  (flycheck-list-errors)
+  (pop-to-buffer "*Flycheck errors*"))
+
 ;; --- General ---
 (use-package general
   :config
@@ -301,6 +306,7 @@
 
   (fp/leader-keys
     "c" '(:ignore t :which-key "code")
+    "ce" '(fp/flycheck-list-errors :which-key "flycheck-list-errors")
     "cc" '(comment-or-uncomment-region :which-key "comment-or-uncomment-region"))
 
   (fp/leader-keys
@@ -328,7 +334,6 @@
     "ct" '(lsp-goto-type-definition :which-key "goto-type-definition")
     "ci" '(lsp-goto-implementation :which-key "goto-implementation")
     "ca" '(lsp-execute-code-action :which-key "code-action")
-    "ce" '(lsp-ui-flycheck-list :which-key "flycheck-list")
     "cr" '(lsp-rename :which-key "rename")
     "cR" '(lsp-workspace-restart :which-key "workspace-restart"))
 
