@@ -510,7 +510,6 @@
          (csharp-mode . tree-sitter-hl-mode)
          (js-mode . tree-sitter-hl-mode)
          (clojure-mode . tree-sitter-hl-mode)
-         (elixir-mode . tree-sitter-hl-mode)
          (typescript-mode . tree-sitter-hl-mode)
          (python-mode . tree-sitter-hl-mode)
          (yaml-mode . tree-sitter-hl-mode)
@@ -544,7 +543,6 @@
 (use-package flycheck
   :hook ((lsp-mode . flycheck-mode)
          (clojure-mode . flycheck-mode)
-         (elixir-mode . flycheck-mode))
   ; Hack because csharp lsp mode often bugs out
   :custom ((flycheck-checker-error-threshold 10000)))
 
@@ -574,21 +572,6 @@
 (use-package go-mode
   :hook ((go-mode . lsp-deferred)
          (go-mode . lsp-go-install-save-hooks)))
-
-;; --- elixir ---
-(defun elixir-install-save-hooks ()
-  (add-hook 'before-save-hook #'elixir-format))
-
-(use-package elixir-mode
-  :mode "\\.exs\\'" "\\.ex\\'"
-  :hook (elixir-mode . elixir-install-save-hooks))
-
-(use-package mix
-  :hook (elixir-mode . mix-minor-mode))
-
-(use-package flycheck-credo
-  :after flycheck-mode
-  :init (flycheck-credo-setup))
 
 ;; --- clojure ---
 (use-package flycheck-clj-kondo)
