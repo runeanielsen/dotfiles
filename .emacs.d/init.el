@@ -249,6 +249,10 @@
   :hook ((text-mode . ws-butler-mode)
          (prog-mode . ws-butler-mode)))
 
+;; --- projectile ripgrep ---
+(use-package projectile-ripgrep)
+
+;; --- custom functions ---
 (defun fp/split-window-balanced ()
   (interactive)
   (split-window-right)
@@ -268,6 +272,11 @@
   (flycheck-list-errors)
   (pop-to-buffer "*Flycheck errors*"))
 
+(defun fp/projectile-ripgrep ()
+  (interactive)
+  (call-interactively 'projectile-ripgrep)
+  (pop-to-buffer "*ripgrep-search*"))
+
 ;; --- General ---
 (use-package general
   :config
@@ -283,7 +292,7 @@
     "TAB l" '(persp-next :which-key "persp-next"))
 
   (fp/leader-keys
-    "SPC" '(counsel-projectile-find-file :which-key "find-file"))
+    "SPC" '(projectile-find-file :which-key "find-file"))
 
   (fp/leader-keys
     "d" '(:ignore t :which-key "dired")
@@ -293,7 +302,7 @@
   (fp/leader-keys
     "b" '(:ignore t :which-key "buffer")
     "bb" '(persp-switch-to-buffer :which-key "switch-to-buffer-persp")
-    "bB" '(counsel-projectile-switch-to-buffer :which-key "switch-to-buffer-all")
+    "bB" '(projectile-switch-to-buffer :which-key "switch-to-buffer-all")
     "ba" '(persp-add-buffer :which-key "persp-add-buffer")
     "bd" '(bury-buffer :which-key "bury-current-buffer")
     "bk" '(persp-kill-buffer :which-key "kill-current-buffer")
@@ -306,7 +315,7 @@
   (fp/leader-keys
     "s" '(:ignore t :which-key "search")
     "ss" '(swiper :which-key "swiper")
-    "sg" '(counsel-projectile-rg :which-key "ripgrep-projectile"))
+    "sg" '(fp/projectile-ripgrep :which-key "ripgrep-projectile"))
 
   (fp/leader-keys
     "c" '(:ignore t :which-key "code")
@@ -362,9 +371,9 @@
     "p" '(:ignore t :which-key "projectile")
     "pa" '(projectile-add-known-project :which-key "add-project")
     "pd" '(projectile-remove-known-project :which-key "remove-project")
-    "pp" '(counsel-projectile-switch-project :which-key "switch-project")
+    "pp" '(projectile-switch-project :which-key "switch-project")
     "pi" '(projectile-invalidate-cache :which-key "invalidate-cache")
-    "pb" '(counsel-projectile-switch-to-buffer :which-key "switch-buffer")
+    "pb" '(projectile-switch-to-buffer :which-key "switch-buffer")
     "pk" '(persp-kill :which-key "kill-project"))
 
   (fp/leader-keys
@@ -448,10 +457,6 @@
   :config
   (global-set-key (kbd "M-x") 'counsel-M-x)
   (global-set-key (kbd "C-x C-f") 'counsel-find-file))
-
-(use-package counsel-projectile
-  :config
-  (counsel-projectile-mode))
 
 ;; --- Ivy ---
 (use-package ivy
