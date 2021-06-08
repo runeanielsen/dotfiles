@@ -595,7 +595,7 @@
                        (make-local-variable 'js-indent-level)
                        (setq js-indent-level 2))))
 
-;; --- json mode ---
+;; --- yaml mode ---
 (use-package yaml-mode)
 
 ;; --- csharp mode ---
