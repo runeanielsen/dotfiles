@@ -607,10 +607,7 @@
   :hook ((csharp-mode . lsp-deferred)
          (csharp-mode . lsp-csharp-install-save-hooks)))
 
-;; --- python-ms ---
-(use-package python-mode
-  :custom (python-shell-interpreter "python3"))
-
+;; --- python ---
 (use-package lsp-python-ms
   :init (setq lsp-python-ms-auto-install-server t)
   :hook (python-mode . (lambda ()
@@ -639,10 +636,10 @@
   (company-mode +1))
 
 (use-package tide
+  :hook ((js-mode-hook . setup-tide-mode)
+         (typescript-mode-hook . setup-tide-mode))
   :config
   (setq company-tooltip-align-annotations t)
-  (add-hook 'js-mode-hook #'setup-tide-mode)
-  (add-hook 'typescript-mode-hook #'setup-tide-mode)
   (flycheck-add-mode 'javascript-eslint 'js-mode)
   (setq flycheck-enabled-checkers (append flycheck-enabled-checkers '(javascript-eslint)))
   (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
