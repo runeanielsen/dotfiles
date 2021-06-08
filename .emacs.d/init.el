@@ -542,7 +542,7 @@
 ;; --- Flycheck ---
 (use-package flycheck
   :hook ((lsp-mode . flycheck-mode)
-         (clojure-mode . flycheck-mode)
+         (clojure-mode . flycheck-mode))
   ; Hack because csharp lsp mode often bugs out
   :custom ((flycheck-checker-error-threshold 10000)))
 
