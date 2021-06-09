@@ -175,6 +175,10 @@
   (add-hook 'persp-mode-hook #'(lambda ()
                                  (persp-mode-projectile-bridge-mode 1))))
 
+(use-package counsel-projectile
+  :config
+  (counsel-projectile-mode))
+
 ;; --- dashboard ---
 (use-package dashboard
   :config
@@ -234,6 +238,8 @@
   (setq spacemacs-theme-org-agenda-height nil)
   (setq spacemacs-theme-org-height nil))
 
+(use-package humanoid-themes)
+
 ;; --- Set theme based on time ---
 (defun set-theme-based-on-time (hour-to-go-dark-mode hour-to-go-light-mode light-theme dark-theme)
   (let ((hour (nth 2 (decode-time (seconds-to-time (current-time))))))
@@ -242,15 +248,12 @@
           (load-theme dark-theme t))))
 
 ;; Light doing the day, dark doing the afternoon/night
-(set-theme-based-on-time 17 8 'spacemacs-light 'hc-zenburn)
+(set-theme-based-on-time 17 8 'humanoid-light 'hc-zenburn)
 
 ;; --- automatically clean whitespace ---
 (use-package ws-butler
   :hook ((text-mode . ws-butler-mode)
          (prog-mode . ws-butler-mode)))
-
-;; --- projectile ripgrep ---
-(use-package projectile-ripgrep)
 
 ;; --- custom functions ---
 (defun fp/split-window-balanced ()
@@ -272,11 +275,6 @@
   (flycheck-list-errors)
   (pop-to-buffer "*Flycheck errors*"))
 
-(defun fp/projectile-ripgrep ()
-  (interactive)
-  (call-interactively 'projectile-ripgrep)
-  (pop-to-buffer "*ripgrep-search*"))
-
 ;; --- General ---
 (use-package general
   :config
@@ -292,7 +290,7 @@
     "TAB l" '(persp-next :which-key "persp-next"))
 
   (fp/leader-keys
-    "SPC" '(projectile-find-file :which-key "find-file"))
+    "SPC" '(counsel-projectile-find-file :which-key "find-file"))
 
   (fp/leader-keys
     "d" '(:ignore t :which-key "dired")
@@ -302,7 +300,8 @@
   (fp/leader-keys
     "b" '(:ignore t :which-key "buffer")
     "bb" '(persp-switch-to-buffer :which-key "switch-to-buffer-persp")
-    "bB" '(projectile-switch-to-buffer :which-key "switch-to-buffer-all")
+    "bB" '(counsel-projectile-switch-to-buffer :which-key "projectile-switch-buffer")
+    "bf" '(counsel-switch-buffer :which-key "counsel-switch-buffer")
     "ba" '(persp-add-buffer :which-key "persp-add-buffer")
     "bd" '(bury-buffer :which-key "bury-current-buffer")
     "bk" '(persp-kill-buffer :which-key "kill-current-buffer")
@@ -315,7 +314,7 @@
   (fp/leader-keys
     "s" '(:ignore t :which-key "search")
     "ss" '(swiper :which-key "swiper")
-    "sg" '(fp/projectile-ripgrep :which-key "ripgrep-projectile"))
+    "sg" '(counsel-projectile-rg :which-key "counsel-projectile-rg"))
 
   (fp/leader-keys
     "c" '(:ignore t :which-key "code")
@@ -371,7 +370,7 @@
     "p" '(:ignore t :which-key "projectile")
     "pa" '(projectile-add-known-project :which-key "add-project")
     "pd" '(projectile-remove-known-project :which-key "remove-project")
-    "pp" '(projectile-switch-project :which-key "switch-project")
+    "pp" '(counsel-projectile-switch-project :which-key "switch-project")
     "pi" '(projectile-invalidate-cache :which-key "invalidate-cache")
     "pb" '(projectile-switch-to-buffer :which-key "switch-buffer")
     "pk" '(persp-kill :which-key "kill-project"))
