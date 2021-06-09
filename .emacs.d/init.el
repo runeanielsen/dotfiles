@@ -232,12 +232,6 @@
 (use-package hc-zenburn-theme
   :defer t)
 
-(use-package spacemacs-theme
-  :defer t
-  :init
-  (setq spacemacs-theme-org-agenda-height nil)
-  (setq spacemacs-theme-org-height nil))
-
 (use-package humanoid-themes)
 
 ;; --- Set theme based on time ---
