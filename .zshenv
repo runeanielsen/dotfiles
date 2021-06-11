@@ -4,6 +4,8 @@ export XDG_CACHE_HOME="$XDG_CONFIG_HOME/cache"
 
 export PATH=~/.local/bin:$PATH
 
+export PATH="$PATH:$HOME/.npm-packages/bin"
+
 export ALTERNATE_EDITOR=""
 export EDITOR="nvim"
 export VISUAL="nvim"
