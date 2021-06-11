@@ -459,16 +459,6 @@
   :config
   (ivy-mode 1))
 
-(use-package all-the-icons-ivy-rich
-  :after ivy
-  :config (all-the-icons-ivy-rich-mode 1))
-
-(use-package ivy-rich
-  :after ivy
-  :config
-  (ivy-rich-mode 1)
-  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
-
 ;; --- Magit ---
 (use-package magit
   :commands magit-status
@@ -510,7 +500,6 @@
          (clojure-mode . tree-sitter-hl-mode)
          (typescript-mode . tree-sitter-hl-mode)
          (python-mode . tree-sitter-hl-mode)
-         (yaml-mode . tree-sitter-hl-mode)
          (css-mode . tree-sitter-hl-mode)))
 
 (use-package tree-sitter-langs)
