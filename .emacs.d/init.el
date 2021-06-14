@@ -232,7 +232,8 @@
 (use-package hc-zenburn-theme
   :defer t)
 
-(use-package humanoid-themes)
+(use-package humanoid-themes
+  :defer t)
 
 ;; --- Set theme based on time ---
 (defun set-theme-based-on-time (hour-to-go-dark-mode hour-to-go-light-mode light-theme dark-theme)
@@ -263,6 +264,11 @@
 (defun fp/open-init-el ()
   (interactive)
   (find-file "~/.emacs.d/init.el"))
+
+(defun fp/flycheck-list-errors ()
+  (interactive)
+  (flycheck-list-errors)
+  (pop-to-buffer "*Flycheck errors*"))
 
 ;; --- General ---
 (use-package general
@@ -307,7 +313,7 @@
 
   (fp/leader-keys
     "c" '(:ignore t :which-key "code")
-    "ce" '(lsp-ui-flycheck-list :which-key "flycheck-list-errors")
+    "ce" '(fp/flycheck-list-errors :which-key "flycheck-list-errors")
     "cc" '(comment-or-uncomment-region :which-key "comment-or-uncomment-region"))
 
   (fp/leader-keys
@@ -325,7 +331,7 @@
     "cs" '(cider-jack-in :which-key "cider-jack-in")
     "cf" '(cider-format-buffer :which-key "cider-format-buffer")
     "cb" '(cider-eval-buffer :which-key "cider-eval-buffer")
-    "ce" '(cider-eval-last-sexp :which-key "cider-eval-last-sexp")
+    "ca" '(cider-eval-last-sexp :which-key "cider-eval-last-sexp")
     "cR" '(cider-restart :which-key "cider-restart"))
 
   (fp/leader-keys
@@ -334,6 +340,7 @@
     "co" '(lsp-organize-imports :which-key "organize-imports")
     "ct" '(lsp-goto-type-definition :which-key "goto-type-definition")
     "ci" '(lsp-find-implementation :which-key "find-implementation")
+    "ce" '(lsp-ui-flycheck-list :which-key "lsp-ui-flycheck-list")
     "cf" '(lsp-find-definition :which-key "find-defintion")
     "cd" '(lsp-describe-thing-at-point :which-key "describe-thing-at-point")
     "ca" '(lsp-execute-code-action :which-key "code-action")
@@ -492,7 +499,6 @@
   :hook ((go-mode . tree-sitter-hl-mode)
          (csharp-mode . tree-sitter-hl-mode)
          (js-mode . tree-sitter-hl-mode)
-         (clojure-mode . tree-sitter-hl-mode)
          (typescript-mode . tree-sitter-hl-mode)
          (python-mode . tree-sitter-hl-mode)
          (css-mode . tree-sitter-hl-mode)))
@@ -543,7 +549,8 @@
 (use-package lsp-ivy
   :commands lsp-ivy-workspace-symbol)
 
-(use-package lsp-ui)
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode))
 
 ;; --- go mode ---
 (defun lsp-go-install-save-hooks ()
@@ -554,7 +561,7 @@
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
 
 (use-package go-mode
-  :hook ((go-mode . lsp)
+  :hook ((go-mode . lsp-deferred)
          (go-mode . lsp-go-install-save-hooks)))
 
 ;; --- clojure ---
