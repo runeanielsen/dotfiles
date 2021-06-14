@@ -124,8 +124,8 @@
         `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
 
 ;; --- Disable mouse ---
-(use-package disable-mouse
-  :init (global-disable-mouse-mode))
+;; (use-package disable-mouse
+;;   :init (global-disable-mouse-mode))
 
 ;; --- shut up ---
 (use-package shut-up
@@ -264,11 +264,6 @@
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
-(defun fp/flycheck-list-errors ()
-  (interactive)
-  (flycheck-list-errors)
-  (pop-to-buffer "*Flycheck errors*"))
-
 ;; --- General ---
 (use-package general
   :config
@@ -312,7 +307,7 @@
 
   (fp/leader-keys
     "c" '(:ignore t :which-key "code")
-    "ce" '(fp/flycheck-list-errors :which-key "flycheck-list-errors")
+    "ce" '(lsp-ui-flycheck-list :which-key "flycheck-list-errors")
     "cc" '(comment-or-uncomment-region :which-key "comment-or-uncomment-region"))
 
   (fp/leader-keys
@@ -548,6 +543,8 @@
 (use-package lsp-ivy
   :commands lsp-ivy-workspace-symbol)
 
+(use-package lsp-ui)
+
 ;; --- go mode ---
 (defun lsp-go-install-save-hooks ()
   "LSP Go install save hooks."
@@ -557,7 +554,7 @@
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
 
 (use-package go-mode
-  :hook ((go-mode . lsp-deferred)
+  :hook ((go-mode . lsp)
          (go-mode . lsp-go-install-save-hooks)))
 
 ;; --- clojure ---
