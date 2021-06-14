@@ -40,6 +40,8 @@ myStartupHook :: X ()
 myStartupHook = do
   spawn "trayer --edge top --align right --widthtype request --SetDockType true --SetPartialStrut true --expand true --iconspacing 4 --tint 0x000000 --transparent true --alpha 0 &"
   spawn "nitrogen --restore &"
+  spawn "xset r rate 225 25 &"
+  spawn "xset s off -dbps &"
   setWMName "LG3D"
 
 -- Layout
