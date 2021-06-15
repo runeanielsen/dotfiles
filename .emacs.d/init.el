@@ -624,6 +624,7 @@
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
+  (add-hook 'before-save-hook 'tide-format)
   (company-mode +1))
 
 (use-package tide
