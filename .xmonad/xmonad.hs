@@ -83,9 +83,9 @@ myKeys =
   , ("M-u", spawn "killall xmobar trayer")
 
     -- Multimedia keys
-  , ("M-,", spawn "spt pb -p")
-  , ("M-.", spawn "spt pb -n")
-  , ("M-/", spawn "spt pb -t")
+  , ("M-,", spawn "cmus-remote -r")
+  , ("M-.", spawn "cmus-remote -n")
+  , ("M-/", spawn "~/.config/scripts/cmus-play-pause.sh")
   ]
 
 -- Main
