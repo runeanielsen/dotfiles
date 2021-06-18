@@ -545,12 +545,15 @@
            (lsp-headerline-breadcrumb-enable nil))
   :commands (lsp lsp-deferred))
 
-;; lsp-ivy
+;; --- lsp-ivy ---
 (use-package lsp-ivy
   :commands lsp-ivy-workspace-symbol)
 
+;; --- lsp-ui ---
 (use-package lsp-ui
-  :hook (lsp-mode . lsp-ui-mode))
+  :hook (lsp-mode . lsp-ui-mode)
+  :custom ((lsp-ui-sideline-show-code-actions nil)
+           (lsp-ui-doc-enable nil)))
 
 ;; --- go mode ---
 (defun lsp-go-install-save-hooks ()
