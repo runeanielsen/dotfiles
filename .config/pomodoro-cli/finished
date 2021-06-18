@@ -1,3 +1,3 @@
 #!/bin/env bash
 
-ffplay -loop 3 -volume 30 -nodisp -autoexit ~/.config/pomodoro-cli/break_sound.mp3 
+ffplay -volume 50 -nodisp -autoexit ~/.config/pomodoro-cli/break_sound.mp3 
