@@ -287,6 +287,11 @@
   (lsp-describe-thing-at-point)
   (pop-to-buffer "*lsp-help*"))
 
+(defun fp/projectile-switch-project ()
+  "Switch to projectile project. (HACK fixes performance issues somehow??)."
+  (interactive)
+  (projectile-switch-project))
+
 ;; --- General ---
 (use-package general
   :config
@@ -383,7 +388,7 @@
     "p" '(:ignore t :which-key "projectile")
     "pa" '(projectile-add-known-project :which-key "add-project")
     "pd" '(projectile-remove-known-project :which-key "remove-project")
-    "pp" '(counsel-projectile-switch-project :which-key "switch-project")
+    "pp" '(fp/projectile-switch-project :which-key "switch-project")
     "pi" '(projectile-invalidate-cache :which-key "invalidate-cache")
     "pb" '(projectile-switch-to-buffer :which-key "switch-buffer")
     "pk" '(persp-kill :which-key "kill-project"))
@@ -465,10 +470,7 @@
   :hook (dired-mode . all-the-icons-dired-mode))
 
 ;; --- Counsel ---
-(use-package counsel
-  :config
-  (global-set-key (kbd "M-x") 'counsel-M-x)
-  (global-set-key (kbd "C-x C-f") 'counsel-find-file))
+(use-package counsel)
 
 ;; --- Ivy ---
 (use-package ivy
@@ -532,7 +534,7 @@
 (use-package company-box
   :hook (company-mode . company-box-mode))
 
-;; optional if you want which-key integration
+;; --- which key ---
 (use-package which-key
   :defer 0
   :diminish which-key-mode
@@ -547,7 +549,8 @@
 ;; --- Flycheck ---
 (use-package flycheck
   :hook ((lsp-mode . flycheck-mode)
-         (clojure-mode . flycheck-mode))
+         (clojure-mode . flycheck-mode)
+         (emacs-lisp-mode . flycheck-mode))
   ; Hack because csharp lsp mode often bugs out
   :custom ((flycheck-checker-error-threshold 10000)))
 
@@ -624,16 +627,6 @@
   :hook (python-mode . (lambda ()
                           (require 'lsp-python-ms)
                           (lsp))))
-
-;; --- elm ---
-(defun lsp-elm-install-save-hooks ()
-  "LSP Elm install save hooks."
-  (add-hook 'before-save-hook #'lsp-format-buffer t t)
-  (add-hook 'before-save-hook #'lsp-organize-imports t t))
-
-(use-package elm-mode
-  :hook ((elm-mode . lsp-elm-install-save-hooks)
-         (elm-mode . lsp-deferred)))
 
 ;; --- Tide ---
 (defun setup-tide-mode ()
@@ -733,60 +726,5 @@
   :config
   (setq markdown-command "marked")
   (add-hook 'markdown-mode-hook 'fp/markdown-mode-hook))
-
-;; --- org mode ---
-(defun fp/org-font-setup ()
-  "Replace list hyphen with dot."
-  (font-lock-add-keywords 'org-mode
-                          '(("^ *\\([-]\\) "
-                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-
-  ;; Set faces for heading levels
-  (dolist (face '((org-level-1 . 1.2)
-                  (org-level-2 . 1.1)
-                  (org-level-3 . 1.05)
-                  (org-level-4 . 1.0)
-                  (org-level-5 . 1.0)
-                  (org-level-6 . 1.0)
-                  (org-level-7 . 1.0)
-                  (org-level-8 . 1.0)))
-    (set-face-attribute (car face) nil :font "Fira Code" :weight 'regular :height (cdr face)))
-
-  ;; Ensure that anything that should be fixed-pitch in Org files appears that way
-  (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-table nil   :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
-
-(defun fp/org-mode-setup ()
-  "Setup org mode."
-  (org-indent-mode)
-  (variable-pitch-mode 1)
-  (visual-line-mode 1))
-
-(use-package org
-  :hook ((org-mode . fp/org-mode-setup)
-         (org-mode . flyspell-mode))
-  :config
-  (fp/org-font-setup))
-
-(defun fp/org-mode-visual-fill ()
-  "How big the visual fill column width should be."
-  (setq visual-fill-column-width 100
-        visual-fill-column-center-text t)
-  (visual-fill-column-mode 1))
-
-(use-package visual-fill-column
-  :hook (org-mode . fp/org-mode-visual-fill))
-
-(use-package org-bullets
-  :after org
-  :hook (org-mode . org-bullets-mode)
-  :custom
-  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
-(put 'upcase-region 'disabled nil)
 
 ;;; init.el ends here
