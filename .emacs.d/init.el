@@ -270,6 +270,11 @@
   (flycheck-list-errors)
   (pop-to-buffer "*Flycheck errors*"))
 
+(defun fp/lsp-describe-thing-at-point ()
+  (interactive)
+  (lsp-describe-thing-at-point)
+  (pop-to-buffer "*lsp-help*"))
+
 ;; --- General ---
 (use-package general
   :config
@@ -342,7 +347,7 @@
     "ci" '(lsp-find-implementation :which-key "find-implementation")
     "ce" '(lsp-ui-flycheck-list :which-key "lsp-ui-flycheck-list")
     "cf" '(lsp-find-definition :which-key "find-defintion")
-    "cd" '(lsp-describe-thing-at-point :which-key "describe-thing-at-point")
+    "cd" '(fp/lsp-describe-thing-at-point :which-key "describe-thing-at-point")
     "ca" '(lsp-execute-code-action :which-key "code-action")
     "cr" '(lsp-rename :which-key "rename")
     "cR" '(lsp-workspace-restart :which-key "workspace-restart"))
