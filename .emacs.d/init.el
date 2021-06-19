@@ -1,3 +1,10 @@
+;;; package --- Summary: init.el file.
+
+;;; Commentary:
+;; Personal Emacs setup.
+
+;;; Code:
+
 ;; Set garbage collection threshold to 1GB to speed up startup.
 (setq gc-cons-threshold #x40000000)
 
@@ -252,25 +259,30 @@
 
 ;; --- custom functions ---
 (defun fp/split-window-balanced ()
+  "Split window and balance all windows after."
   (interactive)
   (split-window-right)
   (balance-windows))
 
 (defun fp/delete-window-balanced ()
+  "Delete window and balance all windows after."
   (interactive)
   (delete-window)
   (balance-windows))
 
 (defun fp/open-init-el ()
+  "Open Emacs init.el file."
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
 (defun fp/flycheck-list-errors ()
+  "Execute flycheck-list-errors and switch to that buffer."
   (interactive)
   (flycheck-list-errors)
   (pop-to-buffer "*Flycheck errors*"))
 
 (defun fp/lsp-describe-thing-at-point ()
+  "Execute lsp-describe-thing-at-point and switch to that buffer."
   (interactive)
   (lsp-describe-thing-at-point)
   (pop-to-buffer "*lsp-help*"))
@@ -431,7 +443,7 @@
 
 ;; --- Dired ---
 (defun quiet-auto-revert ()
-  "A hook to run for buffers you want to revert automatically and silently"
+  "A hook to run for buffers you want to revert automatically and silently."
   (auto-revert-mode 1)
   (setq-local auto-revert-verbose nil))
 
@@ -704,6 +716,7 @@
 
 ;; --- markdown ---
 (defun fp/set-markdown-header-font-sizes ()
+  "Set markdown header font sizes."
   (dolist (face '((markdown-header-face-1 . 1.1)
                   (markdown-header-face-2 . 1.05)
                   (markdown-header-face-3 . 1.0)
@@ -712,6 +725,7 @@
     (set-face-attribute (car face) nil :weight 'normal :height (cdr face))))
 
 (defun fp/markdown-mode-hook ()
+  "Set header font sizes on setup hook."
   (fp/set-markdown-header-font-sizes))
 
 (use-package markdown-mode
@@ -722,7 +736,7 @@
 
 ;; --- org mode ---
 (defun fp/org-font-setup ()
-  ;; Replace list hyphen with dot
+  "Replace list hyphen with dot."
   (font-lock-add-keywords 'org-mode
                           '(("^ *\\([-]\\) "
                              (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
@@ -748,6 +762,7 @@
   (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
 
 (defun fp/org-mode-setup ()
+  "Setup org mode."
   (org-indent-mode)
   (variable-pitch-mode 1)
   (visual-line-mode 1))
@@ -759,6 +774,7 @@
   (fp/org-font-setup))
 
 (defun fp/org-mode-visual-fill ()
+  "How big the visual fill column width should be."
   (setq visual-fill-column-width 100
         visual-fill-column-center-text t)
   (visual-fill-column-mode 1))
@@ -772,3 +788,5 @@
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 (put 'upcase-region 'disabled nil)
+
+;;; init.el ends here
