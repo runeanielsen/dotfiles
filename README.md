@@ -7,8 +7,12 @@ Repository containing my personal dotfiles.
 ``` sh
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'\
 git clone --bare https://github.com/runeanielsen/dotfiles.git $HOME/.dotfiles\
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'\
 config checkout
+```
+
+To not show untracked files
+```sh
+git config --global status.showUntrackedFiles no
 ```
 
 ## Getting updated
