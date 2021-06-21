@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-BOOKS_PATH=$HOME/Nas/books/
+BOOKS_PATH=$HOME/nas/books/
 
 prog="
 "$(exa $BOOKS_PATH -R | rg '\.pdf|\.epub')
