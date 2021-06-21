@@ -12,7 +12,7 @@ config checkout
 
 To not show untracked files
 ```sh
-git config --global status.showUntrackedFiles no
+config config --global status.showUntrackedFiles no
 ```
 
 ## Getting updated
