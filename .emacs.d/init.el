@@ -672,14 +672,14 @@
           (lambda ()
             (when (string-equal "jsx" (file-name-extension buffer-file-name))
               (setup-tide-mode))))
-;; configure jsx-tide checker to run after your default jsx checker
-(flycheck-add-mode 'javascript-eslint 'web-mode)
-(flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
 
 (use-package css-mode
   :hook (css-mode . lsp-deferred)
   :config
   (setq css-indent-offset 2))
+
+(use-package scss-mode
+  :hook(scss-mode . lsp-deferred))
 
 ;; --- Node modules path ---
 (use-package add-node-modules-path
