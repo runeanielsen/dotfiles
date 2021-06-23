@@ -341,8 +341,8 @@
   (fp/leader-keys
     :states '(normal visual)
     :keymaps 'tide-mode-map
-    "ci" '(tide-goto-reference :which-key "go-to-reference")
-    "cf" '(tide-organize-imports :which-key "organize-iports")
+    "ci" '(tide-jump-to-implementation :which-key "go-to-reference")
+    "cf" '(tide-jump-to-definition :which-key "organize-iports")
     "cr" '(tide-rename-symbol :which-key "rename")
     "cR" '(tide-restart-server :which-key "restart-tide"))
 
@@ -520,6 +520,7 @@
          (js-mode . tree-sitter-hl-mode)
          (typescript-mode . tree-sitter-hl-mode)
          (python-mode . tree-sitter-hl-mode)
+         (scss-mode . tree-sitter-hl-mode)
          (css-mode . tree-sitter-hl-mode)))
 
 (use-package tree-sitter-langs)
@@ -634,7 +635,6 @@
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
-  (add-hook 'before-save-hook 'tide-format)
   (company-mode +1))
 
 (use-package tide
@@ -657,6 +657,7 @@
   :config
   (setq web-mode-enable-auto-quoting nil)
   (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2))
 
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
@@ -673,13 +674,14 @@
             (when (string-equal "jsx" (file-name-extension buffer-file-name))
               (setup-tide-mode))))
 
+
 (use-package css-mode
-  :hook (css-mode . lsp-deferred)
   :config
   (setq css-indent-offset 2))
 
 (use-package scss-mode
-  :hook(scss-mode . lsp-deferred))
+  :config
+  (setq css-indent-offset 2))
 
 ;; --- Node modules path ---
 (use-package add-node-modules-path
@@ -691,9 +693,9 @@
 ;; --- Prettier ---
 (use-package prettier-js
   :hook ((js-mode . prettier-js-mode)
+         (web-mode . prettier-js-mode)
          (css-mode . prettier-js-mode)
          (scss-mode . prettier-js-mode)
-         (web-mode . prettier-js-mode)
          (typescript-mode . prettier-js-mode)))
 
 (use-package emmet-mode
