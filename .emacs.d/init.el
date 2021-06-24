@@ -372,8 +372,8 @@
   (fp/leader-keys
     "w" '(:ignore t :which-key "window")
     "ww" '(other-window :which-key "other-window")
-    "wk" '(evil-window-right :which-key "right-window")
-    "wj" '(evil-window-left :which-key "left-window")
+    "wl" '(evil-window-right :which-key "right-window")
+    "wh" '(evil-window-left :which-key "left-window")
     "wn" '(fp/split-window-balanced :which-key "split-window-balanced")
     "ws" '(window-swap-states :which-key "window-swap-states")
     "wd" '(fp/delete-window-balanced :which-key "delete-window"))
@@ -673,7 +673,6 @@
           (lambda ()
             (when (string-equal "jsx" (file-name-extension buffer-file-name))
               (setup-tide-mode))))
-
 
 (use-package css-mode
   :config
