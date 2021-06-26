@@ -18,7 +18,7 @@ alias grs='git remote show'
 alias glo='git log --pretty="oneline"'
 alias glol='git log --graph --oneline --decorate'
 
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 alias bk='epy $(find ~/Nas/books -name $(exa ~/Nas/books -R | rg '.epub' | fzf))'
 

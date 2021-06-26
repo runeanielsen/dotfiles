@@ -5,18 +5,18 @@ Repository containing my personal dotfiles.
 ## Cloning the repository
 
 ``` sh
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'\
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'\
 git clone --bare https://github.com/runeanielsen/dotfiles.git $HOME/.dotfiles\
-config checkout
+dotfiles checkout
 ```
 
 To not show untracked files
 ```sh
-config config status.showUntrackedFiles no
+dotfiles config status.showUntrackedFiles no
 ```
 
 ## Getting updated
 
 ``` sh
-config pull
+dotfiles pull
 ```
