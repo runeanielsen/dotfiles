@@ -12,7 +12,7 @@ config checkout
 
 To not show untracked files
 ```sh
-config config --global status.showUntrackedFiles no
+config config status.showUntrackedFiles no
 ```
 
 ## Getting updated
