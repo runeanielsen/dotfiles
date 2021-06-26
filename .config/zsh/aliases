@@ -41,3 +41,5 @@ alias xwork='xrandr --output DP1 --mode 3440x1440 --output eDP1 --off'
 
 alias copy='xsel --clipboard --input'
 alias paste='xsel --clipboard --output'
+
+alias feed='newsboat -C ~/.config/newsboat/config -c ~/nas/rss/cache.db -u ~/nas/rss/urls'
