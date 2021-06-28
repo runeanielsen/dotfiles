@@ -349,12 +349,16 @@
   (fp/leader-keys
     :states '(normal visual)
     :keymaps 'clojure-mode-map
+    "pt" '(cider-test-run-project-tests :which-key "cider-test-run-project-tests")
+    "pi" '(cljr-add-project-dependency :which-key "cljr-add-project-dependency")
     "cd" '(cider-doc :which-key "cider-doc")
     "cs" '(cider-jack-in :which-key "cider-jack-in")
     "cf" '(cider-format-buffer :which-key "cider-format-buffer")
-    "cb" '(cider-eval-buffer :which-key "cider-eval-buffer")
     "ca" '(cider-eval-last-sexp :which-key "cider-eval-last-sexp")
-    "cR" '(cider-restart :which-key "cider-restart"))
+    "cA" '(cider-eval-buffer :which-key "cider-eval-buffer")
+    "co" '(cider-load-buffer-and-switch-to-repl-buffer :which-key "cider-load-buffer-and-switch-to-repl-buffer")
+    "cR" '(cider-restart :which-key "cider-restart")
+    "cQ" '(cider-quit :which-key "cider-quit"))
 
   (fp/leader-keys
     :states '(normal visual)
@@ -389,7 +393,6 @@
     "pa" '(projectile-add-known-project :which-key "add-project")
     "pd" '(projectile-remove-known-project :which-key "remove-project")
     "pp" '(fp/projectile-switch-project :which-key "switch-project")
-    "pi" '(projectile-invalidate-cache :which-key "invalidate-cache")
     "pb" '(projectile-switch-to-buffer :which-key "switch-buffer")
     "pk" '(persp-kill :which-key "kill-project"))
 
@@ -596,6 +599,9 @@
   :hook (clojure-mode . cider-mode)
   :custom ((cider-repl-pop-to-buffer-on-connect 'display-only)
            (cider-repl-display-help-banner nil)))
+
+(use-package clj-refactor
+  :hook (clojure-mode . clj-refactor-mode))
 
 ;; --- protobuf ---
 (use-package protobuf-mode
