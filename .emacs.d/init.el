@@ -357,6 +357,7 @@
     "ca" '(cider-eval-last-sexp :which-key "cider-eval-last-sexp")
     "cA" '(cider-eval-buffer :which-key "cider-eval-buffer")
     "co" '(cider-load-buffer-and-switch-to-repl-buffer :which-key "cider-load-buffer-and-switch-to-repl-buffer")
+    "cr" '(cljr-rename-symbol :which-key "cljr-rename-symbol")
     "cR" '(cider-restart :which-key "cider-restart")
     "cQ" '(cider-quit :which-key "cider-quit"))
 
@@ -601,7 +602,9 @@
            (cider-repl-display-help-banner nil)))
 
 (use-package clj-refactor
-  :hook (clojure-mode . clj-refactor-mode))
+  :hook (clojure-mode . clj-refactor-mode)
+  :config
+  (setq cljr-warn-on-eval nil))
 
 ;; --- protobuf ---
 (use-package protobuf-mode
