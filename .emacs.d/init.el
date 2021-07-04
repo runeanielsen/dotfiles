@@ -58,7 +58,7 @@
  warning-minimum-level :emergency
 
  ;; Change title
- frame-title-format "Free Programmers Emacs"
+ frame-title-format "Emacs"
 
  ;; Do not create lockfiles.
  create-lockfiles nil
@@ -131,8 +131,8 @@
         `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
 
 ;; --- Disable mouse ---
-;; (use-package disable-mouse
-;;   :init (global-disable-mouse-mode))
+(use-package disable-mouse
+  :init (global-disable-mouse-mode))
 
 ;; --- shut up ---
 (use-package shut-up
