@@ -647,8 +647,8 @@
   (company-mode +1))
 
 (use-package tide
-  :hook ((js-mode-hook . setup-tide-mode)
-         (typescript-mode-hook . setup-tide-mode))
+  :hook ((js-mode . setup-tide-mode)
+         (typescript-mode . setup-tide-mode))
   :config
   (setq company-tooltip-align-annotations t)
   (flycheck-add-mode 'javascript-eslint 'js-mode)
