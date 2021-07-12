@@ -349,7 +349,7 @@
   (fp/leader-keys
     :states '(normal visual)
     :keymaps 'clojure-mode-map
-    "pt" '(cider-test-run-project-tests :which-key "cider-test-run-project-tests")
+    "ct" '(cider-test-run-project-tests :which-key "cider-test-run-project-tests")
     "pi" '(cljr-add-project-dependency :which-key "cljr-add-project-dependency")
     "cd" '(cider-doc :which-key "cider-doc")
     "cs" '(cider-jack-in :which-key "cider-jack-in")
