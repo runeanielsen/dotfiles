@@ -385,7 +385,8 @@
 
   (fp/leader-keys
     "o" '(:ignore t :which-key "open")
-    "ot" '(vterm :which-key "vterm")
+    "ot" '(projectile-run-vterm :which-key "vterm")
+    "oT" '(vterm :which-key "vterm")
     "oe" '(fp/open-init-el :which-key "open-init.el"))
 
   (fp/leader-keys
@@ -394,7 +395,6 @@
     "pd" '(projectile-remove-known-project :which-key "remove-project")
     "pp" '(fp/projectile-switch-project :which-key "switch-project")
     "pb" '(projectile-switch-to-buffer :which-key "switch-buffer")
-    "pt" '(projectile-run-vterm :which-key "vterm")
     "pk" '(persp-kill :which-key "kill-project"))
 
   (fp/leader-keys
