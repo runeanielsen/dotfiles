@@ -596,7 +596,20 @@
 
 (use-package clojure-mode
   :config
-  (require 'flycheck-clj-kondo))
+  (require 'flycheck-clj-kondo)
+  (define-clojure-indent
+    (defroutes 'defun)
+    (GET 2)
+    (POST 2)
+    (PUT 2)
+    (DELETE 2)
+    (HEAD 2)
+    (ANY 2)
+    (OPTIONS 2)
+    (PATCH 2)
+    (rfn 2)
+    (let-routes 1)
+    (context 2)))
 
 (use-package cider
   :hook (clojure-mode . cider-mode)
@@ -607,6 +620,7 @@
   :hook (clojure-mode . clj-refactor-mode)
   :config
   (setq cljr-warn-on-eval nil))
+
 
 ;; --- protobuf ---
 (use-package protobuf-mode
@@ -711,10 +725,9 @@
 (use-package emmet-mode
   :hook ((sgml-mode . emmet-mode)
          (js-mode . emmet-mode)
-         (web-mode . emmet-mode)
-         (css-mode . emmet-mode))
-  :custom
-  (emmet-expand-jsx-className? t))
+         (web-mode . emmet-mode))
+  :config
+  (setq emmet-expand-jsx-className? t))
 
 ;; --- markdown ---
 (defun fp/set-markdown-header-font-sizes ()
