@@ -130,6 +130,18 @@
   (setq auto-save-file-name-transforms
         `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
 
+;; --- Mini frame ---
+(use-package mini-frame
+  :config
+  (custom-set-variables
+   '(mini-frame-show-parameters
+     '((top . 0.15)
+       (width . 90)
+       (height . 10)
+       (left . 0.5))))
+  (setq mini-frame-resize 'grow-only)
+  (mini-frame-mode))
+
 ;; --- Disable mouse ---
 (use-package disable-mouse
   :init (global-disable-mouse-mode))
@@ -330,7 +342,7 @@
 
   (fp/leader-keys
     "s" '(:ignore t :which-key "search")
-    "ss" '(swiper :which-key "swiper")
+    "ss" '(swiper-isearch :which-key "isearch")
     "sg" '(counsel-projectile-rg :which-key "counsel-projectile-rg"))
 
   (fp/leader-keys
@@ -500,6 +512,13 @@
                 :username "runeanielsen"
                 :auth 'forge))
 
+;; --- lisp ---
+(use-package lispyville
+  :init
+  (general-add-hook '(emacs-lisp-mode-hook lisp-mode-hook clojure-mode-hook) #'lispyville-mode)
+  :config
+  (lispyville-set-key-theme '(operators c-w additional)))
+
 ;; --- commmon lisp ---
 (defvar inferior-lisp-program "sbcl")
 
@@ -620,7 +639,6 @@
   :hook (clojure-mode . clj-refactor-mode)
   :config
   (setq cljr-warn-on-eval nil))
-
 
 ;; --- protobuf ---
 (use-package protobuf-mode
