@@ -130,18 +130,6 @@
   (setq auto-save-file-name-transforms
         `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
 
-;; --- Mini frame ---
-(use-package mini-frame
-  :config
-  (custom-set-variables
-   '(mini-frame-show-parameters
-     '((top . 0.15)
-       (width . 90)
-       (height . 10)
-       (left . 0.5))))
-  (setq mini-frame-resize 'grow-only)
-  (mini-frame-mode))
-
 ;; --- Disable mouse ---
 (use-package disable-mouse
   :init (global-disable-mouse-mode))
@@ -241,6 +229,19 @@
   :config
   (set-face-attribute 'mode-line nil :family "Fira Code" :height 85)
   (set-face-attribute 'mode-line-inactive nil :family "Fira Code" :height 85))
+
+;; --- Mini frame ---
+(use-package mini-frame
+  :config
+  (custom-set-variables
+   '(mini-frame-show-parameters
+     '((top . 0.15)
+       (width . 90)
+       (height . 10)
+       (left . 0.5))))
+  (setq mini-frame-resize 'grow-only)
+  (setq mini-frame-color-shift-step 10)
+  (mini-frame-mode))
 
 ;; --- Theme Magic Pywal ---
 (use-package theme-magic
