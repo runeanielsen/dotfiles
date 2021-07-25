@@ -236,11 +236,11 @@
   (custom-set-variables
    '(mini-frame-show-parameters
      '((top . 0.15)
-       (width . 90)
+       (width . 100)
        (height . 10)
        (left . 0.5))))
   (setq mini-frame-resize 'grow-only)
-  (setq mini-frame-color-shift-step 10)
+  (setq mini-frame-color-shift-step 30)
   (mini-frame-mode))
 
 ;; --- Theme Magic Pywal ---
