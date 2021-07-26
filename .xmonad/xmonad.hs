@@ -73,7 +73,7 @@ myKeys =
   , ("M-<Return>", spawn (myTerminal ++ " -e zsh"))
 
     -- My applications
-  , ("M-f", spawn "firefox")
+  , ("M-f", spawn "qutebrowser")
   , ("M-e", spawn "emacs")
   , ("M-i", spawn "~/.config/scripts/dmenu-passmenu.sh")
   , ("M-b", spawn "~/.config/scripts/dmenu-books.sh")

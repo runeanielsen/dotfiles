@@ -3,7 +3,7 @@ auto-reload yes
 max-items 50
 
 # externel browser
-browser "firefox %u"
+browser "qutebrowser %u"
 
 # unbind keys
 unbind-key ENTER
