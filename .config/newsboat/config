@@ -1,6 +1,6 @@
 # general settings
 auto-reload yes
-max-items 50
+max-items 25
 
 # externel browser
 browser "qutebrowser %u"
