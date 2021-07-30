@@ -16,6 +16,7 @@ export PAGER="less"
 export GOPATH=$HOME/go
 export GOBIN=$HOME/go/bin
 export PATH=$PATH:$(go env GOPATH)/bin
+export GO111MODULE="on" 
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
