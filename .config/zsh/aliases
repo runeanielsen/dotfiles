@@ -22,10 +22,10 @@ alias dotf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 alias bk='epy $(find ~/Nas/books -name $(exa ~/Nas/books -R | rg '.epub' | fzf))'
 
-alias ma='mount -a'
+alias ma='mount /home/notation/nas'
 alias r='ranger'
 alias bt='bluetoothctl'
-alias of='cd ~/Projects/openftth/'
+alias pomo='pomodoro-cli'
 
 alias k='kubectl'
 alias kaf='kubectl apply -f'
