@@ -439,7 +439,7 @@
   :after evil
   :custom
   (evil-collection-outline-bind-tab-p nil)
-  :config
+  :init
   (evil-collection-init))
 
 ;; --- Hydra ---
