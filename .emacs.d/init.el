@@ -230,19 +230,6 @@
   (set-face-attribute 'mode-line nil :family "Fira Code" :height 85)
   (set-face-attribute 'mode-line-inactive nil :family "Fira Code" :height 85))
 
-;; --- Mini frame ---
-(use-package mini-frame
-  :config
-  (custom-set-variables
-   '(mini-frame-show-parameters
-     '((top . 0.15)
-       (width . 100)
-       (height . 10)
-       (left . 0.5))))
-  (setq mini-frame-resize 'grow-only)
-  (setq mini-frame-color-shift-step 30)
-  (mini-frame-mode))
-
 ;; --- Theme Magic Pywal ---
 (use-package theme-magic
   :config
@@ -631,8 +618,18 @@
     (let-routes 1)
     (context 2)))
 
+(defun fp/cider-format-buffer-no-errors ()
+  (condition-case nil
+      (cider-format-buffer)
+    (error nil)))
+
+(defun cider-install-save-hooks ()
+  "Cider install save hooks."
+  (add-hook 'before-save-hook #'fp/cider-format-buffer-no-errors t t))
+
 (use-package cider
-  :hook (clojure-mode . cider-mode)
+  :hook ((clojure-mode . cider-mode)
+         (cider-mode . cider-install-save-hooks))
   :custom ((cider-repl-pop-to-buffer-on-connect 'display-only)
            (cider-repl-display-help-banner nil)))
 
