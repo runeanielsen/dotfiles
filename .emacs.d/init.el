@@ -619,6 +619,7 @@
     (context 2)))
 
 (defun fp/cider-format-buffer-no-errors ()
+  "Call cider-format-buffer - do not show error if cider-format fails."
   (condition-case nil
       (cider-format-buffer)
     (error nil)))
