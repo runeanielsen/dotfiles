@@ -195,6 +195,7 @@
   (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
   (setq dashboard-startup-banner "~/.emacs.d/banner-text.txt")
   (setq dashboard-show-shortcuts nil)
+  (setq dashboard-set-init-info nil)
   (setq dashboard-set-footer nil))
 
 ;; --- Helpful ---
@@ -291,6 +292,13 @@
   "Switch to projectile project. (HACK fixes performance issues somehow??)."
   (interactive)
   (projectile-switch-project))
+
+(defun fp/persp-kill ()
+  "Persp kill and switch to dashboard."
+  (interactive)
+  (persp-kill nil)
+  (switch-to-buffer "*dashboard*")
+  (dashboard-refresh-buffer))
 
 ;; --- General ---
 (use-package general
@@ -396,7 +404,7 @@
     "pd" '(projectile-remove-known-project :which-key "remove-project")
     "pp" '(fp/projectile-switch-project :which-key "switch-project")
     "pb" '(projectile-switch-to-buffer :which-key "switch-buffer")
-    "pk" '(persp-kill :which-key "kill-project"))
+    "pk" '(fp/persp-kill :which-key "kill-project"))
 
   (fp/leader-keys
     "f"  '(:ignore t :which-key "files")
@@ -405,7 +413,8 @@
     "fd" '(dired-create-directory :which-key "create-directory")
     "fs" '(evil-write :which-key "write")
     "fS" '(evil-write-all :which-key "write-all")
-    "ft" '(counsel-load-theme :which-key "load-theme")))
+    "ft" '(counsel-load-theme :which-key "load-theme")
+    "fq" '(evil-save-and-close :which-key "save-and-close")))
 
 ;; --- Evil mode ---
 (use-package evil
@@ -749,6 +758,7 @@
 ;; --- markdown ---
 (defun fp/set-markdown-header-font-sizes ()
   "Set markdown header font sizes."
+
   (dolist (face '((markdown-header-face-1 . 1.1)
                   (markdown-header-face-2 . 1.05)
                   (markdown-header-face-3 . 1.0)
@@ -765,5 +775,45 @@
   :config
   (setq markdown-command "marked")
   (add-hook 'markdown-mode-hook 'fp/markdown-mode-hook))
+
+;; --- org-mode ---
+(defun fp/org-font-setup ()
+  "Org-mode font setup."
+  ;; Replace list hyphen with dot
+  (font-lock-add-keywords 'org-mode
+                          '(("^ *\\([-]\\) "
+                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+
+  (dolist (face '((org-level-1 . 1.2)
+                  (org-level-2 . 1.15)
+                  (org-level-3 . 1.1)
+                  (org-level-4 . 1.0)
+                  (org-level-5 . 1.0)
+                  (org-level-6 . 1.0)
+                  (org-level-7 . 1.0)
+                  (org-level-8 . 1.0)))))
+
+(use-package org
+  :hook ((org-mode . org-indent-mode))
+  :custom (org-startup-truncated nil)
+  :config
+  (fp/org-font-setup))
+
+(defun fp/org-mode-visual-fill ()
+  "Set org mode visual fill settings."
+  (advice-add 'text-scale-adjust :after #'visual-fill-column-adjust)
+  (setq visual-fill-column-width 100
+        visual-fill-column-center-text t)
+  (visual-fill-column-mode)
+  (visual-line-mode))
+
+(use-package visual-fill-column
+  :hook (org-mode . fp/org-mode-visual-fill))
+
+(use-package org-bullets
+  :after org
+  :hook (org-mode . org-bullets-mode)
+  :custom
+  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
 ;;; init.el ends here
