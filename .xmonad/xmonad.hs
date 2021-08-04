@@ -91,7 +91,7 @@ myKeys =
 -- Main
 main :: IO ()
 main = do 
-    xmproc <- spawnPipe "xmobar -x 0 /home/notation/.config/xmobar/xmobar.config"
+    xmproc <- spawnPipe "xmobar -x 0 ~/.config/xmobar/xmobar.config"
     xmonad $ fullscreenSupport $ docks defaultConfig
         { layoutHook =          myLayout
         , logHook =             dynamicLogWithPP xmobarPP
