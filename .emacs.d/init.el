@@ -510,6 +510,11 @@
                 :auth 'forge))
 
 ;; --- lisp ---
+;; (use-package lispy
+;;   :hook ((clojure-mode . lispy-mode)
+;;          (lisp-mode . lispy-mode)
+;;          (emacs-lisp-mode . lispy-mode)))
+
 (use-package lispyville
   :init
   (general-add-hook '(emacs-lisp-mode-hook lisp-mode-hook clojure-mode-hook) #'lispyville-mode)
