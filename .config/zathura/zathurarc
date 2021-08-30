@@ -1,10 +1,9 @@
 set selection-clipboard clipboard
 set window-title-basename true
-set font "Fira Code 10"
 
 set recolor true
 set recolor-keephue true
 
 set recolor-lightcolor "#efe3d0"
 set recolor-darkcolor "black"
-set default-bg "#efe3d0"
+set default-bg "white"
