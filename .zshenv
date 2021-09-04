@@ -24,7 +24,7 @@ export BROWSER="/usr/bin/firefox"
 
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export DOTNET_ROOT="/usr/share/dotnet"
-export MSBuildSDKsPath=$(echo /usr/share/dotnet/sdk/5.*/Sdks);
+export MSBuildSDKsPath=$(echo /usr/share/dotnet/sdk/6.*/Sdks);
 export PATH="$PATH:$HOME/.dotnet/tools"
 
 export PYTHONPATH="/usr/share/qgis/python:/usr/share/qgis/python/plugins:/usr/lib/python3.9"
