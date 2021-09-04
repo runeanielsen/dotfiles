@@ -813,6 +813,9 @@
   :hook ((org-mode . org-indent-mode))
   :custom (org-startup-truncated nil)
   :config
+  (setq org-edit-src-content-indentation 0
+        org-src-tab-acts-natively t
+        org-src-preserve-indentation t)
   (fp/org-font-setup))
 
 (defun fp/org-mode-visual-fill ()
