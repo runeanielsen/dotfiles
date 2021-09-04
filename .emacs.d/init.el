@@ -835,4 +835,8 @@
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
+(use-package org-tempo
+  :straight nil
+  :after org)
+
 ;;; init.el ends here
