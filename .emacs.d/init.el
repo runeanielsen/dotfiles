@@ -442,13 +442,13 @@
 (use-package hydra
   :defer t)
 
-(defhydra hydra-text-scale (:timeout 4)
+(defhydra hydra-text-scale ()
   "scale text"
   ("j" text-scale-decrease "out")
   ("k" text-scale-increase "in")
   ("f" nil "finished" :exit t))
 
-(defhydra hydra-window-resize (:timeout 4)
+(defhydra hydra-window-resize ()
   "window-resize"
   ("h" evil-window-decrease-width "decrease-width")
   ("j" evil-window-decrease-height "decrease-height")
