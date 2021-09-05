@@ -763,7 +763,6 @@
 ;; --- markdown ---
 (defun fp/set-markdown-header-font-sizes ()
   "Set markdown header font sizes."
-
   (dolist (face '((markdown-header-face-1 . 1.3)
                   (markdown-header-face-2 . 1.2)
                   (markdown-header-face-3 . 1.1)
