@@ -764,22 +764,18 @@
 (defun fp/set-markdown-header-font-sizes ()
   "Set markdown header font sizes."
 
-  (dolist (face '((markdown-header-face-1 . 1.1)
-                  (markdown-header-face-2 . 1.05)
-                  (markdown-header-face-3 . 1.0)
-                  (markdown-header-face-4 . 1.0)
+  (dolist (face '((markdown-header-face-1 . 1.3)
+                  (markdown-header-face-2 . 1.2)
+                  (markdown-header-face-3 . 1.1)
+                  (markdown-header-face-4 . 1.05)
                   (markdown-header-face-5 . 1.0)))
     (set-face-attribute (car face) nil :weight 'normal :height (cdr face))))
-
-(defun fp/markdown-mode-hook ()
-  "Set header font sizes on setup hook."
-  (fp/set-markdown-header-font-sizes))
 
 (use-package markdown-mode
   :mode "\\.md\\'"
   :config
   (setq markdown-command "marked")
-  (add-hook 'markdown-mode-hook 'fp/markdown-mode-hook))
+  (add-hook 'markdown-mode-hook 'fp/set-markdown-header-font-sizes))
 
 ;; --- org-mode ---
 (defun fp/org-font-setup ()
