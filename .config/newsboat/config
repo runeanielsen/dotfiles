@@ -1,6 +1,6 @@
 # general settings
 auto-reload yes
-max-items 25
+max-items 50
 
 # externel browser
 browser "firefox %u"
