@@ -664,7 +664,8 @@
                        (setq js-indent-level 2))))
 
 ;; --- yaml mode ---
-(use-package yaml-mode)
+(use-package yaml-mode
+  :mode ("\\.yaml\\'" "\\.yml\\'"))
 
 ;; --- csharp mode ---
 (defun lsp-csharp-install-save-hooks ()
