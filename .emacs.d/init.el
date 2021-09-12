@@ -764,10 +764,10 @@
 ;; --- markdown ---
 (defun fp/set-markdown-header-font-sizes ()
   "Set markdown header font sizes."
-  (dolist (face '((markdown-header-face-1 . 1.3)
-                  (markdown-header-face-2 . 1.2)
-                  (markdown-header-face-3 . 1.1)
-                  (markdown-header-face-4 . 1.05)
+  (dolist (face '((markdown-header-face-1 . 1.2)
+                  (markdown-header-face-2 . 1.1)
+                  (markdown-header-face-3 . 1.05)
+                  (markdown-header-face-4 . 1.1)
                   (markdown-header-face-5 . 1.0)))
     (set-face-attribute (car face) nil :weight 'normal :height (cdr face))))
 
@@ -786,10 +786,10 @@
                              (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
   ;; Set faces for heading levels
-  (dolist (face '((org-level-1 . 1.3)
-                  (org-level-2 . 1.2)
-                  (org-level-3 . 1.1)
-                  (org-level-4 . 1.05)
+  (dolist (face '((org-level-1 . 1.2)
+                  (org-level-2 . 1.1)
+                  (org-level-3 . 1.05)
+                  (org-level-4 . 1.0)
                   (org-level-5 . 1.0)
                   (org-level-6 . 1.0)
                   (org-level-7 . 1.0)
