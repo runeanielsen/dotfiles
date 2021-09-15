@@ -654,8 +654,8 @@
 
 (use-package clj-refactor
   :hook (clojure-mode . clj-refactor-mode)
-  :config
-  (setq cljr-warn-on-eval nil))
+  :custom
+  (cljr-warn-on-eval nil))
 
 ;; --- protobuf ---
 (use-package protobuf-mode
