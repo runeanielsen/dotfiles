@@ -213,6 +213,12 @@
 ;; --- All-the-icons ---
 (use-package all-the-icons)
 
+;; --- Ace window ---
+(use-package ace-window
+  :custom
+  ((aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+   (aw-background nil)))
+
 ;; --- vterm ---
 (use-package vterm
   :commands (projectile-run-vterm vterm)
@@ -385,9 +391,7 @@
 
   (fp/leader-keys
     "w" '(:ignore t :which-key "window")
-    "ww" '(other-window :which-key "other-window")
-    "wl" '(evil-window-right :which-key "right-window")
-    "wh" '(evil-window-left :which-key "left-window")
+    "ww" '(ace-window :which-key "ace-window")
     "wn" '(fp/split-window-balanced :which-key "split-window-balanced")
     "ws" '(window-swap-states :which-key "window-swap-states")
     "wd" '(fp/delete-window-balanced :which-key "delete-window"))
@@ -843,8 +847,15 @@
   (org-roam-complete-everywhere t)
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
-         ("C-c n i" . org-roam-node-insert))
+         ("C-c n i" . org-roam-node-insert)
+         :map org-roam-dailies-map
+         ("Y" . org-roam-dailies-capture-yesterday)
+         ("T" . org-roam-dailies-capture-tomorrow))
+  :bind-keymap
+  ("C-c n d" . org-roam-dailies-map)
   :config
-  (org-roam-setup))
+  (org-roam-setup)
+  (require 'org-roam-dailies)
+  (org-roam-db-autosync-mode))
 
 ;;; init.el ends here
