@@ -544,18 +544,6 @@
          typescript-mode
          js-mode))
 
-;; --- tree-sitter ---
-(use-package tree-sitter
-  :hook ((go-mode . tree-sitter-hl-mode)
-         (csharp-mode . tree-sitter-hl-mode)
-         (js-mode . tree-sitter-hl-mode)
-         (typescript-mode . tree-sitter-hl-mode)
-         (python-mode . tree-sitter-hl-mode)
-         (scss-mode . tree-sitter-hl-mode)
-         (css-mode . tree-sitter-hl-mode)))
-
-(use-package tree-sitter-langs)
-
 ;; --- Company mode ---
 (use-package company
   :init (add-hook 'after-init-hook 'global-company-mode)
