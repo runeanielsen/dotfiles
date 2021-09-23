@@ -226,16 +226,21 @@
   (setq vterm-shell "zsh"))
 
 ;; --- Modeline ---
-(use-package doom-modeline
-  :init (doom-modeline-mode 1)
-  :custom ((doom-modeline-persp-name nil)
-           (doom-modeline-height 24)
-           (doom-modeline-buffer-file-name-style 'file-name)
-           (doom-modeline-buffer-encoding nil)
-           (doom-modeline-major-mode-icon nil))
+(use-package mood-line
   :config
-  (set-face-attribute 'mode-line nil :family "Fira Code" :height 85)
-  (set-face-attribute 'mode-line-inactive nil :family "Fira Code" :height 85))
+  (mood-line-mode))
+
+;; --- change fringe color ---
+(defun correct-fringe-color ()
+  "Correct the fringe color."
+  (set-face-attribute 'fringe nil
+                      :foreground (face-foreground 'default)
+                      :background (face-background 'default)))
+(advice-add 'counsel-load-theme :after #'correct-fringe-color)
+
+;; --- window divider ---
+(setq window-divider-default-right-width 1)
+(window-divider-mode)
 
 ;; --- Theme Magic Pywal ---
 (use-package theme-magic
@@ -246,9 +251,6 @@
 (use-package hc-zenburn-theme
   :defer t)
 
-(use-package humanoid-themes
-  :defer t)
-
 ;; --- Set theme based on time ---
 (defun set-theme-based-on-time (hour-to-go-dark-mode hour-to-go-light-mode light-theme dark-theme)
   (let ((hour (nth 2 (decode-time (seconds-to-time (current-time))))))
@@ -257,7 +259,8 @@
           (load-theme dark-theme t))))
 
 ;; Light doing the day, dark doing the afternoon/night
-(set-theme-based-on-time 17 8 'humanoid-light 'hc-zenburn)
+(set-theme-based-on-time 17 8 'whiteboard 'hc-zenburn)
+(correct-fringe-color)
 
 ;; --- automatically clean whitespace ---
 (use-package ws-butler
@@ -498,6 +501,18 @@
   :config
   (ivy-mode 1))
 
+(use-package ivy-posframe
+  :config
+  (setq ivy-posframe-display-functions-alist
+        '((t . ivy-posframe-display-at-frame-center))
+        ivy-posframe-height-alist '((t . 20)))
+  (setq ivy-posframe-parameters
+        '((left-fringe . 15)
+          (right-fringe . 15)))
+  (setq ivy-posframe-border-width 1)
+  (setq ivy-posframe-width 120)
+  (ivy-posframe-mode 1))
+
 ;; --- Magit ---
 (use-package magit
   :commands magit-status
@@ -550,9 +565,6 @@
   :custom ((company-idle-delay 0)
            (company-minimum-prefix-lenght 1))
   :bind (("<C-tab>" . company-complete)))
-
-(use-package company-box
-  :hook (company-mode . company-box-mode))
 
 ;; --- which key ---
 (use-package which-key
