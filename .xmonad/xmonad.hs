@@ -42,6 +42,7 @@ myStartupHook = do
   spawn "nitrogen --restore &"
   spawn "xset r rate 250 25 &"
   spawn "xset s off -dpms &"
+  spawn "unclutter -idle 5 &"
   setWMName "LG3D"
 
 -- Layout
