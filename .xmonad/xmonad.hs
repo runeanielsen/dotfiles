@@ -97,7 +97,7 @@ main = do
         { layoutHook =          myLayout
         , logHook =             dynamicLogWithPP xmobarPP
                                 { ppOutput = hPutStrLn xmproc
-                                , ppTitle = xmobarColor "white" "" . shorten 20 
+                                , ppTitle = xmobarColor "white" "" . shorten 50
                                 , ppCurrent = xmobarColor "#FFA500" ""
                                 , ppSep =  "<fc=white> | </fc>"
                                 , ppHiddenNoWindows = xmobarColor "grey" ""
