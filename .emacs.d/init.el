@@ -309,6 +309,13 @@
   (switch-to-buffer "*dashboard*")
   (dashboard-refresh-buffer))
 
+(defun fp/find-file-or-buffer ()
+  "Find file."
+  (interactive)
+  (if (projectile-project-p)
+      (counsel-projectile-find-file)
+    (ivy-switch-buffer)))
+
 ;; --- General ---
 (use-package general
   :config
@@ -324,7 +331,7 @@
     "TAB l" '(persp-next :which-key "persp-next"))
 
   (fp/leader-keys
-    "SPC" '(counsel-projectile-find-file :which-key "find-file"))
+    "SPC" '(fp/find-file-or-buffer :which-key "find-file"))
 
   (fp/leader-keys
     "d" '(:ignore t :which-key "dired")
@@ -335,7 +342,7 @@
     "b" '(:ignore t :which-key "buffer")
     "bb" '(persp-switch-to-buffer :which-key "switch-to-buffer-persp")
     "bB" '(counsel-projectile-switch-to-buffer :which-key "projectile-switch-buffer")
-    "bf" '(counsel-switch-buffer :which-key "counsel-switch-buffer")
+    "bf" '(ivy-switch-buffer :which-key "ivy-switch-buffer")
     "ba" '(persp-add-buffer :which-key "persp-add-buffer")
     "bd" '(bury-buffer :which-key "bury-current-buffer")
     "bk" '(persp-kill-buffer :which-key "kill-current-buffer")
