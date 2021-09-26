@@ -98,19 +98,6 @@
 (progn
   (setq-default indent-tabs-mode nil))
 
-;; display line numbers
-(global-display-line-numbers-mode)
-(setq display-line-numbers-type 'relative)
-
-(dolist (mode '(org-mode-hook
-                term-mode-hook
-                vterm-mode-hook
-                shell-mode-hook
-                sly-mrepl-mode-hook
-                eshell-mode-hook
-                cider-repl-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 0))))
-
 ;; --- Disable unnecessary UI elements ---
 (progn
   ;; Do not show menu bar.
@@ -126,6 +113,23 @@
 
 ;; Change fringe mode
 (set-fringe-mode 1)
+
+;; Display line numbers
+(use-package display-line-numbers
+  :straight nil
+  :custom
+  (display-line-numbers-type 'relative)
+  (display-line-numbers-grow-only t)
+  :config
+  (global-display-line-numbers-mode)
+  (dolist (mode '(org-mode-hook
+                  term-mode-hook
+                  vterm-mode-hook
+                  shell-mode-hook
+                  sly-mrepl-mode-hook
+                  eshell-mode-hook
+                  cider-repl-mode-hook))
+    (add-hook mode (lambda () (display-line-numbers-mode 0)))))
 
 ;; --- No littering ---
 (use-package no-littering
@@ -242,10 +246,6 @@
   :config
   (theme-magic-export-theme-mode))
 
-;; --- themes ---
-(use-package hc-zenburn-theme
-  :defer t)
-
 ;; --- Set theme based on time ---
 (defun set-theme-based-on-time (hour-to-go-dark-mode hour-to-go-light-mode light-theme dark-theme)
   (let ((hour (nth 2 (decode-time (seconds-to-time (current-time))))))
@@ -254,7 +254,7 @@
           (load-theme dark-theme t))))
 
 ;; Light doing the day, dark doing the afternoon/night
-(set-theme-based-on-time 17 8 'modus-operandi 'hc-zenburn)
+(set-theme-based-on-time 17 8 'modus-operandi 'modus-vivendi)
 
 ;; --- automatically clean whitespace ---
 (use-package ws-butler
