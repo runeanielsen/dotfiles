@@ -124,6 +124,9 @@
   (when (fboundp 'scroll-bar-mode)
     (scroll-bar-mode -1)))
 
+;; Change fringe mode
+(set-fringe-mode 1)
+
 ;; --- No littering ---
 (use-package no-littering
   :config
@@ -230,14 +233,6 @@
   :config
   (mood-line-mode))
 
-;; --- change fringe color ---
-(defun correct-fringe-color ()
-  "Correct the fringe color."
-  (set-face-attribute 'fringe nil
-                      :foreground (face-foreground 'default)
-                      :background (face-background 'default)))
-(advice-add 'counsel-load-theme :after #'correct-fringe-color)
-
 ;; --- window divider ---
 (setq window-divider-default-right-width 1)
 (window-divider-mode)
@@ -259,8 +254,7 @@
           (load-theme dark-theme t))))
 
 ;; Light doing the day, dark doing the afternoon/night
-(set-theme-based-on-time 17 8 'whiteboard 'hc-zenburn)
-(correct-fringe-color)
+(set-theme-based-on-time 17 8 'modus-operandi 'hc-zenburn)
 
 ;; --- automatically clean whitespace ---
 (use-package ws-butler
@@ -508,7 +502,16 @@
   :config
   (ivy-mode 1))
 
+;; --- Ivy posframe ---
+
+(defun correct-fringe-color ()
+  "Correct the fringe color."
+  (set-face-attribute 'fringe nil
+                      :foreground (face-attribute 'ivy-posframe :background nil t)
+                      :background (face-attribute 'ivy-posframe :background nil t)))
+
 (use-package ivy-posframe
+  :after ivy
   :config
   (setq ivy-posframe-display-functions-alist
         '((t . ivy-posframe-display-at-frame-center))
@@ -518,7 +521,10 @@
           (right-fringe . 15)))
   (setq ivy-posframe-border-width 1)
   (setq ivy-posframe-width 120)
-  (ivy-posframe-mode 1))
+  (ivy-posframe-mode 1)
+  (advice-add 'counsel-load-theme :after #'posframe-delete-all)
+  (advice-add 'counsel-load-theme :after #'correct-fringe-color)
+  (correct-fringe-color))
 
 ;; --- Magit ---
 (use-package magit
