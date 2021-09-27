@@ -23,6 +23,7 @@
   (load bootstrap-file nil 'nomessage))
 
 (straight-use-package 'use-package)
+(setq package-enable-at-startup nil)
 (setq straight-use-package-by-default t)
 
 ;; Load helper package
@@ -113,6 +114,9 @@
 
 ;; Change fringe mode
 (set-fringe-mode 1)
+
+;; Disable recentf mode
+(recentf-mode nil)
 
 ;; Display line numbers
 (use-package display-line-numbers
@@ -308,7 +312,7 @@
   (interactive)
   (if (projectile-project-p)
       (counsel-projectile-find-file)
-    (ivy-switch-buffer)))
+    (call-interactively 'ivy-switch-buffer)))
 
 ;; --- General ---
 (use-package general
@@ -503,9 +507,10 @@
   (ivy-mode 1))
 
 ;; --- Ivy posframe ---
-
-(defun correct-fringe-color ()
+(defun correct-color-theme-switch ()
   "Correct the fringe color."
+  (set-face-attribute 'line-number nil
+                      :background (face-attribute 'default :background nil t))
   (set-face-attribute 'fringe nil
                       :foreground (face-attribute 'ivy-posframe :background nil t)
                       :background (face-attribute 'ivy-posframe :background nil t)))
@@ -523,8 +528,8 @@
   (setq ivy-posframe-width 120)
   (ivy-posframe-mode 1)
   (advice-add 'counsel-load-theme :after #'posframe-delete-all)
-  (advice-add 'counsel-load-theme :after #'correct-fringe-color)
-  (correct-fringe-color))
+  (advice-add 'counsel-load-theme :after #'correct-color-theme-switch)
+  (correct-color-theme-switch))
 
 ;; --- Magit ---
 (use-package magit
@@ -798,36 +803,13 @@
   (add-hook 'markdown-mode-hook 'fp/set-markdown-header-font-sizes))
 
 ;; --- org-mode ---
-(defun fp/org-font-setup ()
-  "Org mode font setup."
-  ;; Set faces for heading levels
-  (dolist (face '((org-level-1 . 1.2)
-                  (org-level-2 . 1.1)
-                  (org-level-3 . 1.05)
-                  (org-level-4 . 1.0)
-                  (org-level-5 . 1.0)
-                  (org-level-6 . 1.0)
-                  (org-level-7 . 1.0)
-                  (org-level-8 . 1.0)))
-    (set-face-attribute (car face) nil :font "Fira Code" :weight 'regular :height (cdr face)))
-
-  ;; Ensure that anything that should be fixed-pitch in Org files appears that way
-  (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-table nil   :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
-
 (use-package org
   :hook ((org-mode . org-indent-mode))
   :custom (org-startup-truncated nil)
   :config
   (setq org-edit-src-content-indentation 0
         org-src-tab-acts-natively t
-        org-src-preserve-indentation t)
-  (fp/org-font-setup))
+        org-src-preserve-indentation t))
 
 (defun fp/org-mode-visual-fill ()
   "Set org mode visual fill settings."
@@ -844,7 +826,7 @@
   :after org
   :hook (org-mode . org-bullets-mode)
   :custom
-  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+  (org-bullets-bullet-list '("●" "○" "●" "○" "●" "○" "●")))
 
 (use-package org-tempo
   :straight nil
