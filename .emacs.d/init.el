@@ -272,6 +272,12 @@
   (split-window-right)
   (balance-windows))
 
+(defun fp/split-window-balanced-horizontal ()
+  "Split window horizontal and balance all windows after."
+  (interactive)
+  (split-window-below)
+  (balance-windows))
+
 (defun fp/delete-window-balanced ()
   "Delete window and balance all windows after."
   (interactive)
@@ -401,6 +407,7 @@
     "w" '(:ignore t :which-key "window")
     "ww" '(ace-window :which-key "ace-window")
     "wn" '(fp/split-window-balanced :which-key "split-window-balanced")
+    "wh" '(fp/split-window-balanced-horizontal :which-key "split-window-balanced-horizontal")
     "ws" '(window-swap-states :which-key "window-swap-states")
     "wd" '(fp/delete-window-balanced :which-key "delete-window"))
 
