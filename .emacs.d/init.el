@@ -26,9 +26,6 @@
 (setq package-enable-at-startup nil)
 (setq straight-use-package-by-default t)
 
-;; Load helper package
-(require 'straight-x)
-
 ;; Native compilation
 (setq comp-async-report-warnings-errors nil)
 (setq package-native-compile t)
