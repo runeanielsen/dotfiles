@@ -2,10 +2,6 @@
 set wrap
 set linebreak
 
-" Relative line numbers
-" au BufReadPost * set relativenumber
-au BufReadPost * set number
-
 " Disable the mouse
 set mouse=c
 
@@ -17,3 +13,6 @@ set confirm
 
 " Change all the existing tab characters to match the current tab settings,
 :retab
+
+" Yank to clipboard
+set clipboard+=unnamedplus
