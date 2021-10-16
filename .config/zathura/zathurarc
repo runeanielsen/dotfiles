@@ -6,4 +6,4 @@ set recolor-keephue true
 
 set recolor-lightcolor "#efe3d0"
 set recolor-darkcolor "black"
-set default-bg "white"
+set default-bg "black"
