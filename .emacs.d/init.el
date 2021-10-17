@@ -247,15 +247,9 @@
   :config
   (theme-magic-export-theme-mode))
 
-;; --- Set theme based on time ---
-(defun set-theme-based-on-time (hour-to-go-dark-mode hour-to-go-light-mode light-theme dark-theme)
-  (let ((hour (nth 2 (decode-time (seconds-to-time (current-time))))))
-        (if (and (<= hour hour-to-go-dark-mode) (>= hour hour-to-go-light-mode))
-            (load-theme light-theme t)
-          (load-theme dark-theme t))))
-
-;; Light doing the day, dark doing the afternoon/night
-(set-theme-based-on-time 17 8 'modus-operandi 'modus-vivendi)
+;; -- Load theme ---
+(use-package mood-one-theme)
+(load-theme 'modus-vivendi t)
 
 ;; --- automatically clean whitespace ---
 (use-package ws-butler
@@ -385,7 +379,9 @@
     "co" '(cider-load-buffer-and-switch-to-repl-buffer :which-key "cider-load-buffer-and-switch-to-repl-buffer")
     "cr" '(cljr-rename-symbol :which-key "cljr-rename-symbol")
     "cR" '(cider-restart :which-key "cider-restart")
-    "cQ" '(cider-quit :which-key "cider-quit"))
+    "cQ" '(cider-quit :which-key "cider-quit")
+    "cnr" '(cider-ns-refresh :which-key "cider-ns-refresh")
+    "cpc" '(cider-pprint-eval-last-sexp-to-comment :which-key "cider-pprint-eval-last-sexp-to-comment"))
 
   (fp/leader-keys
     :states '(normal visual)
@@ -599,9 +595,9 @@
   :config (which-key-mode))
 
 ;; --- smartparens ---
-(use-package smartparens
-  :config
-  (smartparens-global-mode t))
+;; (use-package smartparens
+;;   :config
+;;   (smartparens-global-mode t))
 
 ;; --- Flycheck ---
 (use-package flycheck
@@ -677,10 +673,10 @@
   :custom ((cider-repl-pop-to-buffer-on-connect 'display-only)
            (cider-repl-display-help-banner nil)))
 
-(use-package clj-refactor
-  :hook (clojure-mode . clj-refactor-mode)
-  :custom
-  (cljr-warn-on-eval nil))
+;; (use-package clj-refactor
+;;   :hook (clojure-mode . clj-refactor-mode)
+;;   :custom
+;;   (cljr-warn-on-eval nil))
 
 ;; --- protobuf ---
 (use-package protobuf-mode
