@@ -385,6 +385,11 @@
 
   (fp/leader-keys
     :states '(normal visual)
+    :keymaps 'lispyville-mode-map
+    "clw" '(lispyville-wrap-round :which-key "lispyville-wrap-round"))
+
+  (fp/leader-keys
+    :states '(normal visual)
     :keymaps 'lsp-mode-map
     "co" '(lsp-organize-imports :which-key "organize-imports")
     "ct" '(lsp-goto-type-definition :which-key "goto-type-definition")
@@ -547,11 +552,6 @@
                 :auth 'forge))
 
 ;; --- lisp ---
-;; (use-package lispy
-;;   :hook ((clojure-mode . lispy-mode)
-;;          (lisp-mode . lispy-mode)
-;;          (emacs-lisp-mode . lispy-mode)))
-
 (use-package lispyville
   :init
   (general-add-hook '(emacs-lisp-mode-hook lisp-mode-hook clojure-mode-hook) #'lispyville-mode)
@@ -595,9 +595,9 @@
   :config (which-key-mode))
 
 ;; --- smartparens ---
-;; (use-package smartparens
-;;   :config
-;;   (smartparens-global-mode t))
+(use-package smartparens
+  :config
+  (smartparens-global-mode t))
 
 ;; --- Flycheck ---
 (use-package flycheck
