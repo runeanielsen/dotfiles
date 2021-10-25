@@ -34,8 +34,8 @@ alias qrc='~/.config/scripts/qrc.sh'
 alias scf='~/.config/scripts/snake-case-files.sh'
 alias task='~/.config/scripts/task'
 
-alias xhome='xrandr --output DP1 --mode 2560x1440 --rate 144 --output eDP1 --off'
-alias xwork='xrandr --output DP1 --mode 3440x1440 --output eDP1 --off'
+alias xhome='xrandr --output DP1 --mode 2560x1440 --rate 60 --output eDP1 --off && nitrogen --restore'
+alias xwork='xrandr --output DP1 --mode 3440x1440 --output eDP1 --off && nitrogen --restore'
 
 alias copy='xsel --clipboard --input'
 alias paste='xsel --clipboard --output'
