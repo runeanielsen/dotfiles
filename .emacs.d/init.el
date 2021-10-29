@@ -673,10 +673,10 @@
   :custom ((cider-repl-pop-to-buffer-on-connect 'display-only)
            (cider-repl-display-help-banner nil)))
 
-;; (use-package clj-refactor
-;;   :hook (clojure-mode . clj-refactor-mode)
-;;   :custom
-;;   (cljr-warn-on-eval nil))
+ (use-package clj-refactor
+   :hook (clojure-mode . clj-refactor-mode)
+   :custom
+   (cljr-warn-on-eval nil))
 
 ;; --- protobuf ---
 (use-package protobuf-mode
