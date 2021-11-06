@@ -381,6 +381,9 @@
     "cR" '(cider-restart :which-key "cider-restart")
     "cQ" '(cider-quit :which-key "cider-quit")
     "cnr" '(cider-ns-refresh :which-key "cider-ns-refresh")
+    "cna" '(cider-ns-reload :which-key "cider-ns-reload")
+    "cnA" '(cider-ns-reload-all :which-key "cider-ns-reload-all")
+    "cnl" '(cider-load-all-project-ns :which-key "cider-load-all-project-ns")
     "cpc" '(cider-pprint-eval-last-sexp-to-comment :which-key "cider-pprint-eval-last-sexp-to-comment"))
 
   (fp/leader-keys
