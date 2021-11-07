@@ -408,7 +408,9 @@
     "w" '(:ignore t :which-key "window")
     "ww" '(ace-window :which-key "ace-window")
     "wn" '(fp/split-window-balanced :which-key "split-window-balanced")
-    "wh" '(fp/split-window-balanced-horizontal :which-key "split-window-balanced-horizontal")
+    "wN" '(fp/split-window-balanced-horizontal :which-key "split-window-balanced-horizontal")
+    "wh" '(evil-window-left :which-key "window-left")
+    "wl" '(evil-window-right :which-key "window-right")
     "ws" '(window-swap-states :which-key "window-swap-states")
     "wd" '(fp/delete-window-balanced :which-key "delete-window"))
 
