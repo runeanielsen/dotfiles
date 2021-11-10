@@ -535,7 +535,7 @@
         '((left-fringe . 15)
           (right-fringe . 15)))
   (setq ivy-posframe-border-width 1)
-  (setq ivy-posframe-width 120)
+  (setq ivy-posframe-width 130)
   (ivy-posframe-mode 1)
   (advice-add 'counsel-load-theme :after #'posframe-delete-all)
   (advice-add 'counsel-load-theme :after #'correct-color-theme-switch)
