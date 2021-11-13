@@ -675,8 +675,9 @@
 (use-package cider
   :hook ((clojure-mode . cider-mode)
          (cider-mode . cider-install-save-hooks))
-  :custom ((cider-repl-pop-to-buffer-on-connect 'display-only)
-           (cider-repl-display-help-banner nil)))
+  :custom ((cider-repl-pop-to-buffer-on-connect nil)
+           (cider-repl-display-help-banner nil)
+           (cider-repl-dis)))
 
  (use-package clj-refactor
    :hook (clojure-mode . clj-refactor-mode)
