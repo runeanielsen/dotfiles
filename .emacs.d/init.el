@@ -39,7 +39,7 @@
 (setq read-process-output-max (* 3072 1024))
 
 ;; Font
-(set-face-attribute 'default nil :font "Fira Code" :height 110)
+(set-face-attribute 'default nil :font "iosevka" :height 130)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -676,8 +676,7 @@
   :hook ((clojure-mode . cider-mode)
          (cider-mode . cider-install-save-hooks))
   :custom ((cider-repl-pop-to-buffer-on-connect nil)
-           (cider-repl-display-help-banner nil)
-           (cider-repl-dis)))
+           (cider-repl-display-help-banner nil)))
 
  (use-package clj-refactor
    :hook (clojure-mode . clj-refactor-mode)
