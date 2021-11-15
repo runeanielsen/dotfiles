@@ -39,7 +39,7 @@
 (setq read-process-output-max (* 3072 1024))
 
 ;; Font
-(set-face-attribute 'default nil :font "iosevka" :height 130)
+(set-face-attribute 'default nil :font "Fira Code" :height 120)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -535,7 +535,6 @@
         '((left-fringe . 15)
           (right-fringe . 15)))
   (setq ivy-posframe-border-width 1)
-  (setq ivy-posframe-width 130)
   (ivy-posframe-mode 1)
   (advice-add 'counsel-load-theme :after #'posframe-delete-all)
   (advice-add 'counsel-load-theme :after #'correct-color-theme-switch)
@@ -617,7 +616,8 @@
   :hook (lsp-mode . lsp-enable-which-key-integration)
   :custom ((lsp-enable-links nil)
            (lsp-log-io nil)
-           (lsp-headerline-breadcrumb-enable nil))
+           (lsp-headerline-breadcrumb-enable nil)
+           (lsp-idle-delay 0.250))
   :commands (lsp lsp-deferred))
 
 ;; --- lsp-ivy ---
@@ -639,7 +639,7 @@
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
 
 (use-package go-mode
-  :hook ((go-mode . lsp-deferred)
+  :hook ((go-mode . lsp)
          (go-mode . lsp-go-install-save-hooks)))
 
 ;; --- clojure ---
@@ -703,7 +703,7 @@
   (add-hook 'before-save-hook #'lsp-format-buffer t t))
 
 (use-package csharp-mode
-  :hook ((csharp-mode . lsp-deferred)
+  :hook ((csharp-mode . lsp)
          (csharp-mode . lsp-csharp-install-save-hooks)))
 
 ;; --- python ---
