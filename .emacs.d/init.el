@@ -525,6 +525,14 @@
                       :foreground (face-attribute 'ivy-posframe :background nil t)
                       :background (face-attribute 'ivy-posframe :background nil t)))
 
+(defun fp/dynamic-ivy-posframe-get-size ()
+  "Set the ivy-posframe size according to the current frame."
+  (let ((height (or ivy-posframe-height (or ivy-height 10)))
+        (width (min (or ivy-posframe-width 120) (round (* .75 (frame-width))))))
+    (list :height height :width width :min-height height :min-width width)))
+
+(setq ivy-posframe-size-function 'fp/dynamic-ivy-posframe-get-size)
+
 (use-package ivy-posframe
   :after ivy
   :config
