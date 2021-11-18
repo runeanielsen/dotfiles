@@ -625,8 +625,7 @@
   :hook (lsp-mode . lsp-enable-which-key-integration)
   :custom ((lsp-enable-links nil)
            (lsp-log-io nil)
-           (lsp-headerline-breadcrumb-enable nil)
-           (lsp-idle-delay 0.250))
+           (lsp-headerline-breadcrumb-enable nil))
   :commands (lsp lsp-deferred))
 
 ;; --- lsp-ivy ---
