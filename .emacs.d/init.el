@@ -363,6 +363,7 @@
     "ci" '(tide-jump-to-implementation :which-key "go-to-reference")
     "cf" '(tide-jump-to-definition :which-key "organize-imports")
     "cr" '(tide-rename-symbol :which-key "rename")
+    "cd" '(tide-documentation-at-point :which-key "documentation")
     "cR" '(tide-restart-server :which-key "restart-tide"))
 
   (fp/leader-keys
