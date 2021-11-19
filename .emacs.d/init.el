@@ -792,13 +792,6 @@
          (scss-mode . prettier-js-mode)
          (typescript-mode . prettier-js-mode)))
 
-(use-package emmet-mode
-  :hook ((sgml-mode . emmet-mode)
-         (js-mode . emmet-mode)
-         (web-mode . emmet-mode))
-  :config
-  (setq emmet-expand-jsx-className? t))
-
 ;; --- markdown ---
 (use-package markdown-mode
   :ensure t
