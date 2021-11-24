@@ -32,3 +32,7 @@ export PYTHONPATH="/usr/share/qgis/python:/usr/share/qgis/python/plugins:/usr/li
 export TODO_FILENAME="/home/notation/.todo.json"
 
 export TERM=xterm vim
+
+export PATH=~/.nvm/versions/node/v16.13.0/bin:$PATH
+export NVM_DIR=~/.nvm
+[[ -s "/usr/share/nvm/nvm.sh" ]] && source "/usr/share/nvm/nvm.sh" --no-use
