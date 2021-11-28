@@ -586,6 +586,7 @@
   :hook (org-mode
          emacs-lisp-mode
          lisp-mode
+         sly-mode
          clojure-mode
          typescript-mode
          js-mode))
