@@ -14,6 +14,7 @@ alias ksvca='kubectl get svc --all-namespaces'
 
 alias qrc='~/.config/scripts/qrc.sh'
 alias scf='~/.config/scripts/snake-case-files.sh'
+alias spell='~/.config/scripts/spell.sh'
 alias task='~/.config/scripts/task'
 
 alias xhome='xrandr --output DP1 --mode 2560x1440 --rate 60 --output eDP1 --off && nitrogen --restore'
