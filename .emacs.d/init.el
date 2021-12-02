@@ -35,8 +35,8 @@
   :config
   (gcmh-mode 1))
 
-;; Increase the amount of data which Emacs reads from process to 3mb
-(setq read-process-output-max (* 3072 1024))
+;; Increase the amount of data which Emacs reads from process to 4mb
+(setq read-process-output-max (* 4096 1024))
 
 ;; Font
 (set-face-attribute 'default nil :font "Fira Code" :height 110)
