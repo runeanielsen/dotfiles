@@ -541,8 +541,8 @@
         '((t . ivy-posframe-display-at-frame-center))
         ivy-posframe-height-alist '((t . 20)))
   (setq ivy-posframe-parameters
-        '((left-fringe . 15)
-          (right-fringe . 15)))
+        '((left-fringe . 16)
+          (right-fringe . 16)))
   (setq ivy-posframe-border-width 1)
   (ivy-posframe-mode 1)
   (advice-add 'counsel-load-theme :after #'posframe-delete-all)
