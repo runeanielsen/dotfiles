@@ -251,7 +251,7 @@
 
 ;; -- Load theme ---
 (use-package mood-one-theme)
-(load-theme 'modus-vivendi t)
+(load-theme 'mood-one t)
 
 ;; --- automatically clean whitespace ---
 (use-package ws-butler
