@@ -248,7 +248,6 @@
   (theme-magic-export-theme-mode))
 
 ;; -- Load theme ---
-(use-package mood-one-theme)
 (load-theme 'modus-vivendi t)
 
 ;; --- automatically clean whitespace ---
