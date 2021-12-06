@@ -239,8 +239,10 @@
   (mood-line-mode))
 
 ;; --- window divider ---
-(setq window-divider-default-right-width 1)
-(window-divider-mode)
+(use-package window-divider-mode
+  :straight nil
+  :custom (wind-divider-default-right-width 0)
+  :config (window-divider-mode))
 
 ;; --- Theme Magic Pywal ---
 (use-package theme-magic
@@ -248,6 +250,7 @@
   (theme-magic-export-theme-mode))
 
 ;; -- Load theme ---
+(use-package mood-one-theme)
 (load-theme 'modus-vivendi t)
 
 ;; --- automatically clean whitespace ---
