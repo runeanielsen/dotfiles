@@ -717,13 +717,6 @@
   :hook ((csharp-mode . lsp)
          (csharp-mode . lsp-csharp-install-save-hooks)))
 
-;; --- python ---
-(use-package lsp-python-ms
-  :init (setq lsp-python-ms-auto-install-server t)
-  :hook (python-mode . (lambda ()
-                          (require 'lsp-python-ms)
-                          (lsp))))
-
 ;; --- Tide ---
 (defun setup-tide-mode ()
   "Setup Tide Mode."
