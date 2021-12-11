@@ -401,6 +401,11 @@
 
   (fp/leader-keys
     :states '(normal visual)
+    :keymaps 'dictionary-mode-map
+    "cs" '(dictionary-search :which-key "dictionary-search"))
+
+  (fp/leader-keys
+    :states '(normal visual)
     :keymaps 'lsp-mode-map
     "co" '(lsp-organize-imports :which-key "organize-imports")
     "ct" '(lsp-goto-type-definition :which-key "goto-type-definition")
@@ -856,3 +861,7 @@
 
 (use-package flyspell-correct
   :commands (flycheck-correct-wrapper))
+
+(use-package dictionary
+  :straight nil
+  :custom (dictionary-server "dict.org"))
