@@ -396,6 +396,11 @@
 
   (fp/leader-keys
     :states '(normal visual)
+    :keymaps 'org-mode-map
+    "cs" '(flyspell-correct-wrapper :which-key "flyspell-correct-wrapper"))
+
+  (fp/leader-keys
+    :states '(normal visual)
     :keymaps 'lsp-mode-map
     "co" '(lsp-organize-imports :which-key "organize-imports")
     "ct" '(lsp-goto-type-definition :which-key "goto-type-definition")
@@ -845,4 +850,9 @@
   (require 'org-roam-dailies)
   (org-roam-db-autosync-mode))
 
-;;; init.el ends here
+;; Flyspell
+(use-package flyspell
+  :hook (org-mode . flyspell-mode))
+
+(use-package flyspell-correct
+  :commands (flycheck-correct-wrapper))
