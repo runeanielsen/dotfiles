@@ -250,8 +250,7 @@
   (theme-magic-export-theme-mode))
 
 ;; -- Load theme ---
-(use-package mood-one-theme)
-(load-theme 'mood-one t)
+(load-theme 'modus-vivendi t)
 
 ;; --- automatically clean whitespace ---
 (use-package ws-butler
@@ -724,8 +723,13 @@
   (add-hook 'before-save-hook #'lsp-format-buffer t t))
 
 (use-package csharp-mode
+  :defer t
   :hook ((csharp-mode . lsp)
          (csharp-mode . lsp-csharp-install-save-hooks)))
+
+;; --- fsharp mode ---
+(use-package fsharp-mode
+  :defer t)
 
 ;; --- Tide ---
 (defun setup-tide-mode ()
