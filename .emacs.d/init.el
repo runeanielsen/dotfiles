@@ -369,6 +369,11 @@
 
   (fp/leader-keys
     :states '(normal visual)
+    :keymaps 'lispyville-mode-map
+    "lp" '(lispyville-wrap-with-round :which-key "lispyville-wrap-with-round"))
+
+  (fp/leader-keys
+    :states '(normal visual)
     :keymaps 'clojure-mode-map
     "ct" '(cider-test-run-project-tests :which-key "cider-test-run-project-tests")
     "pi" '(cljr-add-project-dependency :which-key "cljr-add-project-dependency")
