@@ -728,7 +728,6 @@
   (add-hook 'before-save-hook #'lsp-format-buffer t t))
 
 (use-package csharp-mode
-  :defer t
   :hook ((csharp-mode . lsp)
          (csharp-mode . lsp-csharp-install-save-hooks)))
 
