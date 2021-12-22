@@ -732,8 +732,13 @@
          (csharp-mode . lsp-csharp-install-save-hooks)))
 
 ;; --- fsharp mode ---
+(defun lsp-fsharp-install-save-hooks ()
+  "LSP FSharp install save hooks."
+  (add-hook 'before-save-hook #'lsp-format-buffer t t))
+
 (use-package fsharp-mode
-  :defer t)
+  :hook ((fsharp-mode . lsp)
+         (fsharp-mode . lsp-fsharp-install-save-hooks)))
 
 ;; --- Tide ---
 (defun setup-tide-mode ()
