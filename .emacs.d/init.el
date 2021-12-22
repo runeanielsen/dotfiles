@@ -39,7 +39,7 @@
 (setq read-process-output-max (* 4096 1024))
 
 ;; Font
-(set-face-attribute 'default nil :font "Fira Code" :height 110)
+(set-face-attribute 'default nil :font "Fira Code" :height 115)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
