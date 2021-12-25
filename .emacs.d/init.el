@@ -573,6 +573,7 @@
 
 (use-package forge
   :after magit
+  :custom (forge-add-default-bindings nil)
   :config
   (ghub-request "GET" "/user" nil
                 :forge 'github
