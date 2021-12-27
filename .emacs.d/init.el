@@ -508,8 +508,8 @@
 (use-package dired
   :straight nil
   :custom ((dired-listing-switches "-agho --group-directories-first"))
+  :hook (dired-mode-hook . fp/quiet-auto-revert)
   :config
-  (add-hook 'dired-mode-hook #'fp/quiet-auto-revert t nil)
   (evil-collection-define-key 'normal 'dired-mode-map
     "h" 'dired-single-up-directory
     "l" 'dired-single-buffer
