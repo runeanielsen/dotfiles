@@ -709,10 +709,6 @@
    :custom
    (cljr-warn-on-eval nil))
 
-;; --- protobuf ---
-(use-package protobuf-mode
-  :mode "\\.proto\\'")
-
 ;; --- json mode ---
 (use-package json-mode
   :hook (json-mode . (lambda ()
