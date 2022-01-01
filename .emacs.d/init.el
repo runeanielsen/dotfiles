@@ -572,8 +572,9 @@
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
 (use-package forge
+  :init
+  (setq forge-add-default-bindings nil)
   :after magit
-  :custom (forge-add-default-bindings nil)
   :config
   (ghub-request "GET" "/user" nil
                 :forge 'github
