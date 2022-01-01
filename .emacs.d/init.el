@@ -92,6 +92,12 @@
 ;; Show parens pairs
 (show-paren-mode 1)
 
+;; Change fringe mode
+(set-fringe-mode 1)
+
+;; Disable recentf mode
+(recentf-mode nil)
+
 ;; make indent commands use space only (never tab character)
 (progn
   (setq-default indent-tabs-mode nil))
@@ -108,12 +114,6 @@
   ;; Do not show scroll bar.
   (when (fboundp 'scroll-bar-mode)
     (scroll-bar-mode -1)))
-
-;; Change fringe mode
-(set-fringe-mode 1)
-
-;; Disable recentf mode
-(recentf-mode nil)
 
 ;; Display line numbers
 (use-package display-line-numbers
