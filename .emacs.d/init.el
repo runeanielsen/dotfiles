@@ -422,6 +422,11 @@
     "cR" '(lsp-workspace-restart :which-key "workspace-restart"))
 
   (fp/leader-keys
+    :states '(normal visual)
+    :keymaps '(lsp-mode-map csharp-mode-map)
+    "cqq" '(lsp-csharp-run-test-at-point :which-key "lsp-csharp-run-test-at-point"))
+
+  (fp/leader-keys
     "w" '(:ignore t :which-key "window")
     "ww" '(ace-window :which-key "ace-window")
     "wn" '(fp/split-window-balanced :which-key "split-window-balanced")
