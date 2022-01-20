@@ -725,8 +725,33 @@
   :mode ("\\.yaml\\'" "\\.yml\\'"))
 
 ;; --- csharp mode ---
+(defun fp/process-sort-usings (usings)
+  "Sort CSharp usings."
+  (->> usings
+       (-map (lambda (x) (replace-regexp-in-string "using \\|;\\|\\." "" x)))
+       (-zip-lists usings)
+       (seq-sort-by (lambda (x) (-> x cdr car)) #'string<)
+       (-map #'car)))
+
+(defun fp/sort-usings-csharp ()
+  "Sort using statements i C#."
+  (interactive)
+  (let* ((buffer-string (buffer-substring-no-properties (point-min) (point-max)))
+         (matches (flatten-list (s-match-strings-all
+                                 "using [A-Za-z\.]+;"
+                                 buffer-string)))
+         (usings (fp/process-sort-usings matches)))
+    (unless (equal matches usings)
+      (save-excursion
+        (goto-char 1)
+        (let ((x 0))
+          (while (search-forward-regexp "using [A-Za-z\.]+;\n" nil t)
+            (replace-match (concat (nth x usings) "\n"))
+            (setq x (+ 1 x))))))))
+
 (defun lsp-csharp-install-save-hooks ()
   "LSP CSharp install save hooks."
+  (add-hook 'before-save-hook #'fp/sort-usings-csharp)
   (add-hook 'before-save-hook #'lsp-format-buffer t t))
 
 (use-package csharp-mode
