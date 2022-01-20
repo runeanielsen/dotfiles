@@ -902,7 +902,8 @@
 
 ;; Flyspell
 (use-package flyspell
-  :hook (org-mode . flyspell-mode))
+  :hook ((org-mode . flyspell-mode)
+         (markdown-mode . flyspell-mode)))
 
 (use-package flyspell-correct
   :commands (flycheck-correct-wrapper))
