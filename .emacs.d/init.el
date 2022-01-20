@@ -857,7 +857,8 @@
   :config
   (setq org-edit-src-content-indentation 0
         org-src-tab-acts-natively t
-        org-src-preserve-indentation t))
+        org-src-preserve-indentation t
+        org-hide-emphasis-markers t))
 
 (defun fp/org-mode-visual-fill ()
   "Set org mode visual fill settings."
