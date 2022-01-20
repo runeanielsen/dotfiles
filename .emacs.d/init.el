@@ -443,6 +443,11 @@
     "oe" '(fp/open-init-el :which-key "open-init.el"))
 
   (fp/leader-keys
+    "t" '(:ignore t :which-key "text")
+    "ts" '(hydra-text-scale/body :which-key "scale text")
+    "tls" '(sort-lines :which-key "sort-lines"))
+
+  (fp/leader-keys
     "p" '(:ignore t :which-key "projectile")
     "pa" '(projectile-add-known-project :which-key "add-project")
     "pd" '(projectile-remove-known-project :which-key "remove-project")
@@ -501,7 +506,6 @@
   ("f" nil "finished" :exit t))
 
 (fp/leader-keys
-  "ts" '(hydra-text-scale/body :which-key "scale text")
   "wr" '(hydra-window-resize/body :which-key "resize window"))
 
 ;; --- Dired ---
