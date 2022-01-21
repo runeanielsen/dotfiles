@@ -643,9 +643,12 @@
 (use-package flycheck
   :hook ((lsp-mode . flycheck-mode)
          (clojure-mode . flycheck-mode)
-         (emacs-lisp-mode . flycheck-mode))
+         (emacs-lisp-mode . flycheck-mode)
+         (markdown-mode . flycheck-mode))
   ; Hack because csharp lsp mode often bugs out
-  :custom ((flycheck-checker-error-threshold 10000)))
+  :custom ((flycheck-checker-error-threshold 10000)
+           (flycheck-check-syntax-automatically '(mode-enabled save idle-buffer-switch))
+           (flycheck-buffer-switch-check-intermediate-buffers t)))
 
 ;; --- lsp mode ---
 (use-package lsp-mode
@@ -911,3 +914,5 @@
 (use-package dictionary
   :straight nil
   :custom (dictionary-server "dict.org"))
+
+;;; init.el ends here
