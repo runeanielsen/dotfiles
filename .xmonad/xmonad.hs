@@ -41,6 +41,7 @@ myStartupHook = do
   spawn "trayer --edge top --align right --widthtype request --SetDockType true --SetPartialStrut true --expand true --iconspacing 4 --tint 0x000000 --transparent true --alpha 0 &"
   spawn "xcompmgr -a &"
   spawn "nitrogen --restore &"
+  spawn "dunst &"
   spawn "xset r rate 225 25 &"
   spawn "xset s off -dpms &"
   spawn "unclutter -idle 5 &"
