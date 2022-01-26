@@ -375,7 +375,10 @@
   (fp/leader-keys
     :states '(normal visual)
     :keymaps 'clojure-mode-map
-    "ct" '(cider-test-run-project-tests :which-key "cider-test-run-project-tests")
+    "ct" '(:ignore t :which-key "Clojure tests")
+    "ctt" '(cider-test-run-test :which-key "cider-test-run-test")
+    "ctn" '(cider-test-run-ns-tests :which-key "cider-tst-run-ns-tests")
+    "cta" '(cider-test-run-project-tests :which-key "cider-test-run-project-tests")
     "pi" '(cljr-add-project-dependency :which-key "cljr-add-project-dependency")
     "cd" '(cider-doc :which-key "cider-doc")
     "cs" '(cider-jack-in :which-key "cider-jack-in")
@@ -716,10 +719,10 @@
   :custom ((cider-repl-pop-to-buffer-on-connect nil)
            (cider-repl-display-help-banner nil)))
 
-(use-package clj-refactor
-  :hook (clojure-mode . clj-refactor-mode)
-  :custom
-  (cljr-warn-on-eval nil))
+;; (use-package clj-refactor
+;;   :hook (clojure-mode . clj-refactor-mode)
+;;   :custom
+;;   (cljr-warn-on-eval nil))
 
 ;; --- json mode ---
 (use-package json-mode
