@@ -148,14 +148,6 @@
   (when noninteractive
     (shut-up-silence-emacs)))
 
-;; --- yasnippet ---
-(use-package yasnippet
-  :config
-  (global-set-key (kbd "<C-tab>") 'yas-expand)
-  (setq yas-snippet-dirs
-        '("~/.emacs.d/snippets"))
-  (yas-global-mode 1))
-
 ;; --- license templates ---
 (use-package license-templates)
 
