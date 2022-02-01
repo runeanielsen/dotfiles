@@ -242,7 +242,9 @@
   (theme-magic-export-theme-mode))
 
 ;; -- Load theme ---
-(load-theme 'modus-vivendi t)
+(use-package mood-one-theme
+  :config (load-theme 'mood-one t))
+
 
 ;; --- automatically clean whitespace ---
 (use-package ws-butler
