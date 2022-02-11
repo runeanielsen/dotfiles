@@ -540,7 +540,7 @@
 ;; --- Ivy posframe ---
 (defun correct-color-theme-switch ()
   "Correct theme color on switch."
-  ;;(set-face-foreground 'vertical-border (face-attribute 'line-number :foreground nil t))
+  (set-face-foreground 'vertical-border (face-attribute 'mode-line :background nil t))
   (set-face-attribute 'line-number nil
                       :background (face-attribute 'default :background nil t)
                       :foreground (face-attribute 'default :foreground nil t))
