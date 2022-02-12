@@ -24,9 +24,11 @@
 
 (straight-use-package 'use-package)
 (setq package-enable-at-startup nil)
+(defvar straight-use-package-by-default)
 (setq straight-use-package-by-default t)
 
 ;; Native compilation
+(defvar comp-async-report-warnings-errors)
 (setq comp-async-report-warnings-errors nil)
 (setq package-native-compile t)
 
@@ -730,12 +732,14 @@
 
 ;; --- csharp mode ---
 (defun fp/process-sort-usings (usings)
-  "Sort CSharp usings."
+  "Sort CSharp USINGS."
   (->> usings
        (-map (lambda (x) (replace-regexp-in-string "using \\|;\\|\\." "" x)))
        (-zip-lists usings)
        (seq-sort-by (lambda (x) (-> x cdr car)) #'string<)
        (-map #'car)))
+
+(fp/process-sort-usings)
 
 (defun fp/sort-usings-csharp ()
   "Sort using statements i C#."
