@@ -226,6 +226,7 @@
   (setq vterm-shell "zsh"))
 
 ;; --- Modeline ---
+
 (use-package mood-line
   :config
   (mood-line-mode))
@@ -242,7 +243,7 @@
   (theme-magic-export-theme-mode))
 
 ;; -- Load theme ---
-(load-theme 'modus-vivendi t)
+(load-theme 'wombat t)
 
 ;; --- automatically clean whitespace ---
 (use-package ws-butler
