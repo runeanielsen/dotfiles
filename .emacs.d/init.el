@@ -640,6 +640,7 @@
 (use-package flycheck
   :hook ((lsp-mode . flycheck-mode)
          (clojure-mode . flycheck-mode)
+         (c-mode. flycheck-mode)
          (emacs-lisp-mode . flycheck-mode)
          (markdown-mode . flycheck-mode)
          (tide-mode . flycheck-mode))
