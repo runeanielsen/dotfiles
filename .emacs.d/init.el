@@ -774,6 +774,11 @@
   :hook ((fsharp-mode . lsp)
          (fsharp-mode . lsp-fsharp-install-save-hooks)))
 
+;; --- C mode ---
+(use-package cc-mode
+  :straight nil
+  :config (c-set-offset 'case-label '+))
+
 ;; --- Tide ---
 (defun setup-tide-mode ()
   "Setup Tide Mode."
