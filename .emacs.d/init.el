@@ -454,6 +454,9 @@
     "pk" '(fp/persp-kill :which-key "kill-project"))
 
   (fp/leader-keys
+    "wr" '(hydra-window-resize/body :which-key "resize window"))
+
+  (fp/leader-keys
     "f"  '(:ignore t :which-key "files")
     "ff" '(counsel-find-file :which-key "find-file")
     "fc" '(dired-create-empty-file :which-key "create-file")
@@ -502,9 +505,6 @@
   ("k" evil-window-increase-height "increase-height")
   ("l" evil-window-increase-width "increase-width")
   ("f" nil "finished" :exit t))
-
-(fp/leader-keys
-  "wr" '(hydra-window-resize/body :which-key "resize window"))
 
 ;; --- Dired ---
 (defun fp/quiet-auto-revert ()
@@ -621,7 +621,7 @@
 (use-package company
   :init (add-hook 'after-init-hook 'global-company-mode)
   :custom ((company-idle-delay nil)
-           (company-minimum-prefix-lenght 1))
+           (company-minimum-prefix-lenght 1)))
   :bind (("<C-tab>" . company-complete)))
 
 ;; --- which key ---
