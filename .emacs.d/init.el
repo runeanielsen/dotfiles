@@ -41,7 +41,7 @@
 (setq read-process-output-max (* 4096 1024))
 
 ;; Font
-(set-face-attribute 'default nil :font "Fira Code" :height 120)
+(set-face-attribute 'default nil :font "Fira Code" :height 130)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -620,7 +620,7 @@
 ;; --- Company mode ---
 (use-package company
   :init (add-hook 'after-init-hook 'global-company-mode)
-  :custom ((company-idle-delay nil)
+  :custom ((company-idle-delay 0)
            (company-minimum-prefix-lenght 1))
   :bind (("<C-tab>" . company-complete)))
 
@@ -774,10 +774,15 @@
   :hook ((fsharp-mode . lsp)
          (fsharp-mode . lsp-fsharp-install-save-hooks)))
 
-;; --- C mode ---
+;; --- C ---
 (use-package cc-mode
   :straight nil
   :config (c-set-offset 'case-label '+))
+
+;; --- Zig ---
+(use-package zig-mode
+  :hook (zig-mode . lsp-deferred)
+  :custom (zig-format-on-save nil))
 
 ;; --- Tide ---
 (defun setup-tide-mode ()
