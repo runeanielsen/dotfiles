@@ -33,6 +33,9 @@ export TODO_FILENAME="/home/notation/.todo.json"
 
 export TERM=xterm vim
 
-export PATH=~/.nvm/versions/node/v16.13.0/bin:$PATH
+export PATH="$PATH:$HOME/.nvm/versions/node/v16.13.0/bin"
 export NVM_DIR=~/.nvm
+
+export PATH="$PATH:$HOME/.config/scripts"
+
 [[ -s "/usr/share/nvm/nvm.sh" ]] && source "/usr/share/nvm/nvm.sh" --no-use
