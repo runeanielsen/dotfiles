@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
-BOOKS_PATH=$HOME/nas/books/
+books_path=$HOME/nas/books/
 
-PROG=$(exa $BOOKS_PATH -R | rg '\.pdf|\.epub')
+prog=$(exa $books_path -R | rg '\.pdf|\.epub')
 
-CMD=$(dmenu -l 20 -i -nf '#ffffff' -nb '#222222' -sf '#222222' -sb '#ffffff' <<< "$PROG")
+cmd=$(dmenu -l 20 -i -nf '#ffffff' -nb '#222222' -sf '#222222' -sb '#ffffff' <<< "$prog")
 
 # Exit if cmd output is empty
-if [ -z "$CMD" ]
+if [ -z "$cmd" ]
 then
     exit 1
 fi
 
-BOOK_PATH="$BOOKS_PATH$CMD"
-$(zathura "${BOOK_PATH}")
+book_path="$books_path$cmd"
+$(zathura "${book_path}")

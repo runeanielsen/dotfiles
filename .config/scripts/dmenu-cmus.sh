@@ -2,8 +2,7 @@
 
 MUSIC_PATH=$HOME/Nas/Music/
 
-prog="
-"$(ls $MUSIC_PATH)
+prog="$(ls $MUSIC_PATH)"
 
 cmd=$(dmenu -l 20 -i -nf '#ffffff' -nb '#222222' -sf '#222222' -sb '#ffffff' <<< "$prog")
 

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-PLAYING=$(cmus-remote -Q | grep -w 'status')
+playing=$(cmus-remote -Q | grep -w 'status')
 
-echo $PLAYING
-if [[ $PLAYING == "status playing" ]]
+echo $playing
+if [[ $playing == "status playing" ]]
 then
     $(cmus-remote -U)
 else
