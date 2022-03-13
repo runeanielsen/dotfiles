@@ -2,15 +2,15 @@
 
 BOOKS_PATH=$HOME/nas/books/
 
-prog=$(exa $BOOKS_PATH -R | rg '\.pdf|\.epub')
+PROG=$(exa $BOOKS_PATH -R | rg '\.pdf|\.epub')
 
-cmd=$(dmenu -l 20 -i -nf '#ffffff' -nb '#222222' -sf '#222222' -sb '#ffffff' <<< "$prog")
+CMD=$(dmenu -l 20 -i -nf '#ffffff' -nb '#222222' -sf '#222222' -sb '#ffffff' <<< "$PROG")
 
 # Exit if cmd output is empty
-if [ -z "$cmd" ]
+if [ -z "$CMD" ]
 then
     exit 1
 fi
 
-BOOK=$(find $BOOKS_PATH -name "$cmd")
-$(zathura "$BOOK")
+BOOK_PATH="$BOOKS_PATH$CMD"
+$(zathura "${BOOK_PATH}")
