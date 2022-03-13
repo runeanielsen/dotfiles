@@ -2,15 +2,16 @@
 
 VIDEOS_PATH=$HOME/nas/videos/
 
-prog=$(exa $VIDEOS_PATH -R | rg '\.webm|\.mp4|\.mkv')
+PROG=$(exa $VIDEOS_PATH -R | rg '\.webm|\.mp4|\.mkv')
 
-cmd=$(dmenu -l 20 -i -nf '#ffffff' -nb '#222222' -sf '#222222' -sb '#ffffff' <<< "$prog")
+CMD=$(dmenu -l 20 -i -nf '#ffffff' -nb '#222222' -sf '#222222' -sb '#ffffff' <<< "$PROG")
 
 # Exit if cmd output is empty
-if [ -z "$cmd" ]
+if [ -z "$CMD" ]
 then
     exit 1
 fi
 
-VIDEO=$(find $VIDEOS_PATH -name "$cmd")
-$(mpv "$VIDEO")
+VIDEO_PATH="$VIDEOS_PATH$CMD"
+
+$(mpv "${VIDEO_PATH}")
