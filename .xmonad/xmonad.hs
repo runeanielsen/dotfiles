@@ -18,22 +18,23 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName
+import XMonad.Layout.Spacing
 
 -- Settings
 myModMask :: KeyMask
 myModMask = mod4Mask
 
 myBorderWidth :: Word32
-myBorderWidth = 1
+myBorderWidth = 2
 
 myTerminal :: String
 myTerminal = "alacritty"
 
 myNormalBorderColor :: String
-myNormalBorderColor = "#2b303b"
+myNormalBorderColor = "#4b5467"
 
 myFocusedBorderColor :: String
-myFocusedBorderColor = "#ffffff"
+myFocusedBorderColor = "#8893a9"
 
 -- Startup Hook
 myStartupHook :: X ()
@@ -48,7 +49,7 @@ myStartupHook = do
   setWMName "LG3D"
 
 -- Layout
-myLayout = avoidStruts (smartBorders $ fullscreenFull $ tiled ||| noBorders Full)
+myLayout = avoidStruts (smartSpacingWithEdge 5 $ smartBorders $ fullscreenFull $ tiled ||| noBorders Full)
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
