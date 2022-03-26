@@ -25,7 +25,7 @@ myModMask :: KeyMask
 myModMask = mod4Mask
 
 myBorderWidth :: Word32
-myBorderWidth = 2
+myBorderWidth = 1
 
 myTerminal :: String
 myTerminal = "alacritty"
@@ -39,7 +39,7 @@ myFocusedBorderColor = "#8893a9"
 -- Startup Hook
 myStartupHook :: X ()
 myStartupHook = do
-  spawn "trayer --edge top --align right --widthtype pixel --height 22px --SetDockType true --SetPartialStrut true --expand true --iconspacing 4 --tint 0x000000 --transparent true --alpha 0 &"
+  spawn "trayer --edge top --align right --widthtype pixel --height 22px --SetDockType true --SetPartialStrut true --expand true --iconspacing 4 --tint 0x242424 --transparent true --alpha 0 &"
   spawn "xcompmgr -a &"
   spawn "nitrogen --restore &"
   spawn "dunst &"
@@ -49,7 +49,7 @@ myStartupHook = do
   setWMName "LG3D"
 
 -- Layout
-myLayout = avoidStruts (smartBorders $ spacingWithEdge 5 $ tiled) ||| avoidStruts (noBorders $ spacingWithEdge 0 Full)
+myLayout = avoidStruts (smartBorders $ spacingWithEdge 5 $ tiled) ||| avoidStruts (noBorders $ spacingWithEdge 0 $ Full)
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
