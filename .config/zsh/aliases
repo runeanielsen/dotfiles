@@ -1,4 +1,4 @@
-alias ls='exa -l'
+alias ls='exa'
 
 alias dotf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
@@ -17,7 +17,6 @@ alias scf='~/.config/scripts/snake-case-files.sh'
 alias spell='~/.config/scripts/spell.sh'
 alias task='~/.config/scripts/task'
 
-alias xhome='xrandr --output DP1 --mode 2560x1440 --rate 60 --output eDP1 --off && nitrogen --restore'
 alias xwork='xrandr --output DP1 --mode 3440x1440 --output eDP1 --off && nitrogen --restore'
 
 alias copy='xsel --clipboard --input'
