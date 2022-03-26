@@ -195,7 +195,6 @@
   (setq dashboard-items nil)
   (setq dashboard-center-content t)
   (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
-  (setq dashboard-startup-banner "~/.emacs.d/banner-text.txt")
   (setq dashboard-show-shortcuts nil)
   (setq dashboard-set-init-info nil)
   (setq dashboard-set-footer nil))
