@@ -25,7 +25,7 @@ myModMask :: KeyMask
 myModMask = mod4Mask
 
 myBorderWidth :: Word32
-myBorderWidth = 1
+myBorderWidth = 2
 
 myTerminal :: String
 myTerminal = "alacritty"
