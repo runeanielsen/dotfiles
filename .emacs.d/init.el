@@ -720,6 +720,9 @@
   :custom
   (cljr-warn-on-eval nil))
 
+;; --- Haksell mode ---
+(use-package haskell-mode)
+
 ;; --- json mode ---
 (use-package json-mode
   :hook (json-mode . (lambda ()
