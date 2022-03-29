@@ -4,7 +4,7 @@ set window-title-basename true
 set recolor false
 set recolor-keephue true
 
-set recolor-lightcolor "black"
+set recolor-lightcolor "#242424"
 set recolor-darkcolor "#e3ded7"
 set default-bg "white"
 
