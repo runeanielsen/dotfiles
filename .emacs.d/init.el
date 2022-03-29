@@ -642,6 +642,7 @@
          (c-mode . flycheck-mode)
          (emacs-lisp-mode . flycheck-mode)
          (markdown-mode . flycheck-mode)
+         (haskell-mode . flycheck-mode)
          (tide-mode . flycheck-mode))
   ; Hack because csharp lsp mode often bugs out
   :custom ((flycheck-checker-error-threshold 10000)
