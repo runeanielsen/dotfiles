@@ -676,7 +676,7 @@
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
 
 (use-package go-mode
-  :hook ((go-mode . lsp)
+  :hook ((go-mode . lsp-deferred)
          (go-mode . lsp-go-install-save-hooks)))
 
 ;; --- clojure ---
@@ -765,7 +765,7 @@
   (add-hook 'before-save-hook #'lsp-format-buffer t t))
 
 (use-package csharp-mode
-  :hook ((csharp-mode . lsp)
+  :hook ((csharp-mode . lsp-deferred)
          (csharp-mode . lsp-csharp-install-save-hooks)))
 
 ;; --- fsharp mode ---
@@ -774,7 +774,7 @@
   (add-hook 'before-save-hook #'lsp-format-buffer t t))
 
 (use-package fsharp-mode
-  :hook ((fsharp-mode . lsp)
+  :hook ((fsharp-mode . lsp-deferred)
          (fsharp-mode . lsp-fsharp-install-save-hooks)))
 
 ;; --- C ---
