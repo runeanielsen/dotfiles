@@ -413,6 +413,7 @@
     "ci" '(lsp-find-implementation :which-key "find-implementation")
     "ce" '(lsp-ui-flycheck-list :which-key "lsp-ui-flycheck-list")
     "cf" '(lsp-find-definition :which-key "find-definition")
+    "cF" '(lsp-format-buffer :which-key "format-buffer")
     "cd" '(fp/lsp-describe-thing-at-point :which-key "describe-thing-at-point")
     "ca" '(lsp-execute-code-action :which-key "code-action")
     "cr" '(lsp-rename :which-key "rename")
