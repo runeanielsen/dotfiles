@@ -722,7 +722,13 @@
   (cljr-warn-on-eval nil))
 
 ;; --- Haksell mode ---
-(use-package haskell-mode)
+(use-package haskell-mode
+  :config
+  (add-hook 'haskell-mode-hook #'lsp-deferred)
+  (add-hook 'haskell-literate-mode-hook #'lsp-deferred))
+
+(use-package lsp-haskell
+  :custom (lsp-haskell-server-path "/usr/bin/haskell-language-server"))
 
 ;; --- json mode ---
 (use-package json-mode
