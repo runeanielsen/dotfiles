@@ -244,7 +244,39 @@
   (theme-magic-export-theme-mode))
 
 ;; -- Load theme ---
-(load-theme 'wombat t)
+(use-package f)
+
+(defvar fp/remember-last-theme-dir (concat "/home/notation/.emacs.d/" "var/remember-last-theme"))
+(defvar fp/remember-last-theme-file (concat fp/remember-last-theme-dir "/remember-last"))
+(defvar fp/remember-last-theme-default 'wombat)
+
+(defun fp/get-last-theme ()
+  "Gets the last set theme."
+  (intern (f-read-text fp/remember-last-theme-file 'utf-8)))
+
+(defun fp/set-last-theme ()
+  "Set the last theme to the current theme."
+  (f-write-text (symbol-name (car custom-enabled-themes)) 'utf-8 fp/remember-last-theme-file))
+
+(defun fp/set-default-theme ()
+  "Set the default theme when none is saved."
+  (f-write-text (symbol-name fp/remember-last-theme-default) 'utf-8 fp/remember-last-theme-file))
+
+(defun fp/create-remember-last-theme-file ()
+  "Create directory and file if not exists."
+  (unless (f-exists? fp/remember-last-theme-dir)
+    (f-mkdir fp/remember-last-theme-dir))
+  (unless (f-exists? fp/remember-last-theme-file)
+      (f-touch fp/remember-last-theme-file)
+      (fp/set-default-theme)))
+
+(defun fp/remember-last-theme ()
+  "Remembers last set theme."
+  (fp/create-remember-last-theme-file)
+  (load-theme (fp/get-last-theme) t)
+  (advice-add 'counsel-load-theme :after #'fp/set-last-theme))
+
+(fp/remember-last-theme)
 
 ;; --- automatically clean whitespace ---
 (use-package ws-butler
@@ -365,6 +397,11 @@
     :states '(normal visual)
     :keymaps 'lispyville-mode-map
     "lp" '(lispyville-wrap-with-round :which-key "lispyville-wrap-with-round"))
+
+  (fp/leader-keys
+    :states '(normal visual)
+    :keymaps 'emacs-lisp-mode-map
+    "cd" '(describe-function :which-key "describe-function"))
 
   (fp/leader-keys
     :states '(normal visual)
