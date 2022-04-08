@@ -647,6 +647,7 @@
 ;; --- Rainbow mode ---
 (use-package rainbow-mode
   :hook (org-mode
+         haskell-mode
          emacs-lisp-mode
          lisp-mode
          sly-mode
