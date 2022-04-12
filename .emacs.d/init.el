@@ -41,7 +41,7 @@
 (setq read-process-output-max (* 4096 1024))
 
 ;; Font
-(set-face-attribute 'default nil :font "Jetbrains Mono" :height 120)
+(set-face-attribute 'default nil :font "Jetbrains Mono" :height 110)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -228,9 +228,17 @@
 
 ;; --- Modeline ---
 
-(use-package mood-line
+(use-package feebleline
   :config
-  (mood-line-mode))
+  (setq feebleline-msg-functions
+        '((feebleline-line-number :post "" :fmt "%5s")
+          (feebleline-column-number :pre ":" :fmt "%-2s")
+          (feebleline-file-directory :face feebleline-dir-face :post "")
+          (feebleline-file-or-buffer-name :face font-lock-keyword-face :post "")
+          (feebleline-file-modified-star :face font-lock-warning-face :post "")
+          (feebleline-git-branch :face feebleline-git-face :pre " : ")
+          (feebleline-project-name :align right)))
+  (feebleline-mode 1))
 
 ;; --- window divider ---
 (use-package window-divider-mode
@@ -580,6 +588,7 @@
 ;; --- Ivy posframe ---
 (defun correct-color-theme-switch ()
   "Correct theme color on switch."
+  (set-face-foreground 'window-divider (face-attribute 'mode-line :background nil t))
   (set-face-foreground 'vertical-border (face-attribute 'mode-line :background nil t))
   (set-face-attribute 'line-number nil
                       :background (face-attribute 'default :background nil t)
