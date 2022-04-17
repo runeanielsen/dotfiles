@@ -834,8 +834,13 @@
   :config (c-set-offset 'case-label '+))
 
 ;; --- Zig ---
+(defun lsp-zig-install-save-hooks ()
+  "LSP Zig install save hooks."
+  (add-hook 'before-save-hook #'lsp-format-buffer t t))
+
 (use-package zig-mode
-  :hook (zig-mode . lsp-deferred)
+  :hook ((zig-mode . lsp-deferred)
+         (zig-mode . lsp-zig-install-save-hooks))
   :custom (zig-format-on-save nil))
 
 ;; --- Tide ---
