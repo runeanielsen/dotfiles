@@ -41,7 +41,7 @@
 (setq read-process-output-max (* 4096 1024))
 
 ;; Font
-(set-face-attribute 'default nil :font "Jetbrains Mono" :height 110)
+(set-face-attribute 'default nil :font "Jetbrains Mono" :height 120)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -227,13 +227,10 @@
   (setq vterm-shell "zsh"))
 
 ;; --- Modeline ---
-
 (use-package feebleline
   :config
   (setq feebleline-msg-functions
-        '((feebleline-line-number :post "" :fmt "%5s")
-          (feebleline-column-number :pre ":" :fmt "%-2s")
-          (feebleline-file-directory :face feebleline-dir-face :post "")
+        '((feebleline-file-directory :face feebleline-dir-face :post "")
           (feebleline-file-or-buffer-name :face font-lock-keyword-face :post "")
           (feebleline-file-modified-star :face font-lock-warning-face :post "")
           (feebleline-git-branch :face feebleline-git-face :pre " : ")
@@ -413,6 +410,25 @@
 
   (fp/leader-keys
     :states '(normal visual)
+    :keymaps 'lsp-mode-map
+    "co" '(lsp-organize-imports :which-key "organize-imports")
+    "ct" '(lsp-goto-type-definition :which-key "goto-type-definition")
+    "ci" '(lsp-find-implementation :which-key "find-implementation")
+    "ce" '(lsp-ui-flycheck-list :which-key "lsp-ui-flycheck-list")
+    "cf" '(lsp-find-definition :which-key "find-definition")
+    "cF" '(lsp-format-buffer :which-key "format-buffer")
+    "cd" '(fp/lsp-describe-thing-at-point :which-key "describe-thing-at-point")
+    "ca" '(lsp-execute-code-action :which-key "code-action")
+    "cr" '(lsp-rename :which-key "rename")
+    "cR" '(lsp-workspace-restart :which-key "workspace-restart"))
+
+  (fp/leader-keys
+    :states '(normal visual)
+    :keymaps '(lsp-mode-map csharp-mode-map)
+    "cqq" '(lsp-csharp-run-test-at-point :which-key "lsp-csharp-run-test-at-point"))
+
+  (fp/leader-keys
+    :states '(normal visual)
     :keymaps 'clojure-mode-map
     "ct" '(:ignore t :which-key "Clojure tests")
     "ctt" '(cider-test-run-test :which-key "cider-test-run-test")
@@ -449,25 +465,6 @@
     :states '(normal visual)
     :keymaps 'dictionary-mode-map
     "cs" '(dictionary-search :which-key "dictionary-search"))
-
-  (fp/leader-keys
-    :states '(normal visual)
-    :keymaps 'lsp-mode-map
-    "co" '(lsp-organize-imports :which-key "organize-imports")
-    "ct" '(lsp-goto-type-definition :which-key "goto-type-definition")
-    "ci" '(lsp-find-implementation :which-key "find-implementation")
-    "ce" '(lsp-ui-flycheck-list :which-key "lsp-ui-flycheck-list")
-    "cf" '(lsp-find-definition :which-key "find-definition")
-    "cF" '(lsp-format-buffer :which-key "format-buffer")
-    "cd" '(fp/lsp-describe-thing-at-point :which-key "describe-thing-at-point")
-    "ca" '(lsp-execute-code-action :which-key "code-action")
-    "cr" '(lsp-rename :which-key "rename")
-    "cR" '(lsp-workspace-restart :which-key "workspace-restart"))
-
-  (fp/leader-keys
-    :states '(normal visual)
-    :keymaps '(lsp-mode-map csharp-mode-map)
-    "cqq" '(lsp-csharp-run-test-at-point :which-key "lsp-csharp-run-test-at-point"))
 
   (fp/leader-keys
     "w" '(:ignore t :which-key "window")
