@@ -699,6 +699,7 @@
   :hook (lsp-mode . lsp-enable-which-key-integration)
   :custom ((lsp-enable-links nil)
            (lsp-log-io nil)
+           (lsp-enable-snippet nil)
            (lsp-headerline-breadcrumb-enable nil))
   :commands (lsp lsp-deferred))
 
@@ -710,7 +711,6 @@
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
   :custom ((lsp-ui-sideline-show-code-actions nil)
-           (lsp-enable-snippet nil)
            (lsp-ui-doc-enable nil)))
 
 ;; --- go mode ---
