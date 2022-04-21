@@ -710,6 +710,7 @@
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
   :custom ((lsp-ui-sideline-show-code-actions nil)
+           (lsp-enable-snippet nil)
            (lsp-ui-doc-enable nil)))
 
 ;; --- go mode ---
