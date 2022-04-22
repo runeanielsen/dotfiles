@@ -700,6 +700,7 @@
   :custom ((lsp-enable-links nil)
            (lsp-log-io nil)
            (lsp-enable-snippet nil)
+           (lsp-lens-enable nil)
            (lsp-headerline-breadcrumb-enable nil))
   :commands (lsp lsp-deferred))
 
