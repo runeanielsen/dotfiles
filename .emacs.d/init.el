@@ -167,7 +167,7 @@
 (use-package persp-mode
   :hook (projectile-mode . persp-mode)
   :config
-  (setq persp-autokill-buffer-on-remove t
+  (setq persp-autokill-buffer-on-remove 'kill-weak
         persp-nil-hidden t
         persp-auto-save-opt 0
         persp-add-buffer-on-find-file nil
