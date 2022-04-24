@@ -41,7 +41,7 @@
 (setq read-process-output-max (* 4096 1024))
 
 ;; Font
-(set-face-attribute 'default nil :font "Jetbrains Mono" :height 120)
+(set-face-attribute 'default nil :font "Jetbrains Mono" :height 130)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -452,6 +452,14 @@
     "cpc" '(cider-pprint-eval-last-sexp-to-comment :which-key "cider-pprint-eval-last-sexp-to-comment"))
 
   (fp/leader-keys
+    :state '(normal visual)
+    :keympas 'scheme-mode
+    "cR" '(geiser-reload :which-key "geiser-load")
+    "cs" '(run-geiser :which-key "run-geiser")
+    "cd" '(geiser-doc-symbol-at-point :which-key "doc-symbol-at-pint")
+    "ca" '(geiser-eval-last-sexp :which-key "eval-expression"))
+
+  (fp/leader-keys
     :states '(normal visual)
     :keymaps 'lispyville-mode-map
     "clw" '(lispyville-wrap-round :which-key "lispyville-wrap-round"))
@@ -636,7 +644,10 @@
 ;; --- lisp ---
 (use-package lispyville
   :init
-  (general-add-hook '(emacs-lisp-mode-hook lisp-mode-hook clojure-mode-hook) #'lispyville-mode)
+  (general-add-hook '(emacs-lisp-mode-hook
+                      lisp-mode-hook
+                      clojure-mode-hook
+                      scheme-mode-hook) #'lispyville-mode)
   :config
   (lispyville-set-key-theme '(operators c-w additional)))
 
@@ -767,6 +778,14 @@
   :hook (clojure-mode . clj-refactor-mode)
   :custom
   (cljr-warn-on-eval nil))
+
+;; --- Scheme mode ---
+(use-package geiser-guile)
+
+(use-package scheme-mode
+  :straight nil
+  :config
+  (setq scheme-program-name "gsi"))
 
 ;; --- Haksell mode ---
 (use-package haskell-mode
