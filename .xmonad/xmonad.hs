@@ -46,6 +46,7 @@ myStartupHook = do
   spawn "xset r rate 225 25 &"
   spawn "xset s off -dpms &"
   spawn "unclutter -idle 5 &"
+  spawn "xdg-settings set default-web-browser firefox.desktop"
   setWMName "LG3D"
 
 -- Layout
