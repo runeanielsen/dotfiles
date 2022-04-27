@@ -788,12 +788,24 @@
   (cljr-warn-on-eval nil))
 
 ;; --- Scheme mode ---
-(use-package geiser-guile)
+(defun fp/format-current-racket-file ()
+  "Formats the current racket file."
+  (interactive)
+  (when (equal (file-name-extension buffer-file-name) "rkt")
+        (let ((tmp-buf (generate-new-buffer " *temp*"))
+              (fmt-cmd (concat "zsh /usr/bin/raco fmt " buffer-file-name)))
+          (with-current-buffer tmp-buf
+            (insert (shell-command-to-string fmt-cmd)))
+          (replace-buffer-contents tmp-buf)
+          (kill-buffer tmp-buf))))
+
+(use-package geiser-racket)
 
 (use-package scheme-mode
   :straight nil
+  :hook (scheme-mode . prettify-symbols-mode)
   :config
-  (setq scheme-program-name "gsi"))
+  (setq scheme-program-name "racket"))
 
 ;; --- Haksell mode ---
 (use-package haskell-mode
