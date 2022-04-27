@@ -453,11 +453,15 @@
 
   (fp/leader-keys
     :state '(normal visual)
-    :keympas 'scheme-mode
+    :keympas 'geiser-mode
+    "cF" '(fp/format-current-racket-file :which-key "format-current-scheme-file")
+    "cm" '(geiser-doc-goto-manual :which-key "geiser-doc-goto-manual")
     "cR" '(geiser-reload :which-key "geiser-load")
     "cs" '(run-geiser :which-key "run-geiser")
-    "cd" '(geiser-doc-symbol-at-point :which-key "doc-symbol-at-pint")
-    "ca" '(geiser-eval-last-sexp :which-key "eval-expression"))
+    "cd" '(geiser-doc-symbol-at-point :which-key "doc-symbol-at-point")
+    "cD" '(geiser-doc-goto-manual :which-key "doc-goto-manual")
+    "ca" '(geiser-eval-last-sexp :which-key "eval-expression")
+    "cA" '(geiser-eval-buffer :which-key "eval-buffer"))
 
   (fp/leader-keys
     :states '(normal visual)
