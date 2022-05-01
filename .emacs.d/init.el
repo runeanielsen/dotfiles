@@ -787,7 +787,8 @@
   (cljr-warn-on-eval nil))
 
 ;; --- Scheme mode ---
-(use-package geiser-guile)
+(use-package geiser-guile
+  :hook (scheme-mode . geiser-mode))
 
 (use-package scheme-mode
   :straight nil
