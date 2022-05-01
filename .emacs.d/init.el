@@ -452,9 +452,8 @@
     "cpc" '(cider-pprint-eval-last-sexp-to-comment :which-key "cider-pprint-eval-last-sexp-to-comment"))
 
   (fp/leader-keys
-    :state '(normal visual)
-    :keympas 'geiser-mode
-    "cF" '(fp/format-current-racket-file :which-key "format-current-scheme-file")
+    :states '(normal visual)
+    :keymaps 'geiser-mode-map
     "cm" '(geiser-doc-goto-manual :which-key "geiser-doc-goto-manual")
     "cR" '(geiser-reload :which-key "geiser-load")
     "cs" '(run-geiser :which-key "run-geiser")
