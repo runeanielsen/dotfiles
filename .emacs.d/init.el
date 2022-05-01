@@ -470,7 +470,7 @@
   (fp/leader-keys
     :states '(normal visual)
     :keymaps 'org-mode-map
-    "cs" '(flyspell-correct-wrapper :which-key "flyspell-correct-wrapper"))
+    "ca" '(flyspell-correct-wrapper :which-key "flyspell-correct-wrapper"))
 
   (fp/leader-keys
     :states '(normal visual)
