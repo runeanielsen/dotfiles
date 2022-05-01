@@ -971,12 +971,6 @@
 (use-package visual-fill-column
   :hook (org-mode . fp/org-mode-visual-fill))
 
-(use-package org-bullets
-  :after org
-  :hook (org-mode . org-bullets-mode)
-  :custom
-  (org-bullets-bullet-list '("●" "○" "●" "○" "●" "○" "●")))
-
 (use-package org-tempo
   :straight nil
   :after org)
