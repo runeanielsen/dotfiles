@@ -6,6 +6,6 @@ set recolor-keephue true
 
 set recolor-lightcolor "#242424"
 set recolor-darkcolor "#e3ded7"
-set default-bg "white"
+set default-bg "#242424"
 
-set font "Fira Code 9"
+set font "Fira Code 8"
