@@ -436,7 +436,7 @@
     "cta" '(cider-test-run-project-tests :which-key "cider-test-run-project-tests")
     "pi" '(cljr-add-project-dependency :which-key "cljr-add-project-dependency")
     "cd" '(cider-doc :which-key "cider-doc")
-    "cs" '(cider-jack-in :which-key "cider-jack-in")
+    "cs" '(fp/cider-jack-in :which-key "cider-jack-in")
     "cf" '(cider-find-var :which-key "cider-format-buffer")
     "cF" '(cider-format-buffer :which-key "cider-format-buffer")
     "ca" '(cider-eval-last-sexp :which-key "cider-eval-last-sexp")
@@ -450,6 +450,17 @@
     "cnA" '(cider-ns-reload-all :which-key "cider-ns-reload-all")
     "cnl" '(cider-load-all-project-ns :which-key "cider-load-all-project-ns")
     "cpc" '(cider-pprint-eval-last-sexp-to-comment :which-key "cider-pprint-eval-last-sexp-to-comment"))
+
+  (fp/leader-keys
+    :states '(normal visual)
+    :keymaps 'lisp-mode-map
+    "cp" '(sly-eval-print-last-expression :which-key "sly-eval-print")
+    "ca" '(sly-eval-last-expression :which-key "sly-eval-defun")
+    "cA" '(sly-eval-buffer :which-key "sly-eval-buffer")
+    "cR" '(sly-restart-inferior-lisp :which-key "sly")
+    "cd" '(sly-documentation :which-key "sly-documentation")
+    "cD" '(sly-documentation-lookup :which-key "sly-documentation")
+    "cs" '(sly :which-key "sly"))
 
   (fp/leader-keys
     :states '(normal visual)
@@ -670,7 +681,6 @@
          haskell-mode
          emacs-lisp-mode
          lisp-mode
-         sly-mode
          clojure-mode
          typescript-mode
          js-mode))
@@ -695,7 +705,7 @@
   (sp-local-pair '(emacs-lisp-mode
                    scheme-mode
                    clojure-mode
-                   common-lisp-mode) "'" "'" :actions nil)
+                   lisp-mode) "'" "'" :actions nil)
   (smartparens-global-mode t))
 
 ;; --- Flycheck ---
@@ -769,6 +779,14 @@
   (condition-case nil
       (cider-format-buffer)
     (error nil)))
+
+(defun fp/cider-jack-in ()
+  "Call either cider-jack-clj in or cider-jack-in-cljs depending on current buffer file extension."
+  (interactive)
+  (let ((extension (file-name-extension buffer-file-name)))
+    (cond ((string= extension "clj") (call-interactively 'cider-jack-in-clj))
+          ((string= extension "cljs") (call-interactively 'cider-jack-in-cljs))
+          (t (message (concat "Extension: " extension " is not valid."))))))
 
 (defun cider-install-save-hooks ()
   "Cider install save hooks."
