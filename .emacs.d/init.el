@@ -41,7 +41,7 @@
 (setq read-process-output-max (* 4096 1024))
 
 ;; Font
-(set-face-attribute 'default nil :font "Jetbrains Mono" :height 130)
+(set-face-attribute 'default nil :font "Jetbrains Mono" :height 140)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -454,12 +454,12 @@
   (fp/leader-keys
     :states '(normal visual)
     :keymaps 'lisp-mode-map
+    "co" '(sly-mrepl :which-key "sly-mrepl")
     "cp" '(sly-eval-print-last-expression :which-key "sly-eval-print")
-    "ca" '(sly-eval-last-expression :which-key "sly-eval-defun")
+    "ca" '(sly-eval-last-expression :which-key "sly-eval-last-expression")
     "cA" '(sly-eval-buffer :which-key "sly-eval-buffer")
     "cR" '(sly-restart-inferior-lisp :which-key "sly")
-    "cd" '(sly-documentation :which-key "sly-documentation")
-    "cD" '(sly-documentation-lookup :which-key "sly-documentation")
+    "cd" '(sly-documentation-lookup :which-key "sly-documentation")
     "cs" '(sly :which-key "sly"))
 
   (fp/leader-keys
