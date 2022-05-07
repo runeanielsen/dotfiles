@@ -454,13 +454,12 @@
   (fp/leader-keys
     :states '(normal visual)
     :keymaps 'lisp-mode-map
-    "co" '(sly-mrepl :which-key "sly-mrepl")
-    "cp" '(sly-eval-print-last-expression :which-key "sly-eval-print")
-    "ca" '(sly-eval-last-expression :which-key "sly-eval-last-expression")
-    "cA" '(sly-eval-buffer :which-key "sly-eval-buffer")
-    "cR" '(sly-restart-inferior-lisp :which-key "sly")
-    "cd" '(sly-documentation-lookup :which-key "sly-documentation")
-    "cs" '(sly :which-key "sly"))
+    "cp" '(slime-eval-print-last-expression :which-key "eval-print-last-expression")
+    "ca" '(slime-eval-last-expression :which-key "eval-last-expression")
+    "cA" '(slime-eval-buffer :which-key "eval-buffer")
+    "cR" '(slime-restart-inferior-lisp :which-key "restart-inferior-lisp")
+    "cd" '(slime-documentation-lookup :which-key "documentation-lookup")
+    "cs" '(slime :which-key "slime"))
 
   (fp/leader-keys
     :states '(normal visual)
@@ -666,8 +665,32 @@
 ;; --- commmon lisp ---
 (defvar inferior-lisp-program "sbcl")
 
-(use-package sly
-  :commands (sly))
+(use-package slime-company
+  :after (slime company)
+  :config
+  (setq slime-company-completion 'fuzzy))
+
+(use-package slime
+  :commands slime
+  :functions slime-setup
+  :config
+  (slime-setup '(slime-repl
+                 slime-fancy
+                 slime-autodoc
+                 slime-banner
+                 slime-asdf
+                 slime-references
+                 slime-indentation
+                 slime-sbcl-exts
+                 slime-company))
+  (setq slime-complete-symbol*-fancy t
+        slime-completion-at-point-functions 'slime-fuzzy-complete-symbol
+        slime-when-complete-filename-expand t
+        slime-truncate-lines nil
+        slime-autodoc-use-multiline-p t
+        slime-net-coding-system 'utf-8-unix
+        slime-startup-animation nil)
+  (slime-autodoc-mode))
 
 ;; --- Rainbow delimiters ---
 (use-package rainbow-delimiters
@@ -712,6 +735,7 @@
          (clojure-mode . flycheck-mode)
          (c-mode . flycheck-mode)
          (emacs-lisp-mode . flycheck-mode)
+         (lisp-mode . flycheck-mode)
          (markdown-mode . flycheck-mode)
          (haskell-mode . flycheck-mode)
          (tide-mode . flycheck-mode))
