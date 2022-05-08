@@ -475,11 +475,6 @@
 
   (fp/leader-keys
     :states '(normal visual)
-    :keymaps 'lispyville-mode-map
-    "clw" '(lispyville-wrap-round :which-key "lispyville-wrap-round"))
-
-  (fp/leader-keys
-    :states '(normal visual)
     :keymaps 'org-mode-map
     "ca" '(flyspell-correct-wrapper :which-key "flyspell-correct-wrapper"))
 
