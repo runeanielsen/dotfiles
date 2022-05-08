@@ -454,6 +454,7 @@
   (fp/leader-keys
     :states '(normal visual)
     :keymaps 'lisp-mode-map
+    "co" '(slime-repl :which-key "repl")
     "cp" '(slime-eval-print-last-expression :which-key "eval-print-last-expression")
     "ca" '(slime-eval-last-expression :which-key "eval-last-expression")
     "cA" '(slime-eval-buffer :which-key "eval-buffer")
