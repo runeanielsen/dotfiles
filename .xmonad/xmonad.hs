@@ -43,7 +43,7 @@ myStartupHook = do
   spawn "xcompmgr -a &"
   spawn "nitrogen --restore &"
   spawn "dunst &"
-  spawn "xset r rate 225 25 &"
+  spawn "xset r rate 200 25 &"
   spawn "xset s off -dpms &"
   spawn "unclutter -idle 5 &"
   spawn "xdg-settings set default-web-browser firefox.desktop"
