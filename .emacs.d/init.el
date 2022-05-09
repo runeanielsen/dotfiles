@@ -1043,7 +1043,7 @@
   :custom (dictionary-server "dict.org"))
 
 (use-package olivetti
-  :custom ((olivetti-minimum-body-width 90)
+  :custom ((olivetti-minimum-body-width 100)
            (olivetti-style 1))
   :hook ((vterm-mode . olivetti-mode)
          (prog-mode . olivetti-mode)
