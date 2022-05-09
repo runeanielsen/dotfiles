@@ -726,10 +726,12 @@
 ;; --- smartparens ---
 (use-package smartparens
   :config
-  (sp-local-pair '(emacs-lisp-mode
-                   scheme-mode
-                   clojure-mode
-                   lisp-mode) "'" "'" :actions nil)
+  (let ((modes '(emacs-lisp-mode
+                 scheme-mode
+                 clojure-mode
+                 lisp-mode)))
+    (sp-local-pair modes "'" nil :actions nil)
+    (sp-local-pair modes "`" nil :actions nil))
   (smartparens-global-mode t))
 
 ;; --- Flycheck ---
