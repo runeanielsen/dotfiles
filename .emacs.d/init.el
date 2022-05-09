@@ -744,9 +744,10 @@
          (markdown-mode . flycheck-mode)
          (haskell-mode . flycheck-mode)
          (tide-mode . flycheck-mode))
-  ; Hack because csharp lsp mode often bugs out
-  :custom ((flycheck-checker-error-threshold 10000)
-           (flycheck-check-syntax-automatically '(mode-enabled save idle-buffer-switch))
+  :custom ((flycheck-indication-mode nil)
+           (flycheck-checker-error-threshold 10000) ;; Hack Csharp mode bugs out.
+           (flycheck-check-syntax-automatically
+            '(mode-enabled save idle-buffer-switch))
            (flycheck-buffer-switch-check-intermediate-buffers t)))
 
 ;; --- lsp mode ---
