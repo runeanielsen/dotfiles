@@ -405,7 +405,9 @@
   (fp/leader-keys
     :states '(normal visual)
     :keymaps 'lispyville-mode-map
-    "lp" '(lispyville-wrap-with-round :which-key "lispyville-wrap-with-round"))
+    "li" '(lispyville-inner-list :which-key "lispyville-next-closing")
+    "ln" '(lispyville-forward-sexp :which-key "lispyville-next-closing")
+    "lw" '(lispyville-wrap-with-round :which-key "lispyville-wrap-with-round"))
 
   (fp/leader-keys
     :states '(normal visual)
