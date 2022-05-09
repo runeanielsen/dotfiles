@@ -390,8 +390,13 @@
 
   (fp/leader-keys
     :states '(normal visual)
+    :keymaps 'prog-mode-map
+    "fi" '(indent-region :which-key "indent-region"))
+
+  (fp/leader-keys
+    :states '(normal visual)
     :keymaps 'tide-mode-map
-    "ci" '(tide-jump-to-implementation :which-key "go-to-reference")
+    "ci" '(tide-jump-to-implementation :which-key "organize-imports")
     "cf" '(tide-jump-to-definition :which-key "organize-imports")
     "cr" '(tide-rename-symbol :which-key "rename")
     "cd" '(tide-documentation-at-point :which-key "documentation")
