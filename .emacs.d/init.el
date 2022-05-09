@@ -101,8 +101,7 @@
 (recentf-mode nil)
 
 ;; make indent commands use space only (never tab character)
-(progn
-  (setq-default indent-tabs-mode nil))
+(setq-default indent-tabs-mode nil)
 
 ;; --- Disable unnecessary UI elements ---
 (progn
