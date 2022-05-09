@@ -623,11 +623,10 @@
         (width (min (or ivy-posframe-width 120) (round (* .75 (frame-width))))))
     (list :height height :width width :min-height height :min-width width)))
 
-(setq ivy-posframe-size-function 'fp/dynamic-ivy-posframe-get-size)
-
 (use-package ivy-posframe
   :after ivy
   :config
+  (setq ivy-posframe-size-function 'fp/dynamic-ivy-posframe-get-size)
   (setq ivy-posframe-display-functions-alist
         '((t . ivy-posframe-display-at-frame-center))
         ivy-posframe-height-alist '((t . 20)))
