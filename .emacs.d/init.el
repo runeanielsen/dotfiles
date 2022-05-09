@@ -637,6 +637,8 @@
   (ivy-posframe-mode 1)
   (advice-add 'counsel-load-theme :after #'posframe-delete-all)
   (advice-add 'counsel-load-theme :after #'correct-color-theme-switch)
+  (advice-add 'olivetti-reset-all-windows :after #'posframe-delete-all)
+  (advice-add 'olivetti-reset-all-windows :after #'correct-color-theme-switch)
   (correct-color-theme-switch))
 
 ;; --- Magit ---
@@ -1001,17 +1003,6 @@
         org-src-preserve-indentation t
         org-hide-emphasis-markers t))
 
-(defun fp/org-mode-visual-fill ()
-  "Set org mode visual fill settings."
-  (advice-add 'text-scale-adjust :after #'visual-fill-column-adjust)
-  (setq visual-fill-column-width 100
-        visual-fill-column-center-text t)
-  (visual-fill-column-mode)
-  (visual-line-mode))
-
-(use-package visual-fill-column
-  :hook (org-mode . fp/org-mode-visual-fill))
-
 (use-package org-tempo
   :straight nil
   :after org)
@@ -1046,5 +1037,13 @@
 (use-package dictionary
   :straight nil
   :custom (dictionary-server "dict.org"))
+
+(use-package olivetti
+  :custom ((olivetti-minimum-body-width 90)
+           (olivetti-style 1))
+  :hook ((vterm-mode . olivetti-mode)
+         (prog-mode . olivetti-mode)
+         (org-mode . olivetti-mode)
+         (markdown-mode . olivetti-mode)))
 
 ;;; init.el ends here
