@@ -825,6 +825,7 @@
          (cider-mode . cider-install-save-hooks))
   :custom ((cider-repl-pop-to-buffer-on-connect nil)
            (cider-repl-display-help-banner nil)
+           (cider-use-fringe-indicators nil)
            (safe-local-variable-values '((cider-clojure-cli-aliases . "test")))))
 
 (use-package clj-refactor
