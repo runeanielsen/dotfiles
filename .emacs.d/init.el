@@ -1048,6 +1048,9 @@
   :hook ((vterm-mode . olivetti-mode)
          (prog-mode . olivetti-mode)
          (org-mode . olivetti-mode)
+         (magit-mode . olivetti-mode)
+         (yaml-mode . olivetti-mode)
+         (fundamental-mode . olivetti-mode)
          (markdown-mode . olivetti-mode)))
 
 ;;; init.el ends here
