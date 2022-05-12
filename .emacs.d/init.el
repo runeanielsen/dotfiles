@@ -670,9 +670,14 @@
 (defun fp/slime-eval-comment-last-expression ()
   "Slime print to comment block."
   (interactive)
+  ;; We forward to avoid issue with evil mode and evaluation at point.
+  (forward-char)
   (slime-eval-async `(swank:eval-and-grab-output ,(slime-last-expression))
     (lambda (result)
       (cl-destructuring-bind (output value) result
+        ;; We forward one char to avoid last parenthesis being removed.
+        (forward-char)
+        (newline)
         (insert ";; => " output value)))))
 
 (defvar inferior-lisp-program "sbcl")
