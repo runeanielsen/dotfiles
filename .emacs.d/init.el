@@ -461,11 +461,12 @@
     :states '(normal visual)
     :keymaps 'lisp-mode-map
     "co" '(slime-repl :which-key "repl")
-    "cp" '(slime-eval-print-last-expression :which-key "eval-print-last-expression")
+    "cp" '(fp/slime-eval-comment-last-expression :which-key "eval-comment-last-expression")
     "ca" '(slime-eval-last-expression :which-key "eval-last-expression")
     "cA" '(slime-eval-buffer :which-key "eval-buffer")
     "cR" '(slime-restart-inferior-lisp :which-key "restart-inferior-lisp")
     "cd" '(slime-documentation-lookup :which-key "documentation-lookup")
+    "cD" '(slime-documentation :which-key "documentation")
     "cs" '(slime :which-key "slime"))
 
   (fp/leader-keys
@@ -666,6 +667,14 @@
   (lispyville-set-key-theme '(operators c-w additional)))
 
 ;; --- commmon lisp ---
+(defun fp/slime-eval-comment-last-expression ()
+  "Slime print to comment block."
+  (interactive)
+  (slime-eval-async `(swank:eval-and-grab-output ,(slime-last-expression))
+    (lambda (result)
+      (cl-destructuring-bind (output value) result
+        (insert ";; => " output value)))))
+
 (defvar inferior-lisp-program "sbcl")
 
 (use-package slime-company
