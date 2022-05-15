@@ -670,7 +670,8 @@
 (defvar inferior-lisp-program "sbcl")
 
 (use-package sly
-  :commands (sly))
+  :commands (sly)
+  :config (setq common-lisp-hyperspec-root "/usr/share/doc/clhs/HyperSpec/"))
 
 ;; --- Rainbow delimiters ---
 (use-package rainbow-delimiters
