@@ -460,14 +460,14 @@
   (fp/leader-keys
     :states '(normal visual)
     :keymaps 'lisp-mode-map
-    "co" '(slime-repl :which-key "repl")
-    "cp" '(fp/slime-eval-last-expression  :which-key "eval-comment-last-expression")
-    "ca" '(slime-eval-last-expression :which-key "eval-last-expression")
-    "cA" '(slime-eval-buffer :which-key "eval-buffer")
-    "cR" '(slime-restart-inferior-lisp :which-key "restart-inferior-lisp")
-    "cd" '(slime-documentation-lookup :which-key "documentation-lookup")
-    "cD" '(slime-documentation :which-key "documentation")
-    "cs" '(slime :which-key "slime"))
+    "co" '(sly-mrepl :which-key "move-to-repl")
+    "cp" '(sly-eval-print-last-expression :which-key "eval-print-last-expression")
+    "ca" '(sly-eval-last-expression :which-key "eval-last-expression")
+    "cA" '(sly-eval-buffer :which-key "eval-buffer")
+    "cR" '(sly-restart-inferior-lisp :which-key "restart-inferior-lisp")
+    "cd" '(sly-documentation-lookup :which-key "documentation-lookup")
+    "cD" '(sly-documentation :which-key "documentation")
+    "cs" '(sly :which-key "sly"))
 
   (fp/leader-keys
     :states '(normal visual)
@@ -667,42 +667,10 @@
   (lispyville-set-key-theme '(operators c-w additional)))
 
 ;; --- commmon lisp ---
-(defun fp/slime-eval-last-expression ()
-  "Slime print to current buffer, function was made because of evil-mode."
-  (interactive)
-  ;; We forward to avoid issue with evil mode and evaluation at point.
-  (when (char-equal (char-after) ?\))
-    (forward-char 2))
-  (call-interactively 'slime-eval-print-last-expression))
-
 (defvar inferior-lisp-program "sbcl")
 
-(use-package slime-company
-  :after (slime company)
-  :config
-  (setq slime-company-completion 'fuzzy))
-
-(use-package slime
-  :commands slime
-  :functions slime-setup
-  :config
-  (slime-setup '(slime-repl
-                 slime-fancy
-                 slime-autodoc
-                 slime-banner
-                 slime-asdf
-                 slime-references
-                 slime-indentation
-                 slime-sbcl-exts
-                 slime-company))
-  (setq slime-complete-symbol*-fancy t
-        slime-completion-at-point-functions 'slime-fuzzy-complete-symbol
-        slime-when-complete-filename-expand t
-        slime-truncate-lines nil
-        slime-autodoc-use-multiline-p t
-        slime-net-coding-system 'utf-8-unix
-        slime-startup-animation nil)
-  (slime-autodoc-mode))
+(use-package sly
+  :commands (sly))
 
 ;; --- Rainbow delimiters ---
 (use-package rainbow-delimiters
@@ -1060,6 +1028,8 @@
          (magit-mode . olivetti-mode)
          (yaml-mode . olivetti-mode)
          (fundamental-mode . olivetti-mode)
+         (dired-mode . olivetti-mode)
+         (sly-mrepl-mode . olivetti-mode)
          (markdown-mode . olivetti-mode)))
 
 ;;; init.el ends here
