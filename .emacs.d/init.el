@@ -455,7 +455,7 @@
     "cna" '(cider-ns-reload :which-key "cider-ns-reload")
     "cnA" '(cider-ns-reload-all :which-key "cider-ns-reload-all")
     "cnl" '(cider-load-all-project-ns :which-key "cider-load-all-project-ns")
-    "cpc" '(cider-pprint-eval-last-sexp-to-comment :which-key "cider-pprint-eval-last-sexp-to-comment"))
+    "cp" '(cider-pprint-eval-last-sexp-to-comment :which-key "cider-pprint-eval-last-sexp-to-comment"))
 
   (fp/leader-keys
     :states '(normal visual)
