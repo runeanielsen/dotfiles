@@ -911,9 +911,9 @@
   :hook ((js-mode . setup-tide-mode)
          (typescript-mode . setup-tide-mode))
   :config
-  (setq company-tooltip-align-annotations t)
   (flycheck-add-mode 'javascript-eslint 'js-mode)
-  (setq flycheck-enabled-checkers (append flycheck-enabled-checkers '(javascript-eslint)))
+  (setq company-tooltip-align-annotations t
+        flycheck-enabled-checkers (append flycheck-enabled-checkers '(javascript-eslint)))
   (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
   (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append))
 
