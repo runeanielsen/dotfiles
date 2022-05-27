@@ -817,9 +817,8 @@
 
 ;; --- Haksell mode ---
 (use-package haskell-mode
-  :config
-  (add-hook 'haskell-mode-hook #'lsp-deferred)
-  (add-hook 'haskell-literate-mode-hook #'lsp-deferred))
+  :hook ((haskell-mode . lsp-deferred)
+         (haskell-literate-mode . lsp-deferred)))
 
 (use-package lsp-haskell
   :custom (lsp-haskell-server-path "/usr/bin/haskell-language-server"))
