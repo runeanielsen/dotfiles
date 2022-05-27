@@ -160,7 +160,7 @@
   (projectile-indexing-method 'alien)
   (projectile-track-known-projects-automatically nil)
   :config
-  (projectile-mode +1))
+  (projectile-mode t))
 
 ;; --- Persp-mode ---
 (use-package persp-mode
@@ -179,9 +179,7 @@
 
 (use-package persp-mode-projectile-bridge
   :after (persp-mode projectile)
-  :config
-  (add-hook 'persp-mode-hook #'(lambda ()
-                                 (persp-mode-projectile-bridge-mode 1))))
+  :hook (persp-mode . persp-mode-projectile-bridge-mode))
 
 (use-package counsel-projectile
   :config
