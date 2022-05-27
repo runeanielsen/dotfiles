@@ -549,9 +549,7 @@
 
 (use-package evil-collection
   :after evil
-  :custom
-  (evil-collection-outline-bind-tab-p nil)
-  :init
+  :config
   (evil-collection-init))
 
 ;; --- Hydra ---
