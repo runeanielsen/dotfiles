@@ -834,6 +834,10 @@
                        (make-local-variable 'js-indent-level)
                        (setq js-indent-level 2))))
 
+;; --- csv mode ---
+(use-package csv-mode
+  :mode ("\\.csv\\'"))
+
 ;; --- yaml mode ---
 (use-package yaml-mode
   :mode ("\\.yaml\\'" "\\.yml\\'"))
