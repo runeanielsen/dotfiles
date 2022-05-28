@@ -922,26 +922,22 @@
   :config
   (setq typescript-indent-level 2))
 
-(defun fp/web-mode-install-hooks ()
-  "Install web-mode hooks."
-  (add-hook 'web-mode-hook
-            (lambda ()
-              (when (string-equal "tsx" (file-name-extension buffer-file-name))
-                (setup-tide-mode))))
-  (add-hook 'web-mode-hook
-            (lambda ()
-              (when (string-equal "jsx" (file-name-extension buffer-file-name))
-                (setup-tide-mode)))))
+(defun fp/web-mode-setup ()
+  "Web-mode setup."
+  (let ((file-extension (file-name-extension buffer-file-name)))
+    (when (or (string-equal "tsx" file-extension)
+              (string-equal "jsx" file-extension))
+      (setup-tide-mode))))
 
 (use-package web-mode
   :mode (("\\.tsx\\'" . web-mode)
          ("\\.jsx\\'" . web-mode))
-  :hook (web-mode . fp/web-mode-install-hooks)
+  :hook (web-mode . fp/web-mode-setup)
+  :custom ((web-mode-enable-auto-quoting nil)
+           (web-mode-markup-indent-offset 2)
+           (web-mode-css-indent-offset 2)
+           (web-mode-code-indent-offset 2))
   :config
-  (setq web-mode-enable-auto-quoting nil
-        web-mode-markup-indent-offset 2
-        web-mode-css-indent-offset 2
-        web-mode-code-indent-offset 2)
   (flycheck-add-mode 'typescript-tslint 'web-mode))
 
 (use-package css-mode
