@@ -824,10 +824,13 @@
   :custom (lsp-haskell-server-path "/usr/bin/haskell-language-server"))
 
 ;; --- json mode ---
+(defun fp/setup-json-mode ()
+  "Setup json mode."
+  (make-local-variable 'js-indent-level)
+  (setq js-indent-level 2))
+
 (use-package json-mode
-  :hook (json-mode . (lambda ()
-                       (make-local-variable 'js-indent-level)
-                       (setq js-indent-level 2))))
+  :hook (json-mode . fp/setup-json-mode))
 
 ;; --- csv mode ---
 (use-package csv-mode
