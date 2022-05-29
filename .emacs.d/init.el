@@ -675,13 +675,7 @@
 
 ;; --- Rainbow mode ---
 (use-package rainbow-mode
-  :hook (org-mode
-         haskell-mode
-         emacs-lisp-mode
-         lisp-mode
-         clojure-mode
-         typescript-mode
-         js-mode))
+  :hook (prog-mode . rainbow-mode))
 
 ;; --- Company mode ---
 (use-package company
