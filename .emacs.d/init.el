@@ -83,7 +83,7 @@
 (setq global-auto-revert-mode t)
 
 ;; No blinking cursor
-(setq blink-cursor-mode 0)
+(blink-cursor-mode 0)
 
 ;; Show parens pairs
 (setq show-paren-mode 1)
