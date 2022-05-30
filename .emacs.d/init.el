@@ -4,7 +4,6 @@
 ;; Personal Emacs setup.
 
 ;;; Code:
-
 ;;; --- Set up 'package' ---
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -189,12 +188,12 @@
 (use-package dashboard
   :config
   (dashboard-setup-startup-hook)
-  (setq dashboard-items nil)
-  (setq dashboard-center-content t)
-  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
-  (setq dashboard-show-shortcuts nil)
-  (setq dashboard-set-init-info nil)
-  (setq dashboard-set-footer nil))
+  (setq dashboard-items nil
+        dashboard-center-content t
+        initial-buffer-choice (lambda () (get-buffer "*dashboard*"))
+        dashboard-show-shortcuts nil
+        dashboard-set-init-info nil
+        dashboard-set-footer nil))
 
 ;; --- Helpful ---
 (use-package helpful
@@ -533,8 +532,8 @@
 ;; --- Evil mode ---
 (use-package evil
   :init
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
+  (setq evil-want-integration t
+        evil-want-keybinding nil)
   :config
   (evil-mode 1)
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
@@ -714,8 +713,7 @@
          (tide-mode . flycheck-mode))
   :custom ((flycheck-indication-mode nil)
            (flycheck-checker-error-threshold 10000) ;; Hack Csharp mode bugs out.
-           (flycheck-check-syntax-automatically
-            '(mode-enabled save idle-buffer-switch))
+           (flycheck-check-syntax-automatically '(mode-enabled save idle-buffer-switch))
            (flycheck-buffer-switch-check-intermediate-buffers t)))
 
 ;; --- lsp mode ---
