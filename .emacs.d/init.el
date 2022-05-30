@@ -5,9 +5,6 @@
 
 ;;; Code:
 
-;; Set garbage collection threshold to 1GB to speed up startup.
-(setq gc-cons-threshold #x40000000)
-
 ;;; --- Set up 'package' ---
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -36,9 +33,6 @@
 (use-package gcmh
   :config
   (gcmh-mode 1))
-
-;; Increase the amount of data which Emacs reads from process to 4mb
-(setq read-process-output-max (* 4096 1024))
 
 ;; Font
 (set-face-attribute 'default nil :font "Jetbrains Mono" :height 140)
@@ -83,22 +77,28 @@
 (put 'narrow-to-page 'disabled nil)
 
 ;; Display column number in mode line.
-(column-number-mode t)
+(setq column-number-mode t)
 
 ;; Automatically update buffers if file content on the disk has changed.
-(global-auto-revert-mode t)
+(setq global-auto-revert-mode t)
 
 ;; No blinking cursor
-(blink-cursor-mode 0)
+(setq blink-cursor-mode 0)
 
 ;; Show parens pairs
-(show-paren-mode 1)
+(setq show-paren-mode 1)
 
 ;; Change fringe mode
 (set-fringe-mode 1)
 
 ;; Disable recentf mode
-(recentf-mode nil)
+(setq recentf-mode nil)
+
+;; Disable backup
+(setq backup-inhibited t)
+
+; Disable auto save
+(setq auto-save-default nil)
 
 ;; make indent commands use space only (never tab character)
 (setq-default indent-tabs-mode nil)
