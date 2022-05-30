@@ -76,8 +76,8 @@
 (put 'narrow-to-region 'disabled nil)
 (put 'narrow-to-page 'disabled nil)
 
-;; Display column number in mode line.
-(setq column-number-mode t)
+;; Do not display column number in mode line.
+(setq column-number-mode nil)
 
 ;; Automatically update buffers if file content on the disk has changed.
 (setq global-auto-revert-mode t)
@@ -86,13 +86,13 @@
 (blink-cursor-mode 0)
 
 ;; Show parens pairs
-(setq show-paren-mode 1)
+(show-paren-mode 1)
 
 ;; Change fringe mode
 (set-fringe-mode 1)
 
 ;; Disable recentf mode
-(setq recentf-mode nil)
+(recentf-mode 0)
 
 ;; Disable backup
 (setq backup-inhibited t)
