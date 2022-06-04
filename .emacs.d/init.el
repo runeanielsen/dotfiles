@@ -367,7 +367,7 @@
     "bB" '(counsel-projectile-switch-to-buffer :which-key "projectile-switch-buffer")
     "bf" '(ivy-switch-buffer :which-key "ivy-switch-buffer")
     "ba" '(persp-add-buffer :which-key "persp-add-buffer")
-    "bd" '(bury-buffer :which-key "bury-current-buffer")
+    "bd" '(bury-buffer :which-key "bury-buffer")
     "bk" '(persp-kill-buffer :which-key "kill-current-buffer")
     "bl" '(projectile-project-buffers-other-buffer :which-key "switch-last-buffer"))
 
