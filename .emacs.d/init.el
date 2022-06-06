@@ -25,8 +25,8 @@
 
 ;; Native compilation
 (defvar comp-async-report-warnings-errors)
-(setq comp-async-report-warnings-errors nil)
-(setq package-native-compile t)
+(setq comp-async-report-warnings-errors nil
+      package-native-compile t)
 
 ;; gcmh
 (use-package gcmh
