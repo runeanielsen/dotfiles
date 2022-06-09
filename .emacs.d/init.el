@@ -75,11 +75,11 @@
 (put 'narrow-to-region 'disabled nil)
 (put 'narrow-to-page 'disabled nil)
 
-;; Do not display column number in mode line.
-(setq column-number-mode nil)
+;; Do not display column number in mode-line.
+(column-number-mode nil)
 
 ;; Automatically update buffers if file content on the disk has changed.
-(setq global-auto-revert-mode t)
+(global-auto-revert-mode t)
 
 ;; No blinking cursor
 (blink-cursor-mode 0)
@@ -100,7 +100,7 @@
 (setq auto-save-default nil)
 
 ;; make indent commands use space only (never tab character)
-(setq-default indent-tabs-mode nil)
+(indent-tabs-mode nil)
 
 ;; --- Disable unnecessary UI elements ---
 (progn
