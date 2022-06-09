@@ -91,7 +91,7 @@
 (set-fringe-mode 1)
 
 ;; Disable recentf mode
-(recentf-mode 0)
+(recentf-mode nil)
 
 ;; Disable backup
 (setq backup-inhibited t)
