@@ -633,8 +633,6 @@
   (ivy-posframe-mode 1)
   (advice-add 'counsel-load-theme :after #'posframe-delete-all)
   (advice-add 'counsel-load-theme :after #'correct-color-theme-switch)
-  (advice-add 'olivetti-reset-all-windows :after #'posframe-delete-all)
-  (advice-add 'olivetti-reset-all-windows :after #'correct-color-theme-switch)
   (correct-color-theme-switch))
 
 ;; --- Magit ---
@@ -1010,18 +1008,5 @@
 (use-package dictionary
   :straight nil
   :custom (dictionary-server "dict.org"))
-
-(use-package olivetti
-  :custom ((olivetti-minimum-body-width 100)
-           (olivetti-style 1))
-  :hook ((vterm-mode . olivetti-mode)
-         (prog-mode . olivetti-mode)
-         (org-mode . olivetti-mode)
-         (magit-mode . olivetti-mode)
-         (yaml-mode . olivetti-mode)
-         (fundamental-mode . olivetti-mode)
-         (dired-mode . olivetti-mode)
-         (sly-mrepl-mode . olivetti-mode)
-         (markdown-mode . olivetti-mode)))
 
 ;;; init.el ends here
