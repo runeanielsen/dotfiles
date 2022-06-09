@@ -34,7 +34,7 @@
   (gcmh-mode 1))
 
 ;; Font
-(set-face-attribute 'default nil :font "Jetbrains Mono" :height 140)
+(set-face-attribute 'default nil :font "Jetbrains Mono" :height 130)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
