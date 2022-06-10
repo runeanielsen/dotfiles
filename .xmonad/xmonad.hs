@@ -9,7 +9,7 @@ import Data.Monoid
 
 -- XMonad
 import XMonad
-import XMonad.Util.Run(spawnPipe)
+import XMonad.Util.Run (spawnPipe)
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.SpawnOnce
 import XMonad.Layout.NoBorders (noBorders, smartBorders)
@@ -17,8 +17,9 @@ import XMonad.Layout.Fullscreen (fullscreenFull, fullscreenSupport)
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
-import XMonad.Hooks.SetWMName
+import XMonad.Hooks.SetWMName (setWMName)
 import XMonad.Layout.Spacing
+import XMonad.Layout.CenteredIfSingle (centeredIfSingle)
 
 -- Settings
 myModMask :: KeyMask
@@ -50,7 +51,10 @@ myStartupHook = do
   setWMName "LG3D"
 
 -- Layout
-myLayout = avoidStruts (smartBorders $ spacingWithEdge 5 tiled) ||| avoidStruts (noBorders $ spacingWithEdge 0 Full)
+myLayout =
+  avoidStruts (smartBorders $ spacingWithEdge 5 tiled) |||
+  avoidStruts (noBorders $ spacingWithEdge 0 Full) |||
+  avoidStruts (smartBorders $ spacingWithEdge 5 $ centeredIfSingle 0.55 tiled)
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -70,11 +74,11 @@ myManageHook = composeAll [
 
 -- Keys
 myKeys :: [([Char], X ())]
-myKeys = 
+myKeys =
   -- Xmonad hotkeys
   [ ("M-d", kill)
-  
-    -- Open my preferred terminal. 
+
+    -- Open my preferred terminal.
   , ("M-<Return>", spawn (myTerminal ++ " -e zsh"))
 
     -- My applications
@@ -84,7 +88,7 @@ myKeys =
   , ("M-b", spawn "~/.config/scripts/dmenu-books.sh")
   , ("M-v", spawn "~/.config/scripts/dmenu-videos.sh")
 
-    -- Kill xmobar 
+    -- Kill xmobar
   , ("M-u", spawn "killall xmobar trayer")
 
     -- Multimedia keys
@@ -95,7 +99,7 @@ myKeys =
 
 -- Main
 main :: IO ()
-main = do 
+main = do
     xmproc <- spawnPipe "xmobar -x 0 ~/.config/xmobar/xmobar.config"
     xmonad $ fullscreenSupport $ docks defaultConfig
         { layoutHook =          myLayout
