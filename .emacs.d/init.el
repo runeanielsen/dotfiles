@@ -390,15 +390,6 @@
 
   (fp/leader-keys
     :states '(normal visual)
-    :keymaps 'tide-mode-map
-    "ci" '(tide-jump-to-implementation :which-key "organize-imports")
-    "cf" '(tide-jump-to-definition :which-key "organize-imports")
-    "cr" '(tide-rename-symbol :which-key "rename")
-    "cd" '(tide-documentation-at-point :which-key "documentation")
-    "cR" '(tide-restart-server :which-key "restart-tide"))
-
-  (fp/leader-keys
-    :states '(normal visual)
     :keymaps 'lispyville-mode-map
     "li" '(lispyville-inner-list :which-key "lispyville-next-closing")
     "ln" '(lispyville-forward-sexp :which-key "lispyville-next-closing")
@@ -706,8 +697,7 @@
          (emacs-lisp-mode . flycheck-mode)
          (lisp-mode . flycheck-mode)
          (markdown-mode . flycheck-mode)
-         (haskell-mode . flycheck-mode)
-         (tide-mode . flycheck-mode))
+         (haskell-mode . flycheck-mode))
   :custom ((flycheck-indication-mode nil)
            (flycheck-checker-error-threshold 10000) ;; Hack Csharp mode bugs out.
            (flycheck-check-syntax-automatically '(mode-enabled save idle-buffer-switch))
@@ -715,7 +705,8 @@
 
 ;; --- lsp mode ---
 (use-package lsp-mode
-  :hook (lsp-mode . lsp-enable-which-key-integration)
+  :hook ((lsp-mode . lsp-enable-which-key-integration)
+         (lsp-mode . yas-minor-mode))
   :custom ((lsp-enable-links nil)
            (lsp-log-io nil)
            (lsp-enable-snippet nil)
@@ -887,58 +878,33 @@
          (zig-mode . lsp-zig-install-save-hooks))
   :custom (zig-format-on-save nil))
 
-;; --- Tide ---
-(defun setup-tide-mode ()
-  "Setup Tide Mode."
-  (interactive)
-  (tide-setup)
-  (flycheck-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (eldoc-mode +1)
-  (tide-hl-identifier-mode +1)
-  (company-mode +1))
-
-(use-package tide
-  :hook ((js-mode . setup-tide-mode)
-         (typescript-mode . setup-tide-mode))
-  :config
-  (flycheck-add-mode 'javascript-eslint 'js-mode)
-  (setq company-tooltip-align-annotations t
-        flycheck-enabled-checkers (append flycheck-enabled-checkers '(javascript-eslint)))
-  (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
-  (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append))
-
 ;; --- Typescript mode ---
 (use-package typescript-mode
-  :mode "\\.ts\\'"
-  :config
-  (setq typescript-indent-level 2))
+  :hook (typescript-mode . lsp-deferred)
+  :custom (typescript-indent-level 2))
 
 (defun fp/web-mode-setup ()
   "Web-mode setup."
   (let ((file-extension (file-name-extension buffer-file-name)))
     (when (or (string-equal "tsx" file-extension)
               (string-equal "jsx" file-extension))
-      (setup-tide-mode))))
+      (lsp-deferred))))
 
 (use-package web-mode
   :mode (("\\.tsx\\'" . web-mode)
-         ("\\.jsx\\'" . web-mode))
+         ("\\.jsx\\'" . web-mode)
+         ("\\.html\\'" . web-mode))
   :hook (web-mode . fp/web-mode-setup)
   :custom ((web-mode-enable-auto-quoting nil)
            (web-mode-markup-indent-offset 2)
            (web-mode-css-indent-offset 2)
-           (web-mode-code-indent-offset 2))
-  :config
-  (flycheck-add-mode 'typescript-tslint 'web-mode))
+           (web-mode-code-indent-offset 2)))
 
 (use-package css-mode
-  :config
-  (setq css-indent-offset 2))
+  :custom (css-indent-offset 2))
 
 (use-package scss-mode
-  :config
-  (setq css-indent-offset 2))
+  :custom (css-indent-offset 2))
 
 ;; --- Node modules path ---
 (use-package add-node-modules-path
