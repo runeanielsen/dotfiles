@@ -153,17 +153,16 @@
 
 ;; --- Projectile ---
 (use-package projectile
-  :custom
-  (projectile-completion-system 'ivy)
-  (projectile-enable-caching nil)
-  (projectile-indexing-method 'alien)
-  (projectile-track-known-projects-automatically nil)
-  :config
-  (projectile-mode t))
+  :custom ((projectile-completion-system 'ivy)
+           (projectile-enable-caching nil)
+           (projectile-indexing-method 'alien)
+           (projectile-track-known-projects-automatically nil))
+  :config (projectile-mode t))
 
 ;; --- Persp-mode ---
 (use-package persp-mode
-  :hook (projectile-mode . persp-mode)
+  :after projectile
+  :init (persp-mode)
   :config
   (setq persp-autokill-buffer-on-remove 'kill-weak
         persp-nil-hidden t
@@ -177,10 +176,11 @@
         persp-auto-resume-time -1))
 
 (use-package persp-mode-projectile-bridge
-  :after (persp-mode projectile)
-  :hook (persp-mode . persp-mode-projectile-bridge-mode))
+  :after persp-mode
+  :init (persp-mode-projectile-bridge-mode))
 
 (use-package counsel-projectile
+  :after projectile
   :config
   (counsel-projectile-mode))
 
@@ -198,14 +198,12 @@
 ;; --- Helpful ---
 (use-package helpful
   :commands (helpful-callable helpful-variable helpful-command helpful-key)
-  :custom
-  (counsel-describe-function-function #'helpful-callable)
-  (counsel-describe-variable-function #'helpful-variable)
-  :bind
-  ([remap describe-function] . counsel-describe-function)
-  ([remap describe-command] . helpful-command)
-  ([remap describe-variable] . counsel-describe-variable)
-  ([remap describe-key] . helpful-key))
+  :custom ((counsel-describe-function-function #'helpful-callable)
+           (counsel-describe-variable-function #'helpful-variable))
+  :bind (([remap describe-function] . counsel-describe-function)
+         ([remap describe-command] . helpful-command)
+         ([remap describe-variable] . counsel-describe-variable)
+         ([remap describe-key] . helpful-key)))
 
 ;; --- All-the-icons ---
 (use-package all-the-icons)
@@ -641,6 +639,7 @@
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
 (use-package forge
+  :after magit
   :init
   (setq forge-add-default-bindings nil)
   (ghub-request "GET" "/user" nil
