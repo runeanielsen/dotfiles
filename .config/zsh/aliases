@@ -1,4 +1,4 @@
-alias ls='exa'
+alias ls='ls --color'
 
 alias dotf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
