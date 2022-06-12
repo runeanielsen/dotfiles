@@ -326,16 +326,16 @@
 (defun fp/persp-kill ()
   "Persp kill and switch to dashboard."
   (interactive)
-  (persp-kill nil)
+  (call-interactively 'persp-kill)
   (switch-to-buffer "*dashboard*")
   (dashboard-refresh-buffer))
 
 (defun fp/find-file-or-buffer ()
-  "Find file."
+  "Find file or buffer depending on if project is active."
   (interactive)
   (if (projectile-project-p)
       (counsel-projectile-find-file)
-    (call-interactively 'ivy-switch-buffer)))
+    (call-interactively 'switch-to-buffer)))
 
 (defun fp/kill-all-buffers ()
   "Kill all buffers."
@@ -368,7 +368,7 @@
   (fp/leader-keys
     "b" '(:ignore t :which-key "buffer")
     "bb" '(persp-switch-to-buffer :which-key "switch-to-buffer-persp")
-    "bB" '(counsel-projectile-switch-to-buffer :which-key "projectile-switch-buffer")
+    "bB" '(switch-to-buffer :which-key "switch-to-buffer")
     "bf" '(ivy-switch-buffer :which-key "ivy-switch-buffer")
     "ba" '(persp-add-buffer :which-key "persp-add-buffer")
     "bd" '(bury-buffer :which-key "bury-buffer")
