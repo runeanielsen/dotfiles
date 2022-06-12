@@ -337,6 +337,12 @@
       (counsel-projectile-find-file)
     (call-interactively 'ivy-switch-buffer)))
 
+(defun fp/kill-all-buffers ()
+  "Kill all buffers."
+  (interactive)
+  (mapcar 'kill-buffer (buffer-list))
+  (delete-other-windows))
+
 ;; --- General ---
 (use-package general
   :config
@@ -367,6 +373,7 @@
     "ba" '(persp-add-buffer :which-key "persp-add-buffer")
     "bd" '(bury-buffer :which-key "bury-buffer")
     "bk" '(persp-kill-buffer :which-key "kill-current-buffer")
+    "bK" '(fp/kill-all-buffers :which-key "kill-all-buffers")
     "bl" '(projectile-project-buffers-other-buffer :which-key "switch-last-buffer"))
 
   (fp/leader-keys
