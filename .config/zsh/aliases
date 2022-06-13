@@ -1,5 +1,10 @@
 alias ls='ls --color'
 
+infol ()
+{
+  info "$1" | less
+}
+
 alias dotf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 alias ma='mount /home/notation/nas'
