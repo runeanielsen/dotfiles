@@ -99,9 +99,6 @@
 ; Disable auto save
 (setq auto-save-default nil)
 
-;; make indent commands use space only (never tab character)
-(indent-tabs-mode nil)
-
 ;; --- Disable unnecessary UI elements ---
 (progn
   ;; Do not show menu bar.
