@@ -2,7 +2,7 @@
 
 books_path=$HOME/nas/books/
 
-prog=$(exa $books_path -R | rg '\.pdf|\.epub')
+prog=$(ls -R $books_path | rg '\.pdf|\.epub')
 
 cmd=$(dmenu -l 20 -i -nf '#ffffff' -nb '#222222' -sf '#222222' -sb '#ffffff' <<< "$prog")
 
