@@ -334,11 +334,12 @@
       (counsel-projectile-find-file)
     (call-interactively 'switch-to-buffer)))
 
-(defun fp/kill-all-buffers ()
-  "Kill all buffers."
+(defun fp/cleanup ()
+  "Kill all buffers, remove other windows and go to dashboard."
   (interactive)
   (mapcar 'kill-buffer (buffer-list))
-  (delete-other-windows))
+  (delete-other-windows)
+  (call-interactively 'dashboard-refresh-buffer))
 
 ;; --- General ---
 (use-package general
@@ -370,7 +371,7 @@
     "ba" '(persp-add-buffer :which-key "persp-add-buffer")
     "bd" '(bury-buffer :which-key "bury-buffer")
     "bk" '(persp-kill-buffer :which-key "kill-current-buffer")
-    "bK" '(fp/kill-all-buffers :which-key "kill-all-buffers")
+    "bK" '(fp/cleanup :which-key "cleanup")
     "bl" '(projectile-project-buffers-other-buffer :which-key "switch-last-buffer"))
 
   (fp/leader-keys
