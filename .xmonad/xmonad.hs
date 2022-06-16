@@ -20,6 +20,7 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName (setWMName)
 import XMonad.Layout.Spacing
 import XMonad.Layout.CenteredIfSingle (centeredIfSingle)
+import qualified Options.Applicative.Types as DAta
 
 -- Settings
 myModMask :: KeyMask
@@ -52,7 +53,7 @@ myStartupHook = do
 
 -- Layout
 myLayout =
-  avoidStruts (smartBorders $ spacingWithEdge 5 $ centeredIfSingle 0.65 tiled) |||
+  avoidStruts (smartBorders $ spacingWithEdge 5 $ centeredIfSingle 0.60 tiled) |||
   avoidStruts (noBorders $ spacingWithEdge 0 Full)
   where
      -- default tiling algorithm partitions the screen into two panes
@@ -100,7 +101,7 @@ myKeys =
 main :: IO ()
 main = do
     xmproc <- spawnPipe "xmobar -x 0 ~/.config/xmobar/xmobar.config"
-    xmonad $ fullscreenSupport $ docks defaultConfig
+    xmonad $ fullscreenSupport $ docks def
         { layoutHook =          myLayout
         , logHook =             dynamicLogWithPP xmobarPP
                                 { ppOutput = hPutStrLn xmproc
