@@ -324,8 +324,9 @@
   "Persp kill and switch to dashboard."
   (interactive)
   (call-interactively 'persp-kill)
-  (switch-to-buffer "*dashboard*")
-  (dashboard-refresh-buffer))
+  (when (equal (projectile-project-p) nil)
+    (switch-to-buffer "*dashboard*")
+    (dashboard-refresh-buffer)))
 
 (defun fp/find-file-or-buffer ()
   "Find file or buffer depending on if project is active."
