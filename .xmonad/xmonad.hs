@@ -20,7 +20,6 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName (setWMName)
 import XMonad.Layout.Spacing
 import XMonad.Layout.CenteredIfSingle (centeredIfSingle)
-import qualified Options.Applicative.Types as DAta
 
 -- Settings
 myModMask :: KeyMask
