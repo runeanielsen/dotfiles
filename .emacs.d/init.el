@@ -591,7 +591,6 @@
 
 ;; --- Ivy ---
 (use-package ivy
-  :diminish
   :custom ((ivy-use-virtual-buffers t)
            (ivy-use-selectable-prompt t))
   :config
@@ -687,7 +686,6 @@
 ;; --- which key ---
 (use-package which-key
   :defer 0
-  :diminish which-key-mode
   :custom (which-key-idle-delay 1)
   :config (which-key-mode))
 
