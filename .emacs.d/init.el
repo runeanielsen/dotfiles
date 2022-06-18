@@ -88,7 +88,7 @@
 (show-paren-mode 1)
 
 ;; Change fringe mode
-(set-fringe-mode 1)
+(set-fringe-mode 0)
 
 ;; Disable recentf mode
 (recentf-mode nil)
