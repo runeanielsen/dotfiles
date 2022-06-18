@@ -875,6 +875,11 @@
   :hook ((fsharp-mode . lsp-deferred)
          (fsharp-mode . lsp-fsharp-install-save-hooks)))
 
+;; --- rust mode ---
+(use-package rust-mode
+  :hook ((rust-mode . lsp-deferred))
+  :custom (rust-format-on-save t))
+
 ;; --- C ---
 (use-package cc-mode
   :straight nil
