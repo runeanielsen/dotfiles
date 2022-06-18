@@ -272,6 +272,7 @@
   (load-theme (fp/get-last-theme) t)
   (advice-add 'counsel-load-theme :after #'fp/set-last-theme))
 
+(setq modus-themes-subtle-line-numbers t)
 (fp/remember-last-theme)
 
 ;; --- automatically clean whitespace ---
