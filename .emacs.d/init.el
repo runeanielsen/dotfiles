@@ -213,7 +213,7 @@
 
 ;; --- vterm ---
 (use-package vterm
-  :commands (projectile-run-vterm vterm)
+  :commands (vterm projectile-run-vterm)
   :config
   (setq vterm-shell "zsh"))
 
