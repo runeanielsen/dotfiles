@@ -721,7 +721,10 @@
   :custom ((lsp-enable-links nil)
            (lsp-log-io nil)
            (lsp-enable-snippet nil)
+           (lsp-eldoc-enable-hover nil)
            (lsp-lens-enable nil)
+           (lsp-enable-folding nil)
+           (lsp-keep-workspace-alive nil)
            (lsp-headerline-breadcrumb-enable nil))
   :commands (lsp lsp-deferred))
 
