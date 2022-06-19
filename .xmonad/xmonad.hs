@@ -78,7 +78,7 @@ myKeys =
   [ ("M-d", kill)
 
     -- Open my preferred terminal.
-  , ("M-<Return>", spawn (myTerminal ++ " -e zsh"))
+  , ("M-<Return>", spawn (myTerminal ++ " -e bash"))
 
     -- My applications
   , ("M-f", spawn "firefox")

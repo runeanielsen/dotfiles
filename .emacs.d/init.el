@@ -34,7 +34,7 @@
   (gcmh-mode 1))
 
 ;; Font
-(set-face-attribute 'default nil :font "Jetbrains Mono" :height 130)
+(set-face-attribute 'default nil :font "Jetbrains Mono" :height 140)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -213,9 +213,7 @@
 
 ;; --- vterm ---
 (use-package vterm
-  :commands (vterm projectile-run-vterm)
-  :config
-  (setq vterm-shell "zsh"))
+  :commands (projectile-run-vterm vterm ))
 
 ;; --- Modeline ---
 (use-package feebleline
@@ -727,6 +725,16 @@
            (lsp-keep-workspace-alive nil)
            (lsp-headerline-breadcrumb-enable nil))
   :commands (lsp lsp-deferred))
+
+;; --- tree-sitter-mode mode ---
+(use-package tree-sitter-langs)
+
+(use-package tree-sitter
+  :config
+  (require 'tree-sitter-langs)
+  (require 'clojure)
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 ;; --- lsp-ivy ---
 (use-package lsp-ivy
