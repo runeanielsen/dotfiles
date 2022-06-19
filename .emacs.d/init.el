@@ -333,15 +333,15 @@
   "Find file or buffer depending on if project is active."
   (interactive)
   (if (projectile-project-p)
-      (counsel-projectile-find-file)
+      (call-interactively 'counsel-projectile-find-file)
     (call-interactively 'switch-to-buffer)))
 
 (defun fp/cleanup ()
   "Kill all buffers, remove other windows and go to dashboard."
   (interactive)
-  (mapcar 'kill-buffer (buffer-list))
+  (mapcar 'kill-buffer (remove (get-buffer "*dashboard*") (buffer-list)))
   (delete-other-windows)
-  (call-interactively 'dashboard-refresh-buffer))
+  (switch-to-buffer "*dashboard*"))
 
 ;; --- General ---
 (use-package general
