@@ -27,14 +27,13 @@
 (defvar comp-async-report-warnings-errors)
 (setq comp-async-report-warnings-errors nil
       package-native-compile t)
-
 ;; gcmh
 (use-package gcmh
   :config
   (gcmh-mode 1))
 
 ;; Font
-(set-face-attribute 'default nil :font "Jetbrains Mono" :height 140)
+(set-face-attribute 'default nil :font "Jetbrains Mono" :height 130)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -88,16 +87,19 @@
 (show-paren-mode 1)
 
 ;; Change fringe mode
-(set-fringe-mode 0)
+(fringe-mode '(16 . 16))
 
 ;; Disable recentf mode
-(recentf-mode nil)
+(recentf-mode 0)
 
 ;; Disable backup
 (setq backup-inhibited t)
 
 ; Disable auto save
 (setq auto-save-default nil)
+
+;; Disable minibuffer auto-raise
+(setq minibuffer-auto-raise nil)
 
 ;; --- Disable unnecessary UI elements ---
 (progn
@@ -112,22 +114,14 @@
   (when (fboundp 'scroll-bar-mode)
     (scroll-bar-mode -1)))
 
-;; Display line numbers
-(use-package display-line-numbers
-  :straight nil
-  :custom
-  (display-line-numbers-type 'relative)
-  (display-line-numbers-grow-only t)
-  :config
-  (global-display-line-numbers-mode)
-  (dolist (mode '(org-mode-hook
-                  term-mode-hook
-                  vterm-mode-hook
-                  shell-mode-hook
-                  sly-mrepl-mode-hook
-                  eshell-mode-hook
-                  cider-repl-mode-hook))
-    (add-hook mode (lambda () (display-line-numbers-mode 0)))))
+;; --- mode-line ---
+(setq-default mode-line-format
+              '("%e"
+                " "
+                "%b"
+                " "
+                "(%l:%c)"
+                " "))
 
 ;; --- No littering ---
 (use-package no-littering
@@ -213,24 +207,7 @@
 
 ;; --- vterm ---
 (use-package vterm
-  :commands (projectile-run-vterm vterm ))
-
-;; --- Modeline ---
-(use-package feebleline
-  :config
-  (setq feebleline-msg-functions
-        '((feebleline-file-directory :face feebleline-dir-face :post "")
-          (feebleline-file-or-buffer-name :face font-lock-keyword-face :post "")
-          (feebleline-file-modified-star :face font-lock-warning-face :post "")
-          (feebleline-git-branch :face feebleline-git-face :pre " : ")
-          (feebleline-project-name :align right)))
-  (feebleline-mode 1))
-
-;; --- window divider ---
-(use-package window-divider-mode
-  :straight nil
-  :custom (wind-divider-default-right-width 0)
-  :config (window-divider-mode))
+  :commands (projectile-run-vterm vterm))
 
 ;; --- Theme Magic Pywal ---
 (use-package theme-magic
@@ -270,7 +247,6 @@
   (load-theme (fp/get-last-theme) t)
   (advice-add 'counsel-load-theme :after #'fp/set-last-theme))
 
-(setq modus-themes-subtle-line-numbers t)
 (fp/remember-last-theme)
 
 ;; --- automatically clean whitespace ---
@@ -341,6 +317,11 @@
   (delete-other-windows)
   (switch-to-buffer "*dashboard*"))
 
+(defun fp/line-number-at-pos ()
+  "Displays the current line number at pos."
+  (interactive)
+  (message (number-to-string (line-number-at-pos))))
+
 ;; --- General ---
 (use-package general
   :config
@@ -380,7 +361,8 @@
 
   (fp/leader-keys
     "s" '(:ignore t :which-key "search")
-    "ss" '(swiper-isearch :which-key "isearch")
+    "ss" '(counsel-grep-or-swiper :which-key "swiper-isearch")
+    "sf" '(evil-avy-goto-char-timer :which-key "goto-char-timer")
     "sg" '(counsel-projectile-rg :which-key "counsel-projectile-rg"))
 
   (fp/leader-keys
@@ -392,13 +374,6 @@
     :states '(normal visual)
     :keymaps 'prog-mode-map
     "fi" '(indent-region :which-key "indent-region"))
-
-  (fp/leader-keys
-    :states '(normal visual)
-    :keymaps 'lispyville-mode-map
-    "li" '(lispyville-inner-list :which-key "lispyville-next-closing")
-    "ln" '(lispyville-forward-sexp :which-key "lispyville-next-closing")
-    "lw" '(lispyville-wrap-with-round :which-key "lispyville-wrap-with-round"))
 
   (fp/leader-keys
     :states '(normal visual)
@@ -521,6 +496,7 @@
     "fs" '(evil-write :which-key "write")
     "fS" '(evil-write-all :which-key "write-all")
     "ft" '(counsel-load-theme :which-key "load-theme")
+    "fl" '(fp/line-number-at-pos :which-key "line number at position")
     "fq" '(evil-save-and-close :which-key "save-and-close")))
 
 ;; --- Evil mode ---
@@ -599,9 +575,8 @@
   "Correct theme color on switch."
   (set-face-foreground 'window-divider (face-attribute 'mode-line :background nil t))
   (set-face-foreground 'vertical-border (face-attribute 'mode-line :background nil t))
-  (set-face-attribute 'line-number nil
-                      :background (face-attribute 'default :background nil t)
-                      :foreground (face-attribute 'default :foreground nil t))
+  (set-face-attribute 'ivy-posframe nil
+                      :background (face-attribute 'default :background nil t))
   (set-face-attribute 'fringe nil
                       :foreground (face-attribute 'ivy-posframe :background nil t)
                       :background (face-attribute 'ivy-posframe :background nil t)))
@@ -727,14 +702,13 @@
   :commands (lsp lsp-deferred))
 
 ;; --- tree-sitter-mode mode ---
-(use-package tree-sitter-langs)
-
 (use-package tree-sitter
   :config
-  (require 'tree-sitter-langs)
-  (require 'clojure)
   (global-tree-sitter-mode)
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+(use-package tree-sitter-langs
+  :after tree-sitter)
 
 ;; --- lsp-ivy ---
 (use-package lsp-ivy
@@ -1002,4 +976,4 @@
   :straight nil
   :custom (dictionary-server "dict.org"))
 
-;;; init.el ends here
+;; init.el ends here
