@@ -45,6 +45,9 @@ export DOTNET_ROOT="/usr/share/dotnet"
 export MSBuildSDKsPath=$(echo /usr/share/dotnet/sdk/6.*/Sdks);
 export PATH="$PATH:$HOME/.dotnet/tools"
 
+## rust
+export PATH="$PATH:$HOME/.cargo/bin"
+
 ## python
 export PYTHONPATH="/usr/share/qgis/python:/usr/share/qgis/python/plugins:/usr/lib/python3.9"
 
