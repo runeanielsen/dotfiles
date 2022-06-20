@@ -48,14 +48,13 @@ export PATH="$PATH:$HOME/.dotnet/tools"
 ## python
 export PYTHONPATH="/usr/share/qgis/python:/usr/share/qgis/python/plugins:/usr/lib/python3.9"
 
-## node
-export PATH=~/.nvm/versions/node/v16.13.0/bin:$PATH
-export NVM_DIR=~/.nvm
-
 ## go
 export GOPATH=$HOME/go
 export GOBIN=$HOME/go/bin
 export PATH=$PATH:$(go env GOPATH)/bin
 export GO111MODULE="on"
 
+## node
+export PATH=~/.nvm/versions/node/v16.13.0/bin:$PATH
+export NVM_DIR=~/.nvm
 [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh" --no-use
