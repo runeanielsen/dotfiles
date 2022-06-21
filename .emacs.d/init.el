@@ -117,13 +117,13 @@
 ;; --- mode-line ---
 (setq-default mode-line-format "%e %b (%l:%c)")
 
-;; --- No littering ---
+;; --- no littering ---
 (use-package no-littering
   :config
   (setq auto-save-file-name-transforms
         `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
 
-;; --- Disable mouse ---
+;; --- disable mouse ---
 (use-package disable-mouse
   :init (global-disable-mouse-mode))
 
@@ -136,7 +136,7 @@
 ;; --- license templates ---
 (use-package license-templates)
 
-;; --- Projectile ---
+;; --- projectile ---
 (use-package projectile
   :custom ((projectile-completion-system 'ivy)
            (projectile-enable-caching nil)
@@ -144,7 +144,7 @@
            (projectile-track-known-projects-automatically nil))
   :config (projectile-mode t))
 
-;; --- Persp-mode ---
+;; --- persp-mode ---
 (use-package persp-mode
   :after projectile
   :init (persp-mode)
@@ -180,7 +180,7 @@
         dashboard-set-init-info nil
         dashboard-set-footer nil))
 
-;; --- Helpful ---
+;; --- helpful ---
 (use-package helpful
   :commands (helpful-callable helpful-variable helpful-command helpful-key)
   :custom ((counsel-describe-function-function #'helpful-callable)
@@ -190,10 +190,10 @@
          ([remap describe-variable] . counsel-describe-variable)
          ([remap describe-key] . helpful-key)))
 
-;; --- All-the-icons ---
+;; --- all-the-icons ---
 (use-package all-the-icons)
 
-;; --- Ace window ---
+;; --- ace window ---
 (use-package ace-window
   :custom
   ((aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
@@ -203,12 +203,12 @@
 (use-package vterm
   :commands (projectile-run-vterm vterm))
 
-;; --- Theme Magic Pywal ---
+;; --- theme Magic Pywal ---
 (use-package theme-magic
   :config
   (theme-magic-export-theme-mode))
 
-;; -- Load theme ---
+;; -- load theme ---
 (use-package f)
 
 (defvar fp/remember-last-theme-dir (concat "/home/notation/.emacs.d/" "var/remember-last-theme"))
@@ -316,7 +316,7 @@
   (interactive)
   (message (number-to-string (line-number-at-pos))))
 
-;; --- General ---
+;; --- general ---
 (use-package general
   :config
   (general-create-definer fp/leader-keys
@@ -513,7 +513,7 @@
   :config
   (evil-collection-init))
 
-;; --- Hydra ---
+;; --- hydra ---
 (use-package hydra
   :defer t)
 
@@ -531,7 +531,7 @@
   ("l" evil-window-increase-width "increase-width")
   ("f" nil "finished" :exit t))
 
-;; --- Dired ---
+;; --- dired ---
 (defun fp/quiet-auto-revert ()
   "A hook to run for buffers you want to revert automatically and silently."
   (auto-revert-mode 1)
@@ -554,17 +554,17 @@
 (use-package all-the-icons-dired
   :hook (dired-mode . all-the-icons-dired-mode))
 
-;; --- Counsel ---
+;; --- counsel ---
 (use-package counsel)
 
-;; --- Ivy ---
+;; --- ivy ---
 (use-package ivy
   :custom ((ivy-use-virtual-buffers t)
            (ivy-use-selectable-prompt t))
   :config
   (ivy-mode 1))
 
-;; --- Ivy posframe ---
+;; --- ivy posframe ---
 (defun correct-color-theme-switch ()
   "Correct theme color on switch."
   (set-face-foreground 'window-divider (face-attribute 'mode-line :background nil t))
@@ -597,7 +597,7 @@
   (advice-add 'counsel-load-theme :after #'correct-color-theme-switch)
   (correct-color-theme-switch))
 
-;; --- Magit ---
+;; --- magit ---
 (use-package magit
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
@@ -635,15 +635,15 @@
   :commands (sly)
   :config (setq common-lisp-hyperspec-root "/usr/share/doc/clhs/HyperSpec/"))
 
-;; --- Rainbow delimiters ---
+;; --- rainbow delimiters ---
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
-;; --- Rainbow mode ---
+;; --- rainbow mode ---
 (use-package rainbow-mode
   :hook (prog-mode . rainbow-mode))
 
-;; --- Company mode ---
+;; --- company mode ---
 (use-package company
   :init (add-hook 'after-init-hook 'global-company-mode)
   :custom ((company-idle-delay 0.1)
@@ -667,7 +667,7 @@
     (sp-local-pair modes "`" nil :actions nil))
   (smartparens-global-mode t))
 
-;; --- Flycheck ---
+;; --- flycheck ---
 (use-package flycheck
   :hook ((lsp-mode . flycheck-mode)
          (clojure-mode . flycheck-mode)
@@ -778,7 +778,7 @@
   :custom
   (cljr-warn-on-eval nil))
 
-;; --- Scheme mode ---
+;; --- scheme mode ---
 (use-package geiser-guile
   :hook (scheme-mode . geiser-mode))
 
@@ -786,7 +786,7 @@
   :straight nil
   :hook (scheme-mode . prettify-symbols-mode))
 
-;; --- Haksell mode ---
+;; --- haskell mode ---
 (use-package haskell-mode
   :hook ((haskell-mode . lsp-deferred)
          (haskell-literate-mode . lsp-deferred)))
@@ -859,12 +859,12 @@
   :hook ((rust-mode . lsp-deferred))
   :custom (rust-format-on-save t))
 
-;; --- C ---
+;; --- c ---
 (use-package cc-mode
   :straight nil
   :config (c-set-offset 'case-label '+))
 
-;; --- Zig ---
+;; --- zig ---
 (defun lsp-zig-install-save-hooks ()
   "LSP Zig install save hooks."
   (add-hook 'before-save-hook #'lsp-format-buffer t t))
@@ -874,11 +874,12 @@
          (zig-mode . lsp-zig-install-save-hooks))
   :custom (zig-format-on-save nil))
 
-;; --- Typescript mode ---
+;; --- typescript mode ---
 (use-package typescript-mode
   :hook (typescript-mode . lsp-deferred)
   :custom (typescript-indent-level 2))
 
+;; --- web mode ---
 (defun fp/web-mode-setup ()
   "Web-mode setup."
   (let ((file-extension (file-name-extension buffer-file-name)))
@@ -896,13 +897,15 @@
            (web-mode-css-indent-offset 2)
            (web-mode-code-indent-offset 2)))
 
+;; --- css mode ---
 (use-package css-mode
   :custom (css-indent-offset 2))
 
+;; --- scss mode ---
 (use-package scss-mode
   :custom (css-indent-offset 2))
 
-;; --- Node modules path ---
+;; --- node modules path ---
 (use-package add-node-modules-path
   :hook ((js-mode . add-node-modules-path)
          (css-mode . add-node-modules-path)
