@@ -1,14 +1,28 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-alias ls='ls --color=auto'
+# history control
+## ignore duplicate history entries
+histcontrol=ignoreboth
+
+## append to history file
+shopt -s histappend
+
+## history size
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# window size
+shopt -s checkwinsize
+
+# prompt
 PS1='λ: '
 
 # wal colors
 (cat ~/.cache/wal/sequences)
 
 # aliases
-alias ls='exa'
+alias ls='ls --color=auto'
 alias dotf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 alias copy='xsel --clipboard --input'
@@ -62,6 +76,7 @@ export PATH=~/.nvm/versions/node/v16.13.0/bin:$PATH
 export NVM_DIR=~/.nvm
 [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh" --no-use
 
+## emacs custom
 vterm_printf(){
     if [ -n "$TMUX" ] && ([ "${TERM%%-*}" = "tmux" ] || [ "${TERM%%-*}" = "screen" ] ); then
         # Tell tmux to pass the escape sequences through
