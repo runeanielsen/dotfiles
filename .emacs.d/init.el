@@ -115,13 +115,7 @@
     (scroll-bar-mode -1)))
 
 ;; --- mode-line ---
-(setq-default mode-line-format
-              '("%e"
-                " "
-                "%b"
-                " "
-                "(%l:%c)"
-                " "))
+(setq-default mode-line-format "%e %b (%l:%c)")
 
 ;; --- No littering ---
 (use-package no-littering
