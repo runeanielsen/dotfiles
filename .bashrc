@@ -21,6 +21,12 @@ PS1='λ: '
 # wal colors
 (cat ~/.cache/wal/sequences)
 
+# ls colors
+## executeable red (ex=31 no background)
+## directory writeable to others sticky bit yes (tw=34 no background)
+## directory writeable to others sticky bit no (tw=34 no background)
+export LS_COLORS='ex=31:tw=34:ow=34'
+
 # aliases
 alias ls='ls --color=auto'
 alias dotf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
