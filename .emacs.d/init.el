@@ -87,7 +87,7 @@
 (show-paren-mode 1)
 
 ;; Change fringe mode
-(fringe-mode '(16 . 16))
+(fringe-mode '(8 . 8))
 
 ;; Disable recentf mode
 (recentf-mode 0)
@@ -125,7 +125,7 @@
 
 ;; --- disable mouse ---
 (use-package disable-mouse
-  :init (global-disable-mouse-mode))
+  :config (global-disable-mouse-mode))
 
 ;; --- shut up ---
 (use-package shut-up
@@ -457,6 +457,8 @@
     "wN" '(fp/split-window-balanced-horizontal :which-key "split-window-balanced-horizontal")
     "wh" '(evil-window-left :which-key "window-left")
     "wl" '(evil-window-right :which-key "window-right")
+    "wj" '(evil-window-down :which-key "window-down")
+    "wk" '(evil-window-up :which-key "window-down")
     "ws" '(window-swap-states :which-key "window-swap-states")
     "wd" '(fp/delete-window-balanced :which-key "delete-window"))
 
@@ -499,14 +501,7 @@
   (setq evil-want-integration t
         evil-want-keybinding nil)
   :config
-  (evil-mode 1)
-  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
-  (mapc #'disable-mouse-in-keymap
-      (list evil-motion-state-map
-            evil-normal-state-map
-            evil-visual-state-map
-            evil-insert-state-map)))
+  (evil-mode 1))
 
 (use-package evil-collection
   :after evil
@@ -639,11 +634,11 @@
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
-;; --- rainbow mode ---
+;; --- rainbow ---
 (use-package rainbow-mode
   :hook (prog-mode . rainbow-mode))
 
-;; --- company mode ---
+;; --- company ---
 (use-package company
   :init (add-hook 'after-init-hook 'global-company-mode)
   :custom ((company-idle-delay 0.1)
@@ -681,21 +676,21 @@
            (flycheck-check-syntax-automatically '(mode-enabled save idle-buffer-switch))
            (flycheck-buffer-switch-check-intermediate-buffers t)))
 
-;; --- lsp mode ---
+;; --- lsp ---
 (use-package lsp-mode
   :hook ((lsp-mode . lsp-enable-which-key-integration)
          (lsp-mode . yas-minor-mode))
   :custom ((lsp-enable-links nil)
            (lsp-log-io nil)
            (lsp-enable-snippet nil)
-           (lsp-eldoc-enable-hover nil)
+           (lsp-eldoc-enable-hover t)
            (lsp-lens-enable nil)
            (lsp-enable-folding nil)
            (lsp-keep-workspace-alive nil)
            (lsp-headerline-breadcrumb-enable nil))
   :commands (lsp lsp-deferred))
 
-;; --- tree-sitter-mode mode ---
+;; --- tree-sitter ---
 (use-package tree-sitter
   :config
   (global-tree-sitter-mode)
@@ -703,10 +698,6 @@
 
 (use-package tree-sitter-langs
   :after tree-sitter)
-
-;; --- lsp-ivy ---
-(use-package lsp-ivy
-  :commands lsp-ivy-workspace-symbol)
 
 ;; --- lsp-ui ---
 (use-package lsp-ui
@@ -758,7 +749,7 @@
   (let ((extension (file-name-extension buffer-file-name)))
     (cond ((string= extension "clj") (call-interactively 'cider-jack-in-clj))
           ((string= extension "cljs") (call-interactively 'cider-jack-in-cljs))
-          (t (message (concat "Extension: " extension " is not valid."))))))
+          (t (message (format "Extension: '%s' is not valid." extension))))))
 
 (defun cider-install-save-hooks ()
   "Cider install save hooks."
@@ -779,12 +770,12 @@
   (cljr-warn-on-eval nil))
 
 ;; --- scheme mode ---
-(use-package geiser-guile
-  :hook (scheme-mode . geiser-mode))
-
 (use-package scheme-mode
   :straight nil
   :hook (scheme-mode . prettify-symbols-mode))
+
+(use-package geiser-guile
+  :commands (geiser))
 
 ;; --- haskell mode ---
 (use-package haskell-mode
@@ -801,6 +792,7 @@
   (setq js-indent-level 2))
 
 (use-package json-mode
+  :mode ("\\.json\\'")
   :hook (json-mode . fp/setup-json-mode))
 
 ;; --- csv mode ---
@@ -824,9 +816,7 @@
   "Sort using statements i C#."
   (interactive)
   (let* ((buffer-string (buffer-substring-no-properties (point-min) (point-max)))
-         (matches (flatten-list (s-match-strings-all
-                                 "using [A-Za-z\.]+;"
-                                 buffer-string)))
+         (matches (flatten-list (s-match-strings-all "using [A-Za-z\.]+;" buffer-string)))
          (usings (fp/process-sort-usings matches)))
     (unless (equal matches usings)
       (save-excursion
