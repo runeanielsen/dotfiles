@@ -607,21 +607,9 @@
                 :username "runeanielsen"
                 :auth 'forge))
 
-;; --- lisp ---
-(use-package lispy
-  :hook ((emacs-lisp-mode . lispy-mode)
-         (lisp-mode . lispy-mode)
-         (clojure-mode . lispy-mode)
-         (scheme-mode . lispy-mode)))
-
-(use-package lispyville
-  :init
-  (general-add-hook '(emacs-lisp-mode-hook
-                      lisp-mode-hook
-                      clojure-mode-hook
-                      scheme-mode-hook) #'lispyville-mode)
-  :config
-  (lispyville-set-key-theme '(operators c-w additional)))
+;; --- evil-cleverparens ---
+(use-package evil-cleverparens
+  :hook ((emacs-lisp-mode . evil-cleverparens-mode)))
 
 ;; --- commmon lisp ---
 (defvar inferior-lisp-program "sbcl")
