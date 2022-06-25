@@ -19,7 +19,7 @@ HISTFILESIZE=2000
 shopt -s checkwinsize
 
 # prompt
-export PS1="\\033[00;34mλ:\\033[00m "
+export PS1="λ: "
 
 # ls colors
 export LS_COLORS='di=0;1:ex=31:tw=0;1:ow=0;1'
