@@ -316,6 +316,13 @@
   (interactive)
   (message (number-to-string (line-number-at-pos))))
 
+(defun fp/pick-vterm ()
+  "Decides how to run projectile."
+  (interactive)
+  (if (projectile-project-p)
+      (call-interactively 'projectile-run-vterm)
+    (call-interactively 'vterm)))
+
 ;; --- general ---
 (use-package general
   :config
@@ -464,7 +471,7 @@
 
   (fp/leader-keys
     "o" '(:ignore t :which-key "open")
-    "ot" '(projectile-run-vterm :which-key "vterm")
+    "ot" '(fp/pick-vterm :which-key "vterm")
     "oT" '(vterm :which-key "vterm")
     "oe" '(fp/open-init-el :which-key "open-init.el"))
 
