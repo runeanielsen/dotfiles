@@ -1,6 +1,9 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# wal colors
+(cat ~/.cache/wal/sequences)
+
 # history control
 ## ignore duplicate history entries
 histcontrol=ignoreboth
