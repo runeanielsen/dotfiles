@@ -681,6 +681,12 @@
            (lsp-headerline-breadcrumb-enable nil))
   :commands (lsp lsp-deferred))
 
+;; --- lsp-ui ---
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode)
+  :custom ((lsp-ui-sideline-show-code-actions nil)
+           (lsp-ui-doc-enable nil)))
+
 ;; --- tree-sitter ---
 (use-package tree-sitter
   :config
@@ -689,12 +695,6 @@
 
 (use-package tree-sitter-langs
   :after tree-sitter)
-
-;; --- lsp-ui ---
-(use-package lsp-ui
-  :hook (lsp-mode . lsp-ui-mode)
-  :custom ((lsp-ui-sideline-show-code-actions nil)
-           (lsp-ui-doc-enable nil)))
 
 ;; --- go mode ---
 (defun lsp-go-install-save-hooks ()
@@ -825,15 +825,6 @@
 (use-package csharp-mode
   :hook ((csharp-mode . lsp-deferred)
          (csharp-mode . lsp-csharp-install-save-hooks)))
-
-;; --- fsharp mode ---
-(defun lsp-fsharp-install-save-hooks ()
-  "LSP FSharp install save hooks."
-  (add-hook 'before-save-hook #'lsp-format-buffer t t))
-
-(use-package fsharp-mode
-  :hook ((fsharp-mode . lsp-deferred)
-         (fsharp-mode . lsp-fsharp-install-save-hooks)))
 
 ;; --- rust mode ---
 (use-package rust-mode
