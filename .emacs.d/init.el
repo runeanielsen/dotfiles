@@ -871,18 +871,13 @@
 
 ;; --- css mode ---
 (use-package css-mode
+  :mode ("\\.css\\'")
   :custom (css-indent-offset 2))
 
 ;; --- scss mode ---
 (use-package scss-mode
+  :mode ("\\.scss\\'")
   :custom (css-indent-offset 2))
-
-;; --- node modules path ---
-(use-package add-node-modules-path
-  :hook ((js-mode . add-node-modules-path)
-         (css-mode . add-node-modules-path)
-         (web-mode . add-node-modules-path)
-         (typescript-mode . add-node-modules-path)))
 
 ;; --- Prettier ---
 (use-package prettier-js
@@ -894,7 +889,6 @@
 
 ;; --- markdown ---
 (use-package markdown-mode
-  :ensure t
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
