@@ -19,16 +19,10 @@ HISTFILESIZE=2000
 shopt -s checkwinsize
 
 # prompt
-PS1='λ: '
-
-# wal colors
-(cat ~/.cache/wal/sequences)
+export PS1="\\033[00;34mλ:\\033[00m "
 
 # ls colors
-## executeable red (ex=31 no background)
-## directory writeable to others sticky bit yes (tw=34 no background)
-## directory writeable to others sticky bit no (tw=34 no background)
-export LS_COLORS='ex=31:tw=34:ow=34'
+export LS_COLORS='di=0;1:ex=31:tw=0;1:ow=0;1'
 
 # aliases
 alias ls='ls --color=auto'
