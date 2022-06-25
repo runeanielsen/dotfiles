@@ -561,8 +561,7 @@
 
 ;; --- ivy ---
 (use-package ivy
-  :custom ((ivy-use-virtual-buffers t)
-           (ivy-use-selectable-prompt t))
+  :custom ((ivy-use-selectable-prompt t))
   :config
   (ivy-mode 1))
 
