@@ -630,7 +630,7 @@
 (use-package company
   :init (add-hook 'after-init-hook 'global-company-mode)
   :custom ((company-idle-delay 0.1)
-           (company-minimum-prefix-lenght 1))
+           (company-minimum-prefix-length 1))
   :bind (("<C-tab>" . company-complete)))
 
 ;; --- which key ---
