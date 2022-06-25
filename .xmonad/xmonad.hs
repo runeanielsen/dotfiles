@@ -52,7 +52,7 @@ myStartupHook = do
 
 -- Layout
 myLayout =
-  avoidStruts (smartBorders $ spacingWithEdge 5 $ centeredIfSingle 0.60 tiled) |||
+  avoidStruts (smartBorders $ spacingWithEdge 5 $ centeredIfSingle 0.65 1 tiled) |||
   avoidStruts (noBorders $ spacingWithEdge 0 Full)
   where
      -- default tiling algorithm partitions the screen into two panes
