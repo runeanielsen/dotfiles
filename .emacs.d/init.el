@@ -534,14 +534,10 @@
   ("f" nil "finished" :exit t))
 
 ;; --- dired ---
-(defun fp/quiet-auto-revert ()
-  "A hook to run for buffers you want to revert automatically and silently."
-  (auto-revert-mode 1)
-  (setq-local auto-revert-verbose nil))
-
 (use-package dired
   :straight nil
-  :custom ((dired-listing-switches "-agho --group-directories-first"))
+  :custom ((dired-listing-switches "-agho --group-directories-first")
+           (dired-auto-revert-buffer t))
   :hook (dired-mode-hook . fp/quiet-auto-revert)
   :config
   (evil-collection-define-key 'normal 'dired-mode-map
@@ -554,6 +550,7 @@
   :after dired)
 
 (use-package all-the-icons-dired
+  :after dired
   :hook (dired-mode . all-the-icons-dired-mode))
 
 ;; --- counsel ---
