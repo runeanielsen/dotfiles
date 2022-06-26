@@ -631,7 +631,10 @@
 
 ;; --- evil-cleverparens ---
 (use-package evil-cleverparens
-  :hook ((emacs-lisp-mode . evil-cleverparens-mode)))
+  :hook ((emacs-lisp-mode . evil-cleverparens-mode)
+         (clojure-mode . evil-cleverparens-mode)
+         (scheme-mode . evil-cleverparens-mode)
+         (common-lisp-mode . evil-cleverparens-mode)))
 
 ;; --- commmon lisp ---
 (defvar inferior-lisp-program "sbcl")
