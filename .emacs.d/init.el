@@ -304,7 +304,7 @@
       (call-interactively 'counsel-projectile-find-file)
     (call-interactively 'switch-to-buffer)))
 
-(defun fp/cleanup ()
+(defun fp/kill-all-buffers ()
   "Kill all buffers, remove other windows and go to dashboard."
   (interactive)
   (mapcar 'kill-buffer (remove (get-buffer "*dashboard*") (buffer-list)))
@@ -326,6 +326,12 @@
 ;; --- general ---
 (use-package general
   :config
+  (general-create-definer fp/default-normal-visual
+    :keymaps '(normal visual))
+
+  (fp/default-normal-visual
+    ";" '(execute-extended-command :which-key "execute-extended-command"))
+
   (general-create-definer fp/leader-keys
     :keymaps '(normal visual)
     :prefix "SPC")
@@ -347,13 +353,23 @@
 
   (fp/leader-keys
     "b" '(:ignore t :which-key "buffer")
-    "bb" '(persp-switch-to-buffer :which-key "switch-to-buffer-persp")
+    "bi" '(ibuffer :which-key "ibuffer")
+    "bb" '(switch-to-buffer :which-key "switch-to-buffer-persp")
     "bB" '(switch-to-buffer :which-key "switch-to-buffer")
-    "bf" '(ivy-switch-buffer :which-key "ivy-switch-buffer")
     "ba" '(persp-add-buffer :which-key "persp-add-buffer")
-    "bd" '(bury-buffer :which-key "bury-buffer")
+    "bz" '(bury-buffer :which-key "bury-buffer")
+    "bm" '(bookmark-set :which-key "bookmark-set")
+    "bM" '(bookmark-delete :which-key "bookmark-set")
     "bk" '(persp-kill-buffer :which-key "kill-current-buffer")
-    "bK" '(fp/cleanup :which-key "cleanup")
+    "bK" '(fp/kill-all-buffers :which-key "kill-all-buffers")
+    "bl" '(evil-switch-to-windows-last-buffer :which-key "switch-to-last-buffer"))
+
+  (fp/leader-keys
+    :states '(normal visual)
+    :keymaps 'persp-mode-map
+    "b" '(:ignore t :which-key "buffer")
+    "bb" '(persp-switch-to-buffer :which-key "persp-switch-to-buffer")
+    "ba" '(persp-add-buffer :which-key "persp-add-buffer")
     "bl" '(projectile-project-buffers-other-buffer :which-key "switch-last-buffer"))
 
   (fp/leader-keys
@@ -362,6 +378,9 @@
 
   (fp/leader-keys
     "s" '(:ignore t :which-key "search")
+    "sj" '(evil-show-jumps :which-key "evil-show-jumps")
+    "sm" '(bookmark-jump :which-key "bookmark-jump")
+    "si" '(imenu :which-key "imenu")
     "ss" '(counsel-grep-or-swiper :which-key "swiper-isearch")
     "sf" '(evil-avy-goto-char-timer :which-key "goto-char-timer")
     "sg" '(counsel-projectile-rg :which-key "counsel-projectile-rg"))
