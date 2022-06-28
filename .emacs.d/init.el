@@ -332,6 +332,12 @@
   (fp/default-normal-visual
     ";" '(execute-extended-command :which-key "execute-extended-command"))
 
+  (fp/default-normal-visual
+    "," '(switch-to-buffer :which-key "switch-to-buffer"))
+
+  (fp/default-normal-visual
+    "." '(find-file :which-key "find-file"))
+
   (general-create-definer fp/leader-keys
     :keymaps '(normal visual)
     :prefix "SPC")
@@ -355,7 +361,6 @@
     "b" '(:ignore t :which-key "buffer")
     "bi" '(ibuffer :which-key "ibuffer")
     "bb" '(switch-to-buffer :which-key "switch-to-buffer-persp")
-    "bB" '(switch-to-buffer :which-key "switch-to-buffer")
     "ba" '(persp-add-buffer :which-key "persp-add-buffer")
     "bz" '(bury-buffer :which-key "bury-buffer")
     "bm" '(bookmark-set :which-key "bookmark-set")
@@ -369,6 +374,7 @@
     :keymaps 'persp-mode-map
     "b" '(:ignore t :which-key "buffer")
     "bb" '(persp-switch-to-buffer :which-key "persp-switch-to-buffer")
+    "bB" '(switch-to-buffer :which-key "switch-to-buffer")
     "ba" '(persp-add-buffer :which-key "persp-add-buffer")
     "bl" '(projectile-project-buffers-other-buffer :which-key "switch-last-buffer"))
 
