@@ -664,8 +664,7 @@
 
 ;; --- lsp ---
 (use-package lsp-mode
-  :hook ((lsp-mode . lsp-enable-which-key-integration)
-         (lsp-mode . yas-minor-mode))
+  :hook ((lsp-mode . lsp-enable-which-key-integration))
   :custom ((lsp-enable-links nil)
            (lsp-log-io nil)
            (lsp-enable-snippet nil)
