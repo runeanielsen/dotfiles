@@ -11,9 +11,9 @@ histcontrol=ignoreboth
 ## append to history file
 shopt -s histappend
 
-## history size
-HISTSIZE=1000
-HISTFILESIZE=2000
+## history to infinite (the value does not matter, as long as it is not numeric)
+HISTSIZE="INFINITE"
+HISTFILESIZE="INFINITE"
 
 # window size
 shopt -s checkwinsize
