@@ -276,12 +276,14 @@
 (defun fp/project-vterm ()
   "Vterm based on project name."
   (interactive)
-  (when (project-current)
+  (if (project-current)
     (let* ((default-project-vterm-name (fp/project-name-prefix "vterm"))
            (vterm-buffer (get-buffer default-project-vterm-name)))
       (if vterm-buffer
-          (switch-to-buffer vterm-buffer)
-        (vterm (generate-new-buffer-name default-project-vterm-name))))))
+        (switch-to-buffer vterm-buffer)
+        (let ((default-directory (cdr (project-current))))
+          (vterm (generate-new-buffer-name default-project-vterm-name)))))
+    (message "Not inside of project, could not open vterm.")))
 
 ;; --- general ---
 (use-package general
