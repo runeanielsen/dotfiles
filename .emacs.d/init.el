@@ -136,38 +136,11 @@
 ;; --- license templates ---
 (use-package license-templates)
 
-;; --- projectile ---
-(use-package projectile
-  :custom ((projectile-completion-system 'ivy)
-           (projectile-enable-caching nil)
-           (projectile-indexing-method 'alien)
-           (projectile-track-known-projects-automatically nil))
-  :config (projectile-mode t))
-
-;; --- persp-mode ---
-(use-package persp-mode
-  :after projectile
-  :init (persp-mode)
-  :config
-  (setq persp-autokill-buffer-on-remove 'kill-weak
-        persp-nil-hidden t
-        persp-auto-save-opt 0
-        persp-add-buffer-on-find-file nil
-        persp-switch-to-added-buffer nil
-        persp-set-last-persp-for-new-frames nil
-        persp-kill-foreign-buffer-behaviour 'kill
-        persp-remove-buffers-from-nil-persp-behaviour nil
-        persp-nil-name "dashboard"
-        persp-auto-resume-time -1))
-
-(use-package persp-mode-projectile-bridge
-  :after persp-mode
-  :init (persp-mode-projectile-bridge-mode))
-
-(use-package counsel-projectile
-  :after projectile
-  :config
-  (counsel-projectile-mode))
+;; --- project ---
+(use-package project
+  :straight nil
+  :custom (project-switch-commands '((project-find-file "Find file")
+                                     (project-find-dir "Find directory"))))
 
 ;; --- dashboard ---
 (use-package dashboard
@@ -180,28 +153,12 @@
         dashboard-set-init-info nil
         dashboard-set-footer nil))
 
-;; --- helpful ---
-(use-package helpful
-  :commands (helpful-callable helpful-variable helpful-command helpful-key)
-  :custom ((counsel-describe-function-function #'helpful-callable)
-           (counsel-describe-variable-function #'helpful-variable))
-  :bind (([remap describe-function] . counsel-describe-function)
-         ([remap describe-command] . helpful-command)
-         ([remap describe-variable] . counsel-describe-variable)
-         ([remap describe-key] . helpful-key)))
-
 ;; --- all-the-icons ---
 (use-package all-the-icons)
 
-;; --- ace window ---
-(use-package ace-window
-  :custom
-  ((aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-   (aw-background nil)))
-
 ;; --- vterm ---
 (use-package vterm
-  :commands (projectile-run-vterm vterm))
+  :commands (vterm))
 
 ;; --- theme Magic Pywal ---
 (use-package theme-magic
@@ -284,26 +241,6 @@
   (lsp-describe-thing-at-point)
   (pop-to-buffer "*lsp-help*"))
 
-(defun fp/projectile-switch-project ()
-  "Switch to projectile project. (HACK fixes performance issues somehow??)."
-  (interactive)
-  (projectile-switch-project))
-
-(defun fp/persp-kill ()
-  "Persp kill and switch to dashboard."
-  (interactive)
-  (call-interactively 'persp-kill)
-  (when (equal (projectile-project-p) nil)
-    (switch-to-buffer "*dashboard*")
-    (dashboard-refresh-buffer)))
-
-(defun fp/find-file-or-buffer ()
-  "Find file or buffer depending on if project is active."
-  (interactive)
-  (if (projectile-project-p)
-      (call-interactively 'counsel-projectile-find-file)
-    (call-interactively 'switch-to-buffer)))
-
 (defun fp/kill-all-buffers ()
   "Kill all buffers, remove other windows and go to dashboard."
   (interactive)
@@ -316,12 +253,35 @@
   (interactive)
   (message (number-to-string (line-number-at-pos))))
 
-(defun fp/pick-vterm ()
-  "Decides how to run projectile."
+(defun fp/switch-to-buffer ()
+  "Switch buffer depending on being in project or not."
   (interactive)
-  (if (projectile-project-p)
-      (call-interactively 'projectile-run-vterm)
-    (call-interactively 'vterm)))
+  (if (project-current)
+      (call-interactively 'project-switch-to-buffer)
+    (call-interactively 'switch-to-buffer)))
+
+(defun fp/find-file ()
+  "Find file depending on being in project or not."
+  (interactive)
+  (if (project-current)
+      (call-interactively 'project-find-file)
+    (call-interactively 'find-file)))
+
+(defun fp/project-name-prefix (name)
+  "Get project name prefix using NAME."
+  (when (project-current)
+    (let ((project-name (car (cdr (reverse (split-string (cdr (project-current)) "/"))))))
+      (concat "*" project-name "-" name "*"))))
+
+(defun fp/project-vterm ()
+  "Vterm based on project name."
+  (interactive)
+  (when (project-current)
+    (let* ((default-project-vterm-name (fp/project-name-prefix "vterm"))
+           (vterm-buffer (get-buffer default-project-vterm-name)))
+      (if vterm-buffer
+          (switch-to-buffer vterm-buffer)
+        (vterm (generate-new-buffer-name default-project-vterm-name))))))
 
 ;; --- general ---
 (use-package general
@@ -330,53 +290,39 @@
     :keymaps '(normal visual))
 
   (fp/default-normal-visual
-    ";" '(execute-extended-command :which-key "execute-extended-command"))
+    ";" '(counsel-M-x :which-key "execute-extended-command"))
 
   (fp/default-normal-visual
-    "," '(switch-to-buffer :which-key "switch-to-buffer"))
-
-  (fp/default-normal-visual
-    "." '(find-file :which-key "find-file"))
+    "," '(fp/switch-to-buffer :which-key "switch-buffer"))
 
   (general-create-definer fp/leader-keys
     :keymaps '(normal visual)
     :prefix "SPC")
 
   (fp/leader-keys
-    "TAB" '(:ignore t :which-key "persp")
-    "TAB TAB" '(persp-switch :which-key "persp-switch")
-    "TAB n" '(persp-add-new :which-key "persp-add-new")
-    "TAB h" '(persp-prev :which-key "persp-prev")
-    "TAB l" '(persp-next :which-key "persp-next"))
+    "TAB" '(:ignore t :which-key "project")
+    "TAB TAB" '(project-switch-project :which-key "switch-project")
+    "TAB n" '(project-remember-project-under :which-key "remember-project"))
 
   (fp/leader-keys
-    "SPC" '(fp/find-file-or-buffer :which-key "find-file"))
+    "SPC" '(fp/find-file :which-key "find-file"))
 
   (fp/leader-keys
     "d" '(:ignore t :which-key "dired")
     "dd" '(dired-jump :which-key "dired-jump")
-    "dp" '(projectile-dired :which-key "dired-projectile"))
+    "dj" '(counsel-dired-jump :which-key "dired-jump")
+    "dp" '(project-dired :which-key "project-dired"))
 
   (fp/leader-keys
     "b" '(:ignore t :which-key "buffer")
     "bi" '(ibuffer :which-key "ibuffer")
-    "bb" '(switch-to-buffer :which-key "switch-to-buffer-persp")
-    "ba" '(persp-add-buffer :which-key "persp-add-buffer")
+    "bb" '(switch-to-buffer :which-key "switch-to-buffer")
     "bz" '(bury-buffer :which-key "bury-buffer")
     "bm" '(bookmark-set :which-key "bookmark-set")
     "bM" '(bookmark-delete :which-key "bookmark-set")
-    "bk" '(persp-kill-buffer :which-key "kill-current-buffer")
+    "bk" '(kill-buffer :which-key "kill-current-buffer")
     "bK" '(fp/kill-all-buffers :which-key "kill-all-buffers")
     "bl" '(evil-switch-to-windows-last-buffer :which-key "switch-to-last-buffer"))
-
-  (fp/leader-keys
-    :states '(normal visual)
-    :keymaps 'persp-mode-map
-    "b" '(:ignore t :which-key "buffer")
-    "bb" '(persp-switch-to-buffer :which-key "persp-switch-to-buffer")
-    "bB" '(switch-to-buffer :which-key "switch-to-buffer")
-    "ba" '(persp-add-buffer :which-key "persp-add-buffer")
-    "bl" '(projectile-project-buffers-other-buffer :which-key "switch-last-buffer"))
 
   (fp/leader-keys
     "g" '(:ignore t :which-key "git")
@@ -386,10 +332,12 @@
     "s" '(:ignore t :which-key "search")
     "sj" '(evil-show-jumps :which-key "evil-show-jumps")
     "sm" '(bookmark-jump :which-key "bookmark-jump")
-    "si" '(imenu :which-key "imenu")
-    "ss" '(counsel-grep-or-swiper :which-key "swiper-isearch")
-    "sf" '(evil-avy-goto-char-timer :which-key "goto-char-timer")
-    "sg" '(counsel-projectile-rg :which-key "counsel-projectile-rg"))
+    "si" '(counsel-imenu :which-key "imenu")
+    "ss" '(counsel-grep-or-swiper :which-key "grep-or-swiper")
+    "sw" '(avy-goto-word-0 :which-key "goto-char-timer")
+    "sf" '(avy-goto-char-timer :which-key "goto-char-timer")
+    "sl" '(avy-goto-line :which-key "goto-char-timer")
+    "sg" '(counsel-rg :which-key "rg"))
 
   (fp/leader-keys
     "c" '(:ignore t :which-key "code")
@@ -484,7 +432,7 @@
 
   (fp/leader-keys
     "w" '(:ignore t :which-key "window")
-    "ww" '(ace-window :which-key "ace-window")
+    "ww" '(other-window :which-key "other-window")
     "wn" '(fp/split-window-balanced :which-key "split-window-balanced")
     "wN" '(fp/split-window-balanced-horizontal :which-key "split-window-balanced-horizontal")
     "wh" '(evil-window-left :which-key "window-left")
@@ -496,7 +444,7 @@
 
   (fp/leader-keys
     "o" '(:ignore t :which-key "open")
-    "ot" '(fp/pick-vterm :which-key "vterm")
+    "ot" '(fp/project-vterm :which-key "vterm")
     "oT" '(vterm :which-key "vterm")
     "oe" '(fp/open-init-el :which-key "open-init.el"))
 
@@ -506,19 +454,16 @@
     "tls" '(sort-lines :which-key "sort-lines"))
 
   (fp/leader-keys
-    "p" '(:ignore t :which-key "projectile")
-    "pa" '(projectile-add-known-project :which-key "add-project")
-    "pd" '(projectile-remove-known-project :which-key "remove-project")
-    "pp" '(fp/projectile-switch-project :which-key "switch-project")
-    "pb" '(projectile-switch-to-buffer :which-key "switch-buffer")
-    "pk" '(fp/persp-kill :which-key "kill-project"))
+    "p" '(:ignore t :which-key "project")
+    "pd" '(project-forget-project :which-key "remove-project")
+    "pk" '(project-kill-buffers :which-key "kill-project"))
 
   (fp/leader-keys
     "wr" '(hydra-window-resize/body :which-key "resize window"))
 
   (fp/leader-keys
     "f"  '(:ignore t :which-key "files")
-    "ff" '(counsel-find-file :which-key "find-file")
+    "ff" '(find-file :which-key "find-file")
     "fc" '(dired-create-empty-file :which-key "create-file")
     "fd" '(dired-create-directory :which-key "create-directory")
     "fs" '(evil-write :which-key "write")
@@ -581,11 +526,45 @@
 ;; --- counsel ---
 (use-package counsel)
 
+;; --- avy ---
+(use-package avy)
+
 ;; --- ivy ---
 (use-package ivy
   :custom ((ivy-use-selectable-prompt t))
   :config
   (ivy-mode 1))
+
+;; --- ivy posframe ---
+(defun correct-color-theme-switch ()
+  "Correct theme color on switch."
+  (set-face-attribute 'ivy-posframe nil
+                      :background (face-attribute 'default :background nil t))
+  (set-face-attribute 'fringe nil
+                      :foreground (face-attribute 'ivy-posframe :background nil t)
+                      :background (face-attribute 'ivy-posframe :background nil t)))
+
+(defun fp/dynamic-ivy-posframe-get-size ()
+  "Set the ivy-posframe size according to the current frame."
+  (let ((height (or ivy-posframe-height (or ivy-height 10)))
+        (width (min (or ivy-posframe-width 120) (round (* .75 (frame-width))))))
+    (list :height height :width width :min-height height :min-width width)))
+
+(use-package ivy-posframe
+  :after ivy
+  :config
+  (setq ivy-posframe-size-function 'fp/dynamic-ivy-posframe-get-size)
+  (setq ivy-posframe-display-functions-alist
+        '((t . ivy-posframe-display-at-frame-center))
+        ivy-posframe-height-alist '((t . 20)))
+  (setq ivy-posframe-border-width 1)
+  (setq ivy-posframe-parameters
+        '((left-fringe . 16)
+          (right-fringe . 16)))
+  (ivy-posframe-mode 1)
+  (advice-add 'counsel-load-theme :after #'posframe-delete-all)
+  (advice-add 'counsel-load-theme :after #'correct-color-theme-switch)
+  (correct-color-theme-switch))
 
 ;; --- magit ---
 (use-package magit
@@ -627,13 +606,12 @@
 ;; --- company ---
 (use-package company
   :init (add-hook 'after-init-hook 'global-company-mode)
-  :custom ((company-idle-delay 0.1)
+  :custom ((company-idle-delay 0)
            (company-minimum-prefix-length 1))
   :bind (("<C-tab>" . company-complete)))
 
 ;; --- which key ---
 (use-package which-key
-  :defer 0
   :custom (which-key-idle-delay 1)
   :config (which-key-mode))
 
@@ -650,13 +628,7 @@
 
 ;; --- flycheck ---
 (use-package flycheck
-  :hook ((lsp-mode . flycheck-mode)
-         (clojure-mode . flycheck-mode)
-         (c-mode . flycheck-mode)
-         (emacs-lisp-mode . flycheck-mode)
-         (lisp-mode . flycheck-mode)
-         (markdown-mode . flycheck-mode)
-         (haskell-mode . flycheck-mode))
+  :hook ((prog-mode . flycheck-mode))
   :custom ((flycheck-indication-mode nil)
            (flycheck-checker-error-threshold 10000) ;; Hack Csharp mode bugs out.
            (flycheck-check-syntax-automatically '(mode-enabled save idle-buffer-switch))
@@ -729,7 +701,7 @@
     (error nil)))
 
 (defun fp/cider-jack-in ()
-  "Call either cider-jack-clj in or cider-jack-in-cljs depending on current buffer file extension."
+  "Call cider-jack-in depending on current buffer file extension."
   (interactive)
   (let ((extension (file-name-extension buffer-file-name)))
     (cond ((string= extension "clj") (call-interactively 'cider-jack-in-clj))
@@ -748,11 +720,6 @@
            (cider-repl-display-help-banner nil)
            (cider-use-fringe-indicators nil)
            (safe-local-variable-values '((cider-clojure-cli-aliases . "test")))))
-
-;; (use-package clj-refactor
-;;   :hook (clojure-mode . clj-refactor-mode)
-;;   :custom
-;;   (cljr-warn-on-eval nil))
 
 ;; --- scheme mode ---
 (use-package scheme-mode
