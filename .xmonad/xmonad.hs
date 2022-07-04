@@ -82,7 +82,7 @@ myKeys =
 
     -- My applications
   , ("M-f", spawn "firefox")
-  , ("M-e", spawn "emacs -ib 8")
+  , ("M-e", spawn "emacs")
   , ("M-i", spawn "~/.config/scripts/dmenu-passmenu.sh")
   , ("M-b", spawn "~/.config/scripts/dmenu-books.sh")
   , ("M-v", spawn "~/.config/scripts/dmenu-videos.sh")
