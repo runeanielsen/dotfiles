@@ -170,7 +170,7 @@
 
 (defvar fp/remember-last-theme-dir (concat "/home/notation/.emacs.d/" "var/remember-last-theme"))
 (defvar fp/remember-last-theme-file (concat fp/remember-last-theme-dir "/remember-last"))
-(defvar fp/remember-last-theme-default 'wombat)
+(defvar fp/remember-last-theme-default 'modus-operandi)
 
 (defun fp/get-last-theme ()
   "Gets the last set theme."
