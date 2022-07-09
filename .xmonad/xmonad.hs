@@ -11,9 +11,8 @@ import Data.Monoid
 import XMonad
 import XMonad.Util.Run (spawnPipe)
 import XMonad.Util.EZConfig (additionalKeysP)
-import XMonad.Util.SpawnOnce
 import XMonad.Layout.NoBorders (noBorders, smartBorders)
-import XMonad.Layout.Fullscreen (fullscreenFull, fullscreenSupport)
+import XMonad.Layout.Fullscreen (fullscreenSupport)
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
@@ -51,6 +50,7 @@ myStartupHook = do
   setWMName "LG3D"
 
 -- Layout
+
 myLayout =
   avoidStruts (smartBorders $ spacingWithEdge 5 $ centeredIfSingle 0.60 1 tiled) |||
   avoidStruts (noBorders $ spacingWithEdge 0 Full)

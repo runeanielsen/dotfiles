@@ -57,6 +57,7 @@ alias xwork='xrandr --output DP1 --mode 3440x1440 --output eDP1 --off && nitroge
 export BROWSER="/usr/bin/firefox"
 export TERM=xterm vim
 export PATH="$PATH:$HOME/.config/scripts"
+export PATH="$PATH:$HOME/.local/bin"
 
 ## dotnet
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
