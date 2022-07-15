@@ -458,6 +458,8 @@
   (fp/leader-keys
     "p" '(:ignore t :which-key "project")
     "pd" '(project-forget-project :which-key "remove-project")
+    "pa" '(project-remember-project :which-key "remember-project")
+    "pA" '(project-remember-projects-under :which-key "remember-projects-under")
     "pk" '(project-kill-buffers :which-key "kill-project"))
 
   (fp/leader-keys
