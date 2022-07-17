@@ -139,8 +139,7 @@
 ;; --- project ---
 (use-package project
   :straight nil
-  :custom (project-switch-commands '((project-find-file "Find file")
-                                     (project-find-dir "Find directory"))))
+  :custom (project-switch-commands '((project-find-file "Find file"))))
 
 ;; --- dashboard ---
 (use-package dashboard
