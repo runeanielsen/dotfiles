@@ -799,6 +799,7 @@
 ;; --- c ---
 (use-package cc-mode
   :straight nil
+  :hook ((c-mode . lsp-deferred))
   :config (c-set-offset 'case-label '+))
 
 ;; --- zig ---
