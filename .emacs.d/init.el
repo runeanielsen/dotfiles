@@ -315,15 +315,15 @@
     "dp" '(project-dired :which-key "project-dired"))
 
   (fp/leader-keys
-    "b" '(:ignore t :which-key "buffer")
-    "bi" '(ibuffer :which-key "ibuffer")
-    "bb" '(switch-to-buffer :which-key "switch-to-buffer")
-    "bz" '(bury-buffer :which-key "bury-buffer")
-    "bm" '(bookmark-set :which-key "bookmark-set")
-    "bM" '(bookmark-delete :which-key "bookmark-set")
-    "bk" '(kill-buffer :which-key "kill-current-buffer")
-    "bK" '(fp/kill-all-buffers :which-key "kill-all-buffers")
-    "bl" '(evil-switch-to-windows-last-buffer :which-key "switch-to-last-buffer"))
+    "j" '(:ignore t :which-key "buffer")
+    "ji" '(ibuffer :which-key "ibuffer")
+    "jj" '(switch-to-buffer :which-key "switch-to-buffer")
+    "jz" '(bury-buffer :which-key "bury-buffer")
+    "jm" '(bookmark-set :which-key "bookmark-set")
+    "jM" '(bookmark-delete :which-key "bookmark-set")
+    "jk" '(kill-buffer :which-key "kill-current-buffer")
+    "jK" '(fp/kill-all-buffers :which-key "kill-all-buffers")
+    "jl" '(evil-switch-to-windows-last-buffer :which-key "switch-to-last-buffer"))
 
   (fp/leader-keys
     "g" '(:ignore t :which-key "git")
