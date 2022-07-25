@@ -433,7 +433,7 @@
 
   (fp/leader-keys
     "w" '(:ignore t :which-key "window")
-    "ww" '(other-window :which-key "other-window")
+    "ww" '(ace-window :which-key "other-window")
     "wn" '(fp/split-window-balanced :which-key "split-window-balanced")
     "wN" '(fp/split-window-balanced-horizontal :which-key "split-window-balanced-horizontal")
     "wh" '(evil-window-left :which-key "window-left")
@@ -609,10 +609,19 @@
 
 ;; --- company ---
 (use-package company
-  :init (add-hook 'after-init-hook 'global-company-mode)
+  :hook (prog-mode . company-mode)
   :custom ((company-idle-delay 0)
            (company-minimum-prefix-length 1))
   :bind (("<C-tab>" . company-complete)))
+
+;; --- ace window ---
+(use-package ace-window
+  :config
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  (setq aw-background t)
+  (custom-set-faces
+   '(aw-leading-char-face
+     ((t (:inherit ace-jump-face-foreground :height 1.0))))))
 
 ;; --- which key ---
 (use-package which-key
