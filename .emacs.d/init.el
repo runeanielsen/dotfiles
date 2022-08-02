@@ -871,13 +871,11 @@
 
 ;; --- org-mode ---
 (use-package org
-  :hook ((org-mode . org-indent-mode))
   :custom (org-startup-truncated nil)
-  :config
-  (setq org-edit-src-content-indentation 0
-        org-src-tab-acts-natively t
-        org-src-preserve-indentation t
-        org-hide-emphasis-markers t))
+  :config (setq org-edit-src-content-indentation 0
+                org-src-tab-acts-natively t
+                org-src-preserve-indentation t
+                org-hide-emphasis-markers t))
 
 (use-package org-tempo
   :straight nil
