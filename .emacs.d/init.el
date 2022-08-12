@@ -330,6 +330,10 @@
     "gg" '(magit-status :which-key "magit-status"))
 
   (fp/leader-keys
+    "r" '(:ignore t :which-key "git")
+    "rr" '(replace-regexp :which-key "replace-regexp"))
+
+  (fp/leader-keys
     "s" '(:ignore t :which-key "search")
     "sj" '(evil-show-jumps :which-key "evil-show-jumps")
     "sm" '(bookmark-jump :which-key "bookmark-jump")
