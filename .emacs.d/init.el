@@ -807,7 +807,7 @@
 ;; --- rust mode ---
 (use-package rust-mode
   :hook ((rust-mode . lsp-deferred))
-  :custom ((rust-format-on-save t)
+  :custom ((rust-format-on-save nil)
            (lsp-rust-analyzer-cargo-watch-command "clippy")))
 
 ;; --- c ---
