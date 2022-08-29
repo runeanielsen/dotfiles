@@ -33,7 +33,7 @@
   (gcmh-mode 1))
 
 ;; Font
-(set-face-attribute 'default nil :font "Jetbrains Mono" :height 130)
+(set-face-attribute 'default nil :font "Jetbrains Mono" :height 120)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -753,6 +753,10 @@
 
 (use-package lsp-haskell
   :custom (lsp-haskell-server-path "/usr/bin/haskell-language-server"))
+
+;;; --- protobuf mode ---
+(use-package protobuf-mode
+  :mode ("\\.proto\\'"))
 
 ;; --- json mode ---
 (defun fp/setup-json-mode ()
