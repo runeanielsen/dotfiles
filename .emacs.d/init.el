@@ -921,4 +921,4 @@
   :straight nil
   :custom (dictionary-server "dict.org"))
 
-;; init.el ends here
+;;; init.el ends here
