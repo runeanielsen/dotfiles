@@ -14,6 +14,7 @@ shopt -s histappend
 ## history to infinite (the value does not matter, as long as it is not numeric)
 HISTSIZE="INFINITE"
 HISTFILESIZE="INFINITE"
+HISTCONTROL="ignoredups"
 
 # window size
 shopt -s checkwinsize
