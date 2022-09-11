@@ -169,7 +169,8 @@
     (shut-up-silence-emacs)))
 
 ;; --- license templates ---
-(use-package license-templates)
+(use-package license-templates
+  :commands (license-templates-new-file))
 
 ;; --- project ---
 (use-package project
