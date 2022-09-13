@@ -248,11 +248,6 @@
   (delete-other-windows)
   (switch-to-buffer "*dashboard*"))
 
-(defun fp/line-number-at-pos ()
-  "Displays the current line number at pos."
-  (interactive)
-  (message (number-to-string (line-number-at-pos))))
-
 (defun fp/switch-to-buffer ()
   "Switch buffer depending on being in project or not."
   (interactive)
