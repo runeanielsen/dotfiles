@@ -384,6 +384,7 @@
     "pi" '(cljr-add-project-dependency :which-key "cljr-add-project-dependency")
     "cd" '(cider-doc :which-key "cider-doc")
     "cs" '(fp/cider-jack-in :which-key "cider-jack-in")
+    "cS" '(cider-connect-clj :which-key "cider-connect-clj")
     "cf" '(cider-find-var :which-key "cider-format-buffer")
     "cF" '(cider-format-buffer :which-key "cider-format-buffer")
     "ca" '(cider-eval-last-sexp :which-key "cider-eval-last-sexp")
