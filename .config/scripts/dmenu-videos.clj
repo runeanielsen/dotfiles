@@ -42,7 +42,7 @@
   (sh "mpv" path))
 
 (defn main []
-  (let [video-paths ( video-sections videos-path video-file-endings)
+  (let [video-paths (video-sections videos-path video-file-endings)
         file-to-open (str/replace (:out (open-menu video-paths)) "\n" "")]
     (when (not (str/blank? file-to-open))
       (println (:err (play-video (str videos-path file-to-open)))))))
