@@ -85,7 +85,7 @@ myKeys =
   , ("M-e", spawn "emacs")
   , ("M-i", spawn "~/.config/scripts/dmenu-passmenu.sh")
   , ("M-b", spawn "~/.config/scripts/dmenu-books.sh")
-  , ("M-v", spawn "~/.config/scripts/dmenu-videos.sh")
+  , ("M-v", spawn "~/.config/scripts/dmenu-videos.clj")
 
     -- Kill xmobar
   , ("M-u", spawn "killall xmobar trayer")
