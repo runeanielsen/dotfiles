@@ -8,10 +8,10 @@
 (def videos-path
   (str (fs/home) "/nas/videos/"))
 
-(def video-file-endsings
+(def video-file-endings
   [".webm" ".mp4" ".mkv"])
 
-(defn list-files-dir [path]
+(defn all-files-in-path [path]
   (let [directory (io/file path)
         dir? #(.isDirectory %)]
     (map #(.getPath %)
@@ -21,14 +21,14 @@
 (defn ends-with-any? [s substrs]
   (any? (map #(str/ends-with? s %) substrs)))
 
-(defn make-videos-paths [path file-endings]
+(defn video-sections [path file-endings]
   (->> path
-       list-files-dir
+       all-files-in-path
        (filter #(ends-with-any? % file-endings))
        (map #(str/replace % videos-path ""))
        (str/join "\n")))
 
-(defn open-dmenu [selections]
+(defn open-menu [selections]
   (sh "dmenu"
       "-l" "20"
       "-i"
@@ -42,8 +42,8 @@
   (sh "mpv" path))
 
 (defn main []
-  (let [video-paths (make-videos-paths videos-path video-file-endsings)
-        file-to-open (str/replace (:out (open-dmenu video-paths)) "\n" "")]
+  (let [video-paths ( video-sections videos-path video-file-endings)
+        file-to-open (str/replace (:out (open-menu video-paths)) "\n" "")]
     (when (not (str/blank? file-to-open))
       (println (:err (play-video (str videos-path file-to-open)))))))
 
