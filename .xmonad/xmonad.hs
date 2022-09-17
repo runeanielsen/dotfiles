@@ -84,7 +84,7 @@ myKeys =
   , ("M-f", spawn "firefox")
   , ("M-e", spawn "emacs")
   , ("M-i", spawn "~/.config/scripts/dmenu-passmenu.sh")
-  , ("M-b", spawn "~/.config/scripts/dmenu-books.sh")
+  , ("M-b", spawn "~/.config/scripts/dmenu-books.clj")
   , ("M-v", spawn "~/.config/scripts/dmenu-videos.clj")
 
     -- Kill xmobar
