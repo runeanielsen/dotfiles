@@ -39,6 +39,8 @@ alias ma='mount /home/notation/nas'
 alias r='ranger'
 alias bt='bluetoothctl'
 alias pomo='pomodoro-cli'
+alias di='dict -d gcide'
+alias th='dict -d moby-thesaurus'
 
 alias k='kubectl'
 alias kaf='kubectl apply -f'
