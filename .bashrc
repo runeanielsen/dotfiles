@@ -30,7 +30,6 @@ alias ls='ls --color=auto'
 alias dotf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 alias pm='pulsemixer'
-
 alias copy='xsel --clipboard --input'
 alias paste='xsel --clipboard --output'
 alias rss='newsboat -C ~/.config/newsboat/config -c ~/nas/rss/cache.db -u ~/nas/rss/urls'
