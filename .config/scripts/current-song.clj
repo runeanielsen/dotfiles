@@ -1,8 +1,7 @@
 #!/usr/bin/env bb
 
 (require '[clojure.java.shell :as shell]
-         '[clojure.string :as str]
-         '[clojure.test :refer [deftest is are]])
+         '[clojure.string :as str])
 
 (defn information-song-field [song-information field]
   (-> (filter #(str/starts-with? % field) song-information)
