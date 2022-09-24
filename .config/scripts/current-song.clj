@@ -4,22 +4,23 @@
          '[clojure.string :as str])
 
 (defn information-song-field [song-information field]
-  (-> (filter #(str/starts-with? % field) song-information)
-      (first)
-      (str/replace field "")))
+  (when-let [tag (first (filter #(str/starts-with? % field) song-information))]
+    (str/replace tag field "")))
 
 (defrecord CurrentSong
-    [artist
+    [status
+     artist
      title
      position
      duration])
 
 (defn make-current-song [song-information]
   (map->CurrentSong
-   {:artist (information-song-field song-information "tag artist ")
-    :title (information-song-field song-information "tag title ")
-    :position (Integer. (information-song-field song-information "position "))
-    :duration (Integer. (information-song-field song-information "duration "))}))
+   {:status (or (information-song-field song-information "status ") "")
+    :artist (or (information-song-field song-information "tag artist ") "")
+    :title (or (information-song-field song-information "tag title ") "")
+    :position (Integer. (or (information-song-field song-information "position ") 0))
+    :duration (Integer. (or (information-song-field song-information "duration ") 0))}))
 
 (defn get-song-information! []
   (shell/sh "cmus-remote" "-Q"))
@@ -30,11 +31,13 @@
     (format "%02d:%02d" min sec)))
 
 (defn format-song-information [current-song]
-  (let [artist (:artist current-song)
-        title (:title current-song)
-        position (convert-to-time (:position current-song))
-        duration (convert-to-time (:duration current-song))]
-    (format "%s : %s (%s/%s)" artist title position duration)))
+  (if (= (:status current-song) "playing")
+    (let [artist (:artist current-song)
+          title (:title current-song)
+          position (convert-to-time (:position current-song))
+          duration (convert-to-time (:duration current-song))]
+      (format "%s : %s (%s/%s)" artist title position duration))
+    ""))
 
 (defn get-current-song-formatted []
   (let [song-information (get-song-information!)]
