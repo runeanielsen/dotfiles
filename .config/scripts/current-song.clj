@@ -3,9 +3,6 @@
 (require '[clojure.java.shell :as shell]
          '[clojure.string :as str])
 
-(defn query-current-song! []
-  (shell/sh "cmus-remote" "-Q"))
-
 (defrecord CurrentSong
     [status
      artist
@@ -40,7 +37,7 @@
     ""))
 
 (defn main []
-  (let [song-information (query-current-song!)]
+  (let [song-information (shell/sh "cmus-remote" "-Q")]
     (if (= (:exit song-information) 0)
       (->> (:out song-information)
            (str/split-lines)
