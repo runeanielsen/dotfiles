@@ -39,16 +39,14 @@
       (format "%s : %s (%s/%s)" artist title position duration))
     ""))
 
-(defn get-current-song-formatted []
+(defn main []
   (let [song-information (get-song-information!)]
     (if (= (:exit song-information) 0)
       (->> (:out song-information)
            (str/split-lines)
            (make-current-song)
-           (format-song-information))
+           (format-song-information)
+           (println))
       "")))
-
-(defn main []
-  (println (get-current-song-formatted)))
 
 (main)
