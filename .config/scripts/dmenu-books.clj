@@ -23,6 +23,7 @@
 
 (defn open-menu [selections]
   (shell/sh "dmenu"
+            "-f"
             "-l" "20"
             "-i"
             "-nf" "#ffffff"

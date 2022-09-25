@@ -30,6 +30,7 @@
 
 (defn open-menu [selections]
   (sh "dmenu"
+      "-f"
       "-l" "20"
       "-i"
       "-nf" "#ffffff"
