@@ -37,13 +37,13 @@
     ""))
 
 (defn main []
-  (let [song-information (shell/sh "cmus-remote" "-Q")]
-    (if (= (:exit song-information) 0)
-      (->> (:out song-information)
-           (str/split-lines)
-           (make-current-song)
-           (format-song)
-           (println))
-      "")))
+  (println
+   (let [song-information (shell/sh "cmus-remote" "-Q")]
+     (if (= (:exit song-information) 0)
+       (->> (:out song-information)
+            (str/split-lines)
+            (make-current-song)
+            (format-song))
+       ""))))
 
 (main)
