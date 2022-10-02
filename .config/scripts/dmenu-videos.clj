@@ -22,8 +22,7 @@
   (any? (map #(str/ends-with? s %) substrs)))
 
 (defn video-sections [path file-endings]
-  (->> path
-       all-files-in-path
+  (->> (all-files-in-path path)
        (filter #(ends-with-any? % file-endings))
        (map #(str/replace % videos-path ""))
        (str/join "\n")))
