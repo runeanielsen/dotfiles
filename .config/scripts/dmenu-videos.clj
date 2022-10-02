@@ -14,9 +14,9 @@
 (defn all-files-in-path [path]
   (let [directory (io/file path)
         dir? #(.isDirectory %)]
-    (map #(.getPath %)
-         (filter (comp not dir?)
-                 (tree-seq dir? #(.listFiles %) directory)))))
+    (->> (tree-seq dir? #(.listFiles %) directory)
+         (filter (comp not dir?))
+         (map #(.getPath %)))))
 
 (defn ends-with-any? [s substrs]
   (any? (map #(str/ends-with? s %) substrs)))
