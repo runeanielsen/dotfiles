@@ -342,7 +342,7 @@
 
   (fp/leader-keys
     "c" '(:ignore t :which-key "code")
-    "ce" '(counsel-flycheck :which-key "flycheck-list-errors")
+    "ce" '(fp/flycheck-list-errors :which-key "flycheck-list-errors")
     "cc" '(comment-or-uncomment-region :which-key "comment-or-uncomment-region"))
 
   (fp/leader-keys
