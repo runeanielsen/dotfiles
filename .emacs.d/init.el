@@ -177,17 +177,6 @@
   :straight nil
   :custom (project-switch-commands '((project-find-file "Find file"))))
 
-;; --- dashboard ---
-(use-package dashboard
-  :custom ((dashboard-items nil)
-           (dashboard-center-content t)
-           (dashboard-show-shortcuts nil)
-           (dashboard-set-init-info nil)
-           (dashboard-set-footer nil)
-           (initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))
-  :config
-  (dashboard-setup-startup-hook))
-
 ;; --- all-the-icons ---
 (use-package all-the-icons)
 
