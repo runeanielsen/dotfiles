@@ -625,7 +625,8 @@
   (let ((modes '(emacs-lisp-mode
                  scheme-mode
                  clojure-mode
-                 lisp-mode)))
+                 lisp-mode
+                 rust-mode)))
     (sp-local-pair modes "'" nil :actions nil)
     (sp-local-pair modes "`" nil :actions nil))
   (smartparens-global-mode t))
