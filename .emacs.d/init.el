@@ -177,6 +177,17 @@
   :straight nil
   :custom (project-switch-commands '((project-find-file "Find file"))))
 
+ ;; --- dashboard ---
+(use-package dashboard
+  :custom ((dashboard-items nil)
+           (dashboard-center-content t)
+           (dashboard-show-shortcuts nil)
+           (dashboard-set-init-info nil)
+           (dashboard-set-footer nil)
+           (initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))
+  :config
+  (dashboard-setup-startup-hook))
+
 ;; --- all-the-icons ---
 (use-package all-the-icons)
 
@@ -231,11 +242,11 @@
   (pop-to-buffer "*lsp-help*"))
 
 (defun fp/kill-all-buffers ()
-  "Kill all buffers, remove other windows and go to scratch buffer."
+  "Kill all buffers, remove other windows and go to dashboard buffer."
   (interactive)
-  (mapcar 'kill-buffer (remove (get-buffer "*scratch*") (buffer-list)))
+  (mapcar 'kill-buffer (remove (get-buffer "*dashboard*") (buffer-list)))
   (delete-other-windows)
-  (switch-to-buffer "*scratch*"))
+  (switch-to-buffer "*dashboard*"))
 
 (defun fp/switch-to-buffer ()
   "Switch buffer depending on being in project or not."
