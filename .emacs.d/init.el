@@ -231,11 +231,11 @@
   (pop-to-buffer "*lsp-help*"))
 
 (defun fp/kill-all-buffers ()
-  "Kill all buffers, remove other windows and go to dashboard."
+  "Kill all buffers, remove other windows and go to scratch buffer."
   (interactive)
-  (mapcar 'kill-buffer (remove (get-buffer "*dashboard*") (buffer-list)))
+  (mapcar 'kill-buffer (remove (get-buffer "*scratch*") (buffer-list)))
   (delete-other-windows)
-  (switch-to-buffer "*dashboard*"))
+  (switch-to-buffer "*scratch*"))
 
 (defun fp/switch-to-buffer ()
   "Switch buffer depending on being in project or not."
