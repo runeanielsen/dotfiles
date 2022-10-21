@@ -38,6 +38,17 @@
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
+;; Do not show menu bar.
+(menu-bar-mode -1)
+
+;; Do not show tool bar.
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode -1))
+
+;; Do not show scroll bar.
+(when (fboundp 'scroll-bar-mode)
+  (scroll-bar-mode -1))
+
 ;; --- Use better defaults ---
 (setq-default
  ;; Don't use the compiled code if its the older package.
@@ -100,19 +111,6 @@
 
 ;; Disable minibuffer auto-raise
 (setq minibuffer-auto-raise nil)
-
-;; --- Disable unnecessary UI elements ---
-(progn
-  ;; Do not show menu bar.
-  (menu-bar-mode -1)
-
-  ;; Do not show tool bar.
-  (when (fboundp 'tool-bar-mode)
-    (tool-bar-mode -1))
-
-  ;; Do not show scroll bar.
-  (when (fboundp 'scroll-bar-mode)
-    (scroll-bar-mode -1)))
 
 ;; --- mode-line ---
 (setq-default mode-line-format "%e %b (%l:%c)")
