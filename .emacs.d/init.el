@@ -27,6 +27,7 @@
 (defvar comp-async-report-warnings-errors)
 (setq comp-async-report-warnings-errors nil
       package-native-compile t)
+
 ;; gcmh
 (use-package gcmh
   :config
@@ -98,7 +99,7 @@
 (show-paren-mode 1)
 
 ;; Change fringe mode
-(fringe-mode '(16 . 16))
+(fringe-mode '(0 . 0))
 
 ;; Disable recentf mode
 (recentf-mode 0)
@@ -540,6 +541,7 @@
 ;; --- ivy posframe ---
 (defun correct-color-theme-switch ()
   "Correct theme color on switch."
+  (fringe-mode '(16 . 16))
   (set-face-foreground 'vertical-border (face-attribute 'mode-line :background nil t))
   (set-face-attribute 'ivy-posframe nil
                       :background (face-attribute 'default :background nil t))
