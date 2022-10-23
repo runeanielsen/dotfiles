@@ -286,9 +286,7 @@
     :keymaps '(normal visual))
 
   (fp/default-normal-visual
-    ";" '(counsel-M-x :which-key "execute-extended-command"))
-
-  (fp/default-normal-visual
+    ";" '(counsel-M-x :which-key "execute-extended-command")
     "," '(fp/switch-to-buffer :which-key "switch-buffer"))
 
   (general-create-definer fp/leader-keys
