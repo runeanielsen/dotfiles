@@ -911,3 +911,5 @@
 (use-package dictionary
   :straight nil
   :custom (dictionary-server "dict.org"))
+
+;;; init.el ends here
