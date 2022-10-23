@@ -228,17 +228,22 @@
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
-(defun fp/flycheck-list-errors ()
-  "Execute flycheck-list-errors and switch to that buffer."
+(defun fp/flymake-list-errors ()
+  "Execute flymake and switch to that buffer."
   (interactive)
-  (flycheck-list-errors)
-  (pop-to-buffer "*Flycheck errors*"))
+  (if (project-current)
+      (progn
+        (flymake-show-project-diagnostics)
+        (other-window 1))
+    (progn
+      (flymake-show-diagnostics-buffer)
+      (other-window 1))))
 
-(defun fp/lsp-describe-thing-at-point ()
+(defun fp/eldoc-doc-buffer-pop-to ()
   "Execute lsp-describe-thing-at-point and switch to that buffer."
   (interactive)
-  (lsp-describe-thing-at-point)
-  (pop-to-buffer "*lsp-help*"))
+  (call-interactively 'eldoc-doc-buffer)
+  (pop-to-buffer "*eldoc*"))
 
 (defun fp/kill-all-buffers ()
   "Kill all buffers, remove other windows and go to dashboard buffer."
@@ -339,7 +344,8 @@
 
   (fp/leader-keys
     "c" '(:ignore t :which-key "code")
-    "ce" '(fp/flycheck-list-errors :which-key "flycheck-list-errors")
+    "ce" '(flymake-goto-next-error :which-key "flymake-goto-next-error")
+    "cE" '(fp/flymake-list-errors :which-key "flymake-list-errors")
     "cc" '(comment-or-uncomment-region :which-key "comment-or-uncomment-region"))
 
   (fp/leader-keys
@@ -354,17 +360,15 @@
 
   (fp/leader-keys
     :states '(normal visual)
-    :keymaps 'lsp-mode-map
-    "co" '(lsp-organize-imports :which-key "organize-imports")
-    "ct" '(lsp-goto-type-definition :which-key "goto-type-definition")
-    "ci" '(lsp-find-implementation :which-key "find-implementation")
-    "ce" '(lsp-ui-flycheck-list :which-key "lsp-ui-flycheck-list")
-    "cf" '(lsp-find-definition :which-key "find-definition")
-    "cF" '(lsp-format-buffer :which-key "format-buffer")
-    "cd" '(fp/lsp-describe-thing-at-point :which-key "describe-thing-at-point")
-    "ca" '(lsp-execute-code-action :which-key "code-action")
-    "cr" '(lsp-rename :which-key "rename")
-    "cR" '(lsp-workspace-restart :which-key "workspace-restart"))
+    :keymaps 'eglot-mode-map
+    "ct" '(eglot-find-typeDefinition :which-key "goto-type-definition")
+    "ci" '(eglot-find-implementation :which-key "find-implementation")
+    "cf" '(eglot-find-declaration :which-key "find-definition")
+    "cF" '(eglot-format-buffer :which-key "format-buffer")
+    "cd" '(fp/eldoc-doc-buffer-pop-to :which-key "fp/eldoc-doc-buffer-pop-to")
+    "ca" '(eglot-code-actions :which-key "code-action")
+    "cr" '(eglot-rename :which-key "rename")
+    "cR" '(eglot-reconnect :which-key "reconnect"))
 
   (fp/leader-keys
     :states '(normal visual)
@@ -640,32 +644,31 @@
     (sp-local-pair modes "`" nil :actions nil))
   (smartparens-global-mode t))
 
-;; --- flycheck ---
-(use-package flycheck
-  :hook ((prog-mode . flycheck-mode))
-  :custom ((flycheck-indication-mode nil)
-           (flycheck-checker-error-threshold 10000) ;; Hack Csharp mode bugs out.
-           (flycheck-check-syntax-automatically '(mode-enabled save idle-buffer-switch))
-           (flycheck-buffer-switch-check-intermediate-buffers t)))
+;; --- flymake ---
+(use-package flymake
+  :straight nil
+  :hook ((prog-mode . flymake-mode))
+  :custom ((flymake-fringe-indicator-position nil)
+           (flymake-start-on-save-buffer t)))
 
-;; --- lsp ---
-(use-package lsp-mode
-  :hook ((lsp-mode . lsp-enable-which-key-integration))
-  :custom ((lsp-enable-links nil)
-           (lsp-log-io nil)
-           (lsp-enable-snippet nil)
-           (lsp-eldoc-enable-hover t)
-           (lsp-lens-enable nil)
-           (lsp-enable-folding nil)
-           (lsp-keep-workspace-alive nil)
-           (lsp-headerline-breadcrumb-enable nil))
-  :commands (lsp lsp-deferred))
+;; --- eldoc ----
+(use-package eldoc
+  :straight nil
+  :config
+  (add-hook 'eglot-managed-mode-hook
+            #'(lambda ()
+                (setq-local eldoc-idle-delay 0)
+                (setq-local eldoc-echo-area-use-multiline-p 1)
+                (setq-local eldoc-documentation-strategy
+                            #'eldoc-documentation-compose))))
 
-;; --- lsp-ui ---
-(use-package lsp-ui
-  :hook (lsp-mode . lsp-ui-mode)
-  :custom ((lsp-ui-sideline-show-code-actions nil)
-           (lsp-ui-doc-enable nil)))
+;; --- eglot ---
+(use-package eglot
+  :config
+  (setq eglot-autoshutdown t)
+  (setq eglot-ignored-server-capabilities '(:documentHighlightProvider))
+  (add-to-list 'eglot-server-programs
+	             '(web-mode . ("typescript-language-server" "--stdio"))))
 
 ;; --- tree-sitter ---
 (use-package tree-sitter
@@ -681,19 +684,15 @@
   "LSP Go install save hooks."
   (setq indent-tabs-mode 1)
   (setq tab-width 2)
-  (add-hook 'before-save-hook #'lsp-format-buffer t t)
-  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+  (add-hook 'before-save-hook #'eglot-format-buffer))
 
 (use-package go-mode
-  :hook ((go-mode . lsp-deferred)
+  :hook ((go-mode . eglot)
          (go-mode . lsp-go-install-save-hooks)))
 
 ;; --- clojure ---
-(use-package flycheck-clj-kondo)
-
 (use-package clojure-mode
   :config
-  (require 'flycheck-clj-kondo)
   (define-clojure-indent
     (defroutes 'defun)
     (GET 2)
@@ -744,12 +743,7 @@
   :commands (geiser))
 
 ;; --- haskell mode ---
-(use-package haskell-mode
-  :hook ((haskell-mode . lsp-deferred)
-         (haskell-literate-mode . lsp-deferred)))
-
-(use-package lsp-haskell
-  :custom (lsp-haskell-server-path "/usr/bin/haskell-language-server"))
+(use-package haskell-mode)
 
 ;;; --- protobuf mode ---
 (use-package protobuf-mode
@@ -799,37 +793,37 @@
 (defun lsp-csharp-install-save-hooks ()
   "LSP CSharp install save hooks."
   (add-hook 'before-save-hook #'fp/sort-usings-csharp)
-  (add-hook 'before-save-hook #'lsp-format-buffer t t))
+  (add-hook 'before-save-hook #'eglot-format-buffer))
 
 (use-package csharp-mode
-  :hook ((csharp-mode . lsp-deferred)
+  :hook ((csharp-mode . eglot-ensure)
          (csharp-mode . lsp-csharp-install-save-hooks)))
 
 ;; --- rust mode ---
 (use-package rust-mode
-  :hook ((rust-mode . lsp-deferred))
+  :hook ((rust-mode . eglot-ensure))
   :custom ((rust-format-on-save nil)
            (lsp-rust-analyzer-cargo-watch-command "clippy")))
 
 ;; --- c ---
 (use-package cc-mode
   :straight nil
-  :hook ((c-mode . lsp-deferred))
+  :hook ((c-mode . eglot-ensure))
   :config (c-set-offset 'case-label '+))
 
 ;; --- zig ---
 (defun lsp-zig-install-save-hooks ()
   "LSP Zig install save hooks."
-  (add-hook 'before-save-hook #'lsp-format-buffer t t))
+  (add-hook 'before-save-hook #'eglot-format-buffer))
 
 (use-package zig-mode
-  :hook ((zig-mode . lsp-deferred)
+  :hook ((zig-mode . eglot-ensure)
          (zig-mode . lsp-zig-install-save-hooks))
   :custom (zig-format-on-save nil))
 
 ;; --- typescript mode ---
 (use-package typescript-mode
-  :hook (typescript-mode . lsp-deferred)
+  :hook (typescript-mode . eglot-ensure)
   :custom (typescript-indent-level 2))
 
 ;; --- web mode ---
@@ -838,7 +832,7 @@
   (let ((file-extension (file-name-extension buffer-file-name)))
     (when (or (string-equal "tsx" file-extension)
               (string-equal "jsx" file-extension))
-      (lsp-deferred))))
+      (eglot-ensure))))
 
 (use-package web-mode
   :mode (("\\.tsx\\'" . web-mode)
@@ -917,5 +911,3 @@
 (use-package dictionary
   :straight nil
   :custom (dictionary-server "dict.org"))
-
-;;; init.el ends here
