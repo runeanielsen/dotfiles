@@ -687,7 +687,7 @@
   (add-hook 'before-save-hook #'eglot-format-buffer))
 
 (use-package go-mode
-  :hook ((go-mode . eglot)
+  :hook ((go-mode . eglot-ensure)
          (go-mode . lsp-go-install-save-hooks)))
 
 ;; --- clojure ---
