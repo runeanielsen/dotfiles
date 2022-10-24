@@ -346,6 +346,7 @@
     "c" '(:ignore t :which-key "code")
     "ce" '(flymake-goto-next-error :which-key "flymake-goto-next-error")
     "cE" '(fp/flymake-list-errors :which-key "flymake-list-errors")
+    "cf" '(xref-find-definitions :which-key "find-definition")
     "cc" '(comment-or-uncomment-region :which-key "comment-or-uncomment-region"))
 
   (fp/leader-keys
@@ -363,7 +364,6 @@
     :keymaps 'eglot-mode-map
     "ct" '(eglot-find-typeDefinition :which-key "goto-type-definition")
     "ci" '(eglot-find-implementation :which-key "find-implementation")
-    "cf" '(eglot-find-declaration :which-key "find-definition")
     "cF" '(eglot-format-buffer :which-key "format-buffer")
     "cd" '(fp/eldoc-doc-buffer-pop-to :which-key "fp/eldoc-doc-buffer-pop-to")
     "ca" '(eglot-code-actions :which-key "code-action")
