@@ -475,7 +475,6 @@
     "fs" '(evil-write :which-key "write")
     "fS" '(evil-write-all :which-key "write-all")
     "ft" '(counsel-load-theme :which-key "load-theme")
-    "fl" '(fp/line-number-at-pos :which-key "line number at position")
     "fq" '(evil-save-and-close :which-key "save-and-close")))
 
 ;; --- Evil mode ---
