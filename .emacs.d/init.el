@@ -496,13 +496,13 @@
   :defer t)
 
 (defhydra hydra-text-scale ()
-  "scale text"
+  "Scale text."
   ("j" text-scale-decrease "out")
   ("k" text-scale-increase "in")
   ("f" nil "finished" :exit t))
 
 (defhydra hydra-window-resize ()
-  "window-resize"
+  "Window-resize."
   ("h" evil-window-decrease-width "decrease-width")
   ("j" evil-window-decrease-height "decrease-height")
   ("k" evil-window-increase-height "increase-height")
@@ -709,13 +709,13 @@
     (context 2)))
 
 (defun fp/cider-format-buffer-no-errors ()
-  "Call cider-format-buffer - do not show error if cider-format fails."
+  "Call 'cider-format-buffer' - do not show error if cider-format fails."
   (condition-case nil
       (cider-format-buffer)
     (error nil)))
 
 (defun fp/cider-jack-in ()
-  "Call cider-jack-in depending on current buffer file extension."
+  "Call 'cider-jack-in' depending on current buffer file extension."
   (interactive)
   (let ((extension (file-name-extension buffer-file-name)))
     (cond ((string= extension "clj") (call-interactively 'cider-jack-in-clj))
