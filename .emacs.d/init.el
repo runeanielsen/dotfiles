@@ -248,9 +248,10 @@
 (defun fp/kill-all-buffers ()
   "Kill all buffers, remove other windows and go to dashboard buffer."
   (interactive)
-  (mapcar 'kill-buffer (remove (get-buffer "*dashboard*") (buffer-list)))
-  (delete-other-windows)
-  (switch-to-buffer "*dashboard*"))
+  (let ((goto-buffer-name "*dashboard*"))
+    (mapcar 'kill-buffer (remove (get-buffer goto-buffer-name) (buffer-list)))
+    (delete-other-windows)
+    (switch-to-buffer goto-buffer-name)))
 
 (defun fp/switch-to-buffer ()
   "Switch buffer depending on being in project or not."
