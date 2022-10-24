@@ -648,8 +648,7 @@
 (use-package flymake
   :straight nil
   :hook ((prog-mode . flymake-mode))
-  :custom ((flymake-fringe-indicator-position nil)
-           (flymake-start-on-save-buffer t)))
+  :custom ((flymake-fringe-indicator-position nil)))
 
 ;; --- eldoc ----
 (use-package eldoc
