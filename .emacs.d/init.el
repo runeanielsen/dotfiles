@@ -240,7 +240,7 @@
       (other-window 1))))
 
 (defun fp/eldoc-doc-buffer-pop-to ()
-  "Execute lsp-describe-thing-at-point and switch to that buffer."
+  "Execute 'eldoc-doc-buffer' and switch to that buffer."
   (interactive)
   (call-interactively 'eldoc-doc-buffer)
   (pop-to-buffer "*eldoc*"))
