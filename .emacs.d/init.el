@@ -667,7 +667,9 @@
   (setq eglot-autoshutdown t)
   (setq eglot-ignored-server-capabilities '(:documentHighlightProvider))
   (add-to-list 'eglot-server-programs
-	             '(web-mode . ("typescript-language-server" "--stdio"))))
+	             '(web-mode . ("typescript-language-server" "--stdio")))
+  (add-to-list 'eglot-server-programs
+	             '(csharp-mode . ("csharp-ls"))))
 
 ;; --- tree-sitter ---
 (use-package tree-sitter
