@@ -855,6 +855,12 @@
   :mode ("\\.scss\\'")
   :custom (css-indent-offset 2))
 
+;; --- Prettier ---
+(use-package prettier-js
+  :hook ((css-mode . prettier-js-mode)
+         (scss-mode . prettier-js-mode)
+         (json-mode . prettier-js-mode)))
+
 ;; --- markdown ---
 (use-package markdown-mode
   :mode (("README\\.md\\'" . gfm-mode)
