@@ -37,7 +37,7 @@ alias rss='newsboat -C ~/.config/newsboat/config -c ~/nas/rss/cache.db -u ~/nas/
 alias ma='mount /home/notation/nas'
 alias r='ranger'
 alias bt='bluetoothctl'
-alias pomo='pomodoro-cli'
+alias tm='f() { timer "$@" -f /home/notation/.config/timer-cli/finished; unset -f f; }; f'
 alias di='dict -d gcide'
 alias th='dict -d moby-thesaurus'
 
