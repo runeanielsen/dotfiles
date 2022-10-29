@@ -801,8 +801,14 @@
          (csharp-mode . lsp-csharp-install-save-hooks)))
 
 ;; --- rust mode ---
+(defun rust-mode-setup ()
+  "Setup 'rust-mode'."
+  (setq-default eglot-workspace-configuration
+                '((:rust-analyzer . (:checkOnSave (:command "clippy")))))
+  (eglot-ensure))
+
 (use-package rust-mode
-  :hook ((rust-mode . eglot-ensure))
+  :hook (rust-mode . rust-mode-setup)
   :custom ((rust-format-on-save nil)))
 
 ;; --- c ---
