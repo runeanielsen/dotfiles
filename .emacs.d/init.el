@@ -803,8 +803,7 @@
 ;; --- rust mode ---
 (use-package rust-mode
   :hook ((rust-mode . eglot-ensure))
-  :custom ((rust-format-on-save nil)
-           (lsp-rust-analyzer-cargo-watch-command "clippy")))
+  :custom ((rust-format-on-save nil)))
 
 ;; --- c ---
 (use-package cc-mode
