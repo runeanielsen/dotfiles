@@ -1,0 +1,7 @@
+#!/bin/env bash
+
+set -o errexit
+set -o pipefail
+
+dunstify "Timer finished."
+ffplay -volume 50 -nodisp -autoexit ~/.config/timer-cli/break_sound.mp3

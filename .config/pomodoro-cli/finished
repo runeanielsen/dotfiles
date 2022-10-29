@@ -1,4 +1,0 @@
-#!/bin/env bash
-
-dunstify "Pomodoro completed." &
-ffplay -volume 50 -nodisp -autoexit ~/.config/pomodoro-cli/break_sound.mp3 &
