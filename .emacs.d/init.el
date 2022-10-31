@@ -791,14 +791,14 @@
             (replace-match (concat (nth x usings) "\n"))
             (setq x (+ 1 x))))))))
 
-(defun lsp-csharp-install-save-hooks ()
+(defun csharp-mode-setup()
   "LSP CSharp install save hooks."
   (add-hook 'before-save-hook #'fp/sort-usings-csharp)
-  (add-hook 'before-save-hook #'eglot-format-buffer))
+  (add-hook 'before-save-hook #'eglot-format-buffer)
+  (eglot-ensure))
 
 (use-package csharp-mode
-  :hook ((csharp-mode . eglot-ensure)
-         (csharp-mode . lsp-csharp-install-save-hooks)))
+  :hook ((csharp-mode . csharp-mode-setup)))
 
 ;; --- rust mode ---
 (defun rust-mode-setup ()
@@ -872,6 +872,7 @@
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
+
 
 ;; --- org-mode ---
 (use-package org
