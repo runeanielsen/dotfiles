@@ -681,15 +681,14 @@
   :after tree-sitter)
 
 ;; --- go mode ---
-(defun lsp-go-install-save-hooks ()
+(defun setup-go-mode ()
   "LSP Go install save hooks."
   (setq indent-tabs-mode 1)
   (setq tab-width 2)
-  (add-hook 'before-save-hook #'eglot-format-buffer))
+  (eglot-ensure))
 
 (use-package go-mode
-  :hook ((go-mode . eglot-ensure)
-         (go-mode . lsp-go-install-save-hooks)))
+  :hook (go-mode . setup-go-mode))
 
 ;; --- clojure ---
 (use-package clojure-mode
