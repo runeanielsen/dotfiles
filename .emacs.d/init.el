@@ -793,8 +793,7 @@
 
 (defun csharp-mode-setup()
   "LSP CSharp install save hooks."
-  (add-hook 'before-save-hook #'fp/sort-usings-csharp)
-  (add-hook 'before-save-hook #'eglot-format-buffer)
+  (advice-add 'eglot-format-buffer :before #'fp/sort-usings-csharp)
   (eglot-ensure))
 
 (use-package csharp-mode
