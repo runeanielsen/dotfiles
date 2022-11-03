@@ -908,9 +908,6 @@
   :hook ((org-mode . flyspell-mode)
          (markdown-mode . flyspell-mode)))
 
-(use-package flyspell-correct
-  :commands (flycheck-correct-wrapper))
-
 (use-package dictionary
   :straight nil
   :custom (dictionary-server "dict.org"))
