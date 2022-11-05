@@ -77,7 +77,13 @@
  tab-width 4
 
  ;; Allow commands to be run on minibuffers.
- enable-recursive-minibuffers t)
+ enable-recursive-minibuffers t
+
+ ;; Disable backups
+ backup-inhibited t
+
+ ;; Mode-line format
+ mode-line-format "%e %b (%l:%c)")
 
 ;; Change all yes/no questions to y/n type
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -99,28 +105,20 @@
 (show-paren-mode 1)
 
 ;; Change fringe mode
-(fringe-mode '(0 . 0))
+(fringe-mode '(16 . 16))
 
 ;; Disable recentf mode
 (recentf-mode 0)
 
-;; Disable backup
-(setq backup-inhibited t)
-
-; Disable auto save
-(setq auto-save-default nil)
-
-;; Disable minibuffer auto-raise
-(setq minibuffer-auto-raise nil)
-
-;; --- mode-line ---
-(setq-default mode-line-format "%e %b (%l:%c)")
-
 ;; -- load theme ---
 (use-package f)
 
-(defvar fp/remember-last-theme-dir (concat "/home/notation/.emacs.d/" "var/remember-last-theme"))
-(defvar fp/remember-last-theme-file (concat fp/remember-last-theme-dir "/remember-last"))
+(defvar fp/remember-last-theme-dir
+  (concat "/home/notation/.emacs.d/" "var/remember-last-theme"))
+
+(defvar fp/remember-last-theme-file
+  (concat fp/remember-last-theme-dir "/remember-last"))
+
 (defvar fp/remember-last-theme-default 'modus-operandi)
 
 (defun fp/get-last-theme ()
