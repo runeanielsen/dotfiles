@@ -105,7 +105,7 @@
 (show-paren-mode 1)
 
 ;; Change fringe mode
-(fringe-mode '(16 . 16))
+(fringe-mode '(0 . 0))
 
 ;; Disable recentf mode
 (recentf-mode 0)
