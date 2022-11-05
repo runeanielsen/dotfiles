@@ -127,11 +127,13 @@
 
 (defun fp/set-last-theme ()
   "Set the last theme to the current theme."
-  (f-write-text (symbol-name (car custom-enabled-themes)) 'utf-8 fp/remember-last-theme-file))
+  (f-write-text (symbol-name (car custom-enabled-themes))
+                'utf-8 fp/remember-last-theme-file))
 
 (defun fp/set-default-theme ()
   "Set the default theme when none is saved."
-  (f-write-text (symbol-name fp/remember-last-theme-default) 'utf-8 fp/remember-last-theme-file))
+  (f-write-text (symbol-name fp/remember-last-theme-default)
+                'utf-8 fp/remember-last-theme-file))
 
 (defun fp/create-remember-last-theme-file ()
   "Create directory and file if not exists."
