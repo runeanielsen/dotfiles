@@ -50,7 +50,7 @@
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
 
-;; --- Use better defaults ---
+;; --- Set defaults ---
 (setq-default
  ;; Don't use the compiled code if its the older package.
  load-prefer-newer t
