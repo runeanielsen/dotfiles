@@ -4,17 +4,13 @@
 # wal colors
 (cat ~/.cache/wal/sequences)
 
-# history control
-## ignore duplicate history entries
-histcontrol=ignoreboth
-
 ## append to history file
 shopt -s histappend
 
 ## history to infinite (the value does not matter, as long as it is not numeric)
 HISTSIZE="INFINITE"
 HISTFILESIZE="INFINITE"
-HISTCONTROL="ignoredups"
+HISTCONTROL=ignoreboth
 
 # window size
 shopt -s checkwinsize
