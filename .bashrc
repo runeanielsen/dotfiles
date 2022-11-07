@@ -16,7 +16,7 @@ HISTCONTROL=ignoreboth
 shopt -s checkwinsize
 
 # prompt
-export PS1="λ: "
+export PS1="\[\033[0;0;0m\]λ: "
 
 # ls colors
 export LS_COLORS='di=0;1:ex=31:tw=0;1:ow=0;1'
