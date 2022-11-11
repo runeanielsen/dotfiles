@@ -249,13 +249,21 @@
   (call-interactively 'eldoc-doc-buffer)
   (pop-to-buffer "*eldoc*"))
 
+(defun fp/filter-non-matching-buffers (names buffers)
+  "Filters non-matching buffers depending on names.
+'NAMES' should include the buffer-names that you want to be filtered away.
+'BUFFERS' is the list of buffers that should be filtered.
+The return value is a list of buffers."
+  (seq-filter (lambda (elt) (not (seq-contains names (buffer-name elt))))
+              buffers))
+
 (defun fp/kill-all-buffers ()
   "Kill all buffers, remove other windows and go to dashboard buffer."
   (interactive)
-  (let ((goto-buffer-name "*dashboard*"))
-    (mapcar 'kill-buffer (remove (get-buffer goto-buffer-name) (buffer-list)))
+  (let ((do-not-kill '("*dashboard*" "*scratch*" "*Messages*")))
+    (mapcar 'kill-buffer (fp/filter-non-matching-buffers do-not-kill (buffer-list)))
     (delete-other-windows)
-    (switch-to-buffer goto-buffer-name)))
+    (switch-to-buffer (car do-not-kill))))
 
 (defun fp/switch-to-buffer ()
   "Switch buffer depending on being in project or not."
