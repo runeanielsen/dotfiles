@@ -36,6 +36,7 @@ alias bt='bluetoothctl'
 alias tm='f() { timer "$@" -f /home/notation/.config/timer-cli/finished; unset -f f; }; f'
 alias di='dict -d gcide'
 alias th='dict -d moby-thesaurus'
+alias hi='history'
 
 alias k='kubectl'
 alias kaf='kubectl apply -f'
