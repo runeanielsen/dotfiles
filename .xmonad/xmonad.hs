@@ -18,7 +18,6 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName (setWMName)
 import XMonad.Layout.Spacing
-import XMonad.Layout.CenteredIfSingle (centeredIfSingle)
 
 -- Settings
 myModMask :: KeyMask
@@ -51,9 +50,7 @@ myStartupHook = do
 
 -- Layout
 
-myLayout =
-  avoidStruts (smartBorders $ spacingWithEdge 5 $ centeredIfSingle 0.60 1 tiled) |||
-  avoidStruts (noBorders $ spacingWithEdge 0 Full)
+myLayout = avoidStruts (smartSpacingWithEdge 5 $ smartBorders $ tiled ||| noBorders Full)
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
