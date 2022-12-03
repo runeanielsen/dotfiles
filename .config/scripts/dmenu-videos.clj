@@ -9,7 +9,7 @@
   (str (fs/home) "/nas/videos/"))
 
 (def video-file-endings
-  [".webm" ".mp4" "m4a" ".mkv"])
+  [".webm" ".mp4" ".mkv"])
 
 (defn all-files-in-path [path]
   (let [directory (io/file path)
