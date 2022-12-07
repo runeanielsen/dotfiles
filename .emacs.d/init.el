@@ -109,7 +109,7 @@
 (show-paren-mode 1)
 
 ;; Change fringe mode
-(fringe-mode '(0 . 0))
+(fringe-mode '(16 . 16))
 
 ;; Disable recentf mode
 (recentf-mode 0)
@@ -551,39 +551,6 @@ The return value is a list of buffers."
   :custom ((ivy-use-selectable-prompt t))
   :config
   (ivy-mode 1))
-
-;; --- ivy posframe ---
-(defun correct-color-theme-switch ()
-  "Correct theme color on switch."
-  (fringe-mode '(16 . 16))
-  (set-face-foreground 'vertical-border (face-attribute 'mode-line :background nil t))
-  (set-face-attribute 'ivy-posframe nil
-                      :background (face-attribute 'default :background nil t))
-  (set-face-attribute 'fringe nil
-                      :foreground (face-attribute 'ivy-posframe :background nil t)
-                      :background (face-attribute 'ivy-posframe :background nil t)))
-
-(defun fp/dynamic-ivy-posframe-get-size ()
-  "Set the ivy-posframe size according to the current frame."
-  (let ((height (or ivy-posframe-height (or ivy-height 10)))
-        (width (min (or ivy-posframe-width 120) (round (* .75 (frame-width))))))
-    (list :height height :width width :min-height height :min-width width)))
-
-(use-package ivy-posframe
-  :after ivy
-  :config
-  (setq ivy-posframe-size-function 'fp/dynamic-ivy-posframe-get-size)
-  (setq ivy-posframe-display-functions-alist
-        '((t . ivy-posframe-display-at-frame-center))
-        ivy-posframe-height-alist '((t . 20)))
-  (setq ivy-posframe-border-width 1)
-  (setq ivy-posframe-parameters
-        '((left-fringe . 16)
-          (right-fringe . 16)))
-  (ivy-posframe-mode 1)
-  (advice-add 'counsel-load-theme :after #'posframe-delete-all)
-  (advice-add 'counsel-load-theme :after #'correct-color-theme-switch)
-  (correct-color-theme-switch))
 
 ;; --- magit ---
 (use-package magit
