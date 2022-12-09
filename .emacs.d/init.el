@@ -87,7 +87,12 @@
  backup-inhibited t
 
  ;; Mode-line format
- mode-line-format "%e %b (%l:%c)")
+ mode-line-format '("%e"
+                    mode-line-front-space
+                    "%b  "
+                    mode-name
+                    "  (%l:%c)"
+                    mode-line-end-spaces))
 
 ;; Change all yes/no questions to y/n type
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -370,7 +375,7 @@ The return value is a list of buffers."
   (fp/leader-keys
     :states '(normal visual)
     :keymaps 'emacs-lisp-mode-map
-    "cd" '(describe-function :which-key "describe-function"))
+    "cd" '(describe-symbol :which-key "describe-symbol"))
 
   (fp/leader-keys
     :states '(normal visual)
