@@ -87,7 +87,7 @@
  backup-inhibited t
 
  ;; Mode-line format
- mode-line-format '("%e" mode-line-front-space "(%l:%c)" mode-line-end-spaces))
+ mode-line-format '("%e" mode-line-front-space "%b (%l:%c)" mode-line-end-spaces))
 
 ;; Change all yes/no questions to y/n type
 (fset 'yes-or-no-p 'y-or-n-p)
