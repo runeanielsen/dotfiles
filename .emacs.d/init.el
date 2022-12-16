@@ -462,7 +462,8 @@ The return value is a list of buffers."
     "o" '(:ignore t :which-key "open")
     "ot" '(fp/project-vterm :which-key "vterm")
     "oT" '(vterm :which-key "vterm")
-    "oe" '(fp/open-init-el :which-key "open-init.el"))
+    "oe" '(fp/open-init-el :which-key "open-init.el")
+    "od" '(dictionary :which-key "dictionary"))
 
   (fp/leader-keys
     "t" '(:ignore t :which-key "text")
@@ -849,7 +850,6 @@ The return value is a list of buffers."
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
-
 
 ;; --- org-mode ---
 (use-package org
