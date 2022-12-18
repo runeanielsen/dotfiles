@@ -29,6 +29,7 @@ alias pm='pulsemixer'
 alias copy='xsel --clipboard --input'
 alias paste='xsel --clipboard --output'
 alias rss='newsboat -C ~/.config/newsboat/config -c ~/nas/rss/cache.db -u ~/nas/rss/urls'
+alias kis='kiwix-serve -p 8081 ~/.local/share/kiwix/*.zim'
 
 alias ma='mount /home/notation/nas'
 alias r='ranger'
