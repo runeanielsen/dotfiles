@@ -22,7 +22,7 @@ export PS1="\[\033[0;0;0m\]λ: "
 export LS_COLORS='di=0;1:ex=31:tw=0;1:ow=0;1'
 
 # aliases
-alias ls='ls --color=auto'
+alias ls='ls --color=auto --format=single-column'
 alias dotf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 alias pm='pulsemixer'
