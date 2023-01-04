@@ -852,6 +852,11 @@ The return value is a list of buffers."
   :init (setq markdown-command "multimarkdown"))
 
 ;; --- org-mode ---
+(use-package olivetti
+  :hook (org-mode . olivetti-mode)
+  :custom (olivetti-body-width 90))
+
+;; --- org-mode ---
 (use-package org
   :custom (org-startup-truncated nil)
   :config (setq org-edit-src-content-indentation 0
