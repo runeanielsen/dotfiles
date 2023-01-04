@@ -144,8 +144,8 @@
   (unless (f-exists? fp/remember-last-theme-dir)
     (f-mkdir fp/remember-last-theme-dir))
   (unless (f-exists? fp/remember-last-theme-file)
-      (f-touch fp/remember-last-theme-file)
-      (fp/set-default-theme)))
+    (f-touch fp/remember-last-theme-file)
+    (fp/set-default-theme)))
 
 (defun fp/remember-last-theme ()
   "Remembers last set theme."
@@ -180,7 +180,7 @@
   :straight nil
   :custom (project-switch-commands '((project-find-file "Find file"))))
 
- ;; --- dashboard ---
+;; --- dashboard ---
 (use-package dashboard
   :custom ((dashboard-items nil)
            (dashboard-center-content t)
@@ -647,9 +647,9 @@ The return value is a list of buffers."
   (setq eglot-autoshutdown t)
   (setq eglot-ignored-server-capabilities '(:documentHighlightProvider))
   (add-to-list 'eglot-server-programs
-	             '(web-mode . ("typescript-language-server" "--stdio")))
+               '(web-mode . ("typescript-language-server" "--stdio")))
   (add-to-list 'eglot-server-programs
-	             '(csharp-mode . ("csharp-ls"))))
+               '(csharp-mode . ("csharp-ls"))))
 
 ;; --- tree-sitter ---
 (use-package tree-sitter
