@@ -892,6 +892,9 @@ The return value is a list of buffers."
   :hook ((org-mode . flyspell-mode)
          (markdown-mode . flyspell-mode)))
 
+(use-package flyspell-correct
+  :after flyspell)
+
 (use-package dictionary
   :straight nil
   :custom (dictionary-server "dict.org"))
