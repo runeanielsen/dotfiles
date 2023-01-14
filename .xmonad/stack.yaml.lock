@@ -5,12 +5,26 @@
 
 packages:
 - completed:
+    hackage: netlink-1.1.1.0@sha256:d83424b5ba9921191449e4b1f53c7cba7f4375f2c55a9b737c77e982e1f40d00,3689
     pantry-tree:
       sha256: 42a57a2db0d8b44e04a04905ed56994b7293d2f244595bf3e65480c36d114ac3
       size: 1598
-    hackage: netlink-1.1.1.0@sha256:d83424b5ba9921191449e4b1f53c7cba7f4375f2c55a9b737c77e982e1f40d00,3689
   original:
     hackage: netlink-1.1.1.0
+- completed:
+    hackage: cairo-0.13.8.2@sha256:ef1709c3c4d2c6d68a9a51d9f220dccc0745f6468d2d0868c15a7ecdf8f325a1,4078
+    pantry-tree:
+      sha256: d6a9b3a15bc2e7b53fda331279cfdbc299fbf0c4be2ee8c1b6b79b924b6fdeb4
+      size: 2830
+  original:
+    hackage: cairo-0.13.8.2
+- completed:
+    hackage: pango-0.13.8.2@sha256:d4057ebddade4cde3e25d7755b5e030e7a7e56fe7365afd37916a7bba46d3fd9,3917
+    pantry-tree:
+      sha256: 10c335853e1d43e0b7426b33e8ddbdb90b3e318ebec4d58f0726a2f4cfb2e1c9
+      size: 1506
+  original:
+    hackage: pango-0.13.8.2
 snapshots:
 - completed:
     sha256: 4c31d4ef975b0211078862566aedf3b82b6cea569fc2cde4c72a51e5a8d236ce
