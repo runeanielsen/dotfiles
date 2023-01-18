@@ -6,7 +6,7 @@ Repository containing my personal dotfiles.
 
 ``` sh
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'\
-git clone --bare https://github.com/runeanielsen/dotfiles.git $HOME/.dotfiles\
+git clone --bare git@github.com:runeanielsen/dotfiles.git $HOME/.dotfiles\
 dotfiles checkout
 ```
 
