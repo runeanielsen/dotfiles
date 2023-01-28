@@ -856,7 +856,6 @@ The return value is a list of buffers."
   :hook (org-mode . olivetti-mode)
   :custom (olivetti-body-width 90))
 
-;; --- org-mode ---
 (use-package org
   :custom (org-startup-truncated nil)
   :config (setq org-edit-src-content-indentation 0
@@ -887,7 +886,7 @@ The return value is a list of buffers."
   (require 'org-roam-dailies)
   (org-roam-db-autosync-mode))
 
-;; Flyspell
+;;; --- flyspell ---
 (use-package flyspell
   :hook ((org-mode . flyspell-mode)
          (markdown-mode . flyspell-mode)))
@@ -895,6 +894,7 @@ The return value is a list of buffers."
 (use-package flyspell-correct
   :after flyspell)
 
+;; --- dictionary ---
 (use-package dictionary
   :straight nil
   :custom (dictionary-server "dict.org"))
