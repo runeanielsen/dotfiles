@@ -4,8 +4,9 @@ set window-title-basename true
 set recolor false
 set recolor-keephue true
 
-set recolor-lightcolor "#242424"
-set recolor-darkcolor "#e3ded7"
+set recolor-lightcolor "#fff7e2"
+
+set recolor-darkcolor "black"
 set default-bg "#242424"
 
 set font "Fira Code 8"
