@@ -191,9 +191,6 @@
   :config
   (dashboard-setup-startup-hook))
 
-;; --- all-the-icons ---
-(use-package all-the-icons)
-
 ;; --- vterm ---
 (use-package vterm
   :commands (vterm))
@@ -536,10 +533,6 @@ The return value is a list of buffers."
 
 (use-package dired-single
   :after dired)
-
-(use-package all-the-icons-dired
-  :after dired
-  :hook (dired-mode . all-the-icons-dired-mode))
 
 ;; --- counsel ---
 (use-package counsel)
