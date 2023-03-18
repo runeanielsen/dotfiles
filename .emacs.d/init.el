@@ -587,7 +587,7 @@ The return value is a list of buffers."
 ;; --- company ---
 (use-package company
   :hook (prog-mode . company-mode)
-  :custom ((company-idle-delay 0)
+  :custom ((company-idle-delay nil)
            (company-minimum-prefix-length 1))
   :bind (("<C-tab>" . company-complete)))
 
