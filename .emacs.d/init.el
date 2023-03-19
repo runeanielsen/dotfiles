@@ -886,9 +886,4 @@ The return value is a list of buffers."
 (use-package flyspell-correct
   :after flyspell)
 
-;; --- dictionary ---
-(use-package dictionary
-  :straight nil
-  :custom (dictionary-server "dict.org"))
-
 ;;; init.el ends here
