@@ -120,7 +120,7 @@
   (concat (file-truename user-emacs-directory) "var/remember-last-theme"))
 
 (defvar fp/remember-last-theme-file
-  (concat fp/remember-last-theme-dir "/remember-last"))
+  (concat fp/remember-last-theme-dir "/last-theme"))
 
 (defvar fp/remember-last-theme-default 'modus-operandi)
 
