@@ -58,7 +58,6 @@
  ;; Do not show the startup message.
  inhibit-startup-message t
 
-
  ;; Avoid resize windows when using `pop-to-buffer`
  even-window-heights nil
 
