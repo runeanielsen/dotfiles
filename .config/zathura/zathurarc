@@ -1,3 +1,4 @@
+set sandbox strict
 set selection-clipboard clipboard
 set window-title-basename true
 
