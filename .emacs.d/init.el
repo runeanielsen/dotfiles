@@ -226,7 +226,7 @@
 (defun fp/open-init-el ()
   "Open Emacs init.el file."
   (interactive)
-  (find-file "~/.emacs.d/init.el"))
+  (find-file (concat user-emacs-directory "init.el")))
 
 (defun fp/flymake-list-errors ()
   "Execute flymake and switch to that buffer."
