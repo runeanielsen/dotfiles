@@ -117,7 +117,7 @@
 (use-package f)
 
 (defvar fp/remember-last-theme-dir
-  (concat "/home/notation/.emacs.d/" "var/remember-last-theme"))
+  (concat (file-truename user-emacs-directory) "var/remember-last-theme"))
 
 (defvar fp/remember-last-theme-file
   (concat fp/remember-last-theme-dir "/remember-last"))
