@@ -522,7 +522,6 @@ The return value is a list of buffers."
   :straight nil
   :custom ((dired-listing-switches "-agho --group-directories-first")
            (dired-auto-revert-buffer t))
-  :hook (dired-mode-hook . fp/quiet-auto-revert)
   :config
   (evil-collection-define-key 'normal 'dired-mode-map
     "h" 'dired-single-up-directory
