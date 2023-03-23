@@ -842,6 +842,9 @@ The return value is a list of buffers."
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
+;; --- docker ---
+(use-package dockerfile-mode)
+
 ;; --- org-mode ---
 (use-package olivetti
   :hook (org-mode . olivetti-mode)
