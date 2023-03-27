@@ -767,7 +767,7 @@ The return value is a list of buffers."
   (eglot-ensure))
 
 (use-package csharp-mode
-  :hook ((csharp-mode . csharp-mode-setup)))
+  :hook (csharp-mode . csharp-mode-setup))
 
 ;; --- rust mode ---
 (defun rust-mode-setup ()
