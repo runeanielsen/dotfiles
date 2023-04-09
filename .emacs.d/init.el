@@ -34,7 +34,7 @@
   (gcmh-mode 1))
 
 ;; Font
-(set-face-attribute 'default nil :font "Jetbrains Mono" :height 130)
+(set-face-attribute 'default nil :font "JetBrains Mono" :height 120)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -278,7 +278,7 @@ The return value is a list of buffers."
 (defun fp/project-name-prefix (name)
   "Get project name prefix using NAME."
   (when (project-current)
-    (let ((project-name (car (cdr (reverse (split-string (cdr (project-current)) "/"))))))
+    (let ((project-name (car (cdr (reverse (split-string (car (last (project-current))) "/"))))))
       (concat "*" project-name "-" name "*"))))
 
 (defun fp/project-vterm ()
@@ -289,7 +289,7 @@ The return value is a list of buffers."
              (vterm-buffer (get-buffer default-project-vterm-name)))
         (if vterm-buffer
             (switch-to-buffer vterm-buffer)
-          (let ((default-directory (cdr (project-current))))
+          (let ((default-directory (car (last (project-current)))))
             (vterm (generate-new-buffer-name default-project-vterm-name)))))
     (vterm)))
 
@@ -761,10 +761,10 @@ The return value is a list of buffers."
             (replace-match (concat (nth x usings) "\n"))
             (setq x (+ 1 x))))))))
 
-(defun csharp-mode-setup()
+(defun csharp-mode-setup())
   "LSP CSharp install save hooks."
-  (advice-add 'eglot-format-buffer :before #'fp/sort-usings-csharp)
-  (eglot-ensure))
+  ;;(advice-add 'eglot-format-buffer :before #'fp/sort-usings-csharp)
+  ;;(eglot-ensure))
 
 (use-package csharp-mode
   :hook (csharp-mode . csharp-mode-setup))
