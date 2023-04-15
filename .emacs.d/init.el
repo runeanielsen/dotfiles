@@ -761,13 +761,7 @@ The return value is a list of buffers."
             (replace-match (concat (nth x usings) "\n"))
             (setq x (+ 1 x))))))))
 
-(defun csharp-mode-setup())
-  "LSP CSharp install save hooks."
-  ;;(advice-add 'eglot-format-buffer :before #'fp/sort-usings-csharp)
-  ;;(eglot-ensure))
-
-(use-package csharp-mode
-  :hook (csharp-mode . csharp-mode-setup))
+(use-package csharp-mode)
 
 ;; --- rust mode ---
 (defun rust-mode-setup ()
