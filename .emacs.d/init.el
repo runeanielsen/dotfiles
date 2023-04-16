@@ -645,11 +645,14 @@ The return value is a list of buffers."
 ;; --- tree-sitter ---
 (use-package tree-sitter
   :config
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+  (add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-tree-sitter-mode)))
 
 (use-package tree-sitter-langs
   :after tree-sitter)
+
+(use-package tree-sitter-indent
+  :after tree-sitter)
+
 
 ;; --- go mode ---
 (defun setup-go-mode ()
