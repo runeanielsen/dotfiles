@@ -31,6 +31,8 @@ alias paste='xsel --clipboard --output'
 alias rss='newsboat -C ~/.config/newsboat/config -c ~/nas/rss/cache.db -u ~/nas/rss/urls'
 alias kix='kiwix-serve -p 8080 ~/.local/share/kiwix/*.zim'
 
+alias dn='dotnet'
+
 alias ma='mount /home/notation/nas'
 alias r='ranger'
 alias bt='bluetoothctl'
