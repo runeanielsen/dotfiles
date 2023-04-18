@@ -642,18 +642,6 @@ The return value is a list of buffers."
   (add-to-list 'eglot-server-programs
                '(csharp-mode . ("csharp-ls"))))
 
-;; --- tree-sitter ---
-(use-package tree-sitter
-  :config
-  (add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-tree-sitter-mode)))
-
-(use-package tree-sitter-langs
-  :after tree-sitter)
-
-(use-package tree-sitter-indent
-  :after tree-sitter)
-
-
 ;; --- go mode ---
 (defun setup-go-mode ()
   "LSP Go install save hooks."
