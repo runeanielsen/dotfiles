@@ -585,7 +585,7 @@ The return value is a list of buffers."
 ;; --- company ---
 (use-package company
   :hook (prog-mode . company-mode)
-  :custom ((company-idle-delay 0.1)
+  :custom ((company-idle-delay nil)
            (company-minimum-prefix-length 1))
   :bind (("<C-tab>" . company-complete)))
 
@@ -636,7 +636,11 @@ The return value is a list of buffers."
 (use-package eglot
   :config
   (setq eglot-autoshutdown t)
-  (setq eglot-ignored-server-capabilities '(:documentHighlightProvider))
+  (setq eglot-ignored-server-capabilities
+        '(:documentHighlightProvider
+          :codeLensProvider
+          :signatureHelpProvider
+          :inlayHintProvider))
   (add-to-list 'eglot-server-programs
                '(web-mode . ("typescript-language-server" "--stdio")))
   (add-to-list 'eglot-server-programs
