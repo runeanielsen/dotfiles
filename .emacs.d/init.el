@@ -585,7 +585,7 @@ The return value is a list of buffers."
 ;; --- company ---
 (use-package company
   :hook (prog-mode . company-mode)
-  :custom ((company-idle-delay nil)
+  :custom ((company-idle-delay 0.1)
            (company-minimum-prefix-length 1))
   :bind (("<C-tab>" . company-complete)))
 
@@ -752,7 +752,13 @@ The return value is a list of buffers."
             (replace-match (concat (nth x usings) "\n"))
             (setq x (+ 1 x))))))))
 
-(use-package csharp-mode)
+(defun csharp-mode-setup()
+  "LSP CSharp install save hooks."
+  (advice-add 'eglot-format-buffer :before #'fp/sort-usings-csharp)
+  (eglot-ensure))
+
+(use-package csharp-mode
+  :hook (csharp-mode . csharp-mode-setup))
 
 ;; --- rust mode ---
 (defun rust-mode-setup ()
