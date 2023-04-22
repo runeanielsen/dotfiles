@@ -232,12 +232,9 @@
   "Execute flymake and switch to that buffer."
   (interactive)
   (if (project-current)
-      (progn
-        (flymake-show-project-diagnostics)
-        (other-window 1))
-    (progn
-      (flymake-show-diagnostics-buffer)
-      (other-window 1))))
+      (flymake-show-project-diagnostics)
+    (flymake-show-diagnostics-buffer))
+  (other-window 1))
 
 (defun fp/eldoc-doc-buffer-pop-to ()
   "Execute 'eldoc-doc-buffer' and switch to that buffer."
