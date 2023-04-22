@@ -625,7 +625,7 @@ The return value is a list of buffers."
   :config
   (add-hook 'eglot-managed-mode-hook
             #'(lambda ()
-                (setq-local eldoc-idle-delay 0)
+                (setq-local eldoc-idle-delay 0.5)
                 (setq-local eldoc-echo-area-use-multiline-p 1)
                 (setq-local eldoc-documentation-strategy
                             #'eldoc-documentation-compose))))
