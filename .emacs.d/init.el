@@ -616,7 +616,8 @@ The return value is a list of buffers."
 (use-package flymake
   :straight nil
   :hook ((prog-mode . flymake-mode))
-  :custom ((flymake-fringe-indicator-position nil)))
+  :custom ((flymake-fringe-indicator-position nil)
+           (flymake-no-changes-timeout nil)))
 
 ;; --- eldoc ----
 (use-package eldoc
