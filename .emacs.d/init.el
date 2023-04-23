@@ -547,8 +547,13 @@ The return value is a list of buffers."
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
 ;; --- forge ---
+
+;; sqlite3 is needed for forge.
+;; In Emacs 29.* sqlite will be part of Emacs and this package won't be needed anymore.
+(use-package sqlite3)
+
 (use-package forge
-  :after magit
+  :after '(magit sqlite3)
   :init
   (setq forge-add-default-bindings nil)
   (ghub-request "GET" "/user" nil
