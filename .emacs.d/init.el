@@ -553,7 +553,7 @@ The return value is a list of buffers."
 (use-package sqlite3)
 
 (use-package forge
-  :after '(magit sqlite3)
+  :after (magit sqlite3)
   :init
   (setq forge-add-default-bindings nil)
   (ghub-request "GET" "/user" nil
