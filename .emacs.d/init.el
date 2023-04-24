@@ -645,7 +645,9 @@ The return value is a list of buffers."
         '(:documentHighlightProvider
           :codeLensProvider
           :signatureHelpProvider
-          :inlayHintProvider))
+          :inlayHintProvider
+          :foldingRangeProvider
+          :documentOnTypeFormattingProvider))
   (add-to-list 'eglot-server-programs
                '(web-mode . ("typescript-language-server" "--stdio")))
   (add-to-list 'eglot-server-programs
