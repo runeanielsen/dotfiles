@@ -752,16 +752,17 @@ The return value is a list of buffers."
 (defun fp/sort-usings-csharp ()
   "Sort using statements i C#."
   (interactive)
-  (let* ((buffer-string (buffer-substring-no-properties (point-min) (point-max)))
-         (matches (flatten-list (s-match-strings-all "using [A-Za-z\.]+;" buffer-string)))
+  (let* ((find-using-reg-exp "using [A-Za-z\.]+;")
+         (buffer-string (buffer-substring-no-properties (point-min) (point-max)))
+         (matches (flatten-list (s-match-strings-all find-using-reg-exp buffer-string)))
          (usings (fp/process-sort-usings matches)))
     (unless (equal matches usings)
       (save-excursion
         (goto-char 1)
-        (let ((x 0))
-          (while (search-forward-regexp "using [A-Za-z\.]+;\n" nil t)
-            (replace-match (concat (nth x usings) "\n"))
-            (setq x (+ 1 x))))))))
+        (let ((current-match-number 0))
+          (while (search-forward-regexp (concat find-using-reg-exp "\n") nil t)
+            (replace-match (concat (nth current-match-number usings) "\n"))
+            (setq current-match-number (1+ current-match-number))))))))
 
 (defun csharp-mode-setup()
   "LSP CSharp install save hooks."
