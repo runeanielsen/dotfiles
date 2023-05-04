@@ -32,6 +32,8 @@ alias rss='newsboat -C ~/.config/newsboat/config -c ~/nas/rss/cache.db -u ~/nas/
 alias kix='kiwix-serve -p 8080 ~/.local/share/kiwix/*.zim'
 
 alias dn='dotnet'
+alias dnb='dotnet build'
+alias dnt='dotnet test'
 
 alias ma='mount /home/notation/nas'
 alias r='ranger'
