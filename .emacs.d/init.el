@@ -378,11 +378,6 @@ The return value is a list of buffers."
 
   (fp/leader-keys
     :states '(normal visual)
-    :keymaps '(lsp-mode-map csharp-mode-map)
-    "cqq" '(lsp-csharp-run-test-at-point :which-key "lsp-csharp-run-test-at-point"))
-
-  (fp/leader-keys
-    :states '(normal visual)
     :keymaps 'clojure-mode-map
     "ct" '(:ignore t :which-key "Clojure tests")
     "ctt" '(cider-test-run-test :which-key "cider-test-run-test")
