@@ -357,11 +357,6 @@ The return value is a list of buffers."
 
   (fp/leader-keys
     :states '(normal visual)
-    :keymaps 'prog-mode-map
-    "fi" '(indent-region :which-key "indent-region"))
-
-  (fp/leader-keys
-    :states '(normal visual)
     :keymaps 'emacs-lisp-mode-map
     "cd" '(describe-symbol :which-key "describe-symbol"))
 
