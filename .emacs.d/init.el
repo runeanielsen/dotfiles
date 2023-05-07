@@ -334,7 +334,7 @@ The return value is a list of buffers."
     "gg" '(magit-status :which-key "magit-status"))
 
   (fp/leader-keys
-    "r" '(:ignore t :which-key "git")
+    "r" '(:ignore t :which-key "replace")
     "rr" '(replace-regexp :which-key "replace-regexp"))
 
   (fp/leader-keys
