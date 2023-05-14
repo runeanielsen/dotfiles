@@ -684,13 +684,8 @@ The return value is a list of buffers."
           ((string= extension "cljs") (call-interactively 'cider-jack-in-cljs))
           (t (message (format "Extension: '%s' is not valid." extension))))))
 
-(defun cider-install-save-hooks ()
-  "Cider install save hooks."
-  (add-hook 'before-save-hook #'fp/cider-format-buffer-no-errors t t))
-
 (use-package cider
-  :hook ((clojure-mode . cider-mode)
-         (cider-mode . cider-install-save-hooks))
+  :hook (clojure-mode . cider-mode)
   :custom ((tab-width 2)
            (cider-repl-pop-to-buffer-on-connect nil)
            (cider-repl-display-help-banner nil)
