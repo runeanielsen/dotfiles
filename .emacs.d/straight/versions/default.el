@@ -25,7 +25,7 @@
  ("emacsql" . "64012261f65fcdd7ea137d1973ef051af1dced42")
  ("evil" . "fc763f888fb9a810f99b9783aa1f3f5e895ce502")
  ("evil-cleverparens" . "9ee249509281c387500e397df625ccb759804df4")
- ("evil-collection" . "4cc676efa2ee18a1e95f1572734cb084e5b76646")
+ ("evil-collection" . "0df5c4815d7be01ab52e9f957c56e6318c871217")
  ("external-completion" . "d717c138623aeecc8e0a0312e0576e98604c43f2")
  ("f.el" . "af7d37c619010b576fd22b50c62c71ff33093f3c")
  ("flymake" . "bb1408afd5c907b6c24e41457064cc32b0f985de")
