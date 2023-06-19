@@ -113,11 +113,6 @@
 ;; Disable recentf mode
 (recentf-mode 0)
 
-;; Do not display buffer window when executing async shell command.
-;; The buffer is still created, but wont be opened automatically.
-(add-to-list 'display-buffer-alist
-             '("*Async Shell Command*" display-buffer-no-window (nil)))
-
 ;; -- load theme ---
 (use-package f)
 
@@ -294,6 +289,13 @@ The return value is a list of buffers."
           (let ((default-directory (car (last (project-current)))))
             (vterm (generate-new-buffer-name default-project-vterm-name)))))
     (vterm)))
+
+(defun fp/execute-eshell-minibuffer (command)
+  "Execute an eshell COMMAND and displays it in the minibuffer."
+  (interactive (list (read-shell-command "Eshell command: ")))
+  (condition-case err
+      (message "%s" (eshell-command-result command))
+    (error (messae "Error: %s" error))))
 
 ;; --- general ---
 (use-package general
@@ -510,6 +512,12 @@ The return value is a list of buffers."
   ("f" nil "finished" :exit t))
 
 ;; --- dired ---
+(defun fp/dired-eshell-minibuffer-refresh ()
+  "Execute a shell COMMAND and refreshes the Dired buffer when the operation is completed."
+  (interactive)
+  (call-interactively 'fp/execute-eshell-minibuffer)
+  (revert-buffer))
+
 (use-package dired
   :straight nil
   :custom ((dired-listing-switches "-agho --group-directories-first")
@@ -520,7 +528,7 @@ The return value is a list of buffers."
     "l" 'dired-single-buffer
     "f" 'dired-create-empty-file
     "F" 'dired-create-directory
-    "s" 'async-shell-command))
+    "s" 'fp/dired-eshell-minibuffer-refresh))
 
 (use-package dired-single
   :after dired)
