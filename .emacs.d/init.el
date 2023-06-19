@@ -278,7 +278,6 @@ The return value is a list of buffers."
 
 (defun fp/project-name-prefix (name)
   "Get project name prefix using NAME."
-  (interactive)
   (when (project-current)
     (let ((project-name (fp/last-item (split-string (fp/last-item (project-current)) "/" t))))
       (concat "*" project-name "-" name "*"))))
