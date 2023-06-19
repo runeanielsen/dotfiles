@@ -113,6 +113,11 @@
 ;; Disable recentf mode
 (recentf-mode 0)
 
+;; Do not display buffer window when executing async shell command.
+;; The buffer is still created, but wont be opened automatically.
+(add-to-list 'display-buffer-alist
+             '("*Async Shell Command*" display-buffer-no-window (nil)))
+
 ;; -- load theme ---
 (use-package f)
 
@@ -514,7 +519,8 @@ The return value is a list of buffers."
     "h" 'dired-single-up-directory
     "l" 'dired-single-buffer
     "f" 'dired-create-empty-file
-    "F" 'dired-create-directory))
+    "F" 'dired-create-directory
+    "s" 'async-shell-command))
 
 (use-package dired-single
   :after dired)
