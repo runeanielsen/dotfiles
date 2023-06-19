@@ -279,15 +279,20 @@ The return value is a list of buffers."
       (concat "*" project-name "-" name "*"))))
 
 (defun fp/project-vterm ()
-  "Vterm based on project name."
+  "Create or switch to a vterm buffer based on the built in 'project.el' mode.
+If the current buffer is not associated with a project.
+When the buffer is not associated with a project it switches to the default vterm buffer."
   (interactive)
   (if (project-current)
+      ;; When a project is found, try to find a buffer with that name,
+      ;; if no buffer is found we instead create a new vterm buffer with that buffer name.
       (let* ((default-project-vterm-name (fp/project-name-prefix "vterm"))
              (vterm-buffer (get-buffer default-project-vterm-name)))
         (if vterm-buffer
             (switch-to-buffer vterm-buffer)
           (let ((default-directory (car (last (project-current)))))
             (vterm (generate-new-buffer-name default-project-vterm-name)))))
+    ;; When no project is found, call the default vterm command.
     (vterm)))
 
 (defun fp/execute-eshell-minibuffer (command)
