@@ -387,7 +387,7 @@ The return value is a list of buffers."
     "cta" '(cider-test-run-project-tests :which-key "cider-test-run-project-tests")
     "pi" '(cljr-add-project-dependency :which-key "cljr-add-project-dependency")
     "cd" '(cider-doc :which-key "cider-doc")
-    "cs" '(fp/cider-jack-in :which-key "cider-jack-in")
+    "cs" '(fp/automatic-cider-jack-in :which-key "cider-jack-in")
     "cS" '(cider-connect-clj :which-key "cider-connect-clj")
     "cf" '(cider-find-var :which-key "cider-format-buffer")
     "cF" '(cider-format-buffer :which-key "cider-format-buffer")
@@ -691,8 +691,11 @@ The return value is a list of buffers."
       (cider-format-buffer)
     (error nil)))
 
-(defun fp/cider-jack-in ()
-  "Call 'cider-jack-in' depending on current buffer file extension."
+(defun fp/automatic-cider-jack-in ()
+  "Automatically call either 'cider-jack-in-clj' or 'cider-jack-in-cljs'.
+The call depends on the current buffers file-extension,
+if the extension is .clj 'cider-jack-in-clj' is called,
+if the extension is .cljs 'cider-jack-in-cljs' is called."
   (interactive)
   (let ((extension (file-name-extension buffer-file-name)))
     (cond ((string= extension "clj") (call-interactively 'cider-jack-in-clj))
