@@ -205,6 +205,10 @@
          (prog-mode . ws-butler-mode)))
 
 ;; --- custom functions ---
+(defun fp/last-item (list)
+  "Get the last item of a LIST."
+  (car (last list)))
+
 (defun fp/split-window-balanced ()
   "Split window and balance all windows after."
   (interactive)
@@ -274,8 +278,9 @@ The return value is a list of buffers."
 
 (defun fp/project-name-prefix (name)
   "Get project name prefix using NAME."
+  (interactive)
   (when (project-current)
-    (let ((project-name (car (cdr (reverse (split-string (car (last (project-current))) "/"))))))
+    (let ((project-name (fp/last-item (split-string (fp/last-item (project-current)) "/" t))))
       (concat "*" project-name "-" name "*"))))
 
 (defun fp/project-vterm ()
@@ -291,7 +296,7 @@ When the buffer is not associated with a project it switches to the default vter
         (if vterm-buffer
             (switch-to-buffer vterm-buffer)
           (let ((default-directory (car (last (project-current)))))
-            (vterm (generate-new-buffer-name default-project-vterm-name)))))
+            (vterm default-project-vterm-name))))
     ;; When no project is found, call the default vterm command.
     (vterm)))
 
