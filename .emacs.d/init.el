@@ -634,8 +634,9 @@ The return value is a list of buffers."
 ;; --- eglot ---
 (use-package eglot
   :config
-  (add-hook 'eglot-managed-mode-hook (lambda ()
-                                       (remove-hook 'flymake-diagnostic-functions 'eglot-flymake-backend)))
+  (add-hook 'eglot-managed-mode-hook
+            (lambda ()
+              (remove-hook 'flymake-diagnostic-functions 'eglot-flymake-backend)))
   (setq eglot-autoshutdown t)
   (setq eglot-ignored-server-capabilities
         '(:documentHighlightProvider
