@@ -784,7 +784,8 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
 
 (use-package rust-mode
   :hook (rust-mode . rust-mode-setup)
-  :custom ((rust-format-on-save nil)))
+  :custom
+  (rust-format-on-save nil))
 
 ;; --- c ---
 (use-package cc-mode
