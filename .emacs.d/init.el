@@ -295,7 +295,7 @@ The return value is a list of buffers."
   (interactive (list (read-shell-command "Eshell command: ")))
   (condition-case err
       (message "%s" (eshell-command-result command))
-    (error (messae "Error: %s" error))))
+    (error (message "Error: %s" error))))
 
 ;; --- general ---
 (use-package general
