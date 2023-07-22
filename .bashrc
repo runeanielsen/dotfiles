@@ -30,6 +30,9 @@ alias ap1='apropos -s 1'
 alias ap2='apropos -s 2'
 alias ap3='apropos -s 3'
 
+# Overwrite the mv command to avoid overwriting existing files by mistake.
+alias mv='mv -i'
+
 alias pm='pulsemixer'
 alias copy='xsel --clipboard --input'
 alias paste='xsel --clipboard --output'
