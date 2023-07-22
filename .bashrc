@@ -25,6 +25,11 @@ export LS_COLORS='di=0;1:ex=31:tw=0;1:ow=0;1'
 alias ls='ls --color=auto --format=single-column'
 alias dotf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
+alias ap='apropos'
+alias ap1='apropos -s 1'
+alias ap2='apropos -s 2'
+alias ap3='apropos -s 3'
+
 alias pm='pulsemixer'
 alias copy='xsel --clipboard --input'
 alias paste='xsel --clipboard --output'
