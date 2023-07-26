@@ -750,7 +750,10 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
 
 ;; --- yaml mode ---
 (use-package yaml-mode
-  :mode ("\\.yaml\\'" "\\.yml\\'"))
+  :mode ("\\.yaml\\'"
+         "\\.yml\\'"
+         "\\.yaml.tpl\\'"
+         "\\.yml.tpl\\'"))
 
 ;; --- csharp mode ---
 (defun fp/process-sort-usings (usings)
