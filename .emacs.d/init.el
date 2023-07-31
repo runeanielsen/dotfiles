@@ -152,7 +152,16 @@
   (load-theme (fp/get-last-theme) t)
   (advice-add 'counsel-load-theme :after #'fp/set-last-theme))
 
+(defun fp/set-fringe-background-color ()
+  "Set the fringe to the background color"
+  (let ((background-color (face-background 'default)))
+    (set-face-attribute 'fringe nil :background background-color)))
+
+;; The fringe color should always be the background color.
+(advice-add 'counsel-load-theme :after #'fp/set-fringe-background-color)
+
 (fp/remember-last-theme)
+(fp/set-fringe-background-color)
 
 ;; --- no littering ---
 (use-package no-littering
