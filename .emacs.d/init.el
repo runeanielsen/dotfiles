@@ -214,6 +214,11 @@
          (prog-mode . ws-butler-mode)))
 
 ;; --- custom functions ---
+(defun fp/kill-buffer-name ()
+  "Takes the current buffer name and add it to the 'kill-ring'."
+  (interactive)
+  (kill-new (buffer-name)))
+
 (defun fp/last-item (list)
   "Get the last item of a LIST."
   (car (last list)))
