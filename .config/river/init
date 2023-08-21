@@ -63,14 +63,17 @@ riverctl map normal Super period spawn 'cmus-remote -n'
 riverctl map normal Super slash spawn '~/.config/scripts/cmus-play-pause.sh'
 
 # Set background and border color
-riverctl background-color 0x002b36
+riverctl background-color 0x101010
 riverctl border-color-focused 0x8893a9
 riverctl border-color-unfocused 0x4b5467
 
 # Set keyboard repeat rate
 riverctl set-repeat 45 200
 
+# Hide cursor after n ms.
+riverctl hide-cursor timeout 3000
+
 # Set the default layout generator to be rivertile and start it.
 # River will send the process group of the init executable SIGTERM on exit.
 riverctl default-layout rivertile
-rivertile -view-padding 6 -outer-padding 6 &
+rivertile -view-padding 6 -outer-padding 0 & dunst &
