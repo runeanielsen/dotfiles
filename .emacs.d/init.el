@@ -85,6 +85,9 @@
  ;; Disable backups
  backup-inhibited t
 
+ ;; Disable titlebar
+ default-frame-alist '((undecorated . t))
+
  ;; Mode-line format
  mode-line-format '("%e" mode-line-front-space "%b (%l:%c)" mode-line-end-spaces))
 
