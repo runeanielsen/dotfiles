@@ -80,7 +80,6 @@ myKeys =
     -- My applications
   , ("M-f", spawn "firefox")
   , ("M-e", spawn "emacs --xrm 'emacs.menuBar: off' -bg black")
-  , ("M-i", spawn "~/.config/scripts/dmenu-passmenu.sh")
   , ("M-b", spawn "~/.config/scripts/dmenu-books.clj")
   , ("M-v", spawn "~/.config/scripts/dmenu-videos.clj")
 
