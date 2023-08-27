@@ -22,14 +22,10 @@
   (any? (map #(str/ends-with? s %) substrs)))
 
 (defn open-menu [selections]
-  (shell/sh "dmenu"
-            "-f"
-            "-l" "20"
+  (shell/sh "rofi"
+            "-dmenu"
+            "-l" "15"
             "-i"
-            "-nf" "#ffffff"
-            "-nb" "#222222"
-            "-sf" "#222222"
-            "-sb" "#ffffff"
             :in selections))
 
 (defn book-sections [path file-endings]

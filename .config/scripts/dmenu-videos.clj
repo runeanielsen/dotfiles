@@ -28,14 +28,10 @@
        (str/join "\n")))
 
 (defn open-menu [selections]
-  (sh "dmenu"
-      "-f"
-      "-l" "20"
+  (sh "rofi"
+      "-dmenu"
+      "-l" "15"
       "-i"
-      "-nf" "#ffffff"
-      "-nb" "#222222"
-      "-sf" "#222222"
-      "-sb" "#ffffff"
       :in selections))
 
 (defn play-video [path]
