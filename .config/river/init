@@ -62,6 +62,10 @@ riverctl map normal Super comma spawn 'cmus-remote -r'
 riverctl map normal Super period spawn 'cmus-remote -n'
 riverctl map normal Super slash spawn '~/.config/scripts/cmus-play-pause.sh'
 
+# Content
+riverctl map normal Super B spawn '~/.config/scripts/dmenu-books.clj'
+riverctl map normal Super V spawn '~/.config/scripts/dmenu-videos.clj'
+
 # Set background and border color
 riverctl background-color 0x101010
 riverctl border-color-focused 0x8893a9
