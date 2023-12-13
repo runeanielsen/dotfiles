@@ -798,6 +798,7 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
 
 (defun csharp-mode-setup()
   "LSP CSharp install save hooks."
+  (setq tab-width 4)
   (advice-add 'eglot-format-buffer :before #'fp/sort-usings-csharp)
   (eglot-ensure))
 
