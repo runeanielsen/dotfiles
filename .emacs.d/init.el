@@ -824,13 +824,8 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
   :config (c-set-offset 'case-label '+))
 
 ;; --- zig ---
-(defun lsp-zig-install-save-hooks ()
-  "LSP Zig install save hooks."
-  (add-hook 'before-save-hook #'eglot-format-buffer))
-
 (use-package zig-mode
-  :hook ((zig-mode . eglot-ensure)
-         (zig-mode . lsp-zig-install-save-hooks))
+  :hook ((zig-mode . eglot-ensure))
   :custom (zig-format-on-save nil))
 
 ;; --- typescript mode ---
