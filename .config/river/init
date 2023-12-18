@@ -70,7 +70,7 @@ riverctl map normal Super V spawn '~/.config/scripts/dmenu-videos.clj'
 riverctl background-color 0x101010
 riverctl border-color-focused 0x8893a9
 riverctl border-color-unfocused 0x4b5467
-riverctl border-width 2
+riverctl border-width 0
 
 # Set keyboard repeat rate
 riverctl set-repeat 45 200
