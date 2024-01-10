@@ -226,18 +226,6 @@
   "Get the last item of a LIST."
   (car (last list)))
 
-(defun fp/split-window-balanced ()
-  "Split window and balance all windows after."
-  (interactive)
-  (split-window-right)
-  (balance-windows))
-
-(defun fp/split-window-balanced-horizontal ()
-  "Split window horizontal and balance all windows after."
-  (interactive)
-  (split-window-below)
-  (balance-windows))
-
 (defun fp/delete-window-balanced ()
   "Delete window and balance all windows after."
   (interactive)
@@ -464,15 +452,17 @@ When the buffer is not associated with a project it switches to the default vter
 
   (fp/leader-keys
     "w" '(:ignore t :which-key "window")
+    "wb" '(balance-windows-area :which-key "other-window")
     "ww" '(ace-window :which-key "other-window")
-    "wn" '(fp/split-window-balanced :which-key "split-window-balanced")
-    "wN" '(fp/split-window-balanced-horizontal :which-key "split-window-balanced-horizontal")
+    "wn" '(split-window-right :which-key "split-window-right")
+    "wN" '(split-window-below :which-key "split-window-below")
     "wh" '(evil-window-left :which-key "window-left")
     "wl" '(evil-window-right :which-key "window-right")
     "wj" '(evil-window-down :which-key "window-down")
     "wk" '(evil-window-up :which-key "window-down")
     "ws" '(window-swap-states :which-key "window-swap-states")
-    "wd" '(fp/delete-window-balanced :which-key "delete-window"))
+    "wd" '(delete-window :which-key "delete-window")
+    "wD" '(fp/delete-window-balanced :which-key "delete-window-balanced"))
 
   (fp/leader-keys
     "o" '(:ignore t :which-key "open")
