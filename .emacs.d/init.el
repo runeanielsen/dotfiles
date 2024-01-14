@@ -855,6 +855,7 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
 (use-package prettier-js
   :hook ((css-mode . prettier-js-mode)
          (scss-mode . prettier-js-mode)
+         (web-mode . prettier-js-mode)
          (json-mode . prettier-js-mode)))
 
 ;; --- markdown ---
