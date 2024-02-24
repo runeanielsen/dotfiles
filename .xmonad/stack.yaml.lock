@@ -5,6 +5,13 @@
 
 packages:
 - completed:
+    hackage: alsa-core-0.5.0.1@sha256:b442233f7b27e5e780e0e63d23767c4efd7153d89bcc0337d821570c43aaea9d,1329
+    pantry-tree:
+      sha256: 7ee0befd4a372f7f3711d59dd25a0d743bc8331302f2b5f8ee6039a711125e18
+      size: 223
+  original:
+    hackage: alsa-core-0.5.0.1
+- completed:
     hackage: netlink-1.1.1.0@sha256:d83424b5ba9921191449e4b1f53c7cba7f4375f2c55a9b737c77e982e1f40d00,3689
     pantry-tree:
       sha256: 42a57a2db0d8b44e04a04905ed56994b7293d2f244595bf3e65480c36d114ac3
