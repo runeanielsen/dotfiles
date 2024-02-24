@@ -77,6 +77,9 @@ myKeys =
     -- Open my preferred terminal.
   , ("M-<Return>", spawn (myTerminal ++ " -e bash"))
 
+  -- Application launcher
+  , ("M-p", spawn "rofi -show drun -show-icons")
+
     -- My applications
   , ("M-f", spawn "firefox")
   , ("M-e", spawn "emacs --xrm 'emacs.menuBar: off' -bg black")
