@@ -1,0 +1,16 @@
+[font]
+size = 14.0
+
+[font.normal]
+family = "Iosevka"
+
+[window]
+dynamic_padding = false
+
+[window.dimensions]
+columns = 0
+lines = 0
+
+[window.padding]
+x = 10
+y = 10
