@@ -49,7 +49,6 @@ myStartupHook = do
   setWMName "LG3D"
 
 -- Layout
-
 myLayout = avoidStruts (smartSpacingWithEdge 5 $ smartBorders $ tiled ||| noBorders Full)
   where
      -- default tiling algorithm partitions the screen into two panes
