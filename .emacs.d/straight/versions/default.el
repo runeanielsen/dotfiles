@@ -64,7 +64,7 @@
  ("queue" . "7ab8f23e770f64f6bd28a44c46c8becfc1af03d8")
  ("rainbow-delimiters" . "f40ece58df8b2f0fb6c8576b527755a552a5e763")
  ("rainbow-mode" . "70ed10d410ef00c82c49b2ba41647930626d6218")
- ("rust-mode" . "d8a09f218e24407acbc9f36c641be4f913f1a63c")
+ ("rust-mode" . "8bbe70b72fde8046e12e6a41ffbee6c9f6b4ddd7")
  ("s.el" . "dda84d38fffdaf0c9b12837b504b402af910d01d")
  ("scss-mode" . "cf58dbec5394280503eb5502938f3b5445d1b53d")
  ("seq" . "4355cde01767911660f761cf874edb412d06bd7a")
