@@ -674,6 +674,11 @@ When the buffer is not associated with a project it switches to the default vter
   (add-to-list 'eglot-server-programs
                '(csharp-mode . ("csharp-ls"))))
 
+(use-package eglot-booster
+	:after eglot
+  :straight (:host github :repo "jdtsmith/eglot-booster" :branch "main")
+	:config	(eglot-booster-mode))
+
 ;; --- go mode ---
 (defun setup-go-mode ()
   "LSP Go install save hooks."
