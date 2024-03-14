@@ -119,6 +119,8 @@
 ;; -- load theme ---
 (use-package f)
 
+(use-package ef-themes)
+
 (defvar fp/remember-last-theme-dir
   (concat (file-truename user-emacs-directory) "var/remember-last-theme"))
 
