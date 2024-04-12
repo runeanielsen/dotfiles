@@ -670,11 +670,7 @@ When the buffer is not associated with a project it switches to the default vter
           :signatureHelpProvider
           :inlayHintProvider
           :foldingRangeProvider
-          :documentOnTypeFormattingProvider))
-  (add-to-list 'eglot-server-programs
-               '(web-mode . ("typescript-language-server" "--stdio")))
-  (add-to-list 'eglot-server-programs
-               '(csharp-mode . ("csharp-ls"))))
+          :documentOnTypeFormattingProvider)))
 
 (use-package eglot-booster
 	:after eglot
@@ -796,11 +792,11 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
 (defun csharp-mode-setup()
   "LSP CSharp install save hooks."
   (setq tab-width 4)
-  (advice-add 'eglot-format-buffer :before #'fp/sort-usings-csharp)
-  (eglot-ensure))
+  (advice-add 'eglot-format-buffer :before #'fp/sort-usings-csharp))
 
-(use-package csharp-mode
-  :hook (csharp-mode . csharp-mode-setup))
+(use-package csharp-ts-mode
+  :straight nil
+  :hook (csharp-ts-mode . csharp-mode-setup))
 
 ;; --- rust mode ---
 (defun rust-mode-setup ()
@@ -826,27 +822,15 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
   :custom (zig-format-on-save nil))
 
 ;; --- typescript mode ---
-(use-package typescript-mode
-  :hook (typescript-mode . eglot-ensure)
+(use-package typescript-ts-mode
+  :hook (typescript-ts-mode . eglot-ensure)
   :custom (typescript-indent-level 2))
 
-;; --- web mode ---
-(defun fp/web-mode-setup ()
-  "Web-mode setup."
-  (let ((file-extension (file-name-extension buffer-file-name)))
-    (when (or (string-equal "tsx" file-extension)
-              (string-equal "jsx" file-extension))
-      (eglot-ensure))))
-
-(use-package web-mode
-  :mode (("\\.tsx\\'" . web-mode)
-         ("\\.jsx\\'" . web-mode)
-         ("\\.html\\'" . web-mode))
-  :hook (web-mode . fp/web-mode-setup)
-  :custom ((web-mode-enable-auto-quoting nil)
-           (web-mode-markup-indent-offset 2)
-           (web-mode-css-indent-offset 2)
-           (web-mode-code-indent-offset 2)))
+(use-package tsx-ts-mode
+  :straight nil
+  :mode ("\\.tsx\\'" . tsx-ts-mode)
+  :hook (tsx-ts-mode . eglot-ensure)
+  :custom (typescript-indent-level 2))
 
 ;; --- css mode ---
 (use-package css-mode
@@ -874,6 +858,35 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
 
 ;; --- docker ---
 (use-package dockerfile-mode)
+
+
+;; --- tree-sitter ---
+(use-package tree-sitter
+  :straight nil
+  :config (global-tree-sitter-mode))
+
+(use-package tree-sitter-indent
+  :straight nil)
+
+(use-package treesit-auto
+  :demand t
+  :config
+  (setq treesit-language-source-alist
+        '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+          (c "https://github.com/tree-sitter/tree-sitter-c")
+          (css "https://github.com/tree-sitter/tree-sitter-css")
+          (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+          (html "https://github.com/tree-sitter/tree-sitter-html")
+          (js . ("https://github.com/tree-sitter/tree-sitter-javascript" "master" "src"))
+          (json "https://github.com/tree-sitter/tree-sitter-json")
+          (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+          (rust "https://github.com/tree-sitter/tree-sitter-rust")
+          (toml "https://github.com/tree-sitter/tree-sitter-toml")
+          (tsx . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src"))
+          (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))
+          (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+  (global-treesit-auto-mode))
+
 
 ;; --- org-mode ---
 (use-package olivetti
