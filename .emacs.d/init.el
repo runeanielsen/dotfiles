@@ -750,9 +750,9 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
   (make-local-variable 'js-indent-level)
   (setq js-indent-level 2))
 
-(use-package json-mode
+(use-package json-ts-mode
   :mode ("\\.json\\'")
-  :hook (json-mode . fp/setup-json-mode))
+  :hook (json-ts-mode . fp/setup-json-mode))
 
 ;; --- csv mode ---
 (use-package csv-mode
