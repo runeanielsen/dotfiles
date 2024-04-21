@@ -823,6 +823,7 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
 
 ;; --- typescript mode ---
 (use-package typescript-ts-mode
+  :mode ("\\.ts\\'" . typescript-ts-mode)
   :hook (typescript-ts-mode . eglot-ensure)
   :custom (typescript-indent-level 2))
 
