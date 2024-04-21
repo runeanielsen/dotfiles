@@ -860,7 +860,6 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
 ;; --- docker ---
 (use-package dockerfile-mode)
 
-
 ;; --- tree-sitter ---
 (use-package tree-sitter
   :straight nil
