@@ -811,9 +811,9 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
   (rust-format-on-save nil))
 
 ;; --- c ---
-(use-package cc-mode
+(use-package c-ts-mode
   :straight nil
-  :hook ((c-mode . eglot-ensure))
+  :mode ("\\.c\\'" . c-ts-mode)
   :config (c-set-offset 'case-label '+))
 
 ;; --- zig ---
