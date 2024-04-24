@@ -834,8 +834,9 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
   :custom (typescript-indent-level 2))
 
 ;; --- css mode ---
-(use-package css-mode
-  :mode ("\\.css\\'")
+(use-package css-ts-mode
+  :straight nil
+  :mode ("\\.css\\'" . css-ts-mode)
   :custom (css-indent-offset 2))
 
 ;; --- scss mode ---
