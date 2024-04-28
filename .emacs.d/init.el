@@ -888,7 +888,6 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
           (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
   (global-treesit-auto-mode))
 
-
 ;; --- org-mode ---
 (use-package olivetti
   :hook (org-mode . olivetti-mode)
