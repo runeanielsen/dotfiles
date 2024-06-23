@@ -19,7 +19,7 @@
          (map #(.getPath %)))))
 
 (defn ends-with-any? [s substrs]
-  (any? (map #(str/ends-with? s %) substrs)))
+  (some true? (map #(str/ends-with? s %) substrs)))
 
 (defn video-sections [path file-endings]
   (->> (all-files-in-path path)
