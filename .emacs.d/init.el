@@ -659,6 +659,7 @@ When the buffer is not associated with a project it switches to the default vter
 
 ;; --- eglot ---
 (use-package eglot
+  :straight nil
   :config
   (add-hook 'eglot-managed-mode-hook
             (lambda ()
