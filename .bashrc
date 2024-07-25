@@ -66,7 +66,7 @@ alias spell='~/.config/scripts/spell.sh'
 alias task='~/.config/scripts/task'
 
 ## screen setup for work
-alias xwork='xrandr --output HDMI1 --mode 3440x1440 --output eDP1 --off && nitrogen --restore'
+alias xwork='xrandr --output HDMI-1 --mode 3440x1440 --output eDP1 --off && nitrogen --restore'
 
 # exports
 export BROWSER="/usr/bin/firefox"
