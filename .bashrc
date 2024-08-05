@@ -66,6 +66,7 @@ alias spell='~/.config/scripts/spell.sh'
 alias task='~/.config/scripts/task'
 
 ## screen setup
+alias xlaptop='xrandr --output eDP-1 --mode 1920x1200'
 alias xhome='xrandr --output HDMI-1 --mode 1920x1080 --output eDP-1 --off && nitrogen --restore'
 alias xwork='xrandr --output HDMI-1 --mode 3440x1440 --output eDP-1 --off && nitrogen --restore'
 
