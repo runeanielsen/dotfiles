@@ -857,33 +857,6 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
 ;; --- docker ---
 (use-package dockerfile-mode)
 
-;; --- tree-sitter ---
-(use-package tree-sitter
-  :straight nil
-  :config (global-tree-sitter-mode))
-
-(use-package tree-sitter-indent
-  :straight nil)
-
-(use-package treesit-auto
-  :demand t
-  :config
-  (setq treesit-language-source-alist
-        '((bash "https://github.com/tree-sitter/tree-sitter-bash")
-          (c "https://github.com/tree-sitter/tree-sitter-c")
-          (css "https://github.com/tree-sitter/tree-sitter-css")
-          (elisp "https://github.com/Wilfred/tree-sitter-elisp")
-          (html "https://github.com/tree-sitter/tree-sitter-html")
-          (js . ("https://github.com/tree-sitter/tree-sitter-javascript" "master" "src"))
-          (json "https://github.com/tree-sitter/tree-sitter-json")
-          (markdown "https://github.com/ikatyang/tree-sitter-markdown")
-          (rust "https://github.com/tree-sitter/tree-sitter-rust")
-          (toml "https://github.com/tree-sitter/tree-sitter-toml")
-          (tsx . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src"))
-          (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))
-          (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
-  (global-treesit-auto-mode))
-
 ;; --- org-mode ---
 (use-package olivetti
   :hook (org-mode . olivetti-mode)
