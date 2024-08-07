@@ -444,11 +444,6 @@ When the buffer is not associated with a project it switches to the default vter
 
   (fp/leader-keys
     :states '(normal visual)
-    :keymaps 'org-mode-map
-    "ca" '(flyspell-correct-wrapper :which-key "flyspell-correct-wrapper"))
-
-  (fp/leader-keys
-    :states '(normal visual)
     :keymaps 'dictionary-mode-map
     "cs" '(dictionary-search :which-key "dictionary-search"))
 
@@ -923,13 +918,5 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
   (org-roam-setup)
   (require 'org-roam-dailies)
   (org-roam-db-autosync-mode))
-
-;;; --- flyspell ---
-(use-package flyspell
-  :hook ((org-mode . flyspell-mode)
-         (markdown-mode . flyspell-mode)))
-
-(use-package flyspell-correct
-  :after flyspell)
 
 ;;; init.el ends here
