@@ -746,9 +746,9 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
   (make-local-variable 'js-indent-level)
   (setq js-indent-level 2))
 
-(use-package json-ts-mode
+(use-package json-mode
   :mode ("\\.json\\'")
-  :hook (json-ts-mode . fp/setup-json-mode))
+  :hook (json-mode . fp/setup-json-mode))
 
 ;; --- csv mode ---
 (use-package csv-mode
@@ -788,11 +788,11 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
 (defun csharp-mode-setup()
   "LSP CSharp install save hooks."
   (setq tab-width 4)
+  (eglot-ensure)
   (advice-add 'eglot-format-buffer :before #'fp/sort-usings-csharp))
 
-(use-package csharp-ts-mode
-  :straight nil
-  :hook (csharp-ts-mode . csharp-mode-setup))
+(use-package csharp-mode
+  :hook (csharp-mode . csharp-mode-setup))
 
 ;; --- rust mode ---
 (defun rust-mode-setup ()
@@ -807,9 +807,9 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
   (rust-format-on-save nil))
 
 ;; --- c ---
-(use-package c-ts-mode
+(use-package c-mode
   :straight nil
-  :mode ("\\.c\\'" . c-ts-mode)
+  :mode ("\\.c\\'" . c-mode)
   :config (c-set-offset 'case-label '+))
 
 ;; --- zig ---
@@ -818,21 +818,21 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
   :custom (zig-format-on-save nil))
 
 ;; --- typescript mode ---
-(use-package typescript-ts-mode
-  :mode ("\\.ts\\'" . typescript-ts-mode)
-  :hook (typescript-ts-mode . eglot-ensure)
+(use-package typescript-mode
+  :mode ("\\.ts\\'" . typescript-mode)
+  :hook (typescript-mode . eglot-ensure)
   :custom (typescript-indent-level 2))
 
-(use-package tsx-ts-mode
+(use-package tsx-mode
   :straight nil
-  :mode ("\\.tsx\\'" . tsx-ts-mode)
-  :hook (tsx-ts-mode . eglot-ensure)
+  :mode ("\\.tsx\\'" . tsx-mode)
+  :hook (tsx-mode . eglot-ensure)
   :custom (typescript-indent-level 2))
 
 ;; --- css mode ---
-(use-package css-ts-mode
+(use-package css-mode
   :straight nil
-  :mode ("\\.css\\'" . css-ts-mode)
+  :mode ("\\.css\\'" . css-mode)
   :custom (css-indent-offset 2))
 
 ;; --- scss mode ---
