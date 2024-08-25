@@ -824,7 +824,6 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
   :custom (typescript-indent-level 2))
 
 (use-package tsx-mode
-  :straight nil
   :mode ("\\.tsx\\'" . tsx-mode)
   :hook (tsx-mode . eglot-ensure)
   :custom (typescript-indent-level 2))
