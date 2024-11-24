@@ -24,6 +24,9 @@ export LS_COLORS='di=0;1:ex=31:tw=0;1:ow=0;1'
 # GPG
 export GPG_TTY=$(tty)
 
+# Set default git editor to neovim
+export GIT_EDITOR=nvim
+
 # aliases
 alias ls='ls --color=auto --format=single-column'
 alias dotf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
