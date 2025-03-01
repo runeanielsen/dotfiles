@@ -119,7 +119,7 @@
 ;; -- load theme ---
 (use-package f)
 
-(use-package ef-themes)
+(use-package modus-themes)
 
 (defvar fp/remember-last-theme-dir
   (concat (file-truename user-emacs-directory) "var/remember-last-theme"))
@@ -672,6 +672,9 @@ When the buffer is not associated with a project it switches to the default vter
 	:after eglot
   :straight (:host github :repo "jdtsmith/eglot-booster" :branch "main")
 	:config	(eglot-booster-mode))
+
+;; --- purescript mode ---
+(use-package purescript-mode)
 
 ;; --- go mode ---
 (defun setup-go-mode ()
