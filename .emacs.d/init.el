@@ -894,4 +894,3 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
   (org-roam-db-autosync-mode))
 
 ;;; init.el ends here
-(put 'dired-find-alternate-file 'disabled nil)
