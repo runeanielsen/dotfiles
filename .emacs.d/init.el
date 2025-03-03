@@ -670,7 +670,8 @@ When the buffer is not associated with a project it switches to the default vter
 	:config	(eglot-booster-mode))
 
 ;; --- purescript mode ---
-(use-package purescript-mode)
+(use-package purescript-mode
+  :hook ((purescript-mode . turn-on-purescript-indentation)))
 
 ;; --- go mode ---
 (defun setup-go-mode ()
