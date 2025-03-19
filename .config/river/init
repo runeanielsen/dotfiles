@@ -81,4 +81,4 @@ riverctl hide-cursor timeout 3000
 # Set the default layout generator to be rivertile and start it.
 # River will send the process group of the init executable SIGTERM on exit.
 riverctl default-layout rivertile
-rivertile -view-padding 4 -outer-padding 0 & dunst &
+rivertile -view-padding 4 -outer-padding 0 & dunst & waybar &

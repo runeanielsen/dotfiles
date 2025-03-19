@@ -1,0 +1,32 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: black;
+    color: #f0f0f0;
+}
+
+#tags button {
+    padding: 5px 3px;
+    color: #636363;
+}
+
+#tags button.focused {
+    color: white;
+}
+
+#clock {
+}
+
+#tray, #clock, #memory {
+    padding: 0px 15px;
+    border-left: 1px solid #636363;
+}
+
+#memory {
+}
