@@ -49,7 +49,7 @@ riverctl map normal Super Space toggle-fullscreen
 riverctl map normal Super F spawn 'firefox'
 
 # Super+E to spawn emacs
-riverctl map normal Super E spawn "emacs -bg black"
+riverctl map normal Super E spawn "emacs --xrm 'emacs.menuBar: off' -bg black"
 
 # Super+Return to spawn terminal 
 riverctl map normal Super Return spawn 'alacritty'
