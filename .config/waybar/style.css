@@ -23,7 +23,7 @@ window#waybar {
 #clock {
 }
 
-#tray, #clock, #memory {
+#tray, #clock, #memory, #battery {
     padding: 0px 15px;
     border-left: 1px solid #636363;
 }
