@@ -2,7 +2,7 @@
     border: none;
     border-radius: 0;
     font-family: Roboto, Helvetica, Arial, sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     min-height: 0;
 }
 
@@ -14,10 +14,17 @@ window#waybar {
 #tags button {
     padding: 5px 3px;
     color: #636363;
+    font-style: italic;
+}
+
+#tags button.occupied {
+    color: #e3e3e3;
+    font-style: normal;
 }
 
 #tags button.focused {
-    color: white;
+    color: #FFA500;
+    font-weight: bold;
 }
 
 #clock {
