@@ -69,9 +69,9 @@ alias spell='~/.config/scripts/spell.sh'
 alias task='~/.config/scripts/task'
 
 ## screen setup
-alias xlaptop='wlr-randr --output eDP-1 --mode 1920x1200 && setxkbmap -option caps:swapescape && nitrogen --restore'
-alias xhome='wlr-randr --output HDMI-1 --mode 1920x1080 --output eDP-1 --off && setxkbmap -option && nitrogen --restore'
-alias xwork='wlr-randr --output HDMI-A-1 --mode 3440x1440 --output eDP-1 --off && setxkbmap -option && nitrogen --restore'
+alias xlaptop='wlr-randr --output eDP-1 --mode 1920x1200 --on'
+alias xhome='wlr-randr --output HDMI-1 --mode 1920x1080 --output eDP-1 --off'
+alias xwork='wlr-randr --output HDMI-A-1 --mode 3440x1440 --output eDP-1 --off'
 
 # exports
 export BROWSER="/usr/bin/firefox"
