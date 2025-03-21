@@ -823,10 +823,10 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
   :hook (typescript-mode . eglot-ensure)
   :custom (typescript-indent-level 2))
 
-(use-package tsx-mode
-  :mode ("\\.tsx\\'" . tsx-mode)
-  :hook (tsx-mode . eglot-ensure)
-  :custom (typescript-indent-level 2))
+;; (use-package tsx-mode
+;;   :mode ("\\.tsx\\'" . tsx-mode)
+;;   :hook (tsx-mode . eglot-ensure)
+;;   :custom (typescript-indent-level 2))
 
 ;; --- css mode ---
 (use-package css-mode
@@ -843,7 +843,6 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
 (use-package prettier-js
   :hook ((css-mode . prettier-js-mode)
          (scss-mode . prettier-js-mode)
-         (tsx-mode . prettier-js-mode)
          (ts-mode . prettier-js-mode)
          (web-mode . prettier-js-mode)
          (json-mode . prettier-js-mode)))
@@ -894,3 +893,13 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
   (org-roam-db-autosync-mode))
 
 ;;; init.el ends here
+
+(+ 770 128.5 20 608 13.95)
+=> 1540
+
+(- 1540 1370)
+
+1370
+170
+
+(/ 1370 170)
