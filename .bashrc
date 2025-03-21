@@ -15,6 +15,13 @@ HISTCONTROL=ignoreboth
 # window size
 shopt -s checkwinsize
 
+# Window manager/compositor
+export SDL_VIDEODRIVER=wayland
+export _JAVA_AWT_WM_NONREPARENTING=1
+export QT_QPA_PLATFORM=wayland
+export XDG_SESSION_DESKTOP=river
+export XDG_CURRENT_DESKTOP=river
+
 # prompt
 export PS1="\[\033[0;0;0m\]λ: "
 
