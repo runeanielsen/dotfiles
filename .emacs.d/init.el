@@ -138,6 +138,11 @@
   (f-write-text (symbol-name (car custom-enabled-themes))
                 'utf-8 fp/remember-last-theme-file))
 
+(defun fp/set-default-theme ()
+  "Set the default theme when none is saved."
+  (f-write-text (symbol-name fp/remember-last-theme-default)
+                'utf-8 fp/remember-last-theme-file))
+
 (defun fp/create-remember-last-theme-file ()
   "Create directory and file if not exists."
   (unless (f-exists? fp/remember-last-theme-dir)
@@ -148,7 +153,7 @@
 (defun fp/remember-last-theme ()
   "Remembers last set theme."
   (fp/create-remember-last-theme-file)
-  (load-theme (let (theme (fp/get-last-theme))
+  (load-theme (let ((theme (fp/get-last-theme)))
                 (if theme theme fp/remember-last-theme-default))
               t)
   (advice-add 'counsel-load-theme :after #'fp/set-last-theme))
