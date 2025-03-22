@@ -79,6 +79,11 @@ riverctl set-repeat 45 200
 # Hide cursor after n ms.
 riverctl hide-cursor timeout 3000
 
+# Allow screencasting https://wiki.archlinux.org/title/River
+systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river
+systemctl --user restart xdg-desktop-portal
+
 # Set the default layout generator to be rivertile and start it.
 # River will send the process group of the init executable SIGTERM on exit.
 riverctl default-layout rivertile
