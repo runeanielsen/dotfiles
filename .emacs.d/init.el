@@ -898,13 +898,3 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
   (org-roam-db-autosync-mode))
 
 ;;; init.el ends here
-
-(+ 770 128.5 20 608 13.95)
-=> 1540
-
-(- 1540 1370)
-
-1370
-170
-
-(/ 1370 170)
