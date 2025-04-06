@@ -284,6 +284,14 @@ The return value is a list of buffers."
       (call-interactively 'project-find-file)
     (call-interactively 'find-file)))
 
+(defun fp/sudo-find-file (file)
+  "Open FILE as root."
+  (interactive
+   (list (read-file-name "Open as root: ")))
+  (find-file (if (file-writable-p file)
+                 file
+               (concat "/sudo:root@localhost:" file))))
+
 (defun fp/project-name-prefix (name)
   "Get project name prefix using NAME."
   (when (project-current)
@@ -487,6 +495,7 @@ When the buffer is not associated with a project it switches to the default vter
   (fp/leader-keys
     "f"  '(:ignore t :which-key "files")
     "ff" '(find-file :which-key "find-file")
+    "fF" '(fp/sudo-find-file :which-key "sudo-find-file")
     "fc" '(dired-create-empty-file :which-key "create-file")
     "fd" '(dired-create-directory :which-key "create-directory")
     "fs" '(evil-write :which-key "write")
