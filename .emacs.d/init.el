@@ -808,6 +808,10 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
 (use-package csharp-mode
   :hook (csharp-mode . csharp-mode-setup))
 
+;; --- powershell mode ---
+(use-package powershell-mode
+  :mode ("\\.ps1\\'" . powershell-mode))
+
 ;; --- rust mode ---
 (defun rust-mode-setup ()
   "Setup 'rust-mode'."
