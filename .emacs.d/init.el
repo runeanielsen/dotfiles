@@ -806,6 +806,7 @@ if the extension is .cljs 'cider-jack-in-cljs' is called."
   (advice-add 'eglot-format-buffer :before #'fp/sort-usings-csharp))
 
 (use-package csharp-mode
+  :straight nil
   :hook (csharp-mode . csharp-mode-setup))
 
 ;; --- powershell mode ---
