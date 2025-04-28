@@ -214,11 +214,6 @@
   :config
   (theme-magic-export-theme-mode))
 
-;; --- automatically clean whitespace ---
-(use-package ws-butler
-  :hook ((text-mode . ws-butler-mode)
-         (prog-mode . ws-butler-mode)))
-
 ;; --- custom functions ---
 (defun fp/kill-buffer-name ()
   "Takes the current buffer name and add it to the 'kill-ring'."
