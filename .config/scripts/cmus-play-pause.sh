@@ -2,10 +2,11 @@
 
 playing=$(cmus-remote -Q | grep -w 'status')
 
-echo $playing
+echo "$playing"
+
 if [[ $playing == "status playing" ]]
 then
-    $(cmus-remote -U)
+    eval "cmus-remote -U"
 else
-    $(cmus-remote -p)
+    eval "cmus-remote -p"
 fi
