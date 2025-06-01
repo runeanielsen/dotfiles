@@ -36,7 +36,7 @@
        (str/join "\n")))
 
 (defn open-book [path]
-  (shell/sh "zathura-sandbox" path))
+  (shell/sh "zathura" path))
 
 (defn main []
   (let [book-paths (book-sections books-path book-file-endings)
