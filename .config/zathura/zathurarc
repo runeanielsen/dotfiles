@@ -1,4 +1,3 @@
-set sandbox normal
 set selection-clipboard clipboard
 set window-title-basename true
 set font "Fira Code 8"
@@ -11,5 +10,5 @@ set recolor-keephue true
 # set recolor-darkcolor "#000000"
 
 # Dark color
-set recolor-darkcolor "#bbad9b"
-set default-bg "#191b1c"
+# set recolor-darkcolor "#bbad9b"
+# set default-bg "#191b1c"
