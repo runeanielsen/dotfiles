@@ -35,7 +35,7 @@ export GPG_TTY=$(tty)
 export GIT_EDITOR=nvim
 
 # aliases
-alias sip='curl 'https://api.ipify.org' && echo ""'
+alias sip='echo "$(curl -s 'https://api.ipify.org')"'
 alias ls='ls --color=auto --format=single-column'
 alias dotf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
