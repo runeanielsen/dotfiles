@@ -90,7 +90,7 @@ export PATH="$PATH:$HOME/.local/bin"
 ## dotnet
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export DOTNET_ROOT="/usr/share/dotnet"
-export MSBuildSDKsPath=$(echo /usr/share/dotnet/sdk/9.*/Sdks);
+export MSBuildSDKsPath=$(echo /usr/share/dotnet/sdk/10.*/Sdks);
 export PATH="$PATH:$HOME/.dotnet/tools"
 
 ## rust
