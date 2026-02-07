@@ -10,7 +10,7 @@
  ("cond-let" . "0430bd1eb3493ea90d69feb6b7eb7dac3e10d0ba")
  ("csv-mode" . "1695ee17521d55dbe94caacaef5a94dfa933cd9f")
  ("dash.el" . "fb443e7a6e660ba849cafcd01021d9aac3ac6764")
- ("dired-single" . "b3db172b5961e10c7236d6f997d794d3b9e0f03d")
+ ("dired-single" . "60fce6599326e12cc2033c28d50b8bf6c6ba164a")
  ("disable-mouse" . "5b240e645d2a4e61e74c83b7d1674151ca6a4b7b")
  ("dockerfile-mode" . "97733ce074b1252c1270fd5e8a53d178b66668ed")
  ("eglot" . "633d7da4c465cb5b90fe8a272b1f53e65b9497bf")
