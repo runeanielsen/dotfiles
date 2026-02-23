@@ -48,6 +48,12 @@ riverctl map normal Super Space toggle-fullscreen
 # Super+F to spawn firefox
 riverctl map normal Super F spawn 'firefox'
 
+# Super+U to kill waybar 
+riverctl map normal Super U spawn 'killall waybar'
+
+# Super+U to start waybar 
+riverctl map normal Super Q spawn 'waybar'
+
 # Super+E to spawn emacs
 riverctl map normal Super E spawn "emacs --xrm 'emacs.menuBar: off' -bg black"
 
