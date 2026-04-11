@@ -293,6 +293,15 @@ The return value is a list of buffers."
     (let ((project-name (fp/last-item (split-string (fp/last-item (project-current)) "/" t))))
       (concat "*" project-name "-" name "*"))))
 
+(defun fp/vterm-custom-name (buffer-name)
+  "Create a new vterm buffer with a BUFFER-NAME."
+  (interactive "sVTerm buffer name: " (read-string))
+  (let* ((vterm-buffer-name (concat buffer-name "-vterm"))
+         (vterm-buffer (get-buffer vterm-buffer-name)))
+    (if vterm-buffer
+        (switch-to-buffer vterm-buffer)
+      (vterm vterm-buffer-name))))
+
 (defun fp/project-vterm ()
   "Create or switch to a vterm buffer based on the built in 'project.el' mode.
 If the current buffer is not associated with a project.
@@ -469,6 +478,7 @@ When the buffer is not associated with a project it switches to the default vter
     "o" '(:ignore t :which-key "open")
     "ot" '(fp/project-vterm :which-key "vterm")
     "oT" '(vterm :which-key "vterm")
+    "oc" '(fp/vterm-custom-name :which-key "vterm")
     "oe" '(fp/open-init-el :which-key "open-init.el")
     "od" '(dictionary :which-key "dictionary"))
 
